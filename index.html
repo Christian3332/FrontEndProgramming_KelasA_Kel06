@@ -8,6 +8,33 @@
     <link rel="stylesheet" href="css/game.css">
 </head>
 <body>
+
+    <div id="game-stats">
+    <span id="score-display">Skor: 0</span>
+    <div id="lives-display">
+        <span>Nyawa: </span>
+        <span class="life-icon"></span>
+        <span class="life-icon"></span>
+        <span class="life-icon"></span>
+    </div>
+    </div>
+
+    <main id="game-board">
+        <!-- Area Soal -->
+        <div id="level-1">
+            <h2 id="level-title">Level 1: Aritmatika</h2>
+            <!-- Area Soal -->
+            <section id="questions-section">
+                <!-- Kosong: Akan diisi soal secara dinamis oleh JavaScript -->
+            </section>
+
+            <!-- Area Pilihan Jawaban -->
+            <section id="answers-section">
+                <!-- Kosong: Akan diisi blok angka secara dinamis oleh JavaScript -->
+            </section>
+        </div>
+    </main>
+    
     <script src="js/ui.js"></script>
     <script src="js/dragDrop.js"></script>
     <script src="js/logic.js"></script>
