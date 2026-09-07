@@ -1,0 +1,128 @@
+{
+  "level": 1,
+  "title": "Level 1: Aritmatika Dasar",
+  "questions": [
+    {
+      "id": "q1",
+      "text": "10 + 5",
+      "expectedAnswer": "15"
+    },
+    {
+      "id": "q2",
+      "text": "20 - 4",
+      "expectedAnswer": "16"
+    },
+    {
+      "id": "q3",
+      "text": "6 x 3",
+      "expectedAnswer": "18"
+    },
+    {
+      "id": "q4",
+      "text": "36 / 4",
+      "expectedAnswer": "9"
+    },
+    {
+      "id": "q5",
+      "text": "11 + 22",
+      "expectedAnswer": "33"
+    },
+    {
+      "id": "q6",
+      "text": "50 - 12",
+      "expectedAnswer": "38"
+    },
+    {
+      "id": "q7",
+      "text": "7 x 5",
+      "expectedAnswer": "35"
+    },
+    {
+      "id": "q8",
+      "text": "48 / 8",
+      "expectedAnswer": "6"
+    },
+    {
+      "id": "q9",
+      "text": "15 + 15",
+      "expectedAnswer": "30"
+    },
+    {
+      "id": "q10",
+      "text": "90 - 40",
+      "expectedAnswer": "50"
+    },
+    {
+      "id": "q11",
+      "text": "4 x 9",
+      "expectedAnswer": "36"
+    },
+    {
+      "id": "q12",
+      "text": "63 / 9",
+      "expectedAnswer": "7"
+    },
+    {
+      "id": "q13",
+      "text": "13 + 14",
+      "expectedAnswer": "27"
+    },
+    {
+      "id": "q14",
+      "text": "60 - 23",
+      "expectedAnswer": "37"
+    },
+    {
+      "id": "q15",
+      "text": "8 x 8",
+      "expectedAnswer": "64"
+    },
+    {
+      "id": "q16",
+      "text": "25 + 24",
+      "expectedAnswer": "49"
+    },
+    {
+      "id": "q17",
+      "text": "70 - 15",
+      "expectedAnswer": "55"
+    },
+    {
+      "id": "q18",
+      "text": "9 x 6",
+      "expectedAnswer": "54"
+    },
+    {
+      "id": "q19",
+      "text": "100 / 4",
+      "expectedAnswer": "25"
+    },
+    {
+      "id": "q20",
+      "text": "11 x 4",
+      "expectedAnswer": "44"
+    }
+  ],
+  "answers": [
+    { "value": "50" },
+    { "value": "9" },
+    { "value": "64" },
+    { "value": "15" },
+    { "value": "35" },
+    { "value": "27" },
+    { "value": "18" },
+    { "value": "44" },
+    { "value": "38" },
+    { "value": "6" },
+    { "value": "33" },
+    { "value": "25" },
+    { "value": "54" },
+    { "value": "36" },
+    { "value": "16" },
+    { "value": "30" },
+    { "value": "49" },
+    { "value": "37" },
+    { "value": "7" },
+    { "value": "55" }
+  ]
+}
