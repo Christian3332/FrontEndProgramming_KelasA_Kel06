@@ -44,3 +44,23 @@ body {
     max-width: 850px;
     display: none; /* Disembunyikan dulu sampai level dipilih via JS */
 }
+
+/* Tampilan Level Select Screen */
+.game-title {
+    font-size: 3rem;
+    color: var(--primary-blue);
+    text-shadow: 0 4px 0 #93c5fd;
+    margin-bottom: 8px;
+}
+
+#level-select-screen h2 {
+    font-size: 1.5rem;
+    color: var(--accent-orange);
+    margin-bottom: 24px;
+}
+
+.level-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
