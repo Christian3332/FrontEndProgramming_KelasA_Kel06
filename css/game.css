@@ -12,3 +12,19 @@
   flex-direction: column;
   gap: 20px;
 }
+
+#level-title {
+  font-size: 1.4rem;
+  color: var(--neon-cyan);
+  text-align: center;
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+  margin-bottom: 10px;
+}
+
+#questions-section,
+#answers-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
