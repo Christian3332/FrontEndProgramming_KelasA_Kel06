@@ -17,3 +17,30 @@
     margin: 0;
     padding: 0;
 }
+
+body {
+    background-color: var(--bg-main);
+    background-image: radial-gradient(#e0f2fe 2px, transparent 2px);
+    background-size: 24px 24px;
+    color: var(--text-dark);
+    font-family: var(--font-kids);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+/* Screen Management */
+.screen {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+#game-screen {
+    width: 100%;
+    max-width: 850px;
+    display: none; /* Disembunyikan dulu sampai level dipilih via JS */
+}
