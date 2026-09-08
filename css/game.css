@@ -13,3 +13,18 @@
     gap: 24px;
     box-shadow: 0 10px 0 #cbd5e1;
 }
+
+@media (min-width: 640px) {
+    #level {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
+}
+
+#level-title {
+    grid-column: 1 / -1;
+    font-size: 1.8rem;
+    color: var(--primary-blue);
+    text-align: center;
+    margin-bottom: 8px;
+}
