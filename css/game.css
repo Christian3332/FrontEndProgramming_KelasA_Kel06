@@ -49,3 +49,20 @@
   box-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
   transform: translateY(-2px);
 }
+
+    .card.dragging {
+    opacity: 0.3;
+    cursor: grabbing;
+    border-style: dashed;
+    }
+
+    .drop-zone {
+    min-height: 56px;
+    border: 1px dashed var(--border-cyan);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(5, 8, 17, 0.6);
+    transition: all 0.2s ease;
+    }
