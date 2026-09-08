@@ -1,75 +1,121 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
 
 :root {
-  --bg-dark: #050811;
-  --card-dark: #0d1322;
-  --neon-cyan: #00f3ff;
-  --neon-green: #00ff66;
-  --neon-pink: #ff0055;
-  --neon-yellow: #ffcc00;
-  --text-main: #e2e8f0;
-  --border-cyan: rgba(0, 243, 255, 0.3);
-  --font-cyber: 'Fira Code', monospace;
+    --bg-main: #f0f9ff;
+    --card-bg: #ffffff;
+    --primary-blue: #3b82f6;
+    --accent-yellow: #facc15;
+    --accent-green: #4ade80;
+    --accent-pink: #f472b6;
+    --accent-orange: #fb923c;
+    --text-dark: #1e293b;
+    --font-kids: 'Fredoka', cursive, sans-serif;
 }
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  background-color: var(--bg-dark);
-  background-image: linear-gradient(
-    rgba(0, 243, 255, 0.03) 50%, 
-    rgba(0, 0, 0, 0.2) 50%
-  );
-  background-size: 100% 4px;
-  color: var(--text-main);
-  font-family: var(--font-cyber);
-  min-height: 100vh;  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 24px;
+    background-color: var(--bg-main);
+    background-image: radial-gradient(#e0f2fe 2px, transparent 2px);
+    background-size: 24px 24px;
+    color: var(--text-dark);
+    font-family: var(--font-kids);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
 }
 
-/* game-screen */
+.screen {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
 #game-screen {
-  display: none !important;
+    width: 100%;
+    max-width: 850px;
+    display: none; 
 }
 
-/* Header Game Stats */
+.game-title {
+    font-size: 3rem;
+    color: var(--primary-blue);
+    text-shadow: 0 4px 0 #93c5fd;
+    margin-bottom: 8px;
+}
+
+#level-select-screen h2 {
+    font-size: 1.5rem;
+    color: var(--accent-orange);
+    margin-bottom: 24px;
+}
+
+.level-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.level-btn {
+    background-color: var(--accent-yellow);
+    color: var(--text-dark);
+    font-family: var(--font-kids);
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding: 16px 24px;
+    border: 3px solid #fde047;
+    border-radius: 20px;
+    box-shadow: 0 6px 0 #facc15;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.level-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #facc15;
+}
+
+.level-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #facc15;
+}
+
+/* Area Stats Game */
 #game-stats {
-  width: 100%;
-  max-width: 900px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--card-dark);
-  padding: 16px 24px;
-  border: 1px solid var(--neon-cyan);
-  border-radius: 6px;
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
-  margin-bottom: 24px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--card-bg);
+    padding: 16px 28px;
+    border: 4px solid #bae6fd;
+    border-radius: 20px;
+    box-shadow: 0 8px 0 #bae6fd;
+    margin-bottom: 24px;
 }
 
 #score-display {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--neon-yellow);
-  text-shadow: 0 0 8px rgba(255, 204, 0, 0.5);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-orange);
 }
 
 #lives-display {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1.1rem;
-  color: var(--neon-cyan);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-pink);
 }
 
 .life-icon {
-  font-size: 1.2rem;
-  transition: transform 0.2s ease;
+    font-size: 1.4rem;
 }

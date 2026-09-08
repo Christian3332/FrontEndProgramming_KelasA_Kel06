@@ -1,0 +1,189 @@
+#game-board {
+    width: 100%;
+}
+
+#level {
+    background-color: var(--card-white);
+    border: 5px solid #cbd5e1;
+    border-radius: 32px;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    box-shadow: 0 12px 0 #94a3b8;
+}
+
+@media (min-width: 640px) {
+    #level {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
+}
+
+#questions-section,
+#answers-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+#level.level-1 {
+    border-color: #7dd3fc;
+    box-shadow: 0 12px 0 #38bdf8;
+    background-color: #f0f9ff;
+}
+
+#level.level-1 #level-title {
+    color: #0284c7;
+    text-shadow: 0 3px 0 #bae6fd;
+}
+
+#level.level-1 .card {
+    background-color: var(--yellow-sun);
+    border: 4px solid #fde047;
+    box-shadow: 0 8px 0 #eab308;
+    color: var(--text-dark);
+}
+
+#level.level-1 .card:hover {
+    box-shadow: 0 12px 0 #eab308;
+}
+
+#level.level-1 .drop-zone {
+    border-color: #7dd3fc;
+    background-color: #ffffff;
+}
+
+
+#level.level-2 {
+    border-color: #86efac;
+    box-shadow: 0 12px 0 #4ade80;
+    background-color: #f0fdf4;
+}
+
+#level.level-2 #level-title {
+    color: #15803d;
+    text-shadow: 0 3px 0 #dcfce7;
+}
+
+#level.level-2 .card {
+    background-color: var(--green-mint);
+    border: 4px solid #86efac;
+    box-shadow: 0 8px 0 #22c55e;
+    color: #064e3b;
+}
+
+#level.level-2 .card:hover {
+    box-shadow: 0 12px 0 #22c55e;
+}
+
+#level.level-2 .drop-zone {
+    border-color: #86efac;
+    background-color: #ffffff;
+}
+
+#level.level-3 {
+    border-color: #f472b6;
+    box-shadow: 0 12px 0 #e879f9;
+    background-color: #fdf2f8;
+}
+
+#level.level-3 #level-title {
+    color: #7e22ce;
+    text-shadow: 0 3px 0 #fbcfe8;
+}
+
+#level.level-3 .card {
+    background-color: var(--pink-candy);
+    border: 4px solid #f472b6;
+    box-shadow: 0 8px 0 #db2777;
+    color: #ffffff;
+}
+
+#level.level-3 .card:hover {
+    box-shadow: 0 12px 0 #db2777;
+}
+
+#level.level-3 .drop-zone {
+    border-color: #f472b6;
+    background-color: #ffffff;
+}
+
+.card {
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 20px;
+    border-radius: 22px;
+    cursor: grab;
+    user-select: none;
+    text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px) scale(1.02);
+}
+
+.card.dragging {
+    opacity: 0.4;
+    cursor: grabbing;
+    transform: scale(0.95);
+    box-shadow: none;
+}
+
+.drop-zone {
+    min-height: 72px;
+    border: 4px dashed #cbd5e1;
+    border-radius: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.target-label {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.drop-zone.hovered {
+    border-color: var(--blue-sky);
+    background-color: #e0f2fe;
+    transform: scale(1.03);
+}
+
+.drop-zone.correct {
+    border-style: solid;
+    border-color: var(--green-mint);
+    background-color: #dcfce7;
+    color: #15803d;
+    box-shadow: 0 8px 0 #86efac;
+}
+
+.drop-zone.wrong {
+    border-style: solid;
+    border-color: var(--pink-candy);
+    background-color: #ffe4e6;
+    box-shadow: 0 8px 0 #fca5a5;
+    animation: fun-shake 0.4s ease;
+}
+
+@keyframes fun-shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-12px) rotate(-3deg);
+    }
+    40% {
+        transform: translateX(12px) rotate(3deg);
+    }
+    60% {
+        transform: translateX(-8px) rotate(-1deg);
+    }
+    80% {
+        transform: translateX(8px) rotate(1deg);
+    }
+}
