@@ -142,3 +142,48 @@
     transition: all 0.2s ease;
 }
 
+.target-label {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.drop-zone.hovered {
+    border-color: var(--blue-sky);
+    background-color: #e0f2fe;
+    transform: scale(1.03);
+}
+
+.drop-zone.correct {
+    border-style: solid;
+    border-color: var(--green-mint);
+    background-color: #dcfce7;
+    color: #15803d;
+    box-shadow: 0 8px 0 #86efac;
+}
+
+.drop-zone.wrong {
+    border-style: solid;
+    border-color: var(--pink-candy);
+    background-color: #ffe4e6;
+    box-shadow: 0 8px 0 #fca5a5;
+    animation: fun-shake 0.4s ease;
+}
+
+@keyframes fun-shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-12px) rotate(-3deg);
+    }
+    40% {
+        transform: translateX(12px) rotate(3deg);
+    }
+    60% {
+        transform: translateX(-8px) rotate(-1deg);
+    }
+    80% {
+        transform: translateX(8px) rotate(1deg);
+    }
+}
