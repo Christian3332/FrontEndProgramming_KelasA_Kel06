@@ -28,3 +28,24 @@
   gap: 12px;
   flex: 1;
 }
+
+
+.card {
+  background-color: rgba(13, 19, 34, 0.9);
+  color: var(--text-main);
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 16px;
+  border: 1px solid var(--border-cyan);
+  border-radius: 4px;
+  cursor: grab;
+  user-select: none;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
+  transform: translateY(-2px);
+}
