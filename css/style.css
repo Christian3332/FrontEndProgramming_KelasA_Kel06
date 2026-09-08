@@ -32,7 +32,6 @@ body {
     padding: 24px;
 }
 
-/* Screen Management */
 .screen {
     width: 100%;
     max-width: 600px;
@@ -42,10 +41,9 @@ body {
 #game-screen {
     width: 100%;
     max-width: 850px;
-    display: none; /* Disembunyikan dulu sampai level dipilih via JS */
+    display: none; 
 }
 
-/* Tampilan Level Select Screen */
 .game-title {
     font-size: 3rem;
     color: var(--primary-blue);
@@ -63,4 +61,28 @@ body {
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+.level-btn {
+    background-color: var(--accent-yellow);
+    color: var(--text-dark);
+    font-family: var(--font-kids);
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding: 16px 24px;
+    border: 3px solid #fde047;
+    border-radius: 20px;
+    box-shadow: 0 6px 0 #facc15;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.level-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #facc15;
+}
+
+.level-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #facc15;
 }
