@@ -1,0 +1,14 @@
+#game-board {
+  width: 100%;
+  max-width: 900px;
+}
+
+#level {
+  background-color: var(--card-dark);
+  border: 1px solid var(--border-cyan);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
