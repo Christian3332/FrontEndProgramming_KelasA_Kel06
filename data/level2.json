@@ -1,0 +1,144 @@
+{
+  "level": 2,
+  "title": "Level 2: Operasi Modulo & Div",
+  "questions": [
+    {
+      "id": "q1",
+      "text": "15 mod 4",
+      "answerId": "a3"
+    },
+    {
+      "id": "q2",
+      "text": "20 div 3",
+      "answerId": "a6"
+    },
+    {
+      "id": "q3",
+      "text": "10 mod 3",
+      "answerId": "a1"
+    },
+    {
+      "id": "q4",
+      "text": "45 div 8",
+      "answerId": "a5"
+    },
+    {
+      "id": "q5",
+      "text": "25 mod 7",
+      "answerId": "a4"
+    },
+    {
+      "id": "q6",
+      "text": "14 div 5",
+      "answerId": "a2"
+    },
+    {
+      "id": "q7",
+      "text": "18 mod 5",
+      "answerId": "a3"
+    },
+    {
+      "id": "q8",
+      "text": "32 div 6",
+      "answerId": "a5"
+    },
+    {
+      "id": "q9",
+      "text": "17 mod 2",
+      "answerId": "a1"
+    },
+    {
+      "id": "q10",
+      "text": "28 div 4",
+      "answerId": "a7"
+    },
+    {
+      "id": "q11",
+      "text": "33 mod 10",
+      "answerId": "a3"
+    },
+    {
+      "id": "q12",
+      "text": "50 div 9",
+      "answerId": "a5"
+    },
+    {
+      "id": "q13",
+      "text": "22 mod 6",
+      "answerId": "a4"
+    },
+    {
+      "id": "q14",
+      "text": "40 div 6",
+      "answerId": "a6"
+    },
+    {
+      "id": "q15",
+      "text": "19 mod 8",
+      "answerId": "a3"
+    },
+    {
+      "id": "q16",
+      "text": "100 div 12",
+      "answerId": "a8"
+    },
+    {
+      "id": "q17",
+      "text": "37 mod 9",
+      "answerId": "a1"
+    },
+    {
+      "id": "q18",
+      "text": "63 div 10",
+      "answerId": "a6"
+    },
+    {
+      "id": "q19",
+      "text": "29 mod 3",
+      "answerId": "a2"
+    },
+    {
+      "id": "q20",
+      "text": "85 div 9",
+      "answerId": "a9"
+    }
+  ],
+  "answers": [
+    {
+      "id": "a1",
+      "value": "1"
+    },
+    {
+      "id": "a2",
+      "value": "2"
+    },
+    {
+      "id": "a3",
+      "value": "3"
+    },
+    {
+      "id": "a4",
+      "value": "4"
+    },
+    {
+      "id": "a5",
+      "value": "5"
+    },
+    {
+      "id": "a6",
+      "value": "6"
+    },
+    {
+      "id": "a7",
+      "value": "7"
+    },
+    {
+      "id": "a8",
+      "value": "8"
+    },
+    {
+      "id": "a9",
+      "value": "9"
+    }
+  ]
+}
