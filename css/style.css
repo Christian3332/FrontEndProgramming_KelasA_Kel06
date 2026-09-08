@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap');
+
+:root {
+  --bg-dark: #050811;
+  --card-dark: #0d1322;
+  --neon-cyan: #00f3ff;
+  --neon-green: #00ff66;
+  --neon-pink: #ff0055;
+  --neon-yellow: #ffcc00;
+  --text-main: #e2e8f0;
+  --border-cyan: rgba(0, 243, 255, 0.3);
+  --font-cyber: 'Fira Code', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
