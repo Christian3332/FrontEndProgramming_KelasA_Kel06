@@ -14,3 +14,32 @@ export function initDragAndDrop(onDropCallback) {
             item.classList.remove('dragging');
         });
     });
+
+    // Interaksi untuk area soal (saat kartu diletakkan)
+    dropZones.forEach(zone => {
+        zone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            if (!zone.classList.contains('correct')) {
+                zone.classList.add('hovered');
+            }
+        });
+
+        zone.addEventListener('dragleave', () => {
+            zone.classList.remove('hovered');
+        });
+
+        zone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            zone.classList.remove('hovered');
+
+            if (zone.classList.contains('correct')) return;
+
+            const draggedId = e.dataTransfer.getData('text/plain');
+            const draggedElement = document.getElementById(draggedId);
+
+            if (onDropCallback && draggedElement) {
+                onDropCallback(draggedElement, zone);
+            }
+        });
+    });
+}
