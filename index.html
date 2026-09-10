@@ -14,9 +14,9 @@
         <h1 class="game-title">ByteMatch</h1>
         <h2>PILIH LEVEL</h2>
         <div class="level-buttons">
-            <button class="level-btn" data-level="1">Level 1: Aritmatika</button>
-            <button class="level-btn" data-level="2">Level 2: Modulo & Div</button>
-            <button class="level-btn" data-level="3">Level 3: Biner</button>
+            <button id = "level1" class="level-btn" data-level="1">Level 1: Aritmatika</button>
+            <button id = "level2" class="level-btn" data-level="2">Level 2: Modulo & Div</button>
+            <button id = "level3" class="level-btn" data-level="3">Level 3: Biner</button>
         </div>
     </div>
 
@@ -35,7 +35,7 @@
         <main id="game-board">
             <!-- Area Soal -->
             <div id="level">
-                <h2 id="level-title">Level 1: Aritmatika</h2>
+                <h2 id="level-title"></h2>
                 <section id="questions-section">
                     <!-- Kosong: Akan diisi soal secara dinamis oleh JavaScript -->
                 </section>
@@ -48,9 +48,6 @@
         </main>
     </div>
     
-    <script src="js/ui.js"></script>
-    <script src="js/dragDrop.js"></script>
-    <script src="js/logic.js"></script>
-    <script src="js/app.js"></script>
+    <script type = "module" src="js/app.js"></script>
 </body>
 </html>
