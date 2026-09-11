@@ -111,6 +111,8 @@ tombolLevel1.addEventListener('click', () =>{
     hidup = 3;
     skor = 0;
     nyawa(hidup);
+    const papanskorsss = document.getElementById("score-display");
+    papanskorsss.innerHTML = "";
     tampilLevel(0);
     initDragAndDrop(mains);
 });
