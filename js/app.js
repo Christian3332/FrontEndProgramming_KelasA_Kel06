@@ -12,6 +12,9 @@ const tombolLevel = document.querySelectorAll(".level-btn");
 const tombolLevel1 = document.getElementById("level1");
 const tombol2 = document.getElementById("level2");
 const tombol3 = document.getElementById("level3");
+const bgMusic = document.getElementById("bg-music");
+bgMusic.volume = 0.3;
+
 unlockLevel(dataSoal, tombolLevel);
 
 function acakLevel(levelIndex) {
@@ -30,6 +33,7 @@ function tampilLevel(levelSekarang){
     levels = levelSekarang;
     layarAwal.style.display = "none";
     layarGame.style.display = "block";
+    bgMusic.play().catch((err) => console.log("Audio tertahan browser:", err));
 
     let datas = dataSoal[levelSekarang];
     const judulLevel = document.getElementById("level-title");
