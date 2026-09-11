@@ -136,102 +136,102 @@ export const dataSoal = [
     {
       "id": "q1",
       "text": "15 mod 4",
-      "answerId": "a3"
+      "expectedAnswer": "3"
     },
     {
       "id": "q2",
       "text": "20 div 3",
-      "answerId": "a6"
+      "expectedAnswer": "6"
     },
     {
       "id": "q3",
       "text": "10 mod 3",
-      "answerId": "a1"
+      "expectedAnswer": "1"
     },
     {
       "id": "q4",
       "text": "45 div 8",
-      "answerId": "a5"
+      "expectedAnswer": "5"
     },
     {
       "id": "q5",
       "text": "25 mod 7",
-      "answerId": "a4"
+      "expectedAnswer": "4"
     },
     {
       "id": "q6",
       "text": "14 div 5",
-      "answerId": "a2"
+      "expectedAnswer": "2"
     },
     {
       "id": "q7",
       "text": "18 mod 5",
-      "answerId": "a3"
+      "expectedAnswer": "3"
     },
     {
       "id": "q8",
       "text": "32 div 6",
-      "answerId": "a5"
+      "expectedAnswer": "5"
     },
     {
       "id": "q9",
       "text": "17 mod 2",
-      "answerId": "a1"
+      "expectedAnswer": "1"
     },
     {
       "id": "q10",
       "text": "28 div 4",
-      "answerId": "a7"
+      "expectedAnswer": "7"
     },
     {
       "id": "q11",
       "text": "33 mod 10",
-      "answerId": "a3"
+      "expectedAnswer": "3"
     },
     {
       "id": "q12",
       "text": "50 div 9",
-      "answerId": "a5"
+      "expectedAnswer": "5"
     },
     {
       "id": "q13",
       "text": "22 mod 6",
-      "answerId": "a4"
+      "expectedAnswer": "4"
     },
     {
       "id": "q14",
       "text": "40 div 6",
-      "answerId": "a6"
+      "expectedAnswer": "6"
     },
     {
       "id": "q15",
       "text": "19 mod 8",
-      "answerId": "a3"
+      "expectedAnswer": "3"
     },
     {
       "id": "q16",
       "text": "100 div 12",
-      "answerId": "a8"
+      "expectedAnswer": "8"
     },
     {
       "id": "q17",
       "text": "37 mod 9",
-      "answerId": "a1"
+      "expectedAnswer": "1"
     },
     {
       "id": "q18",
       "text": "63 div 10",
-      "answerId": "a6"
+      "expectedAnswer": "6"
     },
     {
       "id": "q19",
       "text": "29 mod 3",
-      "answerId": "a2"
+      "expectedAnswer": "2"
     },
     {
       "id": "q20",
       "text": "85 div 9",
-      "answerId": "a9"
+      "expectedAnswer": "9"
     }
   ],
   "answers": [
@@ -281,102 +281,102 @@ export const dataSoal = [
     {
       "id": "q1",
       "text": "0001₂",
-      "answerId": "a1"
+      "expectedAnswer": "1"
     },
     {
       "id": "q2",
       "text": "0010₂",
-      "answerId": "a2"
+      "expectedAnswer": "2"
     },
     {
       "id": "q3",
       "text": "0011₂",
-      "answerId": "a3"
+      "expectedAnswer": "3"
     },
     {
       "id": "q4",
       "text": "0100₂",
-      "answerId": "a4"
+      "expectedAnswer": "4"
     },
     {
       "id": "q5",
       "text": "0101₂",
-      "answerId": "a5"
+      "expectedAnswer": "5"
     },
     {
       "id": "q6",
       "text": "0110₂",
-      "answerId": "a6"
+      "expectedAnswer": "6"
     },
     {
       "id": "q7",
       "text": "0111₂",
-      "answerId": "a7"
+      "expectedAnswer": "7"
     },
     {
       "id": "q8",
       "text": "1000₂",
-      "answerId": "a8"
+      "expectedAnswer": "8"
     },
     {
       "id": "q9",
       "text": "1001₂",
-      "answerId": "a9"
+      "expectedAnswer": "9"
     },
     {
       "id": "q10",
       "text": "1010₂",
-      "answerId": "a10"
+      "expectedAnswer": "10"
     },
     {
       "id": "q11",
       "text": "1011₂",
-      "answerId": "a11"
+      "expectedAnswer": "11"
     },
     {
       "id": "q12",
       "text": "1100₂",
-      "answerId": "a12"
+      "expectedAnswer": "12"
     },
     {
       "id": "q13",
       "text": "1101₂",
-      "answerId": "a13"
+      "expectedAnswer": "13"
     },
     {
       "id": "q14",
       "text": "1110₂",
-      "answerId": "a14"
+      "expectedAnswer": "14"
     },
     {
       "id": "q15",
       "text": "1111₂",
-      "answerId": "a15"
+      "expectedAnswer": "15"
     },
     {
       "id": "q16",
       "text": "10000₂",
-      "answerId": "a16"
+      "expectedAnswer": "16"
     },
     {
       "id": "q17",
       "text": "10101₂",
-      "answerId": "a17"
+      "expectedAnswer": "21"
     },
     {
       "id": "q18",
       "text": "11001₂",
-      "answerId": "a18"
+      "expectedAnswer": "25"
     },
     {
       "id": "q19",
       "text": "11110₂",
-      "answerId": "a19"
+      "expectedAnswer": "30"
     },
     {
       "id": "q20",
       "text": "100000₂",
-      "answerId": "a20"
+      "expectedAnswer": "32"
     }
   ],
   "answers": [

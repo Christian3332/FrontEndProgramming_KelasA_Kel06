@@ -1,10 +1,17 @@
-import{unlockLevel, cekLevel} from "./ui.js";
+import{unlockLevel, cekLevel, tampilScreenAwal} from "./ui.js";
 import { dataSoal } from "./data.js";
 import { initDragAndDrop } from "./dragDrop.js";
+import {nyawa, score} from "./logic.js";
 
-let main = false;
+let hidup = 3;
+let bener = 0;
+let levels = 0;
+let skor = 0;
+
 const tombolLevel = document.querySelectorAll(".level-btn");
-const mulai = document.getElementById("level1");
+const tombolLevel1 = document.getElementById("level1");
+const tombol2 = document.getElementById("level2");
+const tombol3 = document.getElementById("level3");
 unlockLevel(dataSoal, tombolLevel);
 
 function acakLevel(levelIndex) {
@@ -12,6 +19,7 @@ function acakLevel(levelIndex) {
     .sort(() => Math.random() - 0.5)
     .slice(0, 5);
 }
+
 function acakJawaban(jawab){
     return jawab.sort(() => Math.random() - 0.5).slice(0,5)
 }
@@ -19,10 +27,11 @@ function acakJawaban(jawab){
 function tampilLevel(levelSekarang){
     const layarAwal = document.getElementById("level-select-screen");
     const layarGame = document.getElementById("game-screen");
+    levels = levelSekarang;
     layarAwal.style.display = "none";
     layarGame.style.display = "block";
 
-    const datas = dataSoal[levelSekarang];
+    let datas = dataSoal[levelSekarang];
     const judulLevel = document.getElementById("level-title");
     const soalnya = document.getElementById("questions-section");
     const jawabannya = document.getElementById("answers-section");
@@ -53,14 +62,77 @@ function tampilLevel(levelSekarang){
     });
 
     let jawabLevel = acakJawaban(simpanJawab);
-    jawabLevel.forEach(e => {
+    jawabLevel.forEach((e, index) => {
         const draged = document.createElement("div");
         draged.classList.add("draggable-item", "card");
         draged.setAttribute("draggable", "true");
+        draged.id = "ans-" + index;
         draged.textContent = e;
         jawabannya.appendChild(draged);
     });
 
-
 }
 
+function mains(draggedElement, dropZone) {
+  const jawaban = dropZone.dataset.answer;
+  const dipilih = draggedElement.textContent;
+  if (dipilih === jawaban) {
+    dropZone.classList.add("correct");
+    dropZone.appendChild(draggedElement);
+    bener ++;
+    if (bener <= 4){
+        const papanskor = document.getElementById("score-display");
+        skor = score(skor);
+        papanskor.innerText = "skor : " + skor;
+    }
+    if(bener === 5){
+        if (levels + 1 < dataSoal.length) {
+            dataSoal[levels + 1].status = true;
+        }
+        skor = 0;
+        unlockLevel(dataSoal, tombolLevel);
+        tampilScreenAwal();
+    }
+  } 
+  if (dipilih != jawaban){
+    dropZone.classList.add("wrong");
+    hidup --;
+    if(hidup <= 0){
+        bener = 0;
+        hidup = 3;
+        tampilScreenAwal();
+    }
+    nyawa(hidup);
+  }
+}
+
+tombolLevel1.addEventListener('click', () =>{
+    bener = 0;
+    hidup = 3;
+    skor = 0;
+    nyawa(hidup);
+    tampilLevel(0);
+    initDragAndDrop(mains);
+});
+
+tombol2.addEventListener('click', () =>{
+    hidup = 3;
+    bener = 0;
+    skor = 0;
+    const papanskors = document.getElementById("score-display");
+    papanskors.innerHTML = "";
+    nyawa(hidup);
+    tampilLevel(1);
+    initDragAndDrop(mains);
+});
+
+tombol3.addEventListener('click', () =>{
+    hidup = 3;
+    bener = 0;
+    skor = 0;
+    const papanskorss = document.getElementById("score-display");
+    papanskorss.innerHTML = "";
+    nyawa(hidup);
+    tampilLevel(2);
+    initDragAndDrop(mains);
+});
