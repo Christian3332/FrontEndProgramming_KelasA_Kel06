@@ -11,6 +11,10 @@
     grid-template-columns: 1fr;
     gap: 24px;
     box-shadow: 0 12px 0 #94a3b8;
+    grid-template-areas:
+      "questions"
+      "answers";
+    gap: 24px;
 }
 
 @media (min-width: 640px) {
@@ -20,8 +24,7 @@
     }
 }
 
-#questions-section,
-#answers-section {
+#questions-section {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -187,3 +190,37 @@
         transform: translateX(8px) rotate(1deg);
     }
 }
+
+#questions-section {
+    grid-area: questions;
+}
+
+#answers-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    grid-area: answers;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.draggable-item.card {
+flex: 0 0 auto;
+  min-width: 100px;
+  max-width: 150px;
+  background-color: #fff;  
+  border: 3px solid #cbd5e1; 
+  border-radius: 16px; 
+  padding: 12px 20px;  
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1e293b; 
+  box-shadow: 0 6px 0 #94a3b8;
+  cursor: grab;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+
