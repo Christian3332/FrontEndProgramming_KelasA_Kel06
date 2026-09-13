@@ -1,4 +1,4 @@
-import{unlockLevel, cekLevel, tampilScreenAwal} from "./ui.js";
+import{unlockLevel, cekLevel, tampilScreenAwal, tampilPopup, tutupPopup } from "./ui.js";
 import { dataSoal } from "./data.js";
 import { initDragAndDrop } from "./dragDrop.js";
 import {nyawa, score} from "./logic.js";
@@ -14,6 +14,11 @@ const tombol2 = document.getElementById("level2");
 const tombol3 = document.getElementById("level3");
 const bgMusic = document.getElementById("bg-music");
 bgMusic.volume = 0.3;
+
+const popupMenang = document.querySelector(".popup-menang");
+const popupKalah = document.querySelector(".popup-kalah");
+const tombolMenang = document.querySelector(".tombolMenang");
+const tombolKalah = document.querySelector(".tombolKalah");
 
 unlockLevel(dataSoal, tombolLevel);
 
@@ -104,7 +109,7 @@ function mains(draggedElement, dropZone) {
         }
         skor = 0;
         unlockLevel(dataSoal, tombolLevel);
-        tampilScreenAwal();
+        tampilPopup(popupMenang);
     }
   } 
   if (dipilih != jawaban){
@@ -113,7 +118,7 @@ function mains(draggedElement, dropZone) {
     if(hidup <= 0){
         bener = 0;
         hidup = 3;
-        tampilScreenAwal();
+        tampilPopup(popupKalah);
     }
     nyawa(hidup);
   }
@@ -150,4 +155,14 @@ tombol3.addEventListener('click', () =>{
     nyawa(hidup);
     tampilLevel(2);
     initDragAndDrop(mains);
+});
+
+tombolMenang.addEventListener('click', () => {
+    tutupPopup();
+    tampilScreenAwal();
+});
+
+tombolKalah.addEventListener('click', () => {
+    tutupPopup();
+    tampilScreenAwal();
 });
