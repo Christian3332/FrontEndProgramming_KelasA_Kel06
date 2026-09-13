@@ -213,4 +213,79 @@ flex: 0 0 auto;
   align-items: center;
 }
 
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(30, 41, 59, 0.55);
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.overlay.active {
+    display: flex;
+}
+
+.popup {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    background-color: #ffffff;
+    padding: 36px 32px;
+    border-radius: 28px;
+    text-align: center;
+    max-width: 340px;
+    width: 90%;
+}
+
+.popup.show {
+    display: flex;
+}
+
+.popup h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.popup-menang {
+    border: 5px solid var(--accent-green, #4ade80);
+}
+
+.popup-menang h2 {
+    color: #15803d;
+}
+
+
+.popup-kalah {
+    border: 5px solid var(--accent-pink, #f472b6);
+}
+
+.popup-kalah h2 {
+    color: #be123c;
+}
+
+.tombolMenang,
+.tombolKalah {
+    font-family: var(--font-kids);
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.tombolMenang {
+    color: var(--text-dark);
+    background-color: var(--accent-green, #4ade80);
+    border: 3px solid #86efac;
+}
+
+.tombolKalah {
+    color: #ffffff;
+    background-color: var(--accent-pink, #f472b6);
+    border: 3px solid #f9a8d4;
+}
 

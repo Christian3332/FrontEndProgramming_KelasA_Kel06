@@ -1,3 +1,7 @@
+const overlay = document.querySelector(".overlay");
+const popupMenang = document.querySelector(".popup-menang");
+const popupKalah = document.querySelector(".popup-kalah")
+
 export function cekLevel(level){
     if(level > 1 && dataSoal[level - 1].status){
         return true;
@@ -29,6 +33,16 @@ export function tampilScreenAwal() {
   startScreen.style.display = "block";
 }
 
+export function tampilPopup(popup) {
+    overlay.classList.add("active");
+    popup.classList.add("show");
+}
+
+export function tutupPopup() {
+    overlay.classList.remove("active");
+    popupMenang.classList.remove("show");
+    popupKalah.classList.remove("show");
+}
 
 
 
