@@ -108,6 +108,11 @@ function mains(draggedElement, dropZone) {
             dataSoal[levels + 1].status = true;
         }
         skor = 0;
+        if(levels === 2){
+            popupMenang.querySelector("h2").textContent = "Congratulations😁";
+        } else {
+            popupMenang.querySelector("h2").textContent = "Selamat kamu menang!";
+        }
         unlockLevel(dataSoal, tombolLevel);
         tampilPopup(popupMenang);
     }
