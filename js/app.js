@@ -37,6 +37,9 @@ function tampilLevel(levelSekarang){
 
     let datas = dataSoal[levelSekarang];
     const judulLevel = document.getElementById("level-title");
+    const papanLevel = document.getElementById("level");
+    papanLevel.className = "";
+    papanLevel.classList.add("level-" + (levelSekarang + 1));
     const soalnya = document.getElementById("questions-section");
     const jawabannya = document.getElementById("answers-section");
     let soalLevel = acakLevel(levelSekarang);
@@ -58,6 +61,10 @@ function tampilLevel(levelSekarang){
         const drop = document.createElement("div");
         drop.classList.add("drop-zone");
         drop.dataset.answer = q.expectedAnswer;
+        const label = document.createElement("span");
+        label.classList.add("target-label");
+        label.textContent = "?"; // Teks petunjuk yang akan muncul di kotak kosong
+        drop.appendChild(label);
         simpanJawab.push(q.expectedAnswer);
         card.appendChild(teks);
         card.appendChild(drop);
