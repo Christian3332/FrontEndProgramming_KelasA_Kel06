@@ -89,6 +89,8 @@ function mains(draggedElement, dropZone) {
   const dipilih = draggedElement.textContent;
   if (dipilih === jawaban) {
     dropZone.classList.add("correct");
+    const hapusLabel = dropZone.querySelector(".target-label");
+    if (hapusLabel) hapusLabel.remove();
     dropZone.appendChild(draggedElement);
     bener ++;
     if (bener <= 4){
