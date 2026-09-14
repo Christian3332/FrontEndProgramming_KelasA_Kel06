@@ -103,7 +103,7 @@
 }
 
 .card {
-    font-size: 1.4rem;
+    font-size: 22.4px;
     font-weight: 700;
     padding: 20px;
     border-radius: 22px;
@@ -135,7 +135,7 @@
 }
 
 .target-label {
-    font-size: 1.4rem;
+    font-size: 22.4px;
     font-weight: 700;
     color: #94a3b8;
 }
@@ -202,7 +202,7 @@ flex: 0 0 auto;
   border: 3px solid #cbd5e1; 
   border-radius: 16px; 
   padding: 12px 20px;  
-  font-size: 1.4rem;
+  font-size: 22.4px;
   font-weight: 700;
   color: #1e293b; 
   box-shadow: 0 6px 0 #94a3b8;
@@ -245,7 +245,7 @@ flex: 0 0 auto;
 }
 
 .popup h2 {
-    font-size: 1.6rem;
+    font-size: 25.6px;
     font-weight: 700;
     color: var(--text-dark);
 }
@@ -270,7 +270,7 @@ flex: 0 0 auto;
 .tombolMenang,
 .tombolKalah {
     font-family: var(--font-kids);
-    font-size: 1.2rem;
+    font-size: 19.2px;
     font-weight: 700;
     padding: 14px 32px;
     border-radius: 18px;
