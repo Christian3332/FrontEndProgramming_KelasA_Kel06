@@ -23,6 +23,7 @@ nav ul {
     margin: 0;
     padding: 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -37,13 +38,111 @@ nav li a:hover {
     background-color: #0307e9;
 }
 
-article {
+main {
     max-width: 700px;
     margin: 30px auto;
+    padding: 0 15px;
+}
+
+.kartu-profil {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 18px;
     background: #ffffff;
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 98, 255, 0.1);
+}
+
+.avatar {body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background-color: #04a9eb;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+nav {
+    background-color: hsl(216, 74%, 44%);
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+}
+
+nav li a:hover {
+    background-color: #0307e9;
+}
+
+main {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+.kartu-profil {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 18px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid #04a9eb;
+}
+
+.info-profil h2 {
+    margin: 0 0 5px;
+}
+
+.info-profil .prodi {
+    color: #0307e9;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+
+.info-profil .deskripsi {
+    margin: 0;
+}
+
+article {
+    margin-top: 20px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 article ul {
@@ -66,4 +165,104 @@ footer {
     background-color: hwb(210 6% 9%);
     color: white;
     margin-top: 40px;
+}
+
+@media (min-width: 600px) {
+    .avatar {
+        width: 110px;
+        height: 110px;
+        font-size: 1.7rem;
+    }
+
+    .kartu-profil {
+        padding: 30px 40px;
+    }
+}
+
+@media (min-width: 992px) {
+    main {
+        max-width: 900px;
+    }
+
+    .kartu-profil {
+        grid-template-columns: 150px 1fr;
+        justify-items: start;
+        text-align: left;
+        align-items: center;
+    }
+}
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.info-profil h2 {
+    margin: 0 0 5px;
+}
+
+.info-profil .prodi {
+    color: #0307e9;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+
+.info-profil .deskripsi {
+    margin: 0;
+}
+
+article {
+    margin-top: 20px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+article ul {
+    padding-left: 20px;
+}
+
+article a {
+    color: #2b99e2;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+article a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: hwb(210 6% 9%);
+    color: white;
+    margin-top: 40px;
+}
+
+@media (min-width: 600px) {
+    .avatar {
+        width: 110px;
+        height: 110px;
+        font-size: 1.7rem;
+    }
+
+    .kartu-profil {
+        padding: 30px 40px;
+    }
+}
+
+@media (min-width: 992px) {
+    main {
+        max-width: 900px;
+    }
+
+    .kartu-profil {
+        grid-template-columns: 150px 1fr;
+        justify-items: start;
+        text-align: left;
+        align-items: center;
+    }
 }
