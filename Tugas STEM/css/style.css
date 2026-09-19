@@ -46,7 +46,11 @@ body {
 }
 
 .game-title {
+<<<<<<< HEAD:css/style.css
     font-size:48px;
+=======
+    font-size: 48px;
+>>>>>>> bdfe80faea900e91352c894cc9b3c3fb7195985e:Tugas STEM/css/style.css
     color: var(--primary-blue);
     text-shadow: 0 4px 0 #93c5fd;
     margin-bottom: 8px;

@@ -270,7 +270,11 @@ flex: 0 0 auto;
 .tombolMenang,
 .tombolKalah {
     font-family: var(--font-kids);
+<<<<<<< HEAD:css/game.css
     font-size: 19.2px;
+=======
+    font-size: 22.4px;
+>>>>>>> bdfe80faea900e91352c894cc9b3c3fb7195985e:Tugas STEM/css/game.css
     font-weight: 700;
     padding: 14px 32px;
     border-radius: 18px;
