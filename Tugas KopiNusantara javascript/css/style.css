@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-*{
+* {
     box-sizing: border-box;
     margin : 0;
     padding : 0;
@@ -13,7 +13,8 @@ body{
     min-height: 100vh;
     background-color: #FDFBF7;
     color: #3B2F2F;
-}   
+}
+
 .atasan {
     display: flex;
     gap: 20px;
@@ -29,19 +30,18 @@ body{
 .navbar{
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    padding-top: 10px;
 }
-
-header{
+.logo{
+    font-size: 15px;
+}
+.header{
     display: flex;
     flex-direction: column;
     padding: 20px;
+    align-items: center;
     background-color: #8D5524;
     color:#FDFBF7;
-}
-
-.logo{
-    text-align: center;
 }
 
 #hero{
@@ -91,7 +91,7 @@ header{
     margin: 0 auto;
     background-color: antiquewhite;
     border-radius: 15px;
-    box-shadow: 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .card h3{
@@ -109,15 +109,14 @@ header{
 
 .responsive-img{
     display: block;
-    max-width: 70%;
+    max-width: 100%;
     aspect-ratio: 4/3;
     object-fit: cover;
     margin : 0 auto;
+    height: auto;
     border-radius: 15px;
 }
-#bawah{
-    margin-bottom: 20px;
-}
+
 .footer{
     margin-top: auto;
     background-color: #8D5524;
@@ -135,9 +134,31 @@ header{
     box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.15);
 }
 
+#reservasi{
+    margin-bottom: 10px;
+}
+
 @media(min-width:576px){
     .card-container{
         display: grid;
         grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px 60px;
+    }
+
+    .card-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        grid-template-columns: repeat(3, 1fr); 
+    }
+
+    .hero-content h2 {
+        font-size: 32px;
     }
 }
