@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopi Nusantara</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- HEADER & NAVIGASI -->
+    <header class="header">
+        <div class="logo">
+            <h1>Kopi Nusantara</h1>
+        </div>
+        <nav class="navbar">
+            <ul class ="atasan">
+                <li><a href="#hero">Beranda</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO / BANNER SECTION -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h2>Cita Rasa Autentik di Setiap Seduhan</h2>
+            <p>Sajian kopi rumahan dengan cita rasa autentik dari biji kopi pilihan, diracik khusus untuk menemani harimu.</p>
+            <a href="#menu" class="btn-primary">Lihat Menu</a>
+        </div>
+    </section>
+
+    <!-- Section Menu Kopi-->
+    <main>
+        <section id="menu" class="menu-section">
+            <div class="section-title">
+                <h2>Menu Andalan Kami</h2>
+                <p>Pilihan favorit pelanggan setia Kopi Nusantara</p>
+            </div>
+            <!-- Container untuk CSS Flexbox atau Grid -->
+            <div class="card-container">
+                <!-- Card Item (menu 1) -->
+                <article class="card">
+                    <img src="img/es kopi susu aren.jpeg" alt="Es Kopi Susu Aren" class="responsive-img">
+                    <div class="card-body">
+                        <h3>Es Kopi Susu Aren</h3>
+                        <p>Perpaduan espresso pekat dengan susu segar dan manisnya gula aren murni.</p>
+                    </div>
+                </article>
+
+                <!-- Card Item (menu 2)-->
+                <article class="card">
+                    <img src="img/americano.jpeg" alt="Americano" class="responsive-img">
+                    <div class="card-body">
+                        <h3>Americano</h3>
+                        <p>Paduan espresso murni dan air panas, menghasilkan kopi hitam beraroma kuat dengan karakter rasa yang autentik dan ringan.</p>
+                    </div>
+                </article>
+
+                <!-- Card Item (menu 3) -->
+                <article class="card">
+                    <img src="img/vanilla latte.jpeg" alt="Vanilla Latte" class="responsive-img">
+                    <div class="card-body">
+                        <h3>Vanilla Latte</h3>
+                        <p>Espresso lembut dengan paduan sirup vanilla dan foam susu yang creamy.</p>
+                    </div>
+                </article>
+                
+                <!-- Card Item (menu 4) -->
+                <article class="card">
+                    <img src="img/matcha latte.jpeg" alt="Matcha Latte" class="responsive-img">
+                    <div class="card-body">
+                        <h3>Matcha Latte</h3>
+                        <p>Pilihan perpaduan bubuk matcha premium khas Jepang dengan susu yang creamy.</p>
+                    </div>
+                </article>
+
+                <!-- Card Item (menu 5) -->
+                <article class="card">
+                    <img src="img/butter croissant.jpeg" alt="Butter Croissant" class="responsive-img">
+                    <div class="card-body">
+                        <h3>Butter Croissant</h3>
+                        <p>Pastry klasik dengan aroma dan rasa mentega. Pendamping yang sempurna untuk segelas kopimu.</p>
+                    </div>
+                </article>
+
+                <!-- Card Item (menu 6) -->
+                <article class="card">
+                    <img src="img/classic saltbread.jpeg" alt="Classic Saltbread" class="responsive-img">
+                    <div class="card-body">
+                        <h3>Classic Saltbread</h3>
+                        <p>Roti dengan tekstur renyah di luar dan lembut di dalam. Sensasi buttery berpadu dengan taburan sea salt yang gurih.</p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Section FAQ (Accordion) -->
+        <section id="faq" class="faq-section">
+            <div class="section-title">
+                <h2>Pertanyaan yang Sering Diajukan</h2>
+                <p>Jawaban singkat untuk hal yang sering ditanyakan pelanggan</p>
+            </div>
+            <div class="faq-container">
+
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        Jam berapa Kopi Nusantara buka?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Kami buka setiap hari pukul 08.00 - 22.00 WIB, termasuk hari libur nasional.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        Apakah tersedia layanan pesan antar?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Ya, pesanan bisa diantar melalui aplikasi ojek online untuk area sekitar kedai.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        Metode pembayaran apa saja yang diterima?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Kami menerima tunai, QRIS, kartu debit, dan kartu kredit.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        Apakah bisa reservasi tempat untuk acara?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Bisa. Hubungi kami lewat Instagram @kopinusantara minimal 2 hari sebelum acara.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+    <div id="reservasi">
+    </div>
+    <!-- FOOTER -->
+    <footer id="kontak" class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Kopi Nusantara.</p>
+            <p>Jl. Penikmat Kopi No. 88 | IG: @kopinusantara</p>
+        </div>
+    </footer>
+
+    <!-- jQuery via CDN (harus sebelum script kustom) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Script kustom -->
+    <script src="js/script.js"></script>
+</body>
+</html>
