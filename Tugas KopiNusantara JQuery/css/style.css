@@ -266,8 +266,7 @@ body{
         grid-template-columns: repeat(3, 1fr); 
     }
 
-    .logo h1{
-    display:block;
-    padding-top: 25px;
-}
+    .hero-content h2 {
+        font-size: 32px;
+    }
 }
