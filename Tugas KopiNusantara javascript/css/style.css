@@ -35,9 +35,21 @@ body{
     justify-content: center;
     padding-top: 10px;
 }
+
 .logo{
     font-size: 15px;
+    display:flex;
+    gap: 20px;
 }
+
+
+.logo img{
+    display: inline-block;
+    height: auto;
+    max-width: 8%;
+    object-fit: cover;
+}
+
 .header{
     display: flex;
     flex-direction: column;
@@ -149,12 +161,22 @@ body{
         display: grid;
         grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
     }
+    .logo img{
+        max-width: auto;
+        object-fit: cover;
+    }
+
+    .logo h1{
+        display:block;
+        padding-top: 10px;
+    }
+
 }
 
 @media (min-width: 992px) {
     .header {
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         padding: 20px 60px;
     }
 
@@ -164,7 +186,8 @@ body{
         grid-template-columns: repeat(3, 1fr); 
     }
 
-    .hero-content h2 {
-        font-size: 32px;
-    }
+    .logo h1{
+    display:block;
+    padding-top: 25px;
+}
 }
