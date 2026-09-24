@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopi Nusantara</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tema warna Kopi Nusantara -->
+    <link href="/FrontEndProgramming_KelasA_Kel06/Tugas KopiNusantara Bootstrap/css/style.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-brand sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#hero">
+                <img src="/FrontEndProgramming_KelasA_Kel06/Tugas KopiNusantara Bootstrap/img/Kopi_Nusantara_1.png" alt="Logo Kopi Nusantara" width="40" height="40" class="d-inline-block object-fit-cover">
+                Kopi Nusantara
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Buka navigasi">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#hero">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header id="hero" class="hero-bg text-light text-center py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 py-4">
+                    <h2 class="display-5 fw-bold">Cita Rasa Autentik di Setiap Seduhan</h2>
+                    <p class="lead">Sajian kopi rumahan dengan cita rasa autentik dari biji kopi pilihan, diracik khusus untuk menemani harimu.</p>
+                    <a href="#menu" class="btn btn-primary btn-lg mt-3">Lihat Menu</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- MENU -->
+        <section id="menu" class="container py-5">
+            <div class="text-center mb-4">
+                <h2>Menu Andalan Kami</h2>
+                <p class="text-body-secondary">Pilihan favorit pelanggan setia Kopi Nusantara</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-12 col-md-4">
+                    <article class="card h-100 shadow-sm">
+                        <div class="ratio ratio-4x3">
+                            <img src="img/es kopi susu aren.jpeg" class="card-img-top object-fit-cover" alt="Es Kopi Susu Aren">
+                        </div>
+                        <div class="card-body d-flex flex-column text-center">
+                            <h3 class="card-title h5">Es Kopi Susu Aren</h3>
+                            <p class="card-text">Perpaduan espresso pekat dengan susu segar dan manisnya gula aren murni.</p>
+                            <button type="button" class="btn btn-outline-primary like-btn mt-auto mx-auto" aria-label="Sukai Es Kopi Susu Aren">
+                                <span class="like-icon">&#9825;</span> <span class="like-count">0</span>
+                            </button>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-md-4">
+                    <article class="card h-100 shadow-sm">
+                        <div class="ratio ratio-4x3">
+                            <img src="img/americano.jpeg" class="card-img-top object-fit-cover" alt="Americano">
+                        </div>
+                        <div class="card-body d-flex flex-column text-center">
+                            <h3 class="card-title h5">Americano</h3>
+                            <p class="card-text">Paduan espresso murni dan air panas, menghasilkan kopi hitam beraroma kuat dengan karakter rasa yang autentik dan ringan.</p>
+                            <button type="button" class="btn btn-outline-primary like-btn mt-auto mx-auto" aria-label="Sukai Americano">
+                                <span class="like-icon">&#9825;</span> <span class="like-count">0</span>
+                            </button>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-md-4">
+                    <article class="card h-100 shadow-sm">
+                        <div class="ratio ratio-4x3">
+                            <img src="img/vanilla latte.jpeg" class="card-img-top object-fit-cover" alt="Vanilla Latte">
+                        </div>
+                        <div class="card-body d-flex flex-column text-center">
+                            <h3 class="card-title h5">Vanilla Latte</h3>
+                            <p class="card-text">Espresso lembut dengan paduan sirup vanilla dan foam susu yang creamy.</p>
+                            <button type="button" class="btn btn-outline-primary like-btn mt-auto mx-auto" aria-label="Sukai Vanilla Latte">
+                                <span class="like-icon">&#9825;</span> <span class="like-count">0</span>
+                            </button>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-md-4">
+                    <article class="card h-100 shadow-sm">
+                        <div class="ratio ratio-4x3">
+                            <img src="img/matcha latte.jpeg" class="card-img-top object-fit-cover" alt="Matcha Latte">
+                        </div>
+                        <div class="card-body d-flex flex-column text-center">
+                            <h3 class="card-title h5">Matcha Latte</h3>
+                            <p class="card-text">Pilihan perpaduan bubuk matcha premium khas Jepang dengan susu yang creamy.</p>
+                            <button type="button" class="btn btn-outline-primary like-btn mt-auto mx-auto" aria-label="Sukai Matcha Latte">
+                                <span class="like-icon">&#9825;</span> <span class="like-count">0</span>
+                            </button>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-md-4">
+                    <article class="card h-100 shadow-sm">
+                        <div class="ratio ratio-4x3">
+                            <img src="img/butter croissant.jpeg" class="card-img-top object-fit-cover" alt="Butter Croissant">
+                        </div>
+                        <div class="card-body d-flex flex-column text-center">
+                            <h3 class="card-title h5">Butter Croissant</h3>
+                            <p class="card-text">Pastry klasik dengan aroma dan rasa mentega. Pendamping yang sempurna untuk segelas kopimu.</p>
+                            <button type="button" class="btn btn-outline-primary like-btn mt-auto mx-auto" aria-label="Sukai Butter Croissant">
+                                <span class="like-icon">&#9825;</span> <span class="like-count">0</span>
+                            </button>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-md-4">
+                    <article class="card h-100 shadow-sm">
+                        <div class="ratio ratio-4x3">
+                            <img src="img/classic saltbread.jpeg" class="card-img-top object-fit-cover" alt="Classic Saltbread">
+                        </div>
+                        <div class="card-body d-flex flex-column text-center">
+                            <h3 class="card-title h5">Classic Saltbread</h3>
+                            <p class="card-text">Roti dengan tekstur renyah di luar dan lembut di dalam. Sensasi buttery berpadu dengan taburan sea salt yang gurih.</p>
+                            <button type="button" class="btn btn-outline-primary like-btn mt-auto mx-auto" aria-label="Sukai Classic Saltbread">
+                                <span class="like-icon">&#9825;</span> <span class="like-count">0</span>
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="container py-5">
+            <div class="text-center mb-4">
+                <h2>Pertanyaan yang Sering Diajukan</h2>
+                <p class="text-body-secondary">Jawaban singkat untuk hal yang sering ditanyakan pelanggan</p>
+            </div>
+            <div class="accordion mx-auto" id="faqAccordion" style="max-width: 700px;">
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
+                            Jam berapa Kopi Nusantara buka?
+                        </button>
+                    </h3>
+                    <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Kami buka setiap hari pukul 08.00 - 22.00 WIB, termasuk hari libur nasional.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                            Apakah tersedia layanan pesan antar?
+                        </button>
+                    </h3>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Ya, pesanan bisa diantar melalui aplikasi ojek online untuk area sekitar kedai.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                            Metode pembayaran apa saja yang diterima?
+                        </button>
+                    </h3>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Kami menerima tunai, QRIS, kartu debit, dan kartu kredit.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                            Apakah bisa reservasi tempat untuk acara?
+                        </button>
+                    </h3>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Bisa. Hubungi kami lewat Instagram @kopinusantara minimal 2 hari sebelum acara.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="kontak" class="bg-brand text-light text-center p-3 mt-auto">
+        <p class="mb-1">&copy; 2026 Kopi Nusantara.</p>
+        <p class="mb-0">Jl. Penikmat Kopi No. 88 | IG: @kopinusantara</p>
+    </footer>
+
+    <!-- jQuery (sebelum script kustom) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script kustom -->
+    <script src="script.js"></script>
+</body>
+</html>
