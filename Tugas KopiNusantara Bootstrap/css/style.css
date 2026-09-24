@@ -1,0 +1,46 @@
+/* Tema Kopi Nusantara: hanya menimpa variabel Bootstrap, bukan layout */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --bs-primary: #8D5524;
+    --bs-primary-rgb: 141, 85, 36;
+    --bs-body-bg: #FDFBF7;
+    --bs-body-color: #3B2F2F;
+    --bs-body-font-family: "Poppins", sans-serif;
+}
+
+.bg-brand { background-color: #8D5524 !important; }
+
+.hero-bg {
+    background-image: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('../heross.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.btn-primary {
+    --bs-btn-bg: #8D5524; --bs-btn-border-color: #8D5524;
+    --bs-btn-hover-bg: #734419; --bs-btn-hover-border-color: #734419;
+    --bs-btn-active-bg: #734419; --bs-btn-active-border-color: #734419;
+}
+.btn-outline-primary {
+    --bs-btn-color: #8D5524; --bs-btn-border-color: #8D5524;
+    --bs-btn-hover-bg: #8D5524; --bs-btn-hover-border-color: #8D5524;
+    --bs-btn-active-bg: #8D5524; --bs-btn-active-border-color: #8D5524;
+}
+
+.card {
+    --bs-card-bg: antiquewhite;
+    --bs-card-border-radius: 15px;
+    --bs-card-inner-border-radius: 15px;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+.card:hover { transform: translateY(-10px); box-shadow: 0 12px 20px rgba(0,0,0,.15) !important; }
+
+.accordion {
+    --bs-accordion-bg: antiquewhite;
+    --bs-accordion-btn-bg: antiquewhite;
+    --bs-accordion-active-bg: #8D5524;
+    --bs-accordion-active-color: #FDFBF7;
+    --bs-accordion-btn-focus-box-shadow: none;
+}
+.accordion-button:hover { background-color: #8D5524; color: #FDFBF7; }
