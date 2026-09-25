@@ -297,36 +297,96 @@ main {
 }
 
 /* Style untuk katalog section */
+
 .katalog-section {
-    padding: 40px 20px;
+    padding: 40px 20px 55px;
     background-color: #E3F2FD;
 }
 
 .section-title {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.section-title h2 {
     font-family: "Poetsen One", cursive;
     font-size: 22px;
     color: #0D47A1;
+    text-align: center;
+    margin-bottom: 35px;
 }
 
 .katalog-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 25px;
-    max-width: 1000px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 70px;
+    max-width: 850px;
     margin: 0 auto;
 }
 
-/* Kartu terakhir pada katalog diposisikan di tengah, mengikuti prototype */
+.katalog-grid .card {
+    background-color: #D9D9D9;
+    border-radius: 12px;
+    border: 1px solid #000000;
+    overflow: hidden;
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.25);
+    transition: all 0.2s ease;
+}
+
+.katalog-grid .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 5px 9px 12px rgba(0, 0, 0, 0.3);
+}
+
+.katalog-grid .card-img-wrapper {
+    width: 100%;
+    height: 170px;
+    overflow: hidden;
+}
+
+.katalog-grid .card-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.katalog-grid .card:hover .card-img {
+    transform: scale(1.04);
+}
+
+.katalog-grid .card-footer {
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px 8px 18px;
+    background-color: #D9D9D9;
+}
+
+.katalog-grid .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.katalog-grid .btn-primary {
+    min-width: 85px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background-color: #90CAF9;
+    color: #000000;
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.katalog-grid .btn-primary:hover {
+    background-color: #2196F3;
+    color: #FFFFFF;
+}
+
+/* Kartu terakhir berada di tengah */
 .katalog-grid .card:last-child {
     grid-column: 1 / -1;
-    max-width: 320px;
-    margin: 0 auto;
-    width: 100%;
+    width: 50%;
+    justify-self: center;
 }
 
 /* Style untuk warung section (carousel) */
@@ -421,6 +481,48 @@ main {
     padding: 35px 20px 0;
 }
 
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.footer-brand img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
+
+.footer-brand h2 {
+    font-family: "Poetsen One", cursive;
+    font-size: 20px;
+    color: #0D47A1;
+}
+
+.footer-column h4 {
+    font-size: 14px;
+    color: #0D47A1;
+    margin-bottom: 10px;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.footer-column ul li a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+    color: #2196F3;
+}
+
 .footer-container {
     display: flex;
     flex-direction: column;
@@ -496,6 +598,11 @@ main {
         text-align: left;
     }
 
+    .footer-brand,
+    .footer-column {
+        text-align: left;
+    }
+
     .footer-logo h2,
     .footer-links,
     .footer-contact,
@@ -552,5 +659,21 @@ main {
 
     .katalog-grid {
         max-width: 800px;
+    }
+}
+
+@media (max-width: 575px) {
+    .katalog-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .katalog-grid .card:last-child {
+        grid-column: auto;
+        width: 100%;
+    }
+
+    .katalog-grid .card-img-wrapper {
+        height: 180px;
     }
 }
