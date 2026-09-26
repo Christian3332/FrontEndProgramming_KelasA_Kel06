@@ -34,7 +34,8 @@ $(document).ready(function() {
         'nasi pecel', 'pecel',
         'tahu tek', 'tahu',
         'rujak cingur', 'rujak',
-        'lontong kikil', 'kikil'
+        'lontong kikil', 'kikil',
+        'sate', 'sate klopo'
     ];
 
     $('.search-bar').on('submit', function(e) {
