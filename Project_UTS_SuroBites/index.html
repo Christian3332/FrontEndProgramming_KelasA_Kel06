@@ -7,31 +7,36 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+     <a class="skip-link" href="#main-content">Langsung ke konten utama</a>
     <!-- HEADER & NAVBAR -->
     <header class="header">
         <div class="logo">
-            <img src="img/Surobites Logo.png" alt="Logo SuroBites">
+            <img src="img/Surobites Logo.png" alt="Logo SuroBites" width = "32" height = "32">
             <h1>SuroBites</h1> 
         </div>
-        <nav class="navbar">
+        <button type="button" class="menu-toggle" id="mobile-menu" aria-controls="primary-navigation"
+            aria-expanded="false" aria-label="Buka menu navigasi">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <nav class="navbar" id="primary-navigation">
             <ul class="nav-links">
-                <li><a href="index.html">Beranda</a></li>
-                <li><a href="kisah_rasa.html">Kisah Rasa</a></li>
+                <li><a href="index.html" class="active" aria-current="page">Beranda</a></li>
+                <li><a href="kisah-rasa.html">Kisah Rasa</a></li>
                 <li><a href="katalog.html">Katalog</a></li>
                 <li><a href="lokasi.html">Lokasi Warung</a></li>
             </ul>
         </nav>
-        <div class="search-bar">
-            <input type="text" placeholder="Cari kuliner...">
-        </div>
-        <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
+
+        <form class="search-bar" role="search" action="#" onsubmit="return false;">
+            <label class="visually-hidden" for="search-input">Cari kuliner</label>
+            <input id="search-input" type="text" name="q" placeholder="Cari kuliner...">
+        </form>
     </header>
     
-    <main>
+    <main id = "main-content">
         <!-- HERO SECTION -->
         <section id="beranda" class="hero-section">
             <div class="hero-content">
@@ -39,16 +44,17 @@
                 <p>Nikmati Kelezatan Kuliner Warisan Kota Pahlawan. Dari pekatnya kuah Rawon daging hingga segarnya bumbu petis Rujak Cingur dan Lontong Balap. Temukan sejarah, bahan rahasia, dan rekomendasi warung asli di satu tempat.</p>
                 <div class="hero-buttons">
                     <a href="#katalog" class="btn-primary">Eksplorasi Menu</a>
-                    <a href="#kisah-rasa" class="btn-secondary">Kisah Rasa</a>
+                    <a href="#kisah-rasa" class="btn-secondary desktop-section">Kisah Rasa</a>
                 </div>
             </div>
         </section>
 
         <!-- KISAH RASA / HIGHLIGHT MENU -->
-        <section id="kisah-rasa" class="highlight-section">
+        <section id="kisah-rasa" class="highlight-section desktop-section" aria-labelledby="kisah-rasa-title">
+            <h2 id="kisah-rasa-title" class="section-title">Kisah Rasa Pilihan</h2>
             <div class="card-container">
                 <article class="card">
-                    <img src="img/Lontong kikil.png" alt="Lontong Kikil" class="card-img">
+                    <img src="img/Lontong kikil.png" alt="Lontong Kikil" class="card-img" loading = "lazy">
                     <div class="card-body">
                         <h3>Lontong Kikil</h3>
                         <a href="#" class="btn-outline">Selengkapnya</a>
@@ -56,7 +62,7 @@
                 </article>
 
                 <article class="card">
-                    <img src="img/Rawon.jpg" alt="Rawon Setan" class="card-img">
+                    <img src="img/Rawon.jpg" alt="Rawon Setan" class="card-img" loading = "lazy">
                     <div class="card-body">
                         <h3>Rawon Setan</h3>
                         <a href="#" class="btn-outline">Selengkapnya</a>
@@ -64,7 +70,7 @@
                 </article>
 
                 <article class="card">
-                    <img src="img/tahu tek.jpg" alt="Tahu Tek" class="card-img">
+                    <img src="img/tahu tek.jpg" alt="Tahu Tek" class="card-img" loading = "lazy">
                     <div class="card-body">
                         <h3>Tahu Tek</h3>
                         <a href="#" class="btn-outline">Selengkapnya</a>
@@ -74,101 +80,112 @@
         </section>
 
         <!-- KATALOG MENU -->
-        <section id="katalog" class="katalog-section">
-            <div class="section-title">
-                <h2>Makanan Khas Surabaya</h2>
-            </div>
+        <section id="katalog" class="katalog-section" aria-labelledby="katalog-title">
+            <h2 id="katalog-title" class="section-title">Makanan Khas Surabaya</h2>
             <div class="katalog-grid">
                 <article class="card">
-                    <img src="img/Rawon.jpg" alt="Rawon Setan" class="card-img">
-                    <div class="card-body">
-                        <h3>Rawon Setan</h3>
-                        <a href="#" class="btn-outline">Selengkapnya</a>
+                    <div class="card-img-wrapper">
+                        <img src="img/Rawon.jpg" alt="Rawon Setan" class="card-img" loading="lazy">
+                    </div>
+
+                    <div class="card-footer">
+                        <h3 class="card-title">Rawon Setan</h3>
+                        <a href="#" class="btn-primary">Selengkapnya</a>
                     </div>
                 </article>
                 
                 <article class="card">
-                    <img src="img/Nasi Pecel.jpg" alt="Nasi Pecel" class="card-img">
-                    <div class="card-body">
-                        <h3>Nasi Pecel</h3>
-                        <a href="#" class="btn-outline">Selengkapnya</a>
+                    <div class="card-img-wrapper">
+                        <img src="img/Nasi Pecel.jpg" alt="Nasi Pecel" class="card-img" loading="lazy">
+                    </div>
+                    <div class="card-footer">
+                        <h3 class="card-title">Nasi Pecel</h3>
+                        <a href="#" class="btn-primary">Selengkapnya</a>
                     </div>
                 </article>
 
                 <article class="card">
-                    <img src="img/tahu tek.jpg" alt="Tahu Tek" class="card-img">
-                    <div class="card-body">
-                        <h3>Tahu Tek</h3>
-                        <a href="#" class="btn-outline">Selengkapnya</a>
+                    <div class="card-img-wrapper">
+                        <img src="img/tahu tek.jpg" alt="Tahu Tek" class="card-img" loading="lazy">
+                    </div>
+                    <div class="card-footer">
+                        <h3 class="card-title">Tahu Tek</h3>
+                        <a href="#" class="btn-primary">Selengkapnya</a>
                     </div>
                 </article>
 
                 <article class="card">
-                    <img src="img/Rujak cingur.jpg" alt="Rujak Cingur" class="card-img">
-                    <div class="card-body">
-                        <h3>Rujak Cingur</h3>
-                        <a href="#" class="btn-outline">Selengkapnya</a>
+                    <div class="card-img-wrapper">
+                        <img src="img/Rujak cingur.jpg" alt="Rujak Cingur" class="card-img" loading="lazy">
+                    </div>
+                    <div class="card-footer">
+                        <h3 class="card-title">Rujak Cingur</h3>
+                        <a href="#" class="btn-primary">Selengkapnya</a>
                     </div>
                 </article>
 
-                <article class="card">
-                    <img src="img/Lontong kikil.png" alt="Lontong Kikil" class="card-img">
-                    <div class="card-body">
-                        <h3>Lontong Kikil</h3>
-                        <a href="#" class="btn-outline">Selengkapnya</a>
+                <article class="card card-centered">
+                    <div class="card-img-wrapper">
+                        <img src="img/Lontong kikil.png" alt="Lontong Kikil" class="card-img" loading="lazy">
+                    </div>
+                    <div class="card-footer">
+                        <h3 class="card-title">Lontong Kikil</h3>
+                        <a href="#" class="btn-primary">Selengkapnya</a>
                     </div>
                 </article>
             </div>
         </section>
 
         <!-- SECTION WARUNG MAKANAN -->
-        <section id="lokasi" class="warung-section">
+        <section id="lokasi" class="warung-section" aria-labelledby="lokasi-title">
             <div class="section-title">
                 <h2>WARUNG MAKANAN KHAS SURABAYA</h2>
             </div>
             <div class="carousel-container">
-                <button class="carousel-btn prev-btn">&#8592;</button>
-                <div class="carousel-slide">
-                    <img src="img/Warung.png" alt="Warung Tahu Campur Cak Sadak">
-                    <div class="warung-info">
-                        <h3>Tahu Campur Cak Sadak</h3>
-                        <p>Jl. Mayjen Sungkono No. 106, Pakis, Kec. Sawahan, Surabaya, Jawa Timur 60256</p>
-                        <a href="https://maps.app.goo.gl/5s2ocqsDTwDYwsb16" class="btn-blue">Kunjungi</a>
+                <button type = "button" class="carousel-btn prev-btn" aria-label="Warung sebelumnya">&#8592;</button>
+                <div class="carousel-track" tabindex="0" aria-label="Daftar warung, geser untuk melihat lebih banyak">
+                    <div class="carousel-slide">
+                        <img src="img/Warung.png" alt="Warung Tahu Campur Cak Sadak" loading = "lazy">
+                        <div class="warung-info">
+                            <h3>Tahu Campur Cak Sadak</h3>
+                            <p>Jl. Mayjen Sungkono No. 106, Pakis, Kec. Sawahan, Surabaya, Jawa Timur 60256</p>
+                            <a href="https://maps.app.goo.gl/5s2ocqsDTwDYwsb16" class="btn-blue">Kunjungi</a>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="img/warung selamat sukses.png.png" alt="Warung Depot Selamat Sukses Ngagel Jaya Barat" loading="lazy">
+                        <div class="warung-info">
+                            <h3>Depot Selamat Sukses Ngagel Jaya Barat</h3>
+                            <p>Jl. Ngagel Jaya Barat No.24, RT.002/RW.06, Pucang Sewu, Kec. Gubeng, Surabaya, Jawa Timur 60283</p>
+                            <a href="https://maps.app.goo.gl/9Tvp2K7jWLGTJj128" class="btn-blue">Kunjungi</a>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="img/Kedai Bang Jady.jpg" alt="Kedai Bang Jady" loading="lazy">
+                        <div class="warung-info">
+                            <h3>Kedai Bang Jady</h3>
+                            <p>Medokan Ayu, Rungkut, Surabaya, East Java 60293</p>
+                            <a href="https://maps.app.goo.gl/YyiWHLXbtAo8xYy77" class="btn-blue">Kunjungi</a>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="img/depot tanjung api surabaya.jpg" alt="Depot Tanjung Api" loading="lazy">
+                        <div class="warung-info">
+                            <h3>Depot Tanjung Api</h3>
+                            <p>Jl. Walikota Mustajab No.41, Ketabang, Kec. Genteng, Surabaya, Jawa Timur 60272</p>
+                            <a href="https://maps.app.goo.gl/FXVpeHzkZ5vZ4yqw5" class="btn-blue">Kunjungi</a>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="img/ceker pedas cocote tonggo.png" alt="Ceker Pedas Cocote Tonggo" loading="lazy">
+                        <div class="warung-info">
+                            <h3>Ceker Pedas Cocote Tonggo</h3>
+                            <p>Jl. Kombes Pol. Moh. Duryat No.33, Tegalsari, Kec. Tegalsari, Surabaya, Jawa Timur 60262</p>
+                            <a href="https://maps.app.goo.gl/pa7UxQsWbcd6ETBT6" class="btn-blue">Kunjungi</a>
+                        </div>
                     </div>
                 </div>
-                <div class="carousel-slide">
-                    <img src="img/warung selamat sukses.png.png" alt="Warung Depot Selamat Sukses Ngagel Jaya Barat">
-                    <div class="warung-info">
-                        <h3>Depot Selamat Sukses Ngagel Jaya Barat</h3>
-                        <p>Jl. Ngagel Jaya Barat No.24, RT.002/RW.06, Pucang Sewu, Kec. Gubeng, Surabaya, Jawa Timur 60283</p>
-                        <a href="https://maps.app.goo.gl/9Tvp2K7jWLGTJj128" class="btn-blue">Kunjungi</a>
-                    </div>
-                </div>
-                <button class="carousel-btn next-btn">&#8594;</button>
-                <div class="carousel-slide">
-                    <img src="img/Kedai Bang Jady.jpg" alt="Kedai Bang Jady">
-                    <div class="warung-info">
-                        <h3>Kedai Bang Jady</h3>
-                        <p>Medokan Ayu, Rungkut, Surabaya, East Java 60293</p>
-                        <a href="https://maps.app.goo.gl/YyiWHLXbtAo8xYy77" class="btn-blue">Kunjungi</a>
-                    </div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="img/depot tanjung api surabaya.jpg" alt="Depot Tanjung Api">
-                    <div class="warung-info">
-                        <h3>Depot Tanjung Api</h3>
-                        <p>Jl. Walikota Mustajab No.41, Ketabang, Kec. Genteng, Surabaya, Jawa Timur 60272</p>
-                        <a href="https://maps.app.goo.gl/FXVpeHzkZ5vZ4yqw5" class="btn-blue">Kunjungi</a>
-                    </div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="img/ceker pedas cocote tonggo.png" alt="Ceker Pedas Cocote Tonggo">
-                    <div class="warung-info">
-                        <h3>Ceker Pedas Cocote Tonggo</h3>
-                        <p>Jl. Kombes Pol. Moh. Duryat No.33, Tegalsari, Kec. Tegalsari, Surabaya, Jawa Timur 60262</p>
-                        <a href="https://maps.app.goo.gl/pa7UxQsWbcd6ETBT6" class="btn-blue">Kunjungi</a>
-                    </div>
-                </div>
+                <button type="button" class="carousel-btn next-btn" aria-label="Warung berikutnya">&#8594;</button>
             </div>
             
         </section>
@@ -176,11 +193,13 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-container">
-            <div class="footer-logo">
+            <div class="footer-brand">
+                <img src="img/Surobites Logo.png" alt="" width="30" height="30">
                 <h2>SuroBites</h2>
             </div>
             
-            <div class="footer-links">
+            <div class="footer-links-grid">
+            <div class="footer-column">
                 <h4>Information</h4>
                 <ul>
                     <li><a href="#">Kebijakan Privasi</a></li>
@@ -189,25 +208,25 @@
                 </ul>
             </div>
 
-            <div class="footer-contact">
+            <div class="footer-column">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li>Downloads</li>
-                    <li>SuroBites@gmail.com</li>
-                    <li>0888777999</li>
+                    <li><a href="#">Downloads</a></li>
+                    <li><a href="mailto:SuroBites@gmail.com">SuroBites@gmail.com</a></li>
+                    <li><a href="tel:0888777999">0888777999</a></li>
                 </ul>
             </div>
 
-            <div class="footer-social">
+            <div class="footer-column footer-column-social">
                 <h4>Follow us</h4>
                 <ul>
-                    <li>Instagram</li>
-                    <li>Facebook</li>
-                    <li>LinkedIn</li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">LinkedIn</a></li>
                 </ul>
             </div>
         </div>
-        
+    </div>
         <div class="footer-bottom">
             <p>&copy; 2026 | SuroBites.com</p>
         </div>
