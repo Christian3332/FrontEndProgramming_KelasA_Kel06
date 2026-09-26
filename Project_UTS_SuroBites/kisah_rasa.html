@@ -16,12 +16,27 @@
             <h1>SuroBites</h1>
         </div>
 
+        <!-- Mobile menu -->
         <button type="button" class="menu-toggle" id="mobile-menu" aria-controls="primary-navigation"
             aria-expanded="false" aria-label="Buka menu navigasi">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </button>
+
+        <nav class="navbar" id="primary-navigation">
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="kisah-rasa.html" class="active" aria-current="page">Kisah Rasa</a></li>
+                <li><a href="katalog.html">Katalog</a></li>
+                <li><a href="lokasi.html">Lokasi Warung</a></li>
+            </ul>
+        </nav>
+
+        <form class="search-bar" role="search" action="#" onsubmit="return false;">
+            <label class="visually-hidden" for="search-input">Cari kuliner</label>
+            <input id="search-input" type="text" name="q" placeholder="Cari kuliner...">
+        </form>
     </header>
 </body>
 </html>
