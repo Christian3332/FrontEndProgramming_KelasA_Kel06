@@ -446,60 +446,84 @@ input:focus-visible {
 }
 
 .carousel-container {
-    display: flex;
-    align-items: center;
-    column-gap: 10px;
-    max-width: 900px;
+    position: relative;
+    width: 100%;
+    max-width: 680px;
     margin: 0 auto;
 }
 
 .carousel-btn {
-    flex-shrink: 0;
+    position: absolute;
+    top: 50%;
+    z-index: 2;
     width: 44px;
     height: 44px;
     border-radius: 50%;
     border: 1px solid #90CAF9;
-    background-color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.94);
     color: #0D47A1;
     font-size: 16px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: translateY(-50%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.prev-btn {
+    left: 8px;
+}
+
+.next-btn {
+    right: 8px;
 }
 
 .carousel-btn:hover {
     background-color: #90CAF9;
 }
 
-.carousel-track {
-    flex-grow: 1;
-    display: flex;
-    gap: 15px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 4px;
-    scrollbar-width: none;
+.carousel-btn:focus-visible,
+.carousel-track:focus-visible {
+    outline: 3px solid #0D47A1;
+    outline-offset: 3px;
 }
 
-.carousel-track::-webkit-scrollbar {
-    display: none;
+.carousel-track {
+    width: calc(100% - 20px);
+    min-width: 0;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    overflow: hidden;
+    border-radius: 15px;
 }
 
 .carousel-slide {
     position: relative;
-    flex: 0 0 85%;
-    scroll-snap-align: start;
+    grid-area: 1 / 1;
+    width: 100%;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 500ms ease, visibility 0s linear 500ms;
+}
+
+.carousel-slide.is-active {
+    z-index: 1;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
 }
 
 .carousel-slide img {
+    display: block;
     width: 100%;
-    aspect-ratio: 16/10;
+    aspect-ratio: 16/9;
     object-fit: cover;
 }
 
@@ -538,7 +562,7 @@ input:focus-visible {
 .footer {
     background-color: #D9D9D9;
     color: #000000;
-    padding: 32px 20px 0; /* Padding atas sedikit dibesarkan agar bernapas */
+    padding: 32px 20px 0; 
     margin-top: auto;
 }
 
@@ -625,7 +649,7 @@ input:focus-visible {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.6);
-    display: none; /* Disembunyikan dari awal */
+    display: none; 
     justify-content: center;
     align-items: center;
     z-index: 9999;
@@ -702,10 +726,6 @@ input:focus-visible {
         justify-self: center;
     }
 
-    .carousel-slide {
-        flex: 0 0 46%;
-    }
-
     .footer-links-grid {
         gap: 20px 24px;
     }
@@ -713,6 +733,24 @@ input:focus-visible {
 
 /*768px: Tablet */
 @media (min-width: 768px) {
+    .carousel-container {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+    }
+
+    .carousel-btn {
+        position: static;
+        flex-shrink: 0;
+        transform: none;
+    }
+
+    .carousel-track {
+        flex-grow: 1;
+        width: auto;
+        margin: 0;
+    }
+
     .desktop-section {
         display: block !important;
     }
@@ -826,9 +864,6 @@ input:focus-visible {
         width: 100%;
     }
 
-    .carousel-slide {
-        flex: 0 0 31%;
-    }
 }
 
 
@@ -859,7 +894,7 @@ input:focus-visible {
         scroll-behavior: auto;
     }
     .card,
-    .carousel-track,
+    .carousel-slide,
     .menu-toggle .bar,
     .nav-links a,
     .btn-primary,
@@ -867,6 +902,5 @@ input:focus-visible {
     .btn-outline,
     .carousel-btn {
         transition: none;
-        scroll-behavior: auto;
     }
 }

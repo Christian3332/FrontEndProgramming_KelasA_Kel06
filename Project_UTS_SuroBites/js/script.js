@@ -28,6 +28,110 @@ $(document).ready(function() {
             $(this).fadeOut('fast');
         }
     });
+
+    // Carousel warung berganti dengan efek fade, tombol, atau otomatis.
+    $(document).ready(function () {
+        const carousel = document.querySelector('.carousel-container');
+        if (!carousel) return;
+
+        const track = carousel.querySelector('.carousel-track');
+        const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+        const previousButton = carousel.querySelector('.prev-btn');
+        const nextButton = carousel.querySelector('.next-btn');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const autoplayDelay = 4000;
+        let autoplayTimer = null;
+        let mouseIsOver = false;
+        let currentSlideIndex = Math.max(0, slides.findIndex(function (slide) {
+            return slide.classList.contains('is-active');
+        }));
+
+        if (slides.length < 2) return;
+
+        function stopAutoplay() {
+            window.clearTimeout(autoplayTimer);
+            autoplayTimer = null;
+        }
+
+        function shouldPauseAutoplay() {
+            return reducedMotion.matches || document.hidden || mouseIsOver || carousel.contains(document.activeElement);
+        }
+
+        function startAutoplay() {
+            stopAutoplay();
+            if (shouldPauseAutoplay()) return;
+
+            autoplayTimer = window.setTimeout(function () {
+                moveSlide(1);
+                startAutoplay();
+            }, autoplayDelay);
+        }
+
+        function showSlide(index) {
+            currentSlideIndex = index;
+            slides.forEach(function (slide, slideIndex) {
+                const isActive = slideIndex === currentSlideIndex;
+                slide.classList.toggle('is-active', isActive);
+                slide.setAttribute('aria-hidden', String(!isActive));
+            });
+        }
+
+        function moveSlide(direction) {
+            const nextIndex = (currentSlideIndex + direction + slides.length) % slides.length;
+            showSlide(nextIndex);
+        }
+
+        previousButton.addEventListener('click', function () {
+            moveSlide(-1);
+            startAutoplay();
+        });
+
+        nextButton.addEventListener('click', function () {
+            moveSlide(1);
+            startAutoplay();
+        });
+
+        carousel.addEventListener('pointerenter', function (event) {
+            if (event.pointerType === 'mouse') {
+                mouseIsOver = true;
+                stopAutoplay();
+            }
+        });
+
+        carousel.addEventListener('pointerleave', function (event) {
+            if (event.pointerType === 'mouse') {
+                mouseIsOver = false;
+                startAutoplay();
+            }
+        });
+
+        carousel.addEventListener('focusin', stopAutoplay);
+        carousel.addEventListener('focusout', function (event) {
+            if (!carousel.contains(event.relatedTarget)) startAutoplay();
+        });
+
+        track.addEventListener('keydown', function (event) {
+            if (event.target !== track) return;
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                event.preventDefault();
+                moveSlide(event.key === 'ArrowRight' ? 1 : -1);
+                startAutoplay();
+            }
+        });
+
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) stopAutoplay();
+            else startAutoplay();
+        });
+
+        reducedMotion.addEventListener('change', function () {
+            if (reducedMotion.matches) stopAutoplay();
+            else startAutoplay();
+        });
+
+        showSlide(currentSlideIndex);
+        startAutoplay();
+    });
     //data makanan yg ada untuk pengetesan
     const katalogMakanan = [
         'rawon setan', 'rawon',

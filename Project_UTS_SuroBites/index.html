@@ -151,10 +151,10 @@
             <div class="section-title">
                 <h2>WARUNG MAKANAN KHAS SURABAYA</h2>
             </div>
-            <div class="carousel-container">
-                <button type = "button" class="carousel-btn prev-btn" aria-label="Warung sebelumnya">&#8592;</button>
-                <div class="carousel-track" tabindex="0" aria-label="Daftar warung, geser untuk melihat lebih banyak">
-                    <div class="carousel-slide">
+            <div class="carousel-container" role="region" aria-roledescription="carousel" aria-label="Warung kuliner Surabaya">
+                <button type="button" class="carousel-btn prev-btn" aria-label="Warung sebelumnya" aria-controls="warung-carousel-track">&#8592;</button>
+                <div class="carousel-track" id="warung-carousel-track" tabindex="0" aria-label="Daftar warung kuliner">
+                    <div class="carousel-slide is-active" role="group" aria-roledescription="slide" aria-label="1 dari 5" aria-hidden="false">
                         <img src="img/Warung.png" alt="Warung Tahu Campur Cak Sadak" loading = "lazy">
                         <div class="warung-info">
                             <h3>Tahu Campur Cak Sadak</h3>
@@ -162,7 +162,7 @@
                             <a href="https://maps.app.goo.gl/5s2ocqsDTwDYwsb16" class="btn-blue">Kunjungi</a>
                         </div>
                     </div>
-                    <div class="carousel-slide">
+                    <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 dari 5" aria-hidden="true">
                         <img src="img/warung selamat sukses.png.png" alt="Warung Depot Selamat Sukses Ngagel Jaya Barat" loading="lazy">
                         <div class="warung-info">
                             <h3>Depot Selamat Sukses Ngagel Jaya Barat</h3>
@@ -170,7 +170,7 @@
                             <a href="https://maps.app.goo.gl/9Tvp2K7jWLGTJj128" class="btn-blue">Kunjungi</a>
                         </div>
                     </div>
-                    <div class="carousel-slide">
+                    <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 dari 5" aria-hidden="true">
                         <img src="img/Kedai Bang Jady.jpg" alt="Kedai Bang Jady" loading="lazy">
                         <div class="warung-info">
                             <h3>Kedai Bang Jady</h3>
@@ -178,7 +178,7 @@
                             <a href="https://maps.app.goo.gl/YyiWHLXbtAo8xYy77" class="btn-blue">Kunjungi</a>
                         </div>
                     </div>
-                    <div class="carousel-slide">
+                    <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 dari 5" aria-hidden="true">
                         <img src="img/depot tanjung api surabaya.jpg" alt="Depot Tanjung Api" loading="lazy">
                         <div class="warung-info">
                             <h3>Depot Tanjung Api</h3>
@@ -186,7 +186,7 @@
                             <a href="https://maps.app.goo.gl/FXVpeHzkZ5vZ4yqw5" class="btn-blue">Kunjungi</a>
                         </div>
                     </div>
-                    <div class="carousel-slide">
+                    <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="5 dari 5" aria-hidden="true">
                         <img src="img/ceker pedas cocote tonggo.png" alt="Ceker Pedas Cocote Tonggo" loading="lazy">
                         <div class="warung-info">
                             <h3>Ceker Pedas Cocote Tonggo</h3>
@@ -195,7 +195,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="carousel-btn next-btn" aria-label="Warung berikutnya">&#8594;</button>
+                <button type="button" class="carousel-btn next-btn" aria-label="Warung berikutnya" aria-controls="warung-carousel-track">&#8594;</button>
             </div>
             
         </section>
