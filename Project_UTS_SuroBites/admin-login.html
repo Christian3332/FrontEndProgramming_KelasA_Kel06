@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Login | SuroBites</title>
+    <link rel="icon" type="image/png" href="img/Surobites Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body" data-admin-page="login">
+    <main class="login-wrapper" id="main-content">
+        <!-- PANEL BRANDING -->
+        <section class="login-brand" aria-label="Tentang panel admin">
+            <a class="login-brand__logo" href="index.html">
+                <span class="brand-mark"><img src="img/Surobites Logo.png" alt="" width="36" height="36"></span>
+                <span>SuroBites</span>
+            </a>
+            <div class="login-brand__content">
+                <span class="login-brand__eyebrow">Panel Admin</span>
+                <h2>Kelola cita rasa Surabaya dari satu tempat.</h2>
+                <p>Atur katalog makanan, kategori rekomendasi, lokasi warung, FAQ, dan konten website SuroBites dengan mudah.</p>
+                <ul class="login-brand__features">
+                    <li><span aria-hidden="true">🍲</span> Kelola katalog makanan</li>
+                    <li><span aria-hidden="true">⭐</span> Atur kategori rekomendasi</li>
+                    <li><span aria-hidden="true">📍</span> Perbarui lokasi warung</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- FORM LOGIN -->
+        <section class="login-panel">
+            <div class="login-card">
+                <div class="login-card__header">
+                    <img class="login-card__logo" src="img/Surobites Logo.png" alt="Logo SuroBites" width="64" height="64">
+                    <p class="login-card__brand">SuroBites Admin</p>
+                    <h1>Masuk ke Dashboard</h1>
+                    <p>Silakan login untuk mengelola konten website.</p>
+                </div>
+
+                <form id="login-form" novalidate>
+                    <div class="form-alert" id="login-alert" role="alert" hidden></div>
+
+                    <div class="form-field">
+                        <label for="login-username">Username</label>
+                        <div class="input-icon">
+                            <i class="fa-solid fa-user"></i>
+                            <input id="login-username" name="username" type="text" class="form-control" placeholder="Masukkan username" autocomplete="username" aria-describedby="login-username-error">
+                        </div>
+                        <p class="field-error" id="login-username-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="login-password">Password</label>
+                        <div class="input-icon input-icon--toggle">
+                            <i class="fa-solid fa-lock"></i>
+                            <input id="login-password" name="password" type="password" class="form-control" placeholder="Masukkan password" autocomplete="current-password" aria-describedby="login-password-error">
+                            <button type="button" class="toggle-password" data-toggle-password="login-password" aria-label="Tampilkan password"><i class="fa-regular fa-eye"></i></button>
+                        </div>
+                        <p class="field-error" id="login-password-error" aria-live="polite"></p>
+                    </div>
+
+                    <button type="submit" class="ui-btn ui-btn--primary ui-btn--block login-submit" id="login-submit"><span>Login</span></button>
+                </form>
+
+                <div class="demo-account">
+                    <strong>🔑 Akun demo</strong>
+                    <span>Username: <code>admin</code> &middot; Password: <code>admin123</code></span>
+                </div>
+
+                <a href="index.html" class="back-link">← Kembali ke website</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
