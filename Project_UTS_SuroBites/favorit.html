@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daftar makanan khas Surabaya favorit yang kamu simpan di SuroBites.">
+    <title>Favorit Saya | SuroBites</title>
+    <link rel="icon" type="image/png" href="img/Surobites Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Langsung ke konten utama</a>
+
+    <!-- HEADER & NAVBAR -->
+    <header class="header">
+        <a class="logo" href="index.html" aria-label="SuroBites - Beranda">
+            <img src="img/Surobites Logo.png" alt="Logo SuroBites" width="32" height="32">
+            <h1>SuroBites</h1>
+        </a>
+
+        <a href="favorit.html" class="header-fav active" aria-label="Favorit Saya" aria-current="page" title="Favorit Saya">
+            <i class="fa-regular fa-heart"></i>
+            <span class="header-fav__count" data-fav-count hidden>0</span>
+        </a>
+
+        <button type="button" class="menu-toggle" id="mobile-menu" aria-controls="primary-navigation"
+            aria-expanded="false" aria-label="Buka menu navigasi">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <nav class="navbar" id="primary-navigation">
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="rekomendasi.html">Rekomendasi</a></li>
+                <li><a href="katalog.html">Katalog</a></li>
+                <li><a href="lokasi.html">Lokasi Warung</a></li>
+            </ul>
+        </nav>
+
+        <form class="search-bar" role="search" action="katalog.html">
+            <label class="visually-hidden" for="search-input">Cari kuliner</label>
+            <input id="search-input" type="text" name="q" placeholder="Cari kuliner...">
+        </form>
+    </header>
+
+    <main id="main-content" class="container">
+        <section class="katalog-section" aria-labelledby="favorit-title">
+            <div class="page-heading">
+                <span class="page-heading__icon" aria-hidden="true">♥</span>
+                <h2 id="favorit-title" class="section-title">Favorit Saya</h2>
+                <p class="section-subtitle" data-fav-summary>Simpan kuliner yang ingin kamu coba agar mudah ditemukan kembali.</p>
+                <button type="button" class="link-btn" data-fav-clear hidden>Hapus semua favorit</button>
+            </div>
+            <div class="katalog-grid" data-food-list="favorit" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="img/Surobites Logo.png" alt="Logo SuroBites" width="30" height="30">
+                <h2>SuroBites</h2>
+            </div>
+
+            <div class="footer-links-grid">
+                <div class="footer-column">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Downloads</a></li>
+                        <li><a href="mailto:SuroBites@gmail.com">SuroBites@gmail.com</a></li>
+                        <li><a href="tel:0888777999">0888777999</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-column-social">
+                    <h4>Follow us</h4>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 | SuroBites.com</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
