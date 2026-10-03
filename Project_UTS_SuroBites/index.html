@@ -3,17 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="SuroBites - jelajahi kuliner legendaris Surabaya: katalog makanan, rekomendasi sesuai selera, dan lokasi warung.">
+    <meta
+      name="description"
+      content="SuroBites - jelajahi kuliner legendaris Surabaya: katalog makanan, rekomendasi sesuai selera, dan lokasi warung."
+    />
     <title>SuroBites - Kuliner Legendaris Surabaya</title>
-    <link rel="icon" type="image/png" href="img/Surobites Logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="img/Surobites Logo.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Langsung ke konten utama</a>
     <!-- HEADER & NAVBAR -->
     <header class="header">
-      <div class="logo">
+      <a class="logo" href="index.html" aria-label="SuroBites - Beranda">
         <img
           src="img/Surobites Logo.png"
           alt="Logo SuroBites"
@@ -21,7 +27,16 @@
           height="32"
         />
         <h1>SuroBites</h1>
-      </div>
+      </a>
+      <a
+        href="favorit.html"
+        class="header-fav"
+        aria-label="Favorit Saya"
+        title="Favorit Saya"
+      >
+        <i class="fa-regular fa-heart"></i>
+        <span class="header-fav__count" data-fav-count hidden>0</span>
+      </a>
       <button
         type="button"
         class="menu-toggle"
@@ -40,18 +55,13 @@
           <li>
             <a href="index.html" class="active" aria-current="page">Beranda</a>
           </li>
-          <li><a href="kisah_rasa.html">Kisah Rasa</a></li>
+          <li><a href="rekomendasi.html">Rekomendasi</a></li>
           <li><a href="katalog.html">Katalog</a></li>
           <li><a href="lokasi.html">Lokasi Warung</a></li>
         </ul>
       </nav>
 
-      <form
-        class="search-bar"
-        role="search"
-        action="#"
-        onsubmit="return false;"
-      >
+      <form class="search-bar" role="search" action="katalog.html">
         <label class="visually-hidden" for="search-input">Cari kuliner</label>
         <input
           id="search-input"
