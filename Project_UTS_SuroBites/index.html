@@ -28,6 +28,7 @@
         />
         <h1>SuroBites</h1>
       </a>
+
       <a
         href="favorit.html"
         class="header-fav"
@@ -37,6 +38,7 @@
         <i class="fa-regular fa-heart"></i>
         <span class="header-fav__count" data-fav-count hidden>0</span>
       </a>
+
       <button
         type="button"
         class="menu-toggle"
@@ -92,52 +94,237 @@
         </div>
       </section>
 
-      <!-- KISAH RASA / HIGHLIGHT MENU -->
+      <!-- KATEGORI REKOMENDASI -->
       <section
-        id="kisah-rasa"
-        class="highlight-section desktop-section"
-        aria-labelledby="kisah-rasa-title"
+        id="kategori"
+        class="kategori-section"
+        aria-labelledby="kategori-title"
       >
-        <h2 id="kisah-rasa-title" class="section-title">Kisah Rasa Pilihan</h2>
-        <div class="card-container">
+        <h2 id="kategori-title" class="section-title">
+          Mau Makan Apa Hari Ini?
+        </h2>
+        <p class="section-subtitle">
+          Pilih sesuai selera, nanti SuroBites carikan kuliner Surabaya yang
+          paling cocok untukmu.
+        </p>
+        <div class="kategori-grid" data-category-links></div>
+      </section>
+
+      <!-- REKOMENDASI PILIHAN / HIGHLIGHT MENU -->
+      <section
+        id="rekomendasi-pilihan"
+        class="highlight-section desktop-section"
+        aria-labelledby="rekomendasi-pilihan-title"
+      >
+        <h2 id="rekomendasi-pilihan-title" class="section-title">
+          Rekomendasi Pilihan
+        </h2>
+        <div class="card-container" data-food-list="featured">
           <article class="card">
-            <img
-              src="img/Lontong kikil.png"
-              alt="Lontong Kikil"
-              class="card-img"
-              loading="lazy"
-            />
+            <div class="card-img-wrapper">
+              <img
+                src="img/Lontong kikil.png"
+                alt="Lontong Kikil"
+                class="card-img"
+                loading="lazy"
+              />
+            </div>
             <div class="card-body">
               <h3>Lontong Kikil</h3>
-              <a href="#" class="btn-outline">Selengkapnya</a>
+              <button
+                type="button"
+                class="btn-outline"
+                data-open-food="lontong-kikil"
+              >
+                Deskripsi Singkat
+              </button>
             </div>
           </article>
 
           <article class="card">
-            <img
-              src="img/Rawon.jpg"
-              alt="Rawon Setan"
-              class="card-img"
-              loading="lazy"
-            />
+            <div class="card-img-wrapper">
+              <img
+                src="img/Rawon.jpg"
+                alt="Rawon Setan"
+                class="card-img"
+                loading="lazy"
+              />
+            </div>
             <div class="card-body">
               <h3>Rawon Setan</h3>
-              <a href="#" class="btn-outline">Selengkapnya</a>
+              <button
+                type="button"
+                class="btn-outline"
+                data-open-food="rawon-setan"
+              >
+                Deskripsi Singkat
+              </button>
             </div>
           </article>
 
           <article class="card">
-            <img
-              src="img/tahu tek.jpg"
-              alt="Tahu Tek"
-              class="card-img"
-              loading="lazy"
-            />
+            <div class="card-img-wrapper">
+              <img
+                src="img/tahu tek.jpg"
+                alt="Tahu Tek"
+                class="card-img"
+                loading="lazy"
+              />
+            </div>
             <div class="card-body">
               <h3>Tahu Tek</h3>
-              <a href="#" class="btn-outline">Selengkapnya</a>
+              <button
+                type="button"
+                class="btn-outline"
+                data-open-food="tahu-tek"
+              >
+                Deskripsi Singkat
+              </button>
             </div>
           </article>
+        </div>
+      </section>
+
+      <!-- KATALOG MENU -->
+      <section
+        id="katalog"
+        class="katalog-section"
+        aria-labelledby="katalog-title"
+      >
+        <h2 id="katalog-title" class="section-title">Makanan Khas Surabaya</h2>
+        <div class="katalog-grid" data-food-list="home">
+          <article class="card">
+            <div class="card-img-wrapper">
+              <img
+                src="img/Rawon.jpg"
+                alt="Rawon Setan"
+                class="card-img"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="card-footer">
+              <h3 class="card-title">Rawon Setan</h3>
+              <button
+                type="button"
+                class="btn-primary"
+                data-open-food="rawon-setan"
+              >
+                Deskripsi Singkat
+              </button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-img-wrapper">
+              <img
+                src="img/Nasi Pecel.jpg"
+                alt="Nasi Pecel"
+                class="card-img"
+                loading="lazy"
+              />
+            </div>
+            <div class="card-footer">
+              <h3 class="card-title">Nasi Pecel</h3>
+              <button
+                type="button"
+                class="btn-primary"
+                data-open-food="nasi-pecel"
+              >
+                Deskripsi Singkat
+              </button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-img-wrapper">
+              <img
+                src="img/tahu tek.jpg"
+                alt="Tahu Tek"
+                class="card-img"
+                loading="lazy"
+              />
+            </div>
+            <div class="card-footer">
+              <h3 class="card-title">Tahu Tek</h3>
+              <button
+                type="button"
+                class="btn-primary"
+                data-open-food="tahu-tek"
+              >
+                Deskripsi Singkat
+              </button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-img-wrapper">
+              <img
+                src="img/Rujak cingur.jpg"
+                alt="Rujak Cingur"
+                class="card-img"
+                loading="lazy"
+              />
+            </div>
+            <div class="card-footer">
+              <h3 class="card-title">Rujak Cingur</h3>
+              <button
+                type="button"
+                class="btn-primary"
+                data-open-food="rujak-cingur"
+              >
+                Deskripsi Singkat
+              </button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-img-wrapper">
+              <img
+                src="img/Lontong kikil.png"
+                alt="Lontong Kikil"
+                class="card-img"
+                loading="lazy"
+              />
+            </div>
+            <div class="card-footer">
+              <h3 class="card-title">Lontong Kikil</h3>
+              <button
+                type="button"
+                class="btn-primary"
+                data-open-food="lontong-kikil"
+              >
+                Deskripsi Singkat
+              </button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-img-wrapper">
+              <img
+                src="img/Sate klopo.jpg"
+                alt="Sate Klopo"
+                class="card-img"
+                loading="lazy"
+              />
+            </div>
+            <div class="card-footer">
+              <h3 class="card-title">Sate Klopo</h3>
+              <button
+                type="button"
+                class="btn-primary"
+                data-open-food="sate-klopo"
+              >
+                Deskripsi Singkat
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="section-cta" data-katalog-more hidden>
+          <a href="katalog.html" class="btn-more"
+            >Lihat Semua Katalog
+            <span class="btn-more__arrow" aria-hidden="true">→</span></a
+          >
         </div>
       </section>
 
@@ -169,6 +356,7 @@
             id="warung-carousel-track"
             tabindex="0"
             aria-label="Daftar warung kuliner"
+            data-warung-carousel
           >
             <div
               class="carousel-slide is-active"
@@ -191,6 +379,8 @@
                 <a
                   href="https://maps.app.goo.gl/5s2ocqsDTwDYwsb16"
                   class="btn-blue"
+                  target="_blank"
+                  rel="noopener"
                   >Kunjungi</a
                 >
               </div>
@@ -203,7 +393,7 @@
               aria-hidden="true"
             >
               <img
-                src="img/warung selamat sukses.png.png"
+                src="img/warung selamat sukses.png"
                 alt="Warung Depot Selamat Sukses Ngagel Jaya Barat"
                 loading="lazy"
               />
@@ -302,8 +492,26 @@
             &#8594;
           </button>
         </div>
+        <div class="section-cta">
+          <a href="lokasi.html" class="btn-more"
+            >Lihat Semua Lokasi Warung
+            <span class="btn-more__arrow" aria-hidden="true">→</span></a
+          >
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="faq-section" aria-labelledby="faq-title">
+        <h2 id="faq-title" class="section-title">
+          Pertanyaan yang Sering Diajukan
+        </h2>
+        <p class="section-subtitle">
+          Masih bingung? Temukan jawaban seputar SuroBites di sini.
+        </p>
+        <div class="faq-list" data-faq-list></div>
       </section>
     </main>
+
     <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-container">
@@ -318,7 +526,7 @@
             <ul>
               <li><a href="#">Kebijakan Privasi</a></li>
               <li><a href="#">Syarat & Ketentuan</a></li>
-              <li><a href="#">FAQ</a></li>
+              <li><a href="index.html#faq">FAQ</a></li>
             </ul>
           </div>
 
@@ -348,6 +556,7 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/data.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
