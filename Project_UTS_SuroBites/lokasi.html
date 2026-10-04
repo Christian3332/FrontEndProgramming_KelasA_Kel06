@@ -7,7 +7,7 @@
     <title>Lokasi Warung | SuroBites</title>
     <link rel="icon" type="image/png" href="img/Surobites Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="css/lokasi.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <a class="skip-link" href="#main-content">Langsung ke konten utama</a>
@@ -49,14 +49,13 @@
 
     <!-- Main Content: Lokasi Warung -->
     <main id="main-content" class="container lokasi-main">
-        <!-- DAFTAR LOKASI WARUNG (shape kartu sama seperti Katalog) -->
         <section class="lokasi-section" aria-labelledby="lokasi-title">
             <div class="page-heading">
                 <h2 id="lokasi-title" class="section-title">
                     Lokasi Warung Kuliner Surabaya
                 </h2>
                 <p class="section-subtitle">
-                    emukan warung legendaris, cek jam bukanya, lalu langsung arahkan perjalananmu lewat Google Maps.
+                    Temukan warung legendaris, cek jam bukanya, lalu langsung arahkan perjalananmu lewat Google Maps.
                 </p>
             </div>
             <div class="lokasi-toolbar">
@@ -73,6 +72,15 @@
                 </div>
 
                 <p class="lokasi-count" data-warung-count aria-live="polite"></p>
+            </div>
+
+            <!-- DAFTAR LOKASI WARUNG (shape kartu sama seperti Katalog) -->
+            <div class="warung-grid" data-warung-list>
+                <noscript>
+                    <p class="section-subtitle">
+                        Aktifkan JavaScript untuk melihat daftar warung.
+                    </p>
+                </noscript>
             </div>
         </section>
     </main>
@@ -91,7 +99,7 @@
                     <ul>
                         <li><a href="#">Kebijakan Privasi</a></li>
                         <li><a href="#">Syarat &amp; Ketentuan</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
                     </ul>
                 </div>
 
@@ -109,18 +117,18 @@
                     <ul>
                         <li><a href="#">Instagram</a></li>
                         <li><a href="#">Facebook</a></li>
-                        <li><a href="#">LinkedIn</a></li>
                     </ul>
                 </div>
             </div>
+        </div>
 
-            <div class="footer-bottom">
-                <p>&copy; 2026 | SuroBites.com</p>
-            </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 | SuroBites.com</p>
         </div>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/data.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
