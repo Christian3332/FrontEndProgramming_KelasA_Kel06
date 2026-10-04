@@ -118,6 +118,20 @@ const foods = [
         priceRange: 'Rp10.000 – Rp15.000',
         timeCategory: ['pagi', 'siang'],
         featured: false
+    },
+    {
+        id: 'nasi-cumi',
+        name: 'Nasi Cumi',
+        image: 'img/Nasi Cumi.png',
+        shortDescription: 'Nasi putih dengan cumi masak hitam dari tintanya sendiri, ditemani mi goreng, telur pindang, kering tempe, serundeng, dan sambal yang pedas menggigit.',
+        story: 'Nasi cumi hitam dibawa oleh perantau Madura dan kini jadi buruan kuliner malam di Surabaya, terutama di sekitar kawasan Pasar Atom. Warna hitamnya berasal dari tinta cumi asli yang dimasak bersama bumbu rempah hingga meresap.',
+        ingredients: ['Cumi', 'Tinta cumi', 'Nasi putih', 'Mi goreng', 'Telur pindang', 'Kering tempe', 'Sambal'],
+        taste: 'Gurih, pedas, dengan aroma laut yang khas',
+        categories: ['pedas', 'gurih', 'malam'],
+        priceCategory: 'sedang',
+        priceRange: 'Rp25.000 – Rp35.000',
+        timeCategory: ['siang', 'malam'],
+        featured: false
     }
 ];
 
