@@ -146,6 +146,34 @@ const foods = [
         priceRange: 'Rp12.000 – Rp20.000',
         timeCategory: ['siang', 'malam'],
         featured: false
+    },
+    {
+        id: 'kare-ayam',
+        name: 'Kare Ayam',
+        image: 'img/Kare ayam.png',
+        shortDescription: 'Potongan ayam kampung dalam kuah santan kuning yang kental dan harum rempah, berisi wortel serta buncis, nikmat disantap dengan nasi hangat atau roti.',
+        story: 'Kare ayam lahir dari pengaruh pedagang India dan Arab yang singgah di pelabuhan Surabaya. Bumbu karinya kemudian disesuaikan dengan lidah lokal memakai santan dan kunyit, sehingga rasanya lebih ringan dan gurih dibanding kari aslinya.',
+        ingredients: ['Ayam kampung', 'Santan', 'Kunyit', 'Serai & daun salam', 'Wortel', 'Buncis'],
+        taste: 'Gurih, creamy, dan hangat rempah',
+        categories: ['berkuah', 'gurih'],
+        priceCategory: 'sedang',
+        priceRange: 'Rp20.000 – Rp30.000',
+        timeCategory: ['pagi', 'siang'],
+        featured: false
+    },
+    {
+        id: 'kikil-sapi',
+        name: 'Kikil Sapi',
+        image: 'img/Kikil sapi.png',
+        shortDescription: 'Kikil sapi kenyal yang dimasak dalam kuah santan kuning ala gule, ditaburi seledri dan bawang goreng, disantap bersama lontong, kerupuk, dan sambal.',
+        story: 'Berbeda dari Lontong Kikil yang berkuah kaldu, versi ini dimasak dengan santan sehingga kuahnya lebih kental dan creamy. Kikil direbus berjam-jam lebih dulu supaya empuk, lalu dimasak lagi bersama bumbu kuning hingga rempahnya meresap.',
+        ingredients: ['Kikil sapi', 'Santan', 'Bumbu kuning', 'Seledri', 'Bawang goreng', 'Lontong', 'Kerupuk'],
+        taste: 'Gurih santan, kenyal, dan kaya rempah',
+        categories: ['berkuah', 'gurih', 'malam'],
+        priceCategory: 'sedang',
+        priceRange: 'Rp20.000 – Rp30.000',
+        timeCategory: ['siang', 'malam'],
+        featured: false
     }
 ];
 
