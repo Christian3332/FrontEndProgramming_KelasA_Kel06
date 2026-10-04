@@ -41,7 +41,7 @@
             </ul>
         </nav>
 
-        <form class="search-bar" role="search" action="#" onsubmit="return false;">
+        <form class="search-bar" role="search" action="katalog.html">
             <label class="visually-hidden" for="search-input">Cari kuliner</label>
             <input id="search-input" type="text" name="q" placeholder="Cari kuliner...">
         </form>
@@ -49,76 +49,30 @@
 
     <!-- Main Content: Lokasi Warung -->
     <main id="main-content" class="container lokasi-main">
-
-        <!-- HERO SECTION LOKASI WARUNG -->
-        <section class="lokasi-hero" aria-labelledby="lokasi-hero-title">
-            <div class="hero-content">
-                <h2 id="lokasi-hero-title">Temukan Warung Legendaris di Penjuru Kota</h2>
-                <p>Alamat, jam buka, dan rute menuju warung-warung otentik penjaga cita rasa asli Surabaya.</p>
-            </div>
-        </section>
-
         <!-- DAFTAR LOKASI WARUNG (shape kartu sama seperti Katalog) -->
         <section class="lokasi-section" aria-labelledby="lokasi-title">
-            <h3 id="lokasi-title" class="section-title">Warung Pilihan &amp; Alamatnya</h3>
+            <div class="page-heading">
+                <h2 id="lokasi-title" class="section-title">
+                    Lokasi Warung Kuliner Surabaya
+                </h2>
+                <p class="section-subtitle">
+                    emukan warung legendaris, cek jam bukanya, lalu langsung arahkan perjalananmu lewat Google Maps.
+                </p>
+            </div>
+            <div class="lokasi-toolbar">
+                <label class="visually-hidden" for="warung-filter">Cari warung</label>
 
-            <div class="lokasi-grid">
+                <div class="filter-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input
+                        id="warung-filter"
+                        type="search"
+                        class="filter-input"
+                        placeholder="Cari nama warung, alamat, atau menu..."
+                        autocomplete="off">
+                </div>
 
-                <!-- 1. CEKER PEDAS COCOT'E TONGGO -->
-                <article class="card" data-category="ceker-pedas">
-                    <div class="card-img-wrapper">
-                        <img class="card-img" src="img/ceker pedas cocote tonggo.png" alt="Warung Ceker Pedas Cocot'e Tonggo, Surabaya">
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-title">Ceker Pedas Cocot'e Tonggo</span>
-                        <a class="btn-primary" href="https://www.google.com/maps/search/?api=1&query=Ceker+Pedas+Cocot%27e+Tonggo+Surabaya" target="_blank" rel="noopener">Lihat di Peta</a>
-                    </div>
-                </article>
-
-                <!-- 2. KEDAI BANG JADY -->
-                <article class="card" data-category="kedai-bang-jady">
-                    <div class="card-img-wrapper">
-                        <img class="card-img" src="img/Kedai Bang Jady.jpg" alt="Warung Kedai Bang Jady, Surabaya">
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-title">Kedai Bang Jady</span>
-                        <a class="btn-primary" href="https://www.google.com/maps/search/?api=1&query=Kedai+Bang+Jady+Surabaya" target="_blank" rel="noopener">Lihat di Peta</a>
-                    </div>
-                </article>
-
-                <!-- 3. DEPOT TANJUNG API -->
-                <article class="card" data-category="depot-tanjung-api">
-                    <div class="card-img-wrapper">
-                        <img class="card-img" src="img/depot tanjung api surabaya.jpg" alt="Depot Tanjung Api, Surabaya">
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-title">Depot Tanjung Api</span>
-                        <a class="btn-primary" href="https://www.google.com/maps/search/?api=1&query=Depot+Tanjung+Api+Surabaya" target="_blank" rel="noopener">Lihat di Peta</a>
-                    </div>
-                </article>
-
-                <!-- 4. SATE KLOPO -->
-                <article class="card" data-category="sate-klopo">
-                    <div class="card-img-wrapper">
-                        <img class="card-img" src="img/Sate klopo.jpg" alt="Warung Sate Klopo, Surabaya">
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-title">Sate Klopo</span>
-                        <a class="btn-primary" href="https://www.google.com/maps/search/?api=1&query=Sate+Klopo+Surabaya" target="_blank" rel="noopener">Lihat di Peta</a>
-                    </div>
-                </article>
-
-                <!-- 5. WARUNG SELAMAT SUKSES -->
-                <article class="card" data-category="warung-selamat-sukses">
-                    <div class="card-img-wrapper">
-                        <img class="card-img" src="img/warung selamat sukses.png" alt="Warung Selamat Sukses, Surabaya">
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-title">Warung Selamat Sukses</span>
-                        <a class="btn-primary" href="https://www.google.com/maps/search/?api=1&query=Warung+Selamat+Sukses+Surabaya" target="_blank" rel="noopener">Lihat di Peta</a>
-                    </div>
-                </article>
-
+                <p class="lokasi-count" data-warung-count aria-live="polite"></p>
             </div>
         </section>
     </main>
