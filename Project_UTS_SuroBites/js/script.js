@@ -228,119 +228,8 @@ function renderCategoryButtons() {
         }
         html += `<button type="button" class="kategori-card${activeClass}" data-category="${category.id}">${categoryCardContent(category)}</button>`;
     });
-
-    // Carousel warung berganti dengan efek fade, tombol, atau otomatis.
-    $(document).ready(function () {
-        const carousel = document.querySelector('.carousel-container');
-        if (!carousel) return;
-
-        const track = carousel.querySelector('.carousel-track');
-        const slides = Array.from(track.querySelectorAll('.carousel-slide'));
-        const previousButton = carousel.querySelector('.prev-btn');
-        const nextButton = carousel.querySelector('.next-btn');
-        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-        const autoplayDelay = 4000;
-        let autoplayTimer = null;
-        let mouseIsOver = false;
-        let currentSlideIndex = Math.max(0, slides.findIndex(function (slide) {
-            return slide.classList.contains('is-active');
-        }));
-
-        if (slides.length < 2) return;
-
-        function stopAutoplay() {
-            window.clearTimeout(autoplayTimer);
-            autoplayTimer = null;
-        }
-
-        function shouldPauseAutoplay() {
-            return reducedMotion.matches || document.hidden || mouseIsOver || carousel.contains(document.activeElement);
-        }
-
-        function startAutoplay() {
-            stopAutoplay();
-            if (shouldPauseAutoplay()) return;
-
-            autoplayTimer = window.setTimeout(function () {
-                moveSlide(1);
-                startAutoplay();
-            }, autoplayDelay);
-        }
-
-        function showSlide(index) {
-            currentSlideIndex = index;
-            slides.forEach(function (slide, slideIndex) {
-                const isActive = slideIndex === currentSlideIndex;
-                slide.classList.toggle('is-active', isActive);
-                slide.setAttribute('aria-hidden', String(!isActive));
-            });
-        }
-
-        function moveSlide(direction) {
-            const nextIndex = (currentSlideIndex + direction + slides.length) % slides.length;
-            showSlide(nextIndex);
-        }
-
-        previousButton.addEventListener('click', function () {
-            moveSlide(-1);
-            startAutoplay();
-        });
-
-        nextButton.addEventListener('click', function () {
-            moveSlide(1);
-            startAutoplay();
-        });
-
-        carousel.addEventListener('pointerenter', function (event) {
-            if (event.pointerType === 'mouse') {
-                mouseIsOver = true;
-                stopAutoplay();
-            }
-        });
-
-        carousel.addEventListener('pointerleave', function (event) {
-            if (event.pointerType === 'mouse') {
-                mouseIsOver = false;
-                startAutoplay();
-            }
-        });
-
-        carousel.addEventListener('focusin', stopAutoplay);
-        carousel.addEventListener('focusout', function (event) {
-            if (!carousel.contains(event.relatedTarget)) startAutoplay();
-        });
-
-        track.addEventListener('keydown', function (event) {
-            if (event.target !== track) return;
-            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-                event.preventDefault();
-                moveSlide(event.key === 'ArrowRight' ? 1 : -1);
-                startAutoplay();
-            }
-        });
-
-        document.addEventListener('visibilitychange', function () {
-            if (document.hidden) stopAutoplay();
-            else startAutoplay();
-        });
-
-        reducedMotion.addEventListener('change', function () {
-            if (reducedMotion.matches) stopAutoplay();
-            else startAutoplay();
-        });
-
-        showSlide(currentSlideIndex);
-        startAutoplay();
-    });
-    //data makanan yg ada untuk pengetesan
-    const katalogMakanan = [
-        'rawon setan', 'rawon',
-        'nasi pecel', 'pecel',
-        'tahu tek', 'tahu',
-        'rujak cingur', 'rujak',
-        'lontong kikil', 'kikil',
-        'sate', 'sate klopo'
-    ];
+    $('[data-category-filter]').html(html);
+}
 
 function renderRekomendasi(oldLimit) {
     if ($('[data-food-list="rekomendasi"]').length === 0) {
@@ -695,4 +584,238 @@ function renderWarungCarousel() {
         if (index === 0) {
             activeClass = ' is-active';
         }
+        html += `
+            <div class="carousel-slide${activeClass}" role="group" aria-roledescription="slide" aria-label="${index + 1} dari ${warungs.length}">
+                <img src="${warung.image}" alt="Warung ${warung.name}" loading="lazy">
+                <div class="warung-info">
+                    <h3>${warung.name}</h3>
+                    <p>${warung.address}</p>
+                    <a href="${warung.mapsUrl}" class="btn-blue" target="_blank" rel="noopener">Kunjungi</a>
+                </div>
+            </div>`;
     });
+    $('[data-warung-carousel]').html(html);
+}
+
+function renderFaq() {
+    let html = '';
+    $.each(faqs, function (index, faq) {
+        html += `
+            <div class="faq-item">
+                <h3 class="faq-heading">
+                    <button type="button" class="faq-question">
+                        <span>${faq.question}</span>
+                        <span class="faq-icon"></span>
+                    </button>
+                </h3>
+                <div class="faq-answer">
+                    <div class="faq-answer__inner"><p>${faq.answer}</p></div>
+                </div>
+            </div>`;
+    });
+    $('[data-faq-list]').html(html);
+}
+
+function renderStats() {
+    $('[data-stat="foods"]').text(foods.length);
+    $('[data-stat="categories"]').text(categories.length);
+    $('[data-stat="warungs"]').text(warungs.length);
+}
+
+$(document).ready(function () {
+    renderStats();
+    renderHome();
+    renderFeatured();
+    renderCategoryLinks();
+    renderCategoryButtons();
+    renderKatalog(0);
+    renderRekomendasi(0);
+    renderFavorit();
+    renderWarungs();
+    renderWarungCarousel();
+    renderFaq();
+    updateFavoriteCount();
+    highlightWarung();
+    $('#search-input').val(searchKeyword);
+
+    $('.search-bar').on('submit', function (e) {
+        e.preventDefault();
+        const keyword = $(this).find('input[type="text"]').val().trim();
+        if (keyword === '') {
+            return;
+        }
+
+        if (searchFoods(keyword).length > 0) {
+            window.location.href = 'katalog.html?q=' + encodeURIComponent(keyword);
+        } else {
+            $('#popup-message').html(`Maaf, kuliner <strong>"${$('<div>').text(keyword).html()}"</strong> belum ada di katalog kami saat ini.`);
+            $('#custom-popup').css('display', 'flex').hide().fadeIn('fast');
+            $(this).find('input[type="text"]').val('');
+        }
+    });
+
+    $(document).on('click', '[data-open-food]', function () {
+        openFoodModal($(this).data('open-food'));
+    });
+
+    $(document).on('click', '[data-fav-toggle]', function () {
+        toggleFavorite($(this).data('fav-toggle'), this);
+    });
+
+    $(document).on('click', '.detail-toggle', function () {
+        $(this).closest('.detail-item').toggleClass('is-open');
+    });
+
+    $(document).on('click', '.faq-question', function () {
+        $(this).closest('.faq-item').toggleClass('is-open');
+    });
+
+    $(document).on('click', '[data-category]', function () {
+        const id = $(this).data('category');
+        if (id === activeCategory) {
+            chooseCategory(null);
+        } else {
+            chooseCategory(id);
+        }
+    });
+
+    $('[data-category-reset]').on('click', function () {
+        chooseCategory(null);
+    });
+
+    $('[data-load-more-btn="katalog"]').on('click', function () {
+        const oldLimit = katalogLimit;
+        katalogLimit += 9;
+        renderKatalog(oldLimit);
+    });
+
+    $('[data-load-more-btn="rekomendasi"]').on('click', function () {
+        const oldLimit = rekomendasiLimit;
+        rekomendasiLimit += 9;
+        renderRekomendasi(oldLimit);
+    });
+
+    $('[data-fav-clear]').on('click', function () {
+        showConfirm({
+            title: 'Hapus semua favorit?',
+            message: 'Semua kuliner yang kamu simpan akan dihapus dari daftar favorit.',
+            button: 'Ya, Hapus',
+            icon: '🗑️'
+        }, function () {
+            saveFavorites([]);
+            renderFavorit();
+            updateFavoriteCount();
+            showToast('Semua favorit berhasil dihapus', 'remove');
+        });
+    });
+
+    $('#warung-filter').on('input', renderWarungs);
+
+    $(document).on('click', '[data-map-open]', function () {
+        openMapModal($(this).data('map-open'));
+    });
+});
+
+// Carousel warung berganti dengan efek fade, tombol, atau otomatis.
+$(document).ready(function () {
+    const carousel = document.querySelector('.carousel-container');
+    if (!carousel) return;
+
+    const track = carousel.querySelector('.carousel-track');
+    const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+    const previousButton = carousel.querySelector('.prev-btn');
+    const nextButton = carousel.querySelector('.next-btn');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const autoplayDelay = 4000;
+    let autoplayTimer = null;
+    let mouseIsOver = false;
+    let currentSlideIndex = Math.max(0, slides.findIndex(function (slide) {
+        return slide.classList.contains('is-active');
+    }));
+
+    if (slides.length < 2) return;
+
+    function stopAutoplay() {
+        window.clearTimeout(autoplayTimer);
+        autoplayTimer = null;
+    }
+
+    function shouldPauseAutoplay() {
+        return reducedMotion.matches || document.hidden || mouseIsOver || carousel.contains(document.activeElement);
+    }
+
+    function startAutoplay() {
+        stopAutoplay();
+        if (shouldPauseAutoplay()) return;
+
+        autoplayTimer = window.setTimeout(function () {
+            moveSlide(1);
+            startAutoplay();
+        }, autoplayDelay);
+    }
+
+    function showSlide(index) {
+        currentSlideIndex = index;
+        slides.forEach(function (slide, slideIndex) {
+            const isActive = slideIndex === currentSlideIndex;
+            slide.classList.toggle('is-active', isActive);
+            slide.setAttribute('aria-hidden', String(!isActive));
+        });
+    }
+
+    function moveSlide(direction) {
+        const nextIndex = (currentSlideIndex + direction + slides.length) % slides.length;
+        showSlide(nextIndex);
+    }
+
+    previousButton.addEventListener('click', function () {
+        moveSlide(-1);
+        startAutoplay();
+    });
+
+    nextButton.addEventListener('click', function () {
+        moveSlide(1);
+        startAutoplay();
+    });
+
+    carousel.addEventListener('pointerenter', function (event) {
+        if (event.pointerType === 'mouse') {
+            mouseIsOver = true;
+            stopAutoplay();
+        }
+    });
+
+    carousel.addEventListener('pointerleave', function (event) {
+        if (event.pointerType === 'mouse') {
+            mouseIsOver = false;
+            startAutoplay();
+        }
+    });
+
+    carousel.addEventListener('focusin', stopAutoplay);
+    carousel.addEventListener('focusout', function (event) {
+        if (!carousel.contains(event.relatedTarget)) startAutoplay();
+    });
+
+    track.addEventListener('keydown', function (event) {
+        if (event.target !== track) return;
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+            event.preventDefault();
+            moveSlide(event.key === 'ArrowRight' ? 1 : -1);
+            startAutoplay();
+        }
+    });
+
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) stopAutoplay();
+        else startAutoplay();
+    });
+
+    reducedMotion.addEventListener('change', function () {
+        if (reducedMotion.matches) stopAutoplay();
+        else startAutoplay();
+    });
+
+    showSlide(currentSlideIndex);
+    startAutoplay();
+});
