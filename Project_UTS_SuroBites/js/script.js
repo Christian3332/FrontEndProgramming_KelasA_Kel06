@@ -6,7 +6,7 @@ $(document).ready(function() {
     });
 });
 
-//popup kalau menu tidak ada di
+// Popup yang muncul kalau menu yang dicari tidak ada di katalog
 const popupHTML = `
 <div id="custom-popup" class="popup-overlay">
     <div class="popup-content">
@@ -27,6 +27,94 @@ $('.popup-close, #popup-btn-close').on('click', function() {
 $('#custom-popup').on('click', function(e) {
     if (e.target === this) {
         $(this).fadeOut('fast');
+    }
+});
+
+// Pencarian dari kolom search di header, kalau ketemu langsung buka katalog
+$(document).on('submit', '.search-bar', function (e) {
+    e.preventDefault();
+    const input = $(this).find('input');
+    const keyword = input.val().trim();
+    $(this).find('.search-results').prop('hidden', true);
+    if (keyword === '') {
+        return;
+    }
+
+    if (searchFoods(keyword).length > 0) {
+        window.location.href = 'katalog.html?q=' + encodeURIComponent(keyword);
+    } else {
+        $('#popup-message').html(`Maaf, kuliner <strong>"${$('<div>').text(keyword).html()}"</strong> belum ada di katalog kami saat ini.`);
+        $('#custom-popup').css('display', 'flex').hide().fadeIn('fast');
+        input.val('');
+    }
+});
+
+// Saran menu yang langsung muncul di bawah kolom search saat mengetik
+function highlightText(text, keyword) {
+    const start = text.toLowerCase().indexOf(keyword.toLowerCase());
+    if (start === -1) {
+        return text;
+    }
+    const end = start + keyword.length;
+    return text.slice(0, start) + '<mark>' + text.slice(start, end) + '</mark>' + text.slice(end);
+}
+
+function renderSearchResults(input) {
+    const form = $(input).closest('.search-bar');
+    const keyword = $(input).val().trim();
+    let box = form.find('.search-results');
+
+    if (keyword === '') {
+        box.prop('hidden', true);
+        return;
+    }
+
+    if (box.length === 0) {
+        box = $('<div class="search-results"></div>');
+        form.append(box);
+    }
+
+    const results = searchFoods(keyword);
+    let html = '';
+    if (results.length === 0) {
+        html = '<div class="search-empty"><strong>Menu belum ditemukan</strong>Coba kata kunci lain, misalnya "pedas" atau "kikil".</div>';
+    } else {
+        html = `<p class="search-results__label">${results.length} kuliner ditemukan</p>`;
+        $.each(results.slice(0, 5), function (index, food) {
+            html += `
+                <button type="button" class="search-result" data-open-food="${food.id}">
+                    <img src="${food.image}" alt="">
+                    <span class="search-result__text">
+                        <span class="search-result__name">${highlightText(food.name, keyword)}</span>
+                        <span class="search-result__meta">${categoryNames(food).join(' · ')}</span>
+                    </span>
+                </button>`;
+        });
+        html += `<a class="search-results__footer" href="katalog.html?q=${encodeURIComponent(keyword)}">Lihat semua hasil di Katalog</a>`;
+    }
+    box.html(html).prop('hidden', false);
+}
+
+$('.search-bar input').attr('autocomplete', 'off');
+
+$(document).on('input focus', '.search-bar input', function () {
+    renderSearchResults(this);
+});
+
+$(document).on('click', '.search-result', function () {
+    $('.search-results').prop('hidden', true);
+});
+
+$(document).on('keydown', '.search-bar input', function (e) {
+    if (e.key === 'Escape') {
+        $('.search-results').prop('hidden', true);
+    }
+});
+
+// Dropdown saran ditutup kalau klik di luar kolom search
+$(document).on('click', function (e) {
+    if ($(e.target).closest('.search-bar').length === 0) {
+        $('.search-results').prop('hidden', true);
     }
 });
 
@@ -140,9 +228,7 @@ function searchFoods(keyword) {
 }
 
 function updateLoadMore(name, total, shown) {
-    const box = $(`[data-load-more="${name}"]`);
-    box.prop('hidden', shown >= total);
-    box.find('[data-load-more-label]').text(`Tampilkan Lebih Banyak (${total - shown} lagi)`);
+    $(`[data-load-more="${name}"]`).prop('hidden', shown >= total);
 }
 
 function renderHome() {
@@ -577,6 +663,7 @@ function openMapModal(id) {
     openModal('#map-modal');
 }
 
+// Slide carousel warung di beranda diambil dari data warungs
 function renderWarungCarousel() {
     let html = '';
     $.each(warungs, function (index, warung) {
@@ -597,6 +684,7 @@ function renderWarungCarousel() {
     $('[data-warung-carousel]').html(html);
 }
 
+// Daftar pertanyaan FAQ di beranda
 function renderFaq() {
     let html = '';
     $.each(faqs, function (index, faq) {
@@ -616,12 +704,14 @@ function renderFaq() {
     $('[data-faq-list]').html(html);
 }
 
+// Jumlah kuliner, kategori, dan warung di hero halaman rekomendasi
 function renderStats() {
     $('[data-stat="foods"]').text(foods.length);
     $('[data-stat="categories"]').text(categories.length);
     $('[data-stat="warungs"]').text(warungs.length);
 }
 
+// Semua bagian halaman diisi dari data.js setelah halaman siap
 $(document).ready(function () {
     renderStats();
     renderHome();
@@ -638,22 +728,7 @@ $(document).ready(function () {
     highlightWarung();
     $('#search-input').val(searchKeyword);
 
-    $('.search-bar').on('submit', function (e) {
-        e.preventDefault();
-        const keyword = $(this).find('input[type="text"]').val().trim();
-        if (keyword === '') {
-            return;
-        }
-
-        if (searchFoods(keyword).length > 0) {
-            window.location.href = 'katalog.html?q=' + encodeURIComponent(keyword);
-        } else {
-            $('#popup-message').html(`Maaf, kuliner <strong>"${$('<div>').text(keyword).html()}"</strong> belum ada di katalog kami saat ini.`);
-            $('#custom-popup').css('display', 'flex').hide().fadeIn('fast');
-            $(this).find('input[type="text"]').val('');
-        }
-    });
-
+    // Tombol dan kartu di bawah ini dibuat lewat JS, jadi event-nya dipasang ke document
     $(document).on('click', '[data-open-food]', function () {
         openFoodModal($(this).data('open-food'));
     });

@@ -1391,12 +1391,14 @@ body.modal-open {
     backdrop-filter: blur(3px);
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
     transition: opacity 0.25s ease, visibility 0s linear 0.25s;
 }
 
 .modal-overlay.is-open {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
     transition-delay: 0s;
 }
 
