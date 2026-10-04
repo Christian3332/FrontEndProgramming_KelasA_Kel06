@@ -132,6 +132,20 @@ const foods = [
         priceRange: 'Rp25.000 – Rp35.000',
         timeCategory: ['siang', 'malam'],
         featured: false
+    },
+    {
+        id: 'tahu-telur',
+        name: 'Tahu Telur',
+        image: 'img/Tahu telur.png',
+        shortDescription: 'Tahu yang digoreng bersama kocokan telur hingga mengembang berlapis, lalu disiram bumbu kacang petis dan kecap, dilengkapi tauge, lontong, dan kerupuk.',
+        story: 'Tahu telur biasa dimasak satu per satu di wajan kecil agar telurnya mengembang tinggi dan renyah di pinggirnya. Versi Surabaya terasa lebih legit karena bumbu kacangnya diulek bersama petis udang, sama seperti Tahu Tek.',
+        ingredients: ['Tahu', 'Telur ayam', 'Bumbu kacang petis', 'Kecap manis', 'Tauge', 'Lontong', 'Kerupuk'],
+        taste: 'Gurih, manis legit, dan renyah',
+        categories: ['gurih', 'pedas', 'hemat', 'malam'],
+        priceCategory: 'hemat',
+        priceRange: 'Rp12.000 – Rp20.000',
+        timeCategory: ['siang', 'malam'],
+        featured: false
     }
 ];
 
