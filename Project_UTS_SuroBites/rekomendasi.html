@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Lokasi warung kuliner khas Surabaya lengkap dengan alamat, jam buka, menu, dan Google Maps.">
-    <title>Lokasi Warung | SuroBites</title>
+    <meta name="description" content="Rekomendasi kuliner khas Surabaya berdasarkan selera: pedas, berkuah, gurih, segar, hemat, dan kuliner malam.">
+    <title>Rekomendasi Kuliner | SuroBites</title>
     <link rel="icon" type="image/png" href="img/Surobites Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -12,19 +12,18 @@
 <body>
     <a class="skip-link" href="#main-content">Langsung ke konten utama</a>
 
-    <!-- Header & Navbar -->
+    <!-- HEADER & NAVBAR -->
     <header class="header">
         <a class="logo" href="index.html" aria-label="SuroBites - Beranda">
             <img src="img/Surobites Logo.png" alt="Logo SuroBites" width="32" height="32">
             <h1>SuroBites</h1>
         </a>
-        
+
         <a href="favorit.html" class="header-fav" aria-label="Favorit Saya" title="Favorit Saya">
             <i class="fa-regular fa-heart"></i>
             <span class="header-fav__count" data-fav-count hidden>0</span>
         </a>
 
-        <!-- Mobile menu -->
         <button type="button" class="menu-toggle" id="mobile-menu" aria-controls="primary-navigation"
             aria-expanded="false" aria-label="Buka menu navigasi">
             <span class="bar"></span>
@@ -35,9 +34,9 @@
         <nav class="navbar" id="primary-navigation">
             <ul class="nav-links">
                 <li><a href="index.html">Beranda</a></li>
-                <li><a href="rekomendasi.html">Rekomendasi</a></li>
+                <li><a href="rekomendasi.html" class="active" aria-current="page">Rekomendasi</a></li>
                 <li><a href="katalog.html">Katalog</a></li>
-                <li><a href="lokasi.html" class="active" aria-current="page">Lokasi Warung</a></li>
+                <li><a href="lokasi.html">Lokasi Warung</a></li>
             </ul>
         </nav>
 
@@ -47,45 +46,48 @@
         </form>
     </header>
 
-    <!-- Main Content: Lokasi Warung -->
-    <main id="main-content" class="container lokasi-main">
-        <section class="lokasi-section" aria-labelledby="lokasi-title">
-            <div class="page-heading">
-                <h2 id="lokasi-title" class="section-title">
-                    Lokasi Warung Kuliner Surabaya
-                </h2>
-                <p class="section-subtitle">
-                    Temukan warung legendaris, cek jam bukanya, lalu langsung arahkan perjalananmu lewat Google Maps.
-                </p>
+    <main id="main-content">
+        <!-- HERO REKOMENDASI -->
+        <section class="hero-section hero-compact" aria-labelledby="rekomendasi-hero-title">
+            <div class="hero-content">
+                <span class="hero-eyebrow">✨ Rekomendasi Kuliner</span>
+                <h2 id="rekomendasi-hero-title">Temukan Kuliner yang Cocok Untukmu</h2>
+                <p>Bingung mau makan apa? Pilih kategori sesuai selera dan kebutuhanmu, lalu temukan rekomendasi makanan khas Surabaya yang paling pas.</p>
+                <ul class="hero-stats">
+                    <li><strong data-stat="foods">6</strong> Kuliner</li>
+                    <li><strong data-stat="categories">6</strong> Kategori</li>
+                    <li><strong data-stat="warungs">5</strong> Warung</li>
+                </ul>
             </div>
-            <div class="lokasi-toolbar">
-                <label class="visually-hidden" for="warung-filter">Cari warung</label>
+        </section>
 
-                <div class="filter-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input
-                        id="warung-filter"
-                        type="search"
-                        class="filter-input"
-                        placeholder="Cari nama warung, alamat, atau menu..."
-                        autocomplete="off">
+        <!-- PILIHAN KATEGORI -->
+        <section class="kategori-section" aria-labelledby="kategori-title">
+            <h2 id="kategori-title" class="section-title">Pilih Sesuai Seleramu</h2>
+            <p class="section-subtitle">Klik salah satu kategori untuk melihat rekomendasi. Klik sekali lagi untuk menampilkan semua kuliner.</p>
+            <div class="kategori-grid" data-category-filter role="group" aria-label="Kategori rekomendasi"></div>
+        </section>
+
+        <!-- HASIL REKOMENDASI -->
+        <section id="hasil-rekomendasi" class="katalog-section" aria-labelledby="hasil-title">
+            <div class="results-toolbar">
+                <div>
+                    <h2 id="hasil-title" class="results-title" data-results-title>Semua Kuliner Surabaya</h2>
+                    <p class="results-subtitle" data-results-subtitle aria-live="polite"></p>
                 </div>
-
-                <p class="lokasi-count" data-warung-count aria-live="polite"></p>
+                <button type="button" class="btn-outline" data-category-reset hidden>Tampilkan Semua</button>
             </div>
-
-            <!-- DAFTAR LOKASI WARUNG (shape kartu sama seperti Katalog) -->
-            <div class="warung-grid" data-warung-list>
-                <noscript>
-                    <p class="section-subtitle">
-                        Aktifkan JavaScript untuk melihat daftar warung.
-                    </p>
-                </noscript>
+            <div class="katalog-grid" data-food-list="rekomendasi"></div>
+            <div class="section-cta" data-load-more="rekomendasi" hidden>
+                <button type="button" class="btn-more btn-more--down" data-load-more-btn="rekomendasi">
+                    <span data-load-more-label>Tampilkan Lebih Banyak</span>
+                    <span class="btn-more__arrow" aria-hidden="true">↓</span>
+                </button>
             </div>
         </section>
     </main>
 
-    <!-- Footer Section -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-brand">
@@ -98,7 +100,7 @@
                     <h4>Information</h4>
                     <ul>
                         <li><a href="#">Kebijakan Privasi</a></li>
-                        <li><a href="#">Syarat &amp; Ketentuan</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
                         <li><a href="index.html#faq">FAQ</a></li>
                     </ul>
                 </div>
