@@ -104,6 +104,20 @@ const foods = [
         priceRange: 'Rp25.000 – Rp40.000',
         timeCategory: ['pagi', 'malam'],
         featured: false
+    },
+    {
+        id: 'pecel-semanggi',
+        name: 'Pecel Semanggi',
+        image: 'img/Pecel Semanggi.png',
+        shortDescription: 'Daun semanggi dan tauge rebus yang disiram bumbu kacang ubi jalar bercampur petis, disajikan di atas pincuk daun pisang bersama kerupuk puli yang lebar dan renyah.',
+        story: 'Semanggi Suroboyo berasal dari kawasan Kendung, Benowo, tempat tanaman semanggi tumbuh di sawah. Dulu ibu-ibu penjualnya berjalan keliling kota sambil menggendong bakul dan mengenakan kebaya, hingga kuliner ini diabadikan dalam lagu legendaris "Semanggi Suroboyo".',
+        ingredients: ['Daun semanggi', 'Tauge', 'Bumbu kacang ubi jalar', 'Petis udang', 'Kerupuk puli', 'Daun pisang'],
+        taste: 'Segar, manis gurih, dengan sedikit pedas',
+        categories: ['segar', 'hemat'],
+        priceCategory: 'hemat',
+        priceRange: 'Rp10.000 – Rp15.000',
+        timeCategory: ['pagi', 'siang'],
+        featured: false
     }
 ];
 
