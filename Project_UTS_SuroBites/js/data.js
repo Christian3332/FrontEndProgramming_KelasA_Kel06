@@ -254,7 +254,7 @@ const faqs = [
     {
         id: 'faq-makanan-tersedia',
         question: 'Apa saja makanan yang tersedia?',
-        answer: 'Kamu bisa melihat seluruh makanan khas Surabaya di halaman Katalog, mulai dari Rawon Setan, Nasi Pecel, Tahu Tek, Rujak Cingur, Lontong Kikil, hingga Sate Klopo.'
+        answer: 'Kamu bisa melihat seluruh makanan khas Surabaya di halaman Katalog, mulai dari Rawon Setan, Rujak Cingur, Tahu Tek, Pecel Semanggi, Nasi Cumi, hingga Kare Ayam.'
     },
     {
         id: 'faq-lokasi-warung',
