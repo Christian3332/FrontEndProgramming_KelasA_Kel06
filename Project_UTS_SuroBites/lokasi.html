@@ -14,10 +14,15 @@
 
     <!-- Header & Navbar -->
     <header class="header">
-        <div class="logo">
+        <a class="logo" href="index.html" aria-label="SuroBites - Beranda">
             <img src="img/Surobites Logo.png" alt="Logo SuroBites" width="32" height="32">
             <h1>SuroBites</h1>
-        </div>
+        </a>
+        
+        <a href="favorit.html" class="header-fav" aria-label="Favorit Saya" title="Favorit Saya">
+            <i class="fa-regular fa-heart"></i>
+            <span class="header-fav__count" data-fav-count hidden>0</span>
+        </a>
 
         <!-- Mobile menu -->
         <button type="button" class="menu-toggle" id="mobile-menu" aria-controls="primary-navigation"
@@ -30,7 +35,7 @@
         <nav class="navbar" id="primary-navigation">
             <ul class="nav-links">
                 <li><a href="index.html">Beranda</a></li>
-                <li><a href="kisah-rasa.html">Kisah Rasa</a></li>
+                <li><a href="rekomendasi.html">Rekomendasi</a></li>
                 <li><a href="katalog.html">Katalog</a></li>
                 <li><a href="lokasi.html" class="active" aria-current="page">Lokasi Warung</a></li>
             </ul>
