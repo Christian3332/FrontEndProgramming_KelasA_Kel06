@@ -104,6 +104,76 @@ const foods = [
         priceRange: 'Rp25.000 – Rp40.000',
         timeCategory: ['pagi', 'malam'],
         featured: false
+    },
+    {
+        id: 'pecel-semanggi',
+        name: 'Pecel Semanggi',
+        image: 'img/Pecel Semanggi.png',
+        shortDescription: 'Daun semanggi dan tauge rebus yang disiram bumbu kacang ubi jalar bercampur petis, disajikan di atas pincuk daun pisang bersama kerupuk puli yang lebar dan renyah.',
+        story: 'Semanggi Suroboyo berasal dari kawasan Kendung, Benowo, tempat tanaman semanggi tumbuh di sawah. Dulu ibu-ibu penjualnya berjalan keliling kota sambil menggendong bakul dan mengenakan kebaya, hingga kuliner ini diabadikan dalam lagu legendaris "Semanggi Suroboyo".',
+        ingredients: ['Daun semanggi', 'Tauge', 'Bumbu kacang ubi jalar', 'Petis udang', 'Kerupuk puli', 'Daun pisang'],
+        taste: 'Segar, manis gurih, dengan sedikit pedas',
+        categories: ['segar', 'hemat'],
+        priceCategory: 'hemat',
+        priceRange: 'Rp10.000 – Rp15.000',
+        timeCategory: ['pagi', 'siang'],
+        featured: false
+    },
+    {
+        id: 'nasi-cumi',
+        name: 'Nasi Cumi',
+        image: 'img/Nasi Cumi.png',
+        shortDescription: 'Nasi putih dengan cumi masak hitam dari tintanya sendiri, ditemani mi goreng, telur pindang, kering tempe, serundeng, dan sambal yang pedas menggigit.',
+        story: 'Nasi cumi hitam dibawa oleh perantau Madura dan kini jadi buruan kuliner malam di Surabaya, terutama di sekitar kawasan Pasar Atom. Warna hitamnya berasal dari tinta cumi asli yang dimasak bersama bumbu rempah hingga meresap.',
+        ingredients: ['Cumi', 'Tinta cumi', 'Nasi putih', 'Mi goreng', 'Telur pindang', 'Kering tempe', 'Sambal'],
+        taste: 'Gurih, pedas, dengan aroma laut yang khas',
+        categories: ['pedas', 'gurih', 'malam'],
+        priceCategory: 'sedang',
+        priceRange: 'Rp25.000 – Rp35.000',
+        timeCategory: ['siang', 'malam'],
+        featured: false
+    },
+    {
+        id: 'tahu-telur',
+        name: 'Tahu Telur',
+        image: 'img/Tahu telur.png',
+        shortDescription: 'Tahu yang digoreng bersama kocokan telur hingga mengembang berlapis, lalu disiram bumbu kacang petis dan kecap, dilengkapi tauge, lontong, dan kerupuk.',
+        story: 'Tahu telur biasa dimasak satu per satu di wajan kecil agar telurnya mengembang tinggi dan renyah di pinggirnya. Versi Surabaya terasa lebih legit karena bumbu kacangnya diulek bersama petis udang, sama seperti Tahu Tek.',
+        ingredients: ['Tahu', 'Telur ayam', 'Bumbu kacang petis', 'Kecap manis', 'Tauge', 'Lontong', 'Kerupuk'],
+        taste: 'Gurih, manis legit, dan renyah',
+        categories: ['gurih', 'pedas', 'hemat', 'malam'],
+        priceCategory: 'hemat',
+        priceRange: 'Rp12.000 – Rp20.000',
+        timeCategory: ['siang', 'malam'],
+        featured: false
+    },
+    {
+        id: 'kare-ayam',
+        name: 'Kare Ayam',
+        image: 'img/Kare ayam.png',
+        shortDescription: 'Potongan ayam kampung dalam kuah santan kuning yang kental dan harum rempah, berisi wortel serta buncis, nikmat disantap dengan nasi hangat atau roti.',
+        story: 'Kare ayam lahir dari pengaruh pedagang India dan Arab yang singgah di pelabuhan Surabaya. Bumbu karinya kemudian disesuaikan dengan lidah lokal memakai santan dan kunyit, sehingga rasanya lebih ringan dan gurih dibanding kari aslinya.',
+        ingredients: ['Ayam kampung', 'Santan', 'Kunyit', 'Serai & daun salam', 'Wortel', 'Buncis'],
+        taste: 'Gurih, creamy, dan hangat rempah',
+        categories: ['berkuah', 'gurih'],
+        priceCategory: 'sedang',
+        priceRange: 'Rp20.000 – Rp30.000',
+        timeCategory: ['pagi', 'siang'],
+        featured: false
+    },
+    {
+        id: 'kikil-sapi',
+        name: 'Kikil Sapi',
+        image: 'img/Kikil sapi.png',
+        shortDescription: 'Kikil sapi kenyal yang dimasak dalam kuah santan kuning ala gule, ditaburi seledri dan bawang goreng, disantap bersama lontong, kerupuk, dan sambal.',
+        story: 'Berbeda dari Lontong Kikil yang berkuah kaldu, versi ini dimasak dengan santan sehingga kuahnya lebih kental dan creamy. Kikil direbus berjam-jam lebih dulu supaya empuk, lalu dimasak lagi bersama bumbu kuning hingga rempahnya meresap.',
+        ingredients: ['Kikil sapi', 'Santan', 'Bumbu kuning', 'Seledri', 'Bawang goreng', 'Lontong', 'Kerupuk'],
+        taste: 'Gurih santan, kenyal, dan kaya rempah',
+        categories: ['berkuah', 'gurih', 'malam'],
+        priceCategory: 'sedang',
+        priceRange: 'Rp20.000 – Rp30.000',
+        timeCategory: ['siang', 'malam'],
+        featured: false
     }
 ];
 
@@ -184,7 +254,7 @@ const faqs = [
     {
         id: 'faq-makanan-tersedia',
         question: 'Apa saja makanan yang tersedia?',
-        answer: 'Kamu bisa melihat seluruh makanan khas Surabaya di halaman Katalog, mulai dari Rawon Setan, Nasi Pecel, Tahu Tek, Rujak Cingur, Lontong Kikil, hingga Sate Klopo.'
+        answer: 'Kamu bisa melihat seluruh makanan khas Surabaya di halaman Katalog, mulai dari Rawon Setan, Rujak Cingur, Tahu Tek, Pecel Semanggi, Nasi Cumi, hingga Kare Ayam.'
     },
     {
         id: 'faq-lokasi-warung',
