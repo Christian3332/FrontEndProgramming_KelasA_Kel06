@@ -37,19 +37,48 @@ export function createSlug(text: string): string {
 }
 
 // Function mengambil kategori makanan
-export type Category = {
-  id: string;
-  label: string;
-  icon: string;
-};
+import { categories, foods, prices, times, warungs } from "@/data/foods";
+import type { Food, Warung } from "@/data/foods";
 
-export const CATEGORIES: Category[] = [
-  { id: "nasi", label: "Nasi", icon: "🍚" },
-  { id: "mie", label: "Mie", icon: "🍜" },
-  { id: "pedas", label: "Pedas", icon: "🌶️" },
-  { id: "minuman", label: "Minuman", icon: "🥤" },
-];
+export const getCategory = (id: string) => categories.find((c) => c.id === id);
+export const getPrice = (id: string) => prices.find((p) => p.id === id);
+export const getTime = (id: string) => times.find((t) => t.id === id);
+export const findFood = (id: string) => foods.find((f) => f.id === id);
+export const findWarung = (id: string) => warungs.find((w) => w.id === id);
 
-export function getCategory(id: string): Category | undefined {
-  return CATEGORIES.find((c) => c.id === id);
+export function categoryNames(food: Food): string[] {
+  return food.categories.map((id) => getCategory(id)?.label ?? id);
 }
+
+export function searchFoods(keyword: string): Food[] {
+  const key = normalizeText(keyword);
+  const results = foods.filter((food) => {
+    const text = [
+      food.name,
+      food.shortDescription,
+      food.taste,
+      food.ingredients.join(" "),
+      categoryNames(food).join(" "),
+    ].join(" ");
+    return normalizeText(text).includes(key);
+  });
+  return results.sort(
+    (a, b) =>
+      Number(!normalizeText(a.name).includes(key)) -
+      Number(!normalizeText(b.name).includes(key)),
+  );
+}
+
+export function isWarungOpen(w: Warung): boolean {
+  const now = new Date();
+  const current = now.getHours() * 60 + now.getMinutes();
+  const [oh, om] = w.openTime.split(":").map(Number);
+  const [ch, cm] = w.closeTime.split(":").map(Number);
+  const open = oh * 60 + om;
+  const close = ch * 60 + cm;
+  return close > open
+    ? current >= open && current < close
+    : current >= open || current < close;
+}
+
+export const formatTime = (t: string) => t.replace(":", ".");
