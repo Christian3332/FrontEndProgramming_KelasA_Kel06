@@ -15,30 +15,29 @@ export default function FoodCard({ food, onOpen, showTags = false }: Props) {
   const fav = isFavorite(food.id);
 
   return (
-    <article className="card" data-food-id={food.id}>
-      <div className="card-img-wrapper">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+    <article className="card h-100" data-food-id={food.id}>
+      <div className="position-relative">
         <img
           src={food.image}
           alt={food.name}
-          className="card-img"
+          className="card-img-top"
           loading="lazy"
         />
         <button
           type="button"
-          className={`fav-btn${fav ? " is-active" : ""}`}
+          className="btn btn-light position-absolute top-0 end-0 m-2"
           aria-label={`Favorit ${food.name}`}
           aria-pressed={fav}
           onClick={() => toggleFavorite(food.id)}
         >
-          <i className={fav ? "fa-solid fa-heart" : "fa-regular fa-heart"} />
+          {fav ? "♥" : "♡"}
         </button>
         {showTags && (
-          <div className="card-tags">
+          <div className="position-absolute bottom-0 start-0 m-2 d-flex gap-1">
             {food.categories.slice(0, 2).map((id) => {
               const c = getCategory(id);
               return c ? (
-                <span key={id} className="card-tag">
+                <span key={id} className="badge text-bg-light">
                   {c.icon} {c.label}
                 </span>
               ) : null;
@@ -46,11 +45,11 @@ export default function FoodCard({ food, onOpen, showTags = false }: Props) {
           </div>
         )}
       </div>
-      <div className="card-footer">
-        <h3 className="card-title">{food.name}</h3>
+      <div className="card-body d-flex flex-column">
+        <h3 className="card-title h5">{food.name}</h3>
         <button
           type="button"
-          className="btn-primary"
+          className="btn btn-primary mt-auto"
           onClick={() => onOpen(food)}
         >
           Deskripsi Singkat

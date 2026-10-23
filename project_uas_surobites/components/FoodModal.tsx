@@ -11,7 +11,6 @@ type Props = { food: Food | null; onClose: () => void };
 export default function FoodModal({ food, onClose }: Props) {
   const { isFavorite, toggleFavorite } = useFavorites();
 
-  // Esc menutup modal, dan scroll halaman dikunci selama modal terbuka
   useEffect(() => {
     if (!food) return;
     const onKey = (e: KeyboardEvent) => {
