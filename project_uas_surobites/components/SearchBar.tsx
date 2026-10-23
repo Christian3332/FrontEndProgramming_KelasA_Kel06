@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
+import type React from "react";
 
 type SearchBarProps = {
     onSearch?: (query: string) => void;
@@ -15,7 +16,9 @@ export default function SearchBar({
 }: SearchBarProps) {
     const [query, setQuery] = useState(initialValue);
 
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    function handleSubmit(event: Parameters<
+        NonNullable<React.ComponentProps<"form">["onSubmit"]>
+    >[0]) {
         event.preventDefault();
         onSearch?.(query.trim());
     }
