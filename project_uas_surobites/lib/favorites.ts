@@ -2,14 +2,14 @@
 
 import { useCallback, useSyncExternalStore } from "react";
 
-const KEY = "favorites";
-const EMPTY: number[] = [];
+const KEY = "surobites_favorites";
+const EMPTY: string[] = [];
 
-let cache: number[] = EMPTY;
+let cache: string[] = EMPTY;
 let cacheRaw: string | null = null;
 const listeners = new Set<() => void>();
 
-function readFavorites(): number[] {
+function read(): string[] {
   const raw = localStorage.getItem(KEY);
   if (raw !== cacheRaw) {
     cacheRaw = raw;
@@ -22,28 +22,32 @@ function readFavorites(): number[] {
   return cache;
 }
 
-function subscribe(callback: () => void) {
-  listeners.add(callback);
-  window.addEventListener("storage", callback);
+function subscribe(cb: () => void) {
+  listeners.add(cb);
+  window.addEventListener("storage", cb);
   return () => {
-    listeners.delete(callback);
-    window.removeEventListener("storage", callback);
+    listeners.delete(cb);
+    window.removeEventListener("storage", cb);
   };
 }
 
-export function useFavorites() {
-  const favorites = useSyncExternalStore(subscribe, readFavorites, () => EMPTY);
+function write(list: string[]) {
+  localStorage.setItem(KEY, JSON.stringify(list));
+  listeners.forEach((l) => l());
+}
 
-  const toggleFavorite = useCallback((id: number) => {
-    const current = readFavorites();
-    const next = current.includes(id)
-      ? current.filter((x) => x !== id)
-      : [...current, id];
-    localStorage.setItem(KEY, JSON.stringify(next));
-    listeners.forEach((l) => l());
+export function useFavorites() {
+  const favorites = useSyncExternalStore(subscribe, read, () => EMPTY);
+
+  const toggleFavorite = useCallback((id: string) => {
+    const current = read();
+    write(
+      current.includes(id) ? current.filter((x) => x !== id) : [...current, id],
+    );
   }, []);
 
-  const isFavorite = (id: number) => favorites.includes(id);
+  const clearFavorites = useCallback(() => write([]), []);
+  const isFavorite = (id: string) => favorites.includes(id);
 
-  return { favorites, isFavorite, toggleFavorite };
+  return { favorites, isFavorite, toggleFavorite, clearFavorites };
 }
