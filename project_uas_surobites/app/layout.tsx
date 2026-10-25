@@ -1,6 +1,22 @@
-
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans, Poetsen_One } from "next/font/google";
+
+// Bootstrap ditaruh paling atas biar bisa ditimpa globals.css
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./styles/globals.css";
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+});
+
+// Font untuk judul
+const poetsen = Poetsen_One({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-poetsen",
+});
 
 export const metadata: Metadata = {
   title: "SuroBites - Kuliner Surabaya",
@@ -14,8 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
-      <body>{children}</body>
+    <html lang="id" className={`${jakarta.variable} ${poetsen.variable}`}>
+      <body className={jakarta.className}>{children}</body>
     </html>
   );
 }

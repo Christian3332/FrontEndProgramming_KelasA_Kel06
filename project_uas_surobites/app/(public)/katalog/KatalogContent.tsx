@@ -16,7 +16,7 @@ export default function KatalogContent() {
   const [selected, setSelected] = useState<Food | null>(null);
 
   const list = keyword ? searchFoods(keyword) : foods;
-  // Kalau sedang mencari, semua hasil ditampilkan (sama seperti kode lama)
+  // Kalau lagi mencari, semua hasil langsung ditampilkan
   const shown = keyword ? list : list.slice(0, limit);
 
   return (

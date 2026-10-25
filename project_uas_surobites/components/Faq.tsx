@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-// TODO: ganti isi jawaban dengan FAQ asli dari js/data.js atau js/script.js (UTS)
+// TODO: ganti dengan FAQ asli dari data.js
 const faqs = [
   { q: "Apa itu SuroBites?", 
     a: "SuroBites adalah website yang mengenalkan kuliner khas Surabaya, lengkap dengan deskripsi singkat, rekomendasi berdasarkan selera, serta lokasi warung yang bisa kamu kunjungi." },

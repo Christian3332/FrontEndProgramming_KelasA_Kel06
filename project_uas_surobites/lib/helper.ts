@@ -1,9 +1,9 @@
-// Function membersihkan text
+// Membersihkan teks
 export function normalizeText(text: string): string {
   return text.toLowerCase().trim().replace(/\s+/g, " ");
 }
 
-// Function mencari data menggunakan kata kunci
+// Mencari data pakai kata kunci
 export function searchItems<T>(
   items: T[],
   query: string,
@@ -18,7 +18,7 @@ export function searchItems<T>(
   );
 }
 
-// Function angka menjadi format rupiah
+// Ubah angka ke format rupiah
 export function formatRupiah(price: number): string {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -27,7 +27,7 @@ export function formatRupiah(price: number): string {
   }).format(price);
 }
 
-// Function Mengubah format nama
+// Ubah teks jadi slug
 export function createSlug(text: string): string {
   return normalizeText(text)
     .normalize("NFD")
@@ -36,10 +36,10 @@ export function createSlug(text: string): string {
     .replace(/^-|-$/g, "");
 }
 
-// Function mengambil kategori makanan
 import { categories, foods, prices, times, warungs } from "@/data/foods";
 import type { Food, Warung } from "@/data/foods";
 
+// Ambil data berdasarkan id
 export const getCategory = (id: string) => categories.find((c) => c.id === id);
 export const getPrice = (id: string) => prices.find((p) => p.id === id);
 export const getTime = (id: string) => times.find((t) => t.id === id);
