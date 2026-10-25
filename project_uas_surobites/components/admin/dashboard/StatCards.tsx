@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { foods, warungs } from "@/data/foods";
+import { faqs } from "@/data/faqs";
 import { useFavorites } from "@/lib/favorites";
 
 export default function StatCards() {
@@ -24,6 +25,14 @@ export default function StatCards() {
       color: "orange",
       hint: "Tampil di Lokasi Warung",
       href: "/admin/dashboard/warung",
+    },
+    {
+      label: "Jumlah FAQ",
+      value: faqs.length,
+      icon: "fa-regular fa-comments",
+      color: "",
+      hint: "Tampil di Beranda",
+      href: "/admin/dashboard/faq",
     },
     {
       label: "Makanan difavoritkan",

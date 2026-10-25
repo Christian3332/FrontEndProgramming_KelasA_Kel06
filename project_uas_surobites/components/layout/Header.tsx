@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image"
+import FavCount from "@/components/layout/FavCount";
 
 export function Header () {
     return (
@@ -11,6 +12,7 @@ export function Header () {
 
             <Link href="/favorit" className="header-fav" aria-label="Favorit Saya">
                 <i className="fa-regular fa-heart"/>
+                <FavCount />
             </Link>
 
             <nav className="navbar">

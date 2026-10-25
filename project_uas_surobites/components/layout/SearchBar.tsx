@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import type React from "react";
 
 type SearchBarProps = {
@@ -15,12 +16,19 @@ export default function SearchBar({
     initialValue = "",
 }: SearchBarProps) {
     const [query, setQuery] = useState(initialValue);
+    const router = useRouter();
 
     function handleSubmit(event: Parameters<
         NonNullable<React.ComponentProps<"form">["onSubmit"]>
     >[0]) {
         event.preventDefault();
-        onSearch?.(query.trim());
+
+        // kalau tidak dikasih onSearch, langsung cari di halaman katalog
+        if (onSearch) {
+            onSearch(query.trim());
+        } else if (query.trim() !== "") {
+            router.push(`/katalog?q=${encodeURIComponent(query.trim())}`);
+        }
     }
 
     function handleReset() {

@@ -20,7 +20,7 @@ export default function KatalogContent() {
   const shown = keyword ? list : list.slice(0, limit);
 
   return (
-    <main id="main-content" className="container py-4">
+    <div className="container py-4">
       <section aria-labelledby="katalog-title">
         <h2 id="katalog-title">Makanan Khas Surabaya</h2>
         <p>
@@ -77,6 +77,6 @@ export default function KatalogContent() {
       </section>
 
       <FoodModal food={selected} onClose={() => setSelected(null)} />
-    </main>
+    </div>
   );
 }
