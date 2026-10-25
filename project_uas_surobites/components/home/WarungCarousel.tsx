@@ -30,7 +30,7 @@ export default function WarungCarousel() {
         WARUNG MAKANAN KHAS SURABAYA
       </h2>
       <div
-        className={`mx-auto ${styles.carousel}`}
+        className={`w-100 mx-auto ${styles.carousel}`}
         role="region"
         aria-roledescription="carousel"
         aria-label="Warung kuliner Surabaya"

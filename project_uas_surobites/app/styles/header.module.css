@@ -28,6 +28,8 @@
 }
 
 .count {
+    top: -4px;
+    right: -4px;
     min-width: 19px;
     border: 2px solid #FFFFFF;
     background-color: var(--sb-oranye);
@@ -70,7 +72,6 @@
 }
 
 .navbar {
-    width: 100%;
     padding-top: 10px;
 }
 
@@ -82,13 +83,8 @@
     row-gap: 4px;
 }
 
-.navItem {
-    width: 100%;
-}
-
 .navLink {
     display: block;
-    width: 100%;
     padding: 10px 0;
     border-bottom: 2px solid transparent;
     color: #000000;
@@ -102,10 +98,6 @@
 .active {
     color: var(--sb-biru);
     border-bottom-color: var(--sb-biru);
-}
-
-.search {
-    width: 100%;
 }
 
 .searchInput {
@@ -126,7 +118,6 @@
 
 @media (min-width: 992px) {
     .navbar {
-        width: auto;
         padding-top: 0;
     }
 
@@ -134,17 +125,8 @@
         column-gap: 24px;
     }
 
-    .navItem {
-        width: auto;
-    }
-
     .navLink {
-        width: auto;
         padding: 4px 0;
-    }
-
-    .search {
-        width: auto;
     }
 
     .searchInput {
@@ -164,14 +146,11 @@
 }
 
 @keyframes badgeBump {
-    0% {
-        transform: translate(-50%, -50%) scale(1);
+    from {
+        transform: scale(1.35);
     }
-    40% {
-        transform: translate(-50%, -50%) scale(1.35);
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(1);
+    to {
+        transform: scale(1);
     }
 }
 

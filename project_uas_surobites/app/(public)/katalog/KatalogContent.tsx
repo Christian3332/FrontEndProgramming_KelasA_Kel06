@@ -7,6 +7,8 @@ import { foods, type Food } from "@/data/foods";
 import { searchFoods } from "@/lib/helper";
 import FoodCard from "@/components/food/FoodCard";
 import FoodModal from "@/components/food/FoodModal";
+import home from "@/app/styles/home.module.css";
+import styles from "@/app/styles/katalog.module.css";
 
 const PAGE_SIZE = 9;
 
@@ -20,41 +22,43 @@ export default function KatalogContent() {
   const shown = keyword ? list : list.slice(0, limit);
 
   return (
-    <div className="container py-4">
-      <section aria-labelledby="katalog-title">
-        <h2 id="katalog-title">Makanan Khas Surabaya</h2>
-        <p>
+    <div className="container">
+      <section className={home.katalog} aria-labelledby="katalog-title">
+        <h2 id="katalog-title" className={home.sectionTitle}>Makanan Khas Surabaya</h2>
+        <p className={home.subtitle}>
           Klik <strong>Deskripsi Singkat</strong> untuk mengenal setiap
           hidangan, lalu simpan yang kamu suka dengan ikon hati.
         </p>
 
         {keyword && (
           <div
-            className="alert alert-light d-flex justify-content-between"
+            className={`d-flex flex-wrap align-items-center justify-content-between ${styles.searchStatus}`}
             aria-live="polite"
           >
             <span>
               Menampilkan <strong>{list.length}</strong> hasil untuk{" "}
               <strong>&quot;{keyword}&quot;</strong>
             </span>
-            <Link href="/katalog">✕ Hapus pencarian</Link>
+            <Link href="/katalog" className={styles.clearLink}>✕ Hapus pencarian</Link>
           </div>
         )}
 
         {list.length === 0 ? (
-          <div className="text-center py-5">
-            <div className="fs-1">🔍</div>
-            <h3>Kuliner yang kamu cari belum ditemukan.</h3>
-            <p>
+          <div className={`d-flex flex-column align-items-center text-center ${styles.empty}`}>
+            <div className={`d-flex align-items-center justify-content-center ${styles.emptyIcon}`} aria-hidden="true">
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3 className={styles.emptyTitle}>Kuliner yang kamu cari belum ditemukan.</h3>
+            <p className={styles.emptyText}>
               Coba kata kunci lain, misalnya nama makanan, bahan, atau kategori
               seperti &quot;pedas&quot;.
             </p>
-            <Link href="/katalog" className="btn btn-primary">
+            <Link href="/katalog" className={`btn btn-primary ${styles.emptyButton}`}>
               Lihat Semua Kuliner
             </Link>
           </div>
         ) : (
-          <div className="row g-4">
+          <div className={`row g-4 justify-content-center mx-auto ${home.katalogGrid}`}>
             {shown.map((food) => (
               <div className="col-12 col-sm-6 col-lg-4" key={food.id}>
                 <FoodCard food={food} onOpen={setSelected} />
@@ -64,13 +68,14 @@ export default function KatalogContent() {
         )}
 
         {shown.length < list.length && (
-          <div className="text-center mt-4">
+          <div className="d-flex justify-content-center mt-4">
             <button
               type="button"
-              className="btn btn-outline-primary"
+              className={`btn d-inline-flex align-items-center gap-2 ${home.btnMore} ${styles.loadMore}`}
               onClick={() => setLimit((l) => l + PAGE_SIZE)}
             >
-              Tampilkan Lebih Banyak ↓
+              Tampilkan Lebih Banyak
+              <span className={styles.downArrow} aria-hidden="true">↓</span>
             </button>
           </div>
         )}

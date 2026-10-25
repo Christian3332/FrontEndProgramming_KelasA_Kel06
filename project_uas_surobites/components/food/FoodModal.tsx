@@ -69,10 +69,10 @@ export default function FoodModal({ food, onClose }: Props) {
         onClick={onClose}
       >
         <div
-          className={`modal-dialog ${styles.dialog}`}
+          className={`modal-dialog modal-dialog-centered ${styles.dialog}`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className={`modal-content ${styles.content}`}>
+          <div className={`modal-content flex-md-row ${styles.content}`}>
             <button
               type="button"
               className={`d-flex align-items-center justify-content-center rounded-circle border-0 ${styles.close}`}
@@ -82,14 +82,14 @@ export default function FoodModal({ food, onClose }: Props) {
               <i className="fa-solid fa-xmark"></i>
             </button>
 
-            <div className={`position-relative ${styles.media}`}>
-              <img src={food.image} alt={food.name} className={styles.mediaImg} />
+            <div className={`position-relative col-md-5 ${styles.media}`}>
+              <img src={food.image} alt={food.name} className={`w-100 h-100 ${styles.mediaImg}`} />
               <span className={styles.price}>
                 <i className="fa-solid fa-coins"></i> {price?.label} · {food.priceRange}
               </span>
             </div>
 
-            <div className={`d-flex flex-column ${styles.body}`}>
+            <div className={`d-flex flex-column col-md-7 ${styles.body}`}>
               <div className={`d-flex flex-column ${styles.intro}`}>
                 <p className={styles.eyebrow}>Deskripsi Singkat</p>
                 <h2 className={styles.title} id="food-modal-title">
@@ -114,18 +114,24 @@ export default function FoodModal({ food, onClose }: Props) {
               </div>
 
               <div className={`d-flex d-md-none flex-column ${styles.mobileDetail}`}>
-                <div className={styles.infoGrid}>
-                  <div className={`${styles.infoCard} ${styles.infoFull}`}>
-                    <h3 className={styles.infoTitle}>Bahan Utama</h3>
-                    {ingredients}
+                <div className="row g-2">
+                  <div className="col-12">
+                    <div className={styles.infoCard}>
+                      <h3 className={styles.infoTitle}>Bahan Utama</h3>
+                      {ingredients}
+                    </div>
                   </div>
-                  <div className={styles.infoCard}>
-                    <h3 className={styles.infoTitle}>Karakteristik</h3>
-                    <p className={styles.infoText}>{food.taste}</p>
+                  <div className="col-6">
+                    <div className={`h-100 ${styles.infoCard}`}>
+                      <h3 className={styles.infoTitle}>Karakteristik</h3>
+                      <p className={styles.infoText}>{food.taste}</p>
+                    </div>
                   </div>
-                  <div className={styles.infoCard}>
-                    <h3 className={styles.infoTitle}>Waktu Terbaik</h3>
-                    <p className={styles.infoText}>{timeText}</p>
+                  <div className="col-6">
+                    <div className={`h-100 ${styles.infoCard}`}>
+                      <h3 className={styles.infoTitle}>Waktu Terbaik</h3>
+                      <p className={styles.infoText}>{timeText}</p>
+                    </div>
                   </div>
                 </div>
 
@@ -168,14 +174,18 @@ export default function FoodModal({ food, onClose }: Props) {
                     </span>
                     <span className={styles.plusIcon}></span>
                   </summary>
-                  <div className={`${styles.detailContent} ${styles.detailFacts}`}>
-                    <div className={styles.infoCard}>
-                      <h4 className={styles.infoTitle}>Karakteristik</h4>
-                      <p className={styles.infoText}>{food.taste}</p>
+                  <div className={`row g-2 mx-0 ${styles.detailContent} ${styles.detailFacts}`}>
+                    <div className="col-6">
+                      <div className={`h-100 ${styles.infoCard}`}>
+                        <h4 className={styles.infoTitle}>Karakteristik</h4>
+                        <p className={styles.infoText}>{food.taste}</p>
+                      </div>
                     </div>
-                    <div className={styles.infoCard}>
-                      <h4 className={styles.infoTitle}>Waktu Terbaik</h4>
-                      <p className={styles.infoText}>{timeText}</p>
+                    <div className="col-6">
+                      <div className={`h-100 ${styles.infoCard}`}>
+                        <h4 className={styles.infoTitle}>Waktu Terbaik</h4>
+                        <p className={styles.infoText}>{timeText}</p>
+                      </div>
                     </div>
                   </div>
                 </details>

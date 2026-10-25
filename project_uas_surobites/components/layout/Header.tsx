@@ -50,13 +50,13 @@ export function Header () {
 
             <nav
                 id="primary-navigation"
-                className={`order-3 order-lg-2 mx-lg-auto justify-content-center d-lg-flex ${menuOpen ? `d-flex ${styles.navOpen}` : "d-none"} ${styles.navbar}`}
+                className={`col-12 col-lg-auto order-3 order-lg-2 mx-lg-auto justify-content-center d-lg-flex ${menuOpen ? `d-flex ${styles.navOpen}` : "d-none"} ${styles.navbar}`}
             >
                 <ul className={`list-unstyled m-0 d-flex flex-column flex-lg-row align-items-center w-100 ${styles.navLinks}`}>
                     {menu.map((item) => {
                         const active = pathname === item.href;
                         return (
-                            <li key={item.href} className={styles.navItem}>
+                            <li key={item.href} className="col-12 col-lg-auto">
                                 <Link
                                     href={item.href}
                                     className={`${styles.navLink} ${active ? styles.active : ""}`}
@@ -71,7 +71,7 @@ export function Header () {
                 </ul>
             </nav>
 
-            <form className={`order-4 order-lg-3 d-flex justify-content-center mt-1 mt-lg-0 ${styles.search}`} action="/katalog">
+            <form className="col-12 col-lg-auto order-4 order-lg-3 d-flex justify-content-center mt-1 mt-lg-0" action="/katalog">
                 <label className="visually-hidden" htmlFor="search-input">
                     Cari kuliner
                 </label>

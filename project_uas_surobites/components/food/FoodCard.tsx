@@ -21,7 +21,7 @@ export default function FoodCard({ food, onOpen, showTags = false }: Props) {
         <img
           src={food.image}
           alt={food.name}
-          className={styles.cardImg}
+          className={`w-100 h-100 ${styles.cardImg}`}
           loading="lazy"
         />
         <button
