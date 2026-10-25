@@ -1,36 +1,41 @@
 import Link from "next/link";
 import { categories, foods } from "@/data/foods";
+import styles from "@/app/styles/home.module.css";
 
 export default function CategoryLinks() {
   return (
     <section
       id="kategori"
-      className="kategori-section"
+      className={styles.kategori}
       aria-labelledby="kategori-title"
     >
-      <h2 id="kategori-title" className="section-title">
+      <h2 id="kategori-title" className={styles.sectionTitle}>
         Mau Makan Apa Hari Ini?
       </h2>
-      <p className="section-subtitle">
+      <p className={styles.subtitle}>
         Pilih sesuai selera, nanti SuroBites carikan kuliner Surabaya yang
         paling cocok untukmu.
       </p>
-      <div className="kategori-grid">
+      <div className={`row row-cols-2 row-cols-md-3 row-cols-xl-6 g-3 mx-auto ${styles.narrow}`}>
         {categories.map((c) => {
           const total = foods.filter((f) => f.categories.includes(c.id)).length;
           return (
-            <Link
-              href={`/rekomendasi?kategori=${c.id}`}
-              className="kategori-card"
-              key={c.id}
-            >
-              <span className="kategori-card__icon" aria-hidden="true">
-                {c.icon}
-              </span>
-              <span className="kategori-card__label">{c.label}</span>
-              <span className="kategori-card__desc">{c.description}</span>
-              <span className="kategori-card__count">{total} kuliner</span>
-            </Link>
+            <div className="col" key={c.id}>
+              <Link
+                href={`/rekomendasi?kategori=${c.id}`}
+                className={`d-flex flex-column align-items-center text-center h-100 ${styles.kategoriCard}`}
+              >
+                <span
+                  className={`d-flex align-items-center justify-content-center rounded-circle ${styles.kategoriIcon}`}
+                  aria-hidden="true"
+                >
+                  {c.icon}
+                </span>
+                <span className={styles.kategoriLabel}>{c.label}</span>
+                <span className={styles.kategoriDesc}>{c.description}</span>
+                <span className={styles.kategoriCount}>{total} kuliner</span>
+              </Link>
+            </div>
           );
         })}
       </div>

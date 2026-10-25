@@ -11,7 +11,7 @@ export default function FavCount() {
 
   return (
     <span
-      className={`position-absolute top-0 start-100 translate-middle badge rounded-pill ${styles.count}`}
+      className={`position-absolute badge rounded-pill ${styles.count}`}
       aria-label={`${total} favorit`}
     >
       {total}

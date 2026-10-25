@@ -6,6 +6,10 @@ import { foods, type Food } from "@/data/foods";
 import { useFavorites } from "@/lib/favorites";
 import FoodCard from "@/components/food/FoodCard";
 import FoodModal from "@/components/food/FoodModal";
+import home from "@/app/styles/home.module.css";
+import katalog from "@/app/styles/katalog.module.css";
+import confirm from "@/app/styles/confirm.module.css";
+import styles from "@/app/styles/favorit.module.css";
 
 export default function FavoritContent() {
   const { favorites, clearFavorites } = useFavorites();
@@ -35,14 +39,17 @@ export default function FavoritContent() {
   }
 
   return (
-    <div className="container py-4">
-      <section aria-labelledby="favorit-title">
-        <div className="text-center mb-4">
-          <div className="fs-1 text-danger" aria-hidden="true">
-            ♥
-          </div>
-          <h2 id="favorit-title">Favorit Saya</h2>
-          <p className="text-secondary" aria-live="polite">
+    <div className="container">
+      <section className={home.katalog} aria-labelledby="favorit-title">
+        <div className={`text-center ${styles.heading}`}>
+          <span
+            className={`d-inline-flex align-items-center justify-content-center ${styles.headingIcon}`}
+            aria-hidden="true"
+          >
+            <i className="fa-solid fa-heart"></i>
+          </span>
+          <h2 id="favorit-title" className={styles.title}>Favorit Saya</h2>
+          <p className={styles.summary} aria-live="polite">
             {list.length > 0
               ? `Kamu menyimpan ${list.length} kuliner favorit. Klik ikon hati lagi untuk menghapusnya dari daftar.`
               : "Simpan kuliner yang ingin kamu coba agar mudah ditemukan kembali."}
@@ -50,7 +57,7 @@ export default function FavoritContent() {
           {list.length > 0 && (
             <button
               type="button"
-              className="btn btn-link text-danger"
+              className={styles.clearButton}
               onClick={() => setConfirmOpen(true)}
             >
               Hapus semua favorit
@@ -59,21 +66,21 @@ export default function FavoritContent() {
         </div>
 
         {list.length === 0 ? (
-          <div
-            className="mx-auto text-center border border-2 rounded-4 p-5"
-            style={{ maxWidth: 520 }}
-          >
-            <div className="fs-1" aria-hidden="true">
-              ♡
+          <div className={`d-flex flex-column align-items-center text-center ${katalog.empty}`}>
+            <div
+              className={`d-flex align-items-center justify-content-center ${katalog.emptyIcon}`}
+              aria-hidden="true"
+            >
+              <i className="fa-regular fa-heart"></i>
             </div>
-            <h3>Belum ada makanan favorit.</h3>
-            <p>Klik ikon hati pada makanan yang ingin kamu simpan.</p>
-            <Link href="/katalog" className="btn btn-primary rounded-pill">
+            <h3 className={katalog.emptyTitle}>Belum ada makanan favorit.</h3>
+            <p className={katalog.emptyText}>Klik ikon hati pada makanan yang ingin kamu simpan.</p>
+            <Link href="/katalog" className={`btn btn-primary ${katalog.emptyButton}`}>
               Jelajahi Katalog
             </Link>
           </div>
         ) : (
-          <div className="row g-4">
+          <div className={`row g-4 justify-content-center mx-auto ${home.katalogGrid}`}>
             {list.map((food) => (
               <div className="col-12 col-sm-6 col-lg-4" key={food.id}>
                 <FoodCard food={food} onOpen={setSelected} />
@@ -96,31 +103,34 @@ export default function FavoritContent() {
             onClick={() => setConfirmOpen(false)}
           >
             <div
-              className="modal-dialog modal-dialog-centered"
+              className={`modal-dialog modal-dialog-centered ${confirm.dialog}`}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="modal-content text-center p-3">
-                <div className="fs-1" aria-hidden="true">
-                  🗑️
+              <div className={`modal-content text-center ${confirm.box}`}>
+                <div
+                  className={`d-flex align-items-center justify-content-center ${confirm.icon} ${confirm.iconDanger}`}
+                  aria-hidden="true"
+                >
+                  <i className="fa-solid fa-trash-can"></i>
                 </div>
-                <h2 className="h5" id="confirm-title">
+                <h2 className={confirm.title} id="confirm-title">
                   Hapus semua favorit?
                 </h2>
-                <p>
+                <p className={confirm.text}>
                   Semua kuliner yang kamu simpan akan dihapus dari daftar
                   favorit.
                 </p>
-                <div className="d-flex justify-content-center gap-2">
+                <div className={`d-flex ${confirm.actions}`}>
                   <button
                     type="button"
-                    className="btn btn-outline-secondary rounded-pill"
+                    className={`btn ${confirm.btnGhost}`}
                     onClick={() => setConfirmOpen(false)}
                   >
                     Batal
                   </button>
                   <button
                     type="button"
-                    className="btn btn-danger rounded-pill"
+                    className={`btn ${confirm.btnDanger}`}
                     onClick={handleClear}
                   >
                     Ya, Hapus
@@ -129,7 +139,7 @@ export default function FavoritContent() {
               </div>
             </div>
           </div>
-          <div className="modal-backdrop show" />
+          <div className={`modal-backdrop show ${confirm.backdrop}`} />
         </>
       )}
     </div>
