@@ -492,3 +492,88 @@
     color: #444444;
 }
 
+@media (min-width: 576px) {
+    .heroButton {
+        --bs-btn-padding-y: 12px;
+        --bs-btn-padding-x: 24px;
+    }
+}
+
+@media (min-width: 768px) {
+    .hero {
+        margin: 20px 30px;
+        padding: 60px 40px;
+    }
+
+    .heroTitle {
+        font-size: 32px;
+    }
+
+    .heroText {
+        font-size: 15px;
+    }
+
+    .carousel {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+    }
+
+    .carouselBtn {
+        position: static;
+        flex-shrink: 0;
+        transform: none;
+    }
+
+    .track {
+        flex-grow: 1;
+        width: auto;
+        margin: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    .hero {
+        min-height: 500px;
+        padding: 80px 50px;
+        background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.35) 50%, rgba(0, 0, 0, 0) 80%), url("/img/hero image.jpeg");
+    }
+
+    .heroTitle {
+        font-size: 40px;
+    }
+
+    .katalogGrid {
+        max-width: 900px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .heroTitle {
+        font-size: 44px;
+    }
+
+    .heroText {
+        max-width: 640px;
+        font-size: 16px;
+    }
+
+    .katalogGrid {
+        max-width: 1100px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .kategoriCard,
+    .kategoriIcon,
+    .foodCard,
+    .cardImg,
+    .favBtn,
+    .btnMoreArrow,
+    .slide,
+    .faqItem,
+    .faqIcon,
+    .faqAnswer {
+        transition: none;
+    }
+}
