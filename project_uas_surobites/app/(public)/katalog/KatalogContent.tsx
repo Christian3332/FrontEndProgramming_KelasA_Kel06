@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { foods, type Food } from "@/data/foods";
 import { searchFoods } from "@/lib/helper";
-import FoodCard from "@/components/FoodCard";
-import FoodModal from "@/components/FoodModal";
+import FoodCard from "@/components/food/FoodCard";
+import FoodModal from "@/components/food/FoodModal";
 
 const PAGE_SIZE = 9;
 
@@ -16,7 +16,7 @@ export default function KatalogContent() {
   const [selected, setSelected] = useState<Food | null>(null);
 
   const list = keyword ? searchFoods(keyword) : foods;
-  // Kalau sedang mencari, semua hasil ditampilkan (sama seperti kode lama)
+  // Kalau lagi mencari, semua hasil langsung ditampilkan
   const shown = keyword ? list : list.slice(0, limit);
 
   return (
