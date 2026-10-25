@@ -3,6 +3,7 @@
 import type { Food } from "@/data/foods";
 import { getCategory } from "@/lib/helper";
 import { useFavorites } from "@/lib/favorites";
+import styles from "@/app/styles/food-card.module.css";
 
 type Props = {
   food: Food;
@@ -15,29 +16,29 @@ export default function FoodCard({ food, onOpen, showTags = false }: Props) {
   const fav = isFavorite(food.id);
 
   return (
-    <article className="card h-100" data-food-id={food.id}>
-      <div className="position-relative">
+    <article className={`card h-100 ${styles.foodCard} ${styles.katalogCard}`} data-food-id={food.id}>
+      <div className={`position-relative ${styles.cardMedia}`}>
         <img
           src={food.image}
           alt={food.name}
-          className="card-img-top"
+          className={styles.cardImg}
           loading="lazy"
         />
         <button
           type="button"
-          className="btn btn-light position-absolute top-0 end-0 m-2"
+          className={`position-absolute top-0 end-0 m-2 d-flex align-items-center justify-content-center rounded-circle border-0 ${styles.favBtn} ${fav ? styles.favActive : ""}`}
           aria-label={`Favorit ${food.name}`}
           aria-pressed={fav}
           onClick={() => toggleFavorite(food.id)}
         >
-          {fav ? "♥" : "♡"}
+          <i className={fav ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
         </button>
         {showTags && (
-          <div className="position-absolute bottom-0 start-0 m-2 d-flex gap-1">
+          <div className={`d-flex flex-wrap ${styles.cardTags}`}>
             {food.categories.slice(0, 2).map((id) => {
               const c = getCategory(id);
               return c ? (
-                <span key={id} className="badge text-bg-light">
+                <span key={id} className={styles.cardTag}>
                   {c.icon} {c.label}
                 </span>
               ) : null;
@@ -45,11 +46,11 @@ export default function FoodCard({ food, onOpen, showTags = false }: Props) {
           </div>
         )}
       </div>
-      <div className="card-body d-flex flex-column">
-        <h3 className="card-title h5">{food.name}</h3>
+      <div className={`card-footer d-flex align-items-center justify-content-between gap-2 ${styles.katalogFooter}`}>
+        <h3 className={styles.katalogName}>{food.name}</h3>
         <button
           type="button"
-          className="btn btn-primary mt-auto"
+          className={`btn flex-shrink-0 text-nowrap ${styles.btnLight} ${styles.btnSmall}`}
           onClick={() => onOpen(food)}
         >
           Deskripsi Singkat

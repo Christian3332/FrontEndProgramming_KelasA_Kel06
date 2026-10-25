@@ -7,6 +7,7 @@ import { foods, type Food } from "@/data/foods";
 import { useFavorites } from "@/lib/favorites";
 import FoodModal from "@/components/food/FoodModal";
 import styles from "@/app/styles/home.module.css";
+import cardStyles from "@/app/styles/food-card.module.css";
 
 const JUMLAH_TAMPIL = 6;
 
@@ -29,18 +30,18 @@ export default function KatalogPreview() {
           const fav = isFavorite(f.id);
           return (
             <div className="col" key={f.id}>
-              <article className={`card h-100 ${styles.foodCard} ${styles.katalogCard}`}>
-                <div className={`position-relative ${styles.cardMedia}`}>
+              <article className={`card h-100 ${cardStyles.foodCard} ${cardStyles.katalogCard}`}>
+                <div className={`position-relative ${cardStyles.cardMedia}`}>
                   <Image
                     src={f.image}
                     alt={f.name}
                     fill
                     sizes="(min-width: 992px) 30vw, (min-width: 576px) 45vw, 100vw"
-                    className={styles.cardImg}
+                    className={cardStyles.cardImg}
                   />
                   <button
                     type="button"
-                    className={`position-absolute top-0 end-0 m-2 d-flex align-items-center justify-content-center rounded-circle border-0 ${styles.favBtn} ${fav ? styles.favActive : ""}`}
+                    className={`position-absolute top-0 end-0 m-2 d-flex align-items-center justify-content-center rounded-circle border-0 ${cardStyles.favBtn} ${fav ? cardStyles.favActive : ""}`}
                     aria-label={`Favorit ${f.name}`}
                     aria-pressed={fav}
                     onClick={() => toggleFavorite(f.id)}
@@ -48,11 +49,11 @@ export default function KatalogPreview() {
                     <i className={fav ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
                   </button>
                 </div>
-                <div className={`card-footer d-flex align-items-center justify-content-between gap-2 ${styles.katalogFooter}`}>
-                  <h3 className={styles.katalogName}>{f.name}</h3>
+                <div className={`card-footer d-flex align-items-center justify-content-between gap-2 ${cardStyles.katalogFooter}`}>
+                  <h3 className={cardStyles.katalogName}>{f.name}</h3>
                   <button
                     type="button"
-                    className={`btn flex-shrink-0 text-nowrap ${styles.btnLight} ${styles.btnSmall}`}
+                    className={`btn flex-shrink-0 text-nowrap ${cardStyles.btnLight} ${cardStyles.btnSmall}`}
                     onClick={() => setSelected(f)}
                   >
                     Deskripsi Singkat
