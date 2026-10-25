@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,7 +35,9 @@ export default function AdminLoginPage() {
       </section>
 
       <section className="login-panel">
-        <LoginForm />
+        <Suspense>
+          <LoginForm />
+        </Suspense>
       </section>
     </main>
   );

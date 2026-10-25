@@ -1,19 +1,59 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { admin } from "@/data/admin";
+import { isLoggedIn, login } from "@/lib/auth";
+
+type FormAlert = {
+  type: "info" | "error" | "success";
+  message: string;
+};
+
+const pesanInfo: Record<string, string> = {
+  login: "Silakan login terlebih dahulu untuk membuka dashboard.",
+  logout: "Kamu berhasil logout. Sampai jumpa lagi!",
+};
 
 export default function LoginForm() {
+  const router = useRouter();
+  const pesan = useSearchParams().get("pesan");
+  const passwordRef = useRef<HTMLInputElement>(null);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [formAlert, setFormAlert] = useState<FormAlert | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [shaking, setShaking] = useState(false);
 
-  function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+  useEffect(() => {
+    if (isLoggedIn()) {
+      router.replace("/admin/dashboard");
+    }
+  }, [router]);
+
+  const info = pesan ? pesanInfo[pesan] : undefined;
+  const shownAlert: FormAlert | null =
+    formAlert ?? (info ? { type: "info", message: info } : null);
+
+  let buttonText = "Login";
+  if (loading) buttonText = "Memeriksa akun...";
+  if (success) buttonText = "Berhasil, mengalihkan...";
+
+  function shakeCard() {
+    setShaking(true);
+    setTimeout(() => setShaking(false), 450);
+  }
+
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
+    setFormAlert(null);
 
     let valid = true;
 
@@ -32,12 +72,28 @@ export default function LoginForm() {
     }
 
     if (!valid) {
+      shakeCard();
       return;
+    }
+
+    setLoading(true);
+    const berhasil = await login(username.trim(), password);
+
+    if (berhasil) {
+      setSuccess(true);
+      setFormAlert({ type: "success", message: "Login berhasil, mengalihkan ke dashboard..." });
+      setTimeout(() => router.push("/admin/dashboard"), 900);
+    } else {
+      setLoading(false);
+      setFormAlert({ type: "error", message: "Username atau password salah. Silakan coba lagi." });
+      setPassword("");
+      passwordRef.current?.focus();
+      shakeCard();
     }
   }
 
   return (
-    <div className="login-card">
+    <div className={`login-card ${shaking ? "is-shaking" : ""}`}>
       <div className="login-card__header">
         <Image
           className="login-card__logo"
@@ -52,6 +108,12 @@ export default function LoginForm() {
       </div>
 
       <form noValidate onSubmit={handleSubmit}>
+        {shownAlert && (
+          <div className={`form-alert form-alert--${shownAlert.type}`} role="alert">
+            {shownAlert.message}
+          </div>
+        )}
+
         <div className="form-field">
           <label htmlFor="login-username">Username</label>
           <div className="input-icon">
@@ -81,6 +143,7 @@ export default function LoginForm() {
           <div className="input-icon input-icon--toggle">
             <i className="fa-solid fa-lock"></i>
             <input
+              ref={passwordRef}
               id="login-password"
               name="password"
               type={showPassword ? "text" : "password"}
@@ -108,8 +171,13 @@ export default function LoginForm() {
           </p>
         </div>
 
-        <button type="submit" className="ui-btn ui-btn--primary ui-btn--block login-submit">
-          <span>Login</span>
+        <button
+          type="submit"
+          className="ui-btn ui-btn--primary ui-btn--block login-submit"
+          disabled={loading}
+        >
+          {loading && <span className="btn-spinner"></span>}
+          <span>{buttonText}</span>
         </button>
       </form>
 
