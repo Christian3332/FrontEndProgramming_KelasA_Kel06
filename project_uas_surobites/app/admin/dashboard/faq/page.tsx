@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
+import { faqs } from "@/data/faqs";
 import SectionHead from "@/components/admin/SectionHead";
 
 export const metadata: Metadata = {
   title: "Kelola FAQ",
 };
-
-type Faq = {
-  question: string;
-  answer: string;
-};
-
-// masih kosong, nanti ganti jadi import dari data/faqs.ts kalau sudah dibuat
-const faqs: Faq[] = [];
 
 export default function KelolaFaqPage() {
   return (
@@ -31,7 +24,7 @@ export default function KelolaFaqPage() {
           {faqs.length === 0 && <p className="panel-empty">Belum ada data FAQ.</p>}
 
           {faqs.map((faq, index) => (
-            <div className="faq-admin-item" key={faq.question}>
+            <div className="faq-admin-item" key={faq.id}>
               <span className="faq-admin-item__num">{index + 1}</span>
               <div>
                 <h3>{faq.question}</h3>

@@ -37,17 +37,478 @@ export type Warung = {
 };
 
 export const categories: Category[] = [
-  /* salin dari data.js */
+  {
+    id: "pedas",
+    label: "Pedas",
+    icon: "🌶️",
+    description: "Sensasi pedas yang bikin nagih"
+  },
+  {
+    id: "berkuah",
+    label: "Berkuah",
+    icon: "🍲",
+    description: "Kuah hangat penuh rempah"
+  },
+  {
+    id: "gurih",
+    label: "Gurih",
+    icon: "🥘",
+    description: "Gurih khas bumbu Jawa Timur"
+  },
+  {
+    id: "segar",
+    label: "Segar",
+    icon: "🥗",
+    description: "Sayur, buah, dan bumbu segar"
+  },
+  {
+    id: "hemat",
+    label: "Hemat",
+    icon: "💰",
+    description: "Kenyang tanpa bikin kantong bolong"
+  },
+  {
+    id: "malam",
+    label: "Kuliner Malam",
+    icon: "🌙",
+    description: "Teman lapar di malam hari"
+  }
 ];
+
 export const prices: Price[] = [
-  /* salin */
+  {
+    id: "hemat",
+    label: "Hemat",
+    hint: "Di bawah Rp20.000"
+  },
+  {
+    id: "sedang",
+    label: "Sedang",
+    hint: "Rp20.000 – Rp35.000"
+  },
+  {
+    id: "premium",
+    label: "Spesial",
+    hint: "Di atas Rp35.000"
+  }
 ];
+
 export const times: TimeSlot[] = [
-  /* salin */
+  {
+    id: "pagi",
+    label: "Pagi",
+    icon: "🌅"
+  },
+  {
+    id: "siang",
+    label: "Siang",
+    icon: "☀️"
+  },
+  {
+    id: "sore",
+    label: "Sore",
+    icon: "🌇"
+  },
+  {
+    id: "malam",
+    label: "Malam",
+    icon: "🌙"
+  }
 ];
+
 export const foods: Food[] = [
-  /* salin */
+  {
+    id: "rawon-setan",
+    name: "Rawon Setan",
+    image: "/img/Rawon.jpg",
+    shortDescription: "Sup daging sapi berkuah hitam pekat dari kluwek dengan aroma rempah yang kuat. Disajikan bersama nasi hangat, tauge pendek, telur asin, kerupuk, dan sambal.",
+    story: "Penamaan \"Setan\" bermula dari kebiasaan warung-warung rawon di Surabaya masa lalu yang baru mulai buka pada larut malam hingga dini hari (jam setan). Kuah hitam pekatnya yang berasal dari kluwek menjadi identitas tak tergantikan dari kuliner ini.",
+    ingredients: [
+      "Daging sapi",
+      "Kluwek",
+      "Bawang merah & putih",
+      "Serai & daun jeruk",
+      "Tauge pendek",
+      "Telur asin"
+    ],
+    taste: "Gurih, hangat, dan kaya rempah dengan rasa kluwek yang khas",
+    categories: [
+      "berkuah",
+      "gurih",
+      "hemat",
+      "malam"
+    ],
+    priceCategory: "hemat",
+    priceRange: "Rp15.000 – Rp25.000",
+    timeCategory: [
+      "siang",
+      "malam"
+    ],
+    featured: true
+  },
+  {
+    id: "nasi-pecel",
+    name: "Nasi Pecel",
+    image: "/img/Nasi Pecel.jpg",
+    shortDescription: "Nasi putih dengan aneka sayuran rebus seperti kangkung, tauge, dan kacang panjang yang disiram bumbu kacang pedas manis, dilengkapi rempeyek renyah.",
+    story: "Hidangan ini memiliki akar sejarah panjang sejak era Majapahit (tercatat dalam Kakawin Ramayana). Di Surabaya, Nasi Pecel berevolusi dengan karakter bumbu kacang yang lebih pekat, berani, dan pedas, selalu disajikan dengan siraman bumbu yang melimpah dan rempeyek renyah.",
+    ingredients: [
+      "Nasi putih",
+      "Sayuran rebus",
+      "Bumbu kacang",
+      "Rempeyek",
+      "Tempe & tahu goreng"
+    ],
+    taste: "Pedas manis, segar, dan renyah",
+    categories: [
+      "pedas",
+      "segar",
+      "hemat"
+    ],
+    priceCategory: "hemat",
+    priceRange: "Rp10.000 – Rp20.000",
+    timeCategory: [
+      "pagi",
+      "siang"
+    ],
+    featured: false
+  },
+  {
+    id: "tahu-tek",
+    name: "Tahu Tek",
+    image: "/img/tahu tek.jpg",
+    shortDescription: "Potongan tahu goreng, lontong, dan kentang yang digunting langsung di atas piring, lalu disiram bumbu kacang petis serta taburan tauge dan kerupuk.",
+    story: "Nama \"Tek\" diambil dari bunyi tek... tek... tek... yang nyaring terdengar dari gunting penjual keliling saat memotong tahu goreng, lontong, dan kentang. Keunikannya terletak pada bumbu kacang yang diulek bersama petis udang yang legit.",
+    ingredients: [
+      "Tahu goreng",
+      "Lontong",
+      "Kentang",
+      "Tauge",
+      "Bumbu kacang petis",
+      "Kerupuk"
+    ],
+    taste: "Gurih legit petis dengan level pedas yang bisa diatur",
+    categories: [
+      "pedas",
+      "gurih",
+      "hemat",
+      "malam"
+    ],
+    priceCategory: "hemat",
+    priceRange: "Rp12.000 – Rp20.000",
+    timeCategory: [
+      "siang",
+      "malam"
+    ],
+    featured: true
+  },
+  {
+    id: "rujak-cingur",
+    name: "Rujak Cingur",
+    image: "/img/Rujak cingur.jpg",
+    shortDescription: "Perpaduan cingur sapi yang empuk dengan buah segar, sayuran rebus, tahu, dan tempe, lalu diaduk bersama bumbu petis hitam yang gurih dan beraroma tajam.",
+    story: "Sebuah mahakarya orisinal Surabaya. Diciptakan dari kreativitas memadukan cingur (moncong sapi) yang direbus hingga sangat empuk, dengan aneka buah, sayuran, dan irisan tempe/tahu, lalu diikat sempurna oleh bumbu ulek petis hitam yang gurih dan beraroma tajam.",
+    ingredients: [
+      "Cingur sapi",
+      "Buah segar",
+      "Sayuran rebus",
+      "Tahu & tempe",
+      "Bumbu petis hitam",
+      "Kacang tanah"
+    ],
+    taste: "Segar, gurih petis, dan pedas",
+    categories: [
+      "segar",
+      "pedas",
+      "gurih"
+    ],
+    priceCategory: "sedang",
+    priceRange: "Rp20.000 – Rp35.000",
+    timeCategory: [
+      "siang"
+    ],
+    featured: false
+  },
+  {
+    id: "lontong-kikil",
+    name: "Lontong Kikil",
+    image: "/img/Lontong kikil.png",
+    shortDescription: "Kikil sapi yang empuk dan kenyal disajikan dengan lontong dalam kuah kuning berkaldu tebal yang kaya rempah, cocok sebagai sajian penghangat.",
+    story: "Bukti kelihaian masyarakat lokal mengolah bagian kaki sapi (kikil). Direbus berjam-jam hingga teksturnya kenyal dan lembut, kikil ini disajikan dengan kuah kuning berkaldu tebal yang kaya akan rempah seperti serai dan jeruk purut, menjadikannya sajian penghangat yang ikonik sejak zaman kolonial.",
+    ingredients: [
+      "Kikil sapi",
+      "Lontong",
+      "Kuah kuning berkaldu",
+      "Serai",
+      "Daun jeruk purut",
+      "Sambal"
+    ],
+    taste: "Gurih, hangat, dan beraroma rempah",
+    categories: [
+      "berkuah",
+      "gurih",
+      "malam"
+    ],
+    priceCategory: "sedang",
+    priceRange: "Rp20.000 – Rp30.000",
+    timeCategory: [
+      "pagi",
+      "malam"
+    ],
+    featured: true
+  },
+  {
+    id: "sate-klopo",
+    name: "Sate Klopo",
+    image: "/img/Sate klopo.jpg",
+    shortDescription: "Sate daging sapi yang dibalut parutan kelapa berbumbu sebelum dibakar, disajikan dengan nasi atau lontong, sambal kacang, dan serundeng.",
+    story: "\"Klopo\" berarti kelapa dalam bahasa Jawa. Sate khas Surabaya ini identik dengan kawasan Ondomohen, tempat daging sapi dibalut parutan kelapa berbumbu lalu dibakar di atas arang hingga harum. Hasilnya gurih manis dengan tekstur sedikit renyah di bagian luar.",
+    ingredients: [
+      "Daging sapi",
+      "Kelapa parut",
+      "Bumbu bawang & ketumbar",
+      "Sambal kacang",
+      "Serundeng"
+    ],
+    taste: "Gurih manis dengan aroma kelapa bakar",
+    categories: [
+      "gurih",
+      "malam"
+    ],
+    priceCategory: "sedang",
+    priceRange: "Rp25.000 – Rp40.000",
+    timeCategory: [
+      "pagi",
+      "malam"
+    ],
+    featured: false
+  },
+  {
+    id: "pecel-semanggi",
+    name: "Pecel Semanggi",
+    image: "/img/Pecel Semanggi.png",
+    shortDescription: "Daun semanggi dan tauge rebus yang disiram bumbu kacang ubi jalar bercampur petis, disajikan di atas pincuk daun pisang bersama kerupuk puli yang lebar dan renyah.",
+    story: "Semanggi Suroboyo berasal dari kawasan Kendung, Benowo, tempat tanaman semanggi tumbuh di sawah. Dulu ibu-ibu penjualnya berjalan keliling kota sambil menggendong bakul dan mengenakan kebaya, hingga kuliner ini diabadikan dalam lagu legendaris \"Semanggi Suroboyo\".",
+    ingredients: [
+      "Daun semanggi",
+      "Tauge",
+      "Bumbu kacang ubi jalar",
+      "Petis udang",
+      "Kerupuk puli",
+      "Daun pisang"
+    ],
+    taste: "Segar, manis gurih, dengan sedikit pedas",
+    categories: [
+      "segar",
+      "hemat"
+    ],
+    priceCategory: "hemat",
+    priceRange: "Rp10.000 – Rp15.000",
+    timeCategory: [
+      "pagi",
+      "siang"
+    ],
+    featured: false
+  },
+  {
+    id: "nasi-cumi",
+    name: "Nasi Cumi",
+    image: "/img/Nasi Cumi.png",
+    shortDescription: "Nasi putih dengan cumi masak hitam dari tintanya sendiri, ditemani mi goreng, telur pindang, kering tempe, serundeng, dan sambal yang pedas menggigit.",
+    story: "Nasi cumi hitam dibawa oleh perantau Madura dan kini jadi buruan kuliner malam di Surabaya, terutama di sekitar kawasan Pasar Atom. Warna hitamnya berasal dari tinta cumi asli yang dimasak bersama bumbu rempah hingga meresap.",
+    ingredients: [
+      "Cumi",
+      "Tinta cumi",
+      "Nasi putih",
+      "Mi goreng",
+      "Telur pindang",
+      "Kering tempe",
+      "Sambal"
+    ],
+    taste: "Gurih, pedas, dengan aroma laut yang khas",
+    categories: [
+      "pedas",
+      "gurih",
+      "malam"
+    ],
+    priceCategory: "sedang",
+    priceRange: "Rp25.000 – Rp35.000",
+    timeCategory: [
+      "siang",
+      "malam"
+    ],
+    featured: false
+  },
+  {
+    id: "tahu-telur",
+    name: "Tahu Telur",
+    image: "/img/Tahu telur.png",
+    shortDescription: "Tahu yang digoreng bersama kocokan telur hingga mengembang berlapis, lalu disiram bumbu kacang petis dan kecap, dilengkapi tauge, lontong, dan kerupuk.",
+    story: "Tahu telur biasa dimasak satu per satu di wajan kecil agar telurnya mengembang tinggi dan renyah di pinggirnya. Versi Surabaya terasa lebih legit karena bumbu kacangnya diulek bersama petis udang, sama seperti Tahu Tek.",
+    ingredients: [
+      "Tahu",
+      "Telur ayam",
+      "Bumbu kacang petis",
+      "Kecap manis",
+      "Tauge",
+      "Lontong",
+      "Kerupuk"
+    ],
+    taste: "Gurih, manis legit, dan renyah",
+    categories: [
+      "gurih",
+      "pedas",
+      "hemat",
+      "malam"
+    ],
+    priceCategory: "hemat",
+    priceRange: "Rp12.000 – Rp20.000",
+    timeCategory: [
+      "siang",
+      "malam"
+    ],
+    featured: false
+  },
+  {
+    id: "kare-ayam",
+    name: "Kare Ayam",
+    image: "/img/Kare ayam.png",
+    shortDescription: "Potongan ayam kampung dalam kuah santan kuning yang kental dan harum rempah, berisi wortel serta buncis, nikmat disantap dengan nasi hangat atau roti.",
+    story: "Kare ayam lahir dari pengaruh pedagang India dan Arab yang singgah di pelabuhan Surabaya. Bumbu karinya kemudian disesuaikan dengan lidah lokal memakai santan dan kunyit, sehingga rasanya lebih ringan dan gurih dibanding kari aslinya.",
+    ingredients: [
+      "Ayam kampung",
+      "Santan",
+      "Kunyit",
+      "Serai & daun salam",
+      "Wortel",
+      "Buncis"
+    ],
+    taste: "Gurih, creamy, dan hangat rempah",
+    categories: [
+      "berkuah",
+      "gurih"
+    ],
+    priceCategory: "sedang",
+    priceRange: "Rp20.000 – Rp30.000",
+    timeCategory: [
+      "pagi",
+      "siang"
+    ],
+    featured: false
+  },
+  {
+    id: "kikil-sapi",
+    name: "Kikil Sapi",
+    image: "/img/Kikil sapi.png",
+    shortDescription: "Kikil sapi kenyal yang dimasak dalam kuah santan kuning ala gule, ditaburi seledri dan bawang goreng, disantap bersama lontong, kerupuk, dan sambal.",
+    story: "Berbeda dari Lontong Kikil yang berkuah kaldu, versi ini dimasak dengan santan sehingga kuahnya lebih kental dan creamy. Kikil direbus berjam-jam lebih dulu supaya empuk, lalu dimasak lagi bersama bumbu kuning hingga rempahnya meresap.",
+    ingredients: [
+      "Kikil sapi",
+      "Santan",
+      "Bumbu kuning",
+      "Seledri",
+      "Bawang goreng",
+      "Lontong",
+      "Kerupuk"
+    ],
+    taste: "Gurih santan, kenyal, dan kaya rempah",
+    categories: [
+      "berkuah",
+      "gurih",
+      "malam"
+    ],
+    priceCategory: "sedang",
+    priceRange: "Rp20.000 – Rp30.000",
+    timeCategory: [
+      "siang",
+      "malam"
+    ],
+    featured: false
+  }
 ];
+
 export const warungs: Warung[] = [
-  /* salin */
+  {
+    id: "tahu-campur-cak-sadak",
+    name: "Tahu Campur Cak Sadak",
+    address: "Jl. Mayjen Sungkono No. 106, Pakis, Kec. Sawahan, Surabaya, Jawa Timur 60256",
+    openDays: "Setiap hari",
+    openTime: "17:00",
+    closeTime: "23:00",
+    description: "Warung gerobak kayu legendaris di kawasan Mayjen Sungkono yang terkenal dengan tahu campur dan lontong kikil berkuah gurih.",
+    foodIds: [
+      "lontong-kikil"
+    ],
+    otherMenu: [
+      "Tahu Campur"
+    ],
+    image: "/img/Warung.png",
+    mapsUrl: "https://maps.app.goo.gl/5s2ocqsDTwDYwsb16"
+  },
+  {
+    id: "depot-selamat-sukses",
+    name: "Depot Selamat Sukses Ngagel Jaya Barat",
+    address: "Jl. Ngagel Jaya Barat No.24, RT.002/RW.06, Pucang Sewu, Kec. Gubeng, Surabaya, Jawa Timur 60283",
+    openDays: "Setiap hari",
+    openTime: "07:00",
+    closeTime: "21:00",
+    description: "Depot rumahan bernuansa sederhana dengan aneka masakan khas Jawa Timur dan gratis isi ulang nasi putih.",
+    foodIds: [
+      "rawon-setan",
+      "nasi-pecel"
+    ],
+    otherMenu: [
+      "Nasi Campur"
+    ],
+    image: "/img/warung selamat sukses.png",
+    mapsUrl: "https://maps.app.goo.gl/9Tvp2K7jWLGTJj128"
+  },
+  {
+    id: "kedai-bang-jady",
+    name: "Kedai Bang Jady",
+    address: "Medokan Ayu, Rungkut, Surabaya, East Java 60293",
+    openDays: "Setiap hari",
+    openTime: "10:00",
+    closeTime: "22:00",
+    description: "Kedai kaki lima di Rungkut yang dikenal dengan menu spesial nasi telur, porsinya mengenyangkan dengan harga ramah kantong.",
+    foodIds: [],
+    otherMenu: [
+      "Nasi Telur",
+      "Es Teh"
+    ],
+    image: "/img/Kedai Bang Jady.jpg",
+    mapsUrl: "https://maps.app.goo.gl/YyiWHLXbtAo8xYy77"
+  },
+  {
+    id: "depot-tanjung-api",
+    name: "Depot Tanjung Api",
+    address: "Jl. Walikota Mustajab No.41, Ketabang, Kec. Genteng, Surabaya, Jawa Timur 60272",
+    openDays: "Setiap hari",
+    openTime: "10:00",
+    closeTime: "21:00",
+    description: "Depot bergaya modern di pusat kota dengan konsep \"selera tuan dan nyonya\" yang menyajikan camilan, hidangan rumahan, dan pempek.",
+    foodIds: [],
+    otherMenu: [
+      "Pempek",
+      "Camilan",
+      "Hidangan Rumahan"
+    ],
+    image: "/img/depot tanjung api surabaya.jpg",
+    mapsUrl: "https://maps.app.goo.gl/FXVpeHzkZ5vZ4yqw5"
+  },
+  {
+    id: "ceker-pedas-cocote-tonggo",
+    name: "Ceker Pedas Cocote Tonggo",
+    address: "Jl. Kombes Pol. Moh. Duryat No.33, Tegalsari, Kec. Tegalsari, Surabaya, Jawa Timur 60262",
+    openDays: "Setiap hari",
+    openTime: "11:00",
+    closeTime: "23:00",
+    description: "Tempat makan favorit anak muda Surabaya untuk menikmati ceker pedas berbumbu meresap dengan suasana santai.",
+    foodIds: [],
+    otherMenu: [
+      "Ceker Pedas"
+    ],
+    image: "/img/ceker pedas cocote tonggo.png",
+    mapsUrl: "https://maps.app.goo.gl/pa7UxQsWbcd6ETBT6"
+  }
 ];

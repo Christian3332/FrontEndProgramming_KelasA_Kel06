@@ -9,7 +9,7 @@ import Faq from "@/components/home/Faq";
 
 export default function HomePage() {
   return (
-    <main>
+    <>
       <Hero />
       <SearchBar />
       <CategoryLinks />
@@ -17,6 +17,6 @@ export default function HomePage() {
       <KatalogPreview />
       <WarungCarousel />
       <Faq />
-    </main>
+    </>
   );
 }

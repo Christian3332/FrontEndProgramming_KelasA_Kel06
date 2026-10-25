@@ -39,7 +39,7 @@ function RekomendasiList({ categoryId }: { categoryId: string | null }) {
   }
 
   return (
-    <main id="main-content">
+    <div>
       {/* HERO */}
       <section
         className="container py-5 text-center"
@@ -126,6 +126,6 @@ function RekomendasiList({ categoryId }: { categoryId: string | null }) {
       </section>
 
       <FoodModal food={selected} onClose={() => setSelected(null)} />
-    </main>
+    </div>
   );
 }

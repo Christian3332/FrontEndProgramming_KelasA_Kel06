@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { admin } from "@/data/admin";
 import { foods, warungs } from "@/data/foods";
+import { faqs } from "@/data/faqs";
 import { logout } from "@/lib/auth";
 import ConfirmDialog from "@/components/admin/ConfirmDialog";
 
@@ -21,7 +22,7 @@ const menuUtama: MenuItem[] = [
   { href: "/admin/dashboard/makanan", label: "Kelola Makanan", icon: "fa-solid fa-bowl-food", count: foods.length },
   { href: "/admin/dashboard/rekomendasi", label: "Kelola Rekomendasi", icon: "fa-regular fa-star" },
   { href: "/admin/dashboard/warung", label: "Kelola Warung", icon: "fa-solid fa-location-dot", count: warungs.length },
-  { href: "/admin/dashboard/faq", label: "Kelola FAQ", icon: "fa-regular fa-circle-question" },
+  { href: "/admin/dashboard/faq", label: "Kelola FAQ", icon: "fa-regular fa-circle-question", count: faqs.length },
   { href: "/admin/dashboard/konten", label: "Kelola Konten", icon: "fa-regular fa-file-lines" },
 ];
 

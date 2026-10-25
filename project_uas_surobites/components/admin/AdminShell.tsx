@@ -28,7 +28,7 @@ export default function AdminShell({
 
   return (
     <>
-      <a className="skip-link" href="#admin-main">
+      <a className="skip-link visually-hidden-focusable" href="#admin-main">
         Langsung ke konten utama
       </a>
 

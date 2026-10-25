@@ -2,6 +2,7 @@
 
 import { foods } from "@/data/foods";
 import { useFavorites } from "@/lib/favorites";
+import styles from "@/app/styles/header.module.css";
 
 export default function FavCount() {
   const { favorites } = useFavorites();
@@ -9,7 +10,10 @@ export default function FavCount() {
   if (total === 0) return null;
 
   return (
-    <span className="header-fav__count" aria-label={`${total} favorit`}>
+    <span
+      className={`position-absolute top-0 start-100 translate-middle badge rounded-pill ${styles.count}`}
+      aria-label={`${total} favorit`}
+    >
       {total}
     </span>
   );

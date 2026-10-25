@@ -1,1 +1,103 @@
-/* Style global SuroBites, diisi pas tahap CSS */
+:root {
+    --sb-biru-tua: #0D47A1;
+    --sb-biru: #2196F3;
+    --sb-biru-muda: #E3F2FD;
+    --sb-biru-garis: #90CAF9;
+    --sb-oranye: #C15400;
+    --sb-oranye-gelap: #A34600;
+    --sb-merah: #E53935;
+
+    --bs-primary: #0D47A1;
+    --bs-primary-rgb: 13, 71, 161;
+    --bs-link-color: #0D47A1;
+    --bs-link-color-rgb: 13, 71, 161;
+    --bs-link-hover-color: #2196F3;
+    --bs-link-hover-color-rgb: 33, 150, 243;
+    --bs-body-font-family: var(--font-jakarta), sans-serif;
+    --bs-body-color: #000000;
+    --bs-body-line-height: 1.5;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+main {
+    background-color: var(--sb-biru-muda);
+}
+
+h1,
+h2 {
+    font-family: var(--font-poetsen), cursive;
+    font-weight: 400;
+    color: var(--sb-biru-tua);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--sb-biru);
+    outline-offset: 2px;
+}
+
+.skip-link:focus {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2000;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background-color: var(--sb-biru-tua);
+    color: #FFFFFF;
+}
+
+.btn {
+    --bs-btn-border-radius: 50px;
+    --bs-btn-font-weight: 600;
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--sb-oranye);
+    --bs-btn-border-color: var(--sb-oranye);
+    --bs-btn-hover-bg: var(--sb-oranye-gelap);
+    --bs-btn-hover-border-color: var(--sb-oranye-gelap);
+    --bs-btn-active-bg: var(--sb-oranye-gelap);
+    --bs-btn-active-border-color: var(--sb-oranye-gelap);
+    --bs-btn-disabled-bg: var(--sb-oranye);
+    --bs-btn-disabled-border-color: var(--sb-oranye);
+    --bs-btn-focus-shadow-rgb: 193, 84, 0;
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--sb-biru-tua);
+    --bs-btn-border-color: var(--sb-biru-tua);
+    --bs-btn-hover-bg: var(--sb-biru-tua);
+    --bs-btn-hover-border-color: var(--sb-biru-tua);
+    --bs-btn-active-bg: var(--sb-biru-tua);
+    --bs-btn-active-border-color: var(--sb-biru-tua);
+    --bs-btn-disabled-color: var(--sb-biru-tua);
+    --bs-btn-disabled-border-color: var(--sb-biru-tua);
+    --bs-btn-focus-shadow-rgb: 13, 71, 161;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--sb-biru);
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.15);
+}
+
+.form-check-input:checked {
+    background-color: var(--sb-biru-tua);
+    border-color: var(--sb-biru-tua);
+}
