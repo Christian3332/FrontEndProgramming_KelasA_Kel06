@@ -14,8 +14,6 @@ type Props = {
 };
 
 export default function WarungCard({ warung, onOpenMap, onOpenFood }: Props) {
-  // Di server hasilnya null (badge tidak dirender), di browser dihitung dari
-  // jam pengunjung. Ini mencegah hydration mismatch karena jam server beda.
   const open = useSyncExternalStore(
     noop,
     () => isWarungOpen(warung),
