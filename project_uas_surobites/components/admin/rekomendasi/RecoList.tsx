@@ -1,42 +1,44 @@
 import Image from "next/image";
 import { categories, foods } from "@/data/foods";
+import ui from "@/app/styles/admin-ui.module.css";
+import styles from "@/app/styles/admin-dashboard.module.css";
 
 export default function RecoList() {
   return (
-    <div className="panel">
-      <div className="panel__header">
+    <div className={ui.panel}>
+      <div className={`d-flex flex-wrap align-items-start justify-content-between ${ui.panelHeader}`}>
         <div>
-          <h3 className="panel__title">Kategori per makanan</h3>
-          <p className="panel__subtitle">
+          <h3 className={ui.panelTitle}>Kategori per makanan</h3>
+          <p className={ui.panelSubtitle}>
             Tombol ★ Pilihan menandai makanan untuk &quot;Rekomendasi Pilihan&quot; di
             Beranda (maksimal 3 pertama yang tampil)
           </p>
         </div>
       </div>
 
-      <div className="reco-list">
-        {foods.length === 0 && <p className="panel-empty">Belum ada data makanan.</p>}
+      <div className="d-flex flex-column">
+        {foods.length === 0 && <p className={ui.panelEmpty}>Belum ada data makanan.</p>}
 
         {foods.map((food) => (
-          <div className="reco-row" key={food.id}>
-            <div className="reco-row__food">
-              <Image src={food.image} alt="" width={48} height={48} />
+          <div className={`d-flex flex-column flex-lg-row align-items-lg-center justify-content-lg-between ${styles.recoRow}`} key={food.id}>
+            <div className={`d-flex align-items-center ${styles.recoFood}`}>
+              <Image src={food.image} alt="" width={48} height={48} className={styles.recoImg} />
               <div>
-                <strong>{food.name}</strong>
-                <small>{food.categories.length} kategori</small>
+                <strong className={styles.recoName}>{food.name}</strong>
+                <small className={styles.recoMeta}>{food.categories.length} kategori</small>
               </div>
             </div>
 
-            <div className="check-group">
+            <div className={`d-flex flex-wrap justify-content-lg-end ${styles.checkGroup}`}>
               {categories.map((category) => (
-                <label className="check-chip" key={category.id}>
+                <label className={styles.checkChip} key={category.id}>
                   <input type="checkbox" defaultChecked={food.categories.includes(category.id)} />
                   <span>
                     {category.icon} {category.label}
                   </span>
                 </label>
               ))}
-              <label className="check-chip check-chip--star">
+              <label className={`${styles.checkChip} ${styles.checkStar}`}>
                 <input type="checkbox" defaultChecked={food.featured} />
                 <span>★ Pilihan</span>
               </label>
@@ -45,11 +47,11 @@ export default function RecoList() {
         ))}
       </div>
 
-      <div className="panel__footer">
-        <button type="button" className="ui-btn ui-btn--ghost">
+      <div className={`d-flex flex-wrap align-items-center justify-content-end ${ui.panelFooter}`}>
+        <button type="button" className={`btn ${ui.btn} ${ui.btnGhost}`}>
           Batalkan
         </button>
-        <button type="button" className="ui-btn ui-btn--primary">
+        <button type="button" className={`btn btn-primary ${ui.btn} ${ui.btnPrimary}`}>
           Simpan Perubahan
         </button>
       </div>

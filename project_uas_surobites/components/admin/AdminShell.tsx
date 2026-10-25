@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useLoginStatus } from "@/lib/auth";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminTopbar from "@/components/admin/AdminTopbar";
+import styles from "@/app/styles/admin-dashboard.module.css";
 
 export default function AdminShell({
   children,
@@ -32,16 +33,16 @@ export default function AdminShell({
         Langsung ke konten utama
       </a>
 
-      <div className="admin-layout">
+      <div className={`d-flex min-vh-100 ${styles.layout}`}>
         <AdminSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-        <div className="admin-main-wrap">
+        <div className={`d-flex flex-column ${styles.mainWrap}`}>
           <AdminTopbar
             sidebarOpen={sidebarOpen}
             onOpenSidebar={() => setSidebarOpen(true)}
           />
 
-          <main id="admin-main" className="admin-content">
+          <main id="admin-main" className={styles.content}>
             {children}
           </main>
         </div>

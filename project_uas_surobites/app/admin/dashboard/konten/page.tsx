@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SectionHead from "@/components/admin/SectionHead";
 import KontenForm from "@/components/admin/konten/KontenForm";
+import ui from "@/app/styles/admin-ui.module.css";
 
 export const metadata: Metadata = {
   title: "Kelola Konten",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function KelolaKontenPage() {
   return (
-    <section className="admin-section" aria-labelledby="sec-konten">
+    <section className={ui.section} aria-labelledby="sec-konten">
       <SectionHead
         id="sec-konten"
         title="Kelola Konten"

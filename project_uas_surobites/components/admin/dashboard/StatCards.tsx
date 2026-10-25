@@ -4,6 +4,7 @@ import Link from "next/link";
 import { foods, warungs } from "@/data/foods";
 import { faqs } from "@/data/faqs";
 import { useFavorites } from "@/lib/favorites";
+import styles from "@/app/styles/admin-dashboard.module.css";
 
 export default function StatCards() {
   const { favorites } = useFavorites();
@@ -14,7 +15,7 @@ export default function StatCards() {
       label: "Jumlah makanan",
       value: foods.length,
       icon: "fa-solid fa-bowl-food",
-      color: "",
+      iconClass: "",
       hint: "Tampil di Katalog & Rekomendasi",
       href: "/admin/dashboard/makanan",
     },
@@ -22,7 +23,7 @@ export default function StatCards() {
       label: "Jumlah warung",
       value: warungs.length,
       icon: "fa-solid fa-location-dot",
-      color: "orange",
+      iconClass: styles.statIconOrange,
       hint: "Tampil di Lokasi Warung",
       href: "/admin/dashboard/warung",
     },
@@ -30,7 +31,7 @@ export default function StatCards() {
       label: "Jumlah FAQ",
       value: faqs.length,
       icon: "fa-regular fa-comments",
-      color: "",
+      iconClass: "",
       hint: "Tampil di Beranda",
       href: "/admin/dashboard/faq",
     },
@@ -38,25 +39,27 @@ export default function StatCards() {
       label: "Makanan difavoritkan",
       value: favoriteCount,
       icon: "fa-solid fa-heart",
-      color: "red",
+      iconClass: styles.statIconRed,
       hint: "Disimpan pengunjung di browser ini",
       href: "/favorit",
     },
   ];
 
   return (
-    <div className="stat-grid">
+    <div className={`row row-cols-2 row-cols-xl-4 g-3 ${styles.statGrid}`}>
       {stats.map((stat) => (
-        <Link key={stat.label} href={stat.href} className="stat-card">
-          <span className="stat-card__top">
-            <span className="stat-card__label">{stat.label}</span>
-            <span className={`stat-card__icon stat-card__icon--${stat.color}`}>
-              <i className={stat.icon}></i>
+        <div className="col" key={stat.label}>
+          <Link href={stat.href} className={`d-flex flex-column h-100 ${styles.statCard}`}>
+            <span className={`d-flex align-items-center justify-content-between ${styles.statTop}`}>
+              <span className={styles.statLabel}>{stat.label}</span>
+              <span className={`d-flex align-items-center justify-content-center ${styles.statIcon} ${stat.iconClass}`}>
+                <i className={stat.icon}></i>
+              </span>
             </span>
-          </span>
-          <strong className="stat-card__value">{stat.value}</strong>
-          <span className="stat-card__hint">{stat.hint}</span>
-        </Link>
+            <strong className={styles.statValue}>{stat.value}</strong>
+            <span className={styles.statHint}>{stat.hint}</span>
+          </Link>
+        </div>
       ))}
     </div>
   );

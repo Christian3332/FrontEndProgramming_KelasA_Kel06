@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { faqs } from "@/data/faqs";
 import SectionHead from "@/components/admin/SectionHead";
+import ui from "@/app/styles/admin-ui.module.css";
+import styles from "@/app/styles/admin-dashboard.module.css";
 
 export const metadata: Metadata = {
   title: "Kelola FAQ",
@@ -8,39 +10,39 @@ export const metadata: Metadata = {
 
 export default function KelolaFaqPage() {
   return (
-    <section className="admin-section" aria-labelledby="sec-faq">
+    <section className={ui.section} aria-labelledby="sec-faq">
       <SectionHead
         id="sec-faq"
         title="Kelola FAQ"
         description="Pertanyaan dan jawaban ini tampil sebagai accordion di Beranda. Gunakan tombol panah untuk mengatur urutan."
       >
-        <button type="button" className="ui-btn ui-btn--primary">
+        <button type="button" className={`btn btn-primary ${ui.btn} ${ui.btnPrimary}`}>
           + Tambah FAQ
         </button>
       </SectionHead>
 
-      <div className="panel">
-        <div className="faq-admin-list">
-          {faqs.length === 0 && <p className="panel-empty">Belum ada data FAQ.</p>}
+      <div className={ui.panel}>
+        <div className={`d-flex flex-column ${styles.faqList}`}>
+          {faqs.length === 0 && <p className={ui.panelEmpty}>Belum ada data FAQ.</p>}
 
           {faqs.map((faq, index) => (
-            <div className="faq-admin-item" key={faq.id}>
-              <span className="faq-admin-item__num">{index + 1}</span>
-              <div>
-                <h3>{faq.question}</h3>
-                <p>{faq.answer}</p>
+            <div className={`d-flex flex-wrap flex-md-nowrap align-items-md-center ${styles.faqItem}`} key={faq.id}>
+              <span className={`d-flex align-items-center justify-content-center ${styles.faqNum}`}>{index + 1}</span>
+              <div className={styles.faqBody}>
+                <h3 className={styles.faqQuestion}>{faq.question}</h3>
+                <p className={styles.faqAnswer}>{faq.answer}</p>
               </div>
-              <div className="row-actions">
-                <button type="button" className="icon-btn" title="Naikkan" aria-label="Naikkan">
+              <div className={`col-12 col-md-auto d-flex justify-content-end ${ui.rowActions}`}>
+                <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn}`} title="Naikkan" aria-label="Naikkan">
                   <i className="fa-solid fa-chevron-up"></i>
                 </button>
-                <button type="button" className="icon-btn" title="Turunkan" aria-label="Turunkan">
+                <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn}`} title="Turunkan" aria-label="Turunkan">
                   <i className="fa-solid fa-chevron-down"></i>
                 </button>
-                <button type="button" className="icon-btn" title="Edit" aria-label="Edit">
+                <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn}`} title="Edit" aria-label="Edit">
                   <i className="fa-solid fa-pen"></i>
                 </button>
-                <button type="button" className="icon-btn icon-btn--danger" title="Hapus" aria-label="Hapus">
+                <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn} ${ui.iconBtnDanger}`} title="Hapus" aria-label="Hapus">
                   <i className="fa-solid fa-trash"></i>
                 </button>
               </div>
