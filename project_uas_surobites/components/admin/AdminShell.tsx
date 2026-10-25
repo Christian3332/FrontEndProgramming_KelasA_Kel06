@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLoginStatus } from "@/lib/auth";
 import AdminSidebar from "@/components/admin/AdminSidebar";
+import AdminTopbar from "@/components/admin/AdminTopbar";
 
 export default function AdminShell({
   children,
@@ -35,6 +36,11 @@ export default function AdminShell({
         <AdminSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
         <div className="admin-main-wrap">
+          <AdminTopbar
+            sidebarOpen={sidebarOpen}
+            onOpenSidebar={() => setSidebarOpen(true)}
+          />
+
           <main id="admin-main" className="admin-content">
             {children}
           </main>
