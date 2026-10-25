@@ -3,17 +3,17 @@
 import { useState } from "react";
 
 const faqs = [
-  { q: "Apa itu SuroBites?", 
+  { q: "Apa itu SuroBites?",
     a: "SuroBites adalah website yang mengenalkan kuliner khas Surabaya, lengkap dengan deskripsi singkat, rekomendasi berdasarkan selera, serta lokasi warung yang bisa kamu kunjungi." },
-  { q: "Apa saja makanan yang tersedia?", 
+  { q: "Apa saja makanan yang tersedia?",
     a: "Kamu bisa melihat seluruh makanan khas Surabaya di halaman Katalog, mulai dari Rawon Setan, Rujak Cingur, Tahu Tek, Pecel Semanggi, Nasi Cumi, hingga Kare Ayam." },
-  { q: "Di mana saya dapat menemukan warung kuliner Surabaya?", 
+  { q: "Di mana saya dapat menemukan warung kuliner Surabaya?",
     a: "Buka halaman Lokasi Warung. Di sana tersedia alamat, jam buka, menu andalan, dan tautan Google Maps untuk setiap warung." },
-  { q: "Bagaimana cara mendapatkan rekomendasi kuliner?", 
+  { q: "Bagaimana cara mendapatkan rekomendasi kuliner?",
     a: "Masuk ke halaman Rekomendasi lalu pilih kategori sesuai selera atau kebutuhanmu, misalnya Pedas, Berkuah, Hemat, atau Kuliner Malam." },
-  { q: "Bagaimana cara menyimpan makanan favorit?", 
+  { q: "Bagaimana cara menyimpan makanan favorit?",
     a: "Klik ikon hati pada card makanan. Semua makanan yang kamu simpan bisa dilihat kapan saja lewat ikon hati di bagian atas halaman." },
-  { q: "Apakah daftar favorit saya akan hilang saat halaman di-refresh?", 
+  { q: "Apakah daftar favorit saya akan hilang saat halaman di-refresh?",
     a: "Tidak. Daftar favorit tersimpan di browser yang kamu gunakan, jadi tetap ada meskipun halaman di-refresh atau kamu berpindah halaman." },
 ];
 
