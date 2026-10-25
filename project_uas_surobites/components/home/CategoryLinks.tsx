@@ -16,7 +16,7 @@ export default function CategoryLinks() {
         Pilih sesuai selera, nanti SuroBites carikan kuliner Surabaya yang
         paling cocok untukmu.
       </p>
-      <div className={`row row-cols-2 row-cols-md-3 g-3 mx-auto ${styles.narrow}`}>
+      <div className={`row row-cols-2 row-cols-md-3 row-cols-xl-6 g-3 mx-auto ${styles.narrow}`}>
         {categories.map((c) => {
           const total = foods.filter((f) => f.categories.includes(c.id)).length;
           return (

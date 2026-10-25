@@ -28,7 +28,7 @@ export function Header () {
 
             <Link
                 href="/favorit"
-                className={`order-2 ms-auto me-2 position-relative d-inline-flex align-items-center justify-content-center rounded-circle ${styles.fav}`}
+                className={`order-2 order-lg-4 ms-auto ms-lg-3 me-2 me-lg-0 position-relative d-inline-flex align-items-center justify-content-center rounded-circle ${styles.fav}`}
                 aria-label="Favorit Saya"
             >
                 <i className="fa-regular fa-heart"/>
@@ -50,7 +50,7 @@ export function Header () {
 
             <nav
                 id="primary-navigation"
-                className={`order-3 order-lg-2 justify-content-center d-lg-flex ${menuOpen ? `d-flex ${styles.navOpen}` : "d-none"} ${styles.navbar}`}
+                className={`order-3 order-lg-2 mx-lg-auto justify-content-center d-lg-flex ${menuOpen ? `d-flex ${styles.navOpen}` : "d-none"} ${styles.navbar}`}
             >
                 <ul className={`list-unstyled m-0 d-flex flex-column flex-lg-row align-items-center w-100 ${styles.navLinks}`}>
                     {menu.map((item) => {

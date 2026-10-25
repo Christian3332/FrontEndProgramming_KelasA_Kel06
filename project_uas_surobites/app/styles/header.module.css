@@ -125,10 +125,6 @@
 }
 
 @media (min-width: 992px) {
-    .header {
-        column-gap: 24px;
-    }
-
     .navbar {
         width: auto;
         padding-top: 0;
