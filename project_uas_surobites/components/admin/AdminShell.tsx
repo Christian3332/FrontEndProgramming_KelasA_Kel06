@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLoginStatus } from "@/lib/auth";
+import AdminSidebar from "@/components/admin/AdminSidebar";
 
 export default function AdminShell({
   children,
@@ -11,6 +12,7 @@ export default function AdminShell({
 }>) {
   const router = useRouter();
   const loggedIn = useLoginStatus();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (loggedIn === false) {
@@ -30,6 +32,8 @@ export default function AdminShell({
       </a>
 
       <div className="admin-layout">
+        <AdminSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
         <div className="admin-main-wrap">
           <main id="admin-main" className="admin-content">
             {children}
