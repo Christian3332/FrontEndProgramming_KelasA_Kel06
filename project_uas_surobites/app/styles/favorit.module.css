@@ -1,0 +1,47 @@
+.heading {
+    margin-bottom: 22px;
+}
+
+.headingIcon {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 10px;
+    border-radius: 27px;
+    background-color: #FFFFFF;
+    color: var(--sb-merah);
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(13, 71, 161, 0.12);
+}
+
+.title {
+    margin-bottom: 18px;
+    font-size: 20px;
+}
+
+.summary {
+    max-width: 560px;
+    margin: -10px auto 12px;
+    font-size: 13.5px;
+    color: #3B3B3B;
+}
+
+.clearButton {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 50px;
+    background: none;
+    color: var(--sb-oranye);
+    font-size: 12.5px;
+    font-weight: 700;
+    transition: background-color 0.2s ease;
+}
+
+.clearButton:hover {
+    background-color: #FFF3E0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .clearButton {
+        transition: none;
+    }
+}
