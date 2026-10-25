@@ -31,7 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" className={`${jakarta.variable} ${poetsen.variable}`}>
-      <body className={jakarta.className}>{children}</body>
+      <body className={`${jakarta.className} d-flex flex-column min-vh-100`}>
+        {children}
+      </body>
     </html>
   );
 }
