@@ -4,6 +4,7 @@ import { useSyncExternalStore } from "react";
 import Image from "next/image";
 import type { Food, Warung } from "@/data/foods";
 import { findFood, formatTime, isWarungOpen } from "@/lib/helper";
+import styles from "@/app/styles/lokasi.module.css";
 
 const noop = () => () => {};
 
@@ -25,21 +26,19 @@ export default function WarungCard({ warung, onOpenMap, onOpenFood }: Props) {
     .filter((f): f is Food => Boolean(f));
 
   return (
-    <article id={warung.id} data-warung className="card h-100 overflow-hidden">
-      <div className="position-relative">
-        <div className="ratio ratio-16x9">
-          <Image
-            src={warung.image}
-            alt={warung.name}
-            fill
-            sizes="(min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw"
-            style={{ objectFit: "cover" }}
-          />
-        </div>
+    <article id={warung.id} data-warung className={`card h-100 ${styles.warungCard}`}>
+      <div className={`position-relative ${styles.media}`}>
+        <Image
+          src={warung.image}
+          alt={warung.name}
+          fill
+          sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className={styles.mediaImg}
+        />
         {open !== null && (
           <span
-            className={`badge rounded-pill position-absolute top-0 start-0 m-2 ${
-              open ? "text-bg-success" : "text-bg-secondary"
+            className={`position-absolute d-inline-flex align-items-center ${styles.status} ${
+              open ? styles.statusOpen : styles.statusClosed
             }`}
           >
             {open ? "Buka sekarang" : "Sedang tutup"}
@@ -47,16 +46,16 @@ export default function WarungCard({ warung, onOpenMap, onOpenFood }: Props) {
         )}
       </div>
 
-      <div className="card-body d-flex flex-column gap-2">
-        <h3 className="card-title h5 mb-0">{warung.name}</h3>
+      <div className={`d-flex flex-column flex-grow-1 ${styles.body}`}>
+        <h3 className={styles.cardTitle}>{warung.name}</h3>
 
-        <ul className="list-unstyled small mb-0">
-          <li className="d-flex gap-2 mb-1">
-            <i className="fa-solid fa-location-dot mt-1" aria-hidden="true" />
+        <ul className={`list-unstyled m-0 d-flex flex-column ${styles.info}`}>
+          <li className="d-flex align-items-start gap-2">
+            <i className="fa-solid fa-location-dot" aria-hidden="true" />
             <span>{warung.address}</span>
           </li>
-          <li className="d-flex gap-2">
-            <i className="fa-regular fa-clock mt-1" aria-hidden="true" />
+          <li className="d-flex align-items-start gap-2">
+            <i className="fa-regular fa-clock" aria-hidden="true" />
             <span>
               {warung.openDays}, {formatTime(warung.openTime)} –{" "}
               {formatTime(warung.closeTime)} WIB
@@ -64,38 +63,38 @@ export default function WarungCard({ warung, onOpenMap, onOpenFood }: Props) {
           </li>
         </ul>
 
-        <p className="small text-secondary mb-0">{warung.description}</p>
+        <p className={styles.desc}>{warung.description}</p>
 
-        <div className="d-flex flex-wrap align-items-center gap-1">
-          <span className="small fw-bold me-1">Menu:</span>
+        <div className={`d-flex flex-wrap align-items-center ${styles.menu}`}>
+          <span className={styles.menuLabel}>Menu:</span>
           {foodList.map((food) => (
             <button
               key={food.id}
               type="button"
-              className="btn btn-sm btn-outline-primary rounded-pill"
+              className={`${styles.chip} ${styles.chipButton}`}
               onClick={() => onOpenFood(food)}
             >
               {food.name}
             </button>
           ))}
           {warung.otherMenu.map((item) => (
-            <span key={item} className="badge rounded-pill text-bg-light border">
+            <span key={item} className={styles.chip}>
               {item}
             </span>
           ))}
         </div>
 
-        <div className="d-flex flex-wrap gap-2 mt-auto pt-2">
+        <div className={`d-flex flex-wrap ${styles.actions}`}>
           <button
             type="button"
-            className="btn btn-outline-primary rounded-pill flex-fill"
+            className={`btn ${styles.btnMap}`}
             onClick={() => onOpenMap(warung)}
           >
             Lihat Peta
           </button>
           <a
             href={warung.mapsUrl}
-            className="btn btn-primary rounded-pill flex-fill"
+            className={`btn ${styles.btnMaps}`}
             target="_blank"
             rel="noopener noreferrer"
           >

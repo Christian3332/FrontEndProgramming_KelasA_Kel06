@@ -6,8 +6,10 @@ import { findFood, searchItems } from "@/lib/helper";
 import WarungCard from "@/components/warung/WarungCard";
 import MapModal from "@/components/warung/MapModal";
 import FoodModal from "@/components/food/FoodModal";
+import katalog from "@/app/styles/katalog.module.css";
+import styles from "@/app/styles/lokasi.module.css";
 
-const HIGHLIGHT = ["border-primary", "border-3", "shadow-lg"];
+const HIGHLIGHT = [styles.highlighted];
 
 function warungSearchText(w: Warung): string {
   const foodNames = w.foodIds.map((id) => findFood(id)?.name ?? "");
@@ -51,22 +53,26 @@ export default function LokasiContent() {
   }, []);
 
   return (
-    <div className="container py-4">
-      <section aria-labelledby="lokasi-title">
-        <div className="text-center mb-4">
-          <h2 id="lokasi-title">Lokasi Warung Kuliner Surabaya</h2>
-          <p className="text-secondary">
+    <div className="container">
+      <section className={styles.section} aria-labelledby="lokasi-title">
+        <div className={`text-center ${styles.heading}`}>
+          <h2 id="lokasi-title" className={styles.title}>Lokasi Warung Kuliner Surabaya</h2>
+          <p className={styles.subtitle}>
             Temukan warung legendaris, cek jam bukanya, lalu langsung arahkan
             perjalananmu lewat Google Maps.
           </p>
         </div>
 
-        <div className="mx-auto mb-4 text-center" style={{ maxWidth: 520 }}>
-          <div className="mb-2">
+        <div className={`d-flex flex-column align-items-center mx-auto ${styles.toolbar}`}>
+          <div className="position-relative w-100">
+            <i
+              className={`fa-solid fa-magnifying-glass position-absolute top-0 bottom-0 d-flex align-items-center ${styles.filterIcon}`}
+              aria-hidden="true"
+            ></i>
             <input
               id="warung-filter"
               type="search"
-              className="form-control form-control-lg rounded-pill"
+              className={`form-control rounded-pill ${styles.filterInput}`}
               placeholder="Cari nama warung, alamat, atau menu..."
               aria-label="Cari warung"
               autoComplete="off"
@@ -74,7 +80,7 @@ export default function LokasiContent() {
               onChange={(e) => setKeyword(e.target.value)}
             />
           </div>
-          <p className="small text-secondary mb-0" aria-live="polite">
+          <p className={styles.count} aria-live="polite">
             {keyword.trim()
               ? `${list.length} dari ${warungs.length} warung cocok dengan pencarianmu`
               : `${warungs.length} warung kuliner pilihan di Surabaya`}
@@ -82,15 +88,20 @@ export default function LokasiContent() {
         </div>
 
         {list.length === 0 ? (
-          <div className="text-center py-5">
-            <div className="fs-1">📍</div>
-            <h3>Warung belum ditemukan</h3>
-            <p>Coba cari dengan nama warung, alamat, atau menu lain.</p>
+          <div className={`d-flex flex-column align-items-center text-center ${katalog.empty}`}>
+            <div
+              className={`d-flex align-items-center justify-content-center ${katalog.emptyIcon}`}
+              aria-hidden="true"
+            >
+              <i className="fa-solid fa-location-dot"></i>
+            </div>
+            <h3 className={katalog.emptyTitle}>Warung belum ditemukan</h3>
+            <p className={katalog.emptyText}>Coba cari dengan nama warung, alamat, atau menu lain.</p>
           </div>
         ) : (
-          <div className="row g-4">
+          <div className={`row g-4 mx-auto ${styles.grid}`}>
             {list.map((w) => (
-              <div className="col-12 col-md-6 col-lg-4" key={w.id}>
+              <div className="col-12 col-md-6 col-xl-4" key={w.id}>
                 <WarungCard
                   warung={w}
                   onOpenMap={setMapWarung}

@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import type { Warung } from "@/data/foods";
+import styles from "@/app/styles/food-modal.module.css";
 
 type Props = { warung: Warung | null; onClose: () => void };
 
@@ -37,37 +38,38 @@ export default function MapModal({ warung, onClose }: Props) {
         onClick={onClose}
       >
         <div
-          className="modal-dialog modal-dialog-centered modal-lg"
+          className={`modal-dialog modal-dialog-centered ${styles.dialog} ${styles.mapDialog}`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="modal-content overflow-hidden">
-            <div className="modal-header">
-              <h2 className="modal-title h5" id="map-modal-title">
-                {warung.name}
-              </h2>
-              <button
-                type="button"
-                className="btn-close"
-                aria-label="Tutup"
-                onClick={onClose}
-              />
-            </div>
+          <div className={`modal-content ${styles.mapContent}`}>
+            <button
+              type="button"
+              className={`d-flex align-items-center justify-content-center rounded-circle border-0 ${styles.close}`}
+              aria-label="Tutup"
+              onClick={onClose}
+            >
+              <i className="fa-solid fa-xmark"></i>
+            </button>
 
-            <div className="ratio ratio-4x3">
+            <div className={`position-relative ${styles.mapFrame}`}>
               <iframe
                 src={getMapsEmbed(warung)}
                 title={`Peta ${warung.name}`}
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
+                className="position-absolute top-0 start-0 w-100 h-100 border-0"
               />
             </div>
 
-            <div className="modal-body">
-              <p className="mb-3">{warung.address}</p>
+            <div className={`d-flex flex-column ${styles.mapBody}`}>
+              <h2 className={styles.mapTitle} id="map-modal-title">
+                {warung.name}
+              </h2>
+              <p className={styles.mapText}>{warung.address}</p>
               <a
                 href={warung.mapsUrl}
-                className="btn btn-primary rounded-pill"
+                className={`btn align-self-start ${styles.btnDark}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -77,7 +79,7 @@ export default function MapModal({ warung, onClose }: Props) {
           </div>
         </div>
       </div>
-      <div className="modal-backdrop show" />
+      <div className={`modal-backdrop show ${styles.backdrop}`} />
     </>
   );
 }

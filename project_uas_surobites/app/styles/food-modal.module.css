@@ -509,3 +509,73 @@
         transition: none;
     }
 }
+
+.mapContent {
+    overflow: hidden;
+    border: none;
+    border-radius: 22px 22px 0 0;
+    background-color: #FFFFFF;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+    animation: sheetUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.mapFrame {
+    aspect-ratio: 4 / 3;
+    background-color: var(--sb-biru-muda);
+}
+
+.mapBody {
+    gap: 8px;
+    padding: 18px 20px 22px;
+}
+
+.mapTitle {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.25;
+}
+
+.mapText {
+    margin: 0;
+    font-size: 13px;
+    color: #444444;
+}
+
+.btnDark {
+    --bs-btn-padding-y: 11px;
+    --bs-btn-padding-x: 20px;
+    --bs-btn-font-size: 13.5px;
+    --bs-btn-font-weight: 700;
+    --bs-btn-color: #FFFFFF;
+    --bs-btn-bg: var(--sb-biru-tua);
+    --bs-btn-border-color: var(--sb-biru-tua);
+    --bs-btn-hover-color: #FFFFFF;
+    --bs-btn-hover-bg: #0B3C8A;
+    --bs-btn-hover-border-color: #0B3C8A;
+    --bs-btn-active-color: #FFFFFF;
+    --bs-btn-active-bg: #0B3C8A;
+    --bs-btn-active-border-color: #0B3C8A;
+    margin-top: 6px;
+}
+
+@media (min-width: 768px) {
+    .mapDialog {
+        max-width: 720px;
+    }
+
+    .mapContent {
+        border-radius: 22px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+        animation-name: popIn;
+    }
+
+    .mapFrame {
+        aspect-ratio: 16 / 9;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mapContent {
+        animation: none;
+    }
+}

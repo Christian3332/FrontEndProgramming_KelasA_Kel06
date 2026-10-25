@@ -40,6 +40,12 @@
     background-color: #FFF3E0;
 }
 
+@media (min-width: 768px) {
+    .title {
+        font-size: 24px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .clearButton {
         transition: none;
