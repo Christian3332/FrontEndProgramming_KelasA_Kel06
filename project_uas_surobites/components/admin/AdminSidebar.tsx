@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { admin } from "@/data/admin";
 import { foods, warungs } from "@/data/foods";
 import { logout } from "@/lib/auth";
+import ConfirmDialog from "@/components/admin/ConfirmDialog";
 
 type MenuItem = {
   href: string;
@@ -32,6 +33,7 @@ type Props = {
 export default function AdminSidebar({ open, onClose }: Props) {
   const pathname = usePathname();
   const router = useRouter();
+  const [confirmLogout, setConfirmLogout] = useState(false);
 
   // body dikunci biar halaman belakang tidak ikut scroll waktu sidebar terbuka di HP
   useEffect(() => {
@@ -101,7 +103,7 @@ export default function AdminSidebar({ open, onClose }: Props) {
           <button
             type="button"
             className="admin-nav__link admin-nav__link--logout"
-            onClick={handleLogout}
+            onClick={() => setConfirmLogout(true)}
           >
             <i className="fa-solid fa-right-from-bracket"></i>
             <span>Logout</span>
@@ -124,6 +126,16 @@ export default function AdminSidebar({ open, onClose }: Props) {
         aria-hidden="true"
         onClick={onClose}
       ></div>
+
+      <ConfirmDialog
+        open={confirmLogout}
+        title="Keluar dari dashboard?"
+        message="Kamu perlu login kembali untuk mengelola konten SuroBites."
+        confirmText="Ya, Logout"
+        icon="fa-regular fa-hand"
+        onConfirm={handleLogout}
+        onCancel={() => setConfirmLogout(false)}
+      />
     </>
   );
 }
