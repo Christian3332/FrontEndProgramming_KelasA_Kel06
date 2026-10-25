@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { foods, type Food } from "@/data/foods";
-import FoodModal from "@/components/FoodModal";
+import FoodModal from "@/components/food/FoodModal";
 
 export default function HighlightMenu() {
   const [selected, setSelected] = useState<Food | null>(null);

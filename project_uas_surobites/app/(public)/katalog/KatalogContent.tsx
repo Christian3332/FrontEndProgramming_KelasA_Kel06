@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { foods, type Food } from "@/data/foods";
 import { searchFoods } from "@/lib/helper";
-import FoodCard from "@/components/FoodCard";
-import FoodModal from "@/components/FoodModal";
+import FoodCard from "@/components/food/FoodCard";
+import FoodModal from "@/components/food/FoodModal";
 
 const PAGE_SIZE = 9;
 

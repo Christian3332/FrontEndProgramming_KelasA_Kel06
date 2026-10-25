@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { foods, type Food } from "@/data/foods";
-import FoodModal from "@/components/FoodModal";
+import FoodModal from "@/components/food/FoodModal";
 
 const JUMLAH_TAMPIL = 6;
 

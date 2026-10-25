@@ -4,9 +4,9 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { foods, categories, warungs, type Food } from "@/data/foods";
 import { getCategory } from "@/lib/helper";
-import CategoryFilter from "@/components/CategoryFilter";
-import FoodCard from "@/components/FoodCard";
-import FoodModal from "@/components/FoodModal";
+import CategoryFilter from "@/components/food/CategoryFilter";
+import FoodCard from "@/components/food/FoodCard";
+import FoodModal from "@/components/food/FoodModal";
 
 const PAGE_SIZE = 9;
 
