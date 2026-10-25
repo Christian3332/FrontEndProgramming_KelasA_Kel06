@@ -1,0 +1,26 @@
+.footer {
+    background-color: #D9D9D9;
+    color: #000000;
+}
+
+.brand {
+    font-size: 20px;
+}
+
+.title {
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--sb-biru-tua);
+}
+
+.item {
+    margin-bottom: 6px;
+    font-size: 11px;
+    word-break: break-word;
+}
+
+.bottom {
+    border-top: 1px dashed #999999;
+    font-size: 11px;
+}

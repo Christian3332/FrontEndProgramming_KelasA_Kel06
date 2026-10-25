@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type React from "react";
+import styles from "@/app/styles/search-bar.module.css";
 
 type SearchBarProps = {
     onSearch?: (query: string) => void;
@@ -37,14 +38,15 @@ export default function SearchBar({
     }
 
     return (
-        <form className="search-bar" role="search" onSubmit={handleSubmit}>
-            <input 
-                type="search" 
-                name="q" 
-                value={query} 
+        <form className={`d-flex align-items-center gap-2 mx-auto my-4 px-3 ${styles.searchBar}`} role="search" onSubmit={handleSubmit}>
+            <input
+                type="search"
+                name="q"
+                value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={placeholder}
-                aria-label="Cari kuliner"  
+                aria-label="Cari kuliner"
+                className={`form-control rounded-pill ${styles.input}`}
             />
 
             {query && (
@@ -52,12 +54,13 @@ export default function SearchBar({
                     type="button"
                     onClick={handleReset}
                     aria-label="Hapus pencarian"
+                    className={`btn btn-light rounded-circle ${styles.iconButton}`}
                 >
                     <span>&times;</span>
                 </button>
             )}
 
-            <button type="submit" aria-label="Cari">
+            <button type="submit" aria-label="Cari" className={`btn btn-primary rounded-circle ${styles.iconButton}`}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
