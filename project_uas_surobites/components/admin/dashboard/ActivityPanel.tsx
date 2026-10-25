@@ -1,32 +1,36 @@
 "use client";
 
 import { useLastLogin } from "@/lib/auth";
+import ui from "@/app/styles/admin-ui.module.css";
+import styles from "@/app/styles/admin-dashboard.module.css";
 
 export default function ActivityPanel() {
   const lastLogin = useLastLogin();
 
   return (
-    <article className="panel">
-      <div className="panel__header">
+    <article className={`h-100 ${ui.panel}`}>
+      <div className={`d-flex flex-wrap align-items-start justify-content-between ${ui.panelHeader}`}>
         <div>
-          <h3 className="panel__title">Aktivitas terakhir</h3>
-          <p className="panel__subtitle">Riwayat perubahan oleh admin</p>
+          <h3 className={ui.panelTitle}>Aktivitas terakhir</h3>
+          <p className={ui.panelSubtitle}>Riwayat perubahan oleh admin</p>
         </div>
       </div>
 
-      <ul className="activity-list">
+      <ul className="list-unstyled m-0 d-flex flex-column">
         {lastLogin ? (
-          <li>
-            <span className="activity-dot activity-dot--login">
+          <li className={`d-flex ${styles.activityItem}`}>
+            <span className={`d-flex align-items-center justify-content-center ${styles.activityDot}`}>
               <i className="fa-solid fa-key"></i>
             </span>
             <div>
-              <p>Login ke dashboard admin</p>
-              <time>{new Date(Number(lastLogin)).toLocaleString("id-ID")}</time>
+              <p className={styles.activityText}>Login ke dashboard admin</p>
+              <time className={styles.activityTime}>
+                {new Date(Number(lastLogin)).toLocaleString("id-ID")}
+              </time>
             </div>
           </li>
         ) : (
-          <li className="panel-empty">Belum ada aktivitas.</li>
+          <li className={ui.panelEmpty}>Belum ada aktivitas.</li>
         )}
       </ul>
     </article>

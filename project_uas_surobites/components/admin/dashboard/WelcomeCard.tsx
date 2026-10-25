@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import ui from "@/app/styles/admin-ui.module.css";
+import styles from "@/app/styles/admin-dashboard.module.css";
 
 export default function WelcomeCard() {
   const today = new Date().toLocaleDateString("id-ID", {
@@ -11,27 +13,33 @@ export default function WelcomeCard() {
   });
 
   return (
-    <div className="welcome-card">
-      <div className="welcome-card__text">
-        <p className="welcome-card__eyebrow">{today}</p>
-        <h2>
+    <div className={`d-flex align-items-center justify-content-between ${styles.welcome}`}>
+      <div>
+        <p className={styles.welcomeEyebrow}>{today}</p>
+        <h2 className={styles.welcomeTitle}>
           Halo, <span>Admin</span>!
         </h2>
-        <p>
+        <p className={styles.welcomeText}>
           Kelola konten kuliner Surabaya agar pengunjung SuroBites selalu
           mendapat informasi terbaru.
         </p>
-        <div className="welcome-card__actions">
-          <button type="button" className="ui-btn ui-btn--primary">
+        <div className={`d-flex flex-wrap ${styles.welcomeActions}`}>
+          <button type="button" className={`btn btn-primary ${ui.btn} ${ui.btnPrimary}`}>
             + Tambah Makanan
           </button>
-          <button type="button" className="ui-btn ui-btn--light">
+          <button type="button" className={`btn ${ui.btn} ${ui.btnLight}`}>
             + Tambah Warung
           </button>
         </div>
       </div>
-      <span className="welcome-card__art" aria-hidden="true">
-        <Image src="/img/Surobites Logo.png" alt="" width={120} height={120} />
+      <span className={`d-none d-md-block ${styles.welcomeArt}`} aria-hidden="true">
+        <Image
+          src="/img/Surobites Logo.png"
+          alt=""
+          width={90}
+          height={90}
+          className={`w-100 h-100 ${styles.welcomeArtImg}`}
+        />
       </span>
     </div>
   );

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import ui from "@/app/styles/admin-ui.module.css";
+import styles from "@/app/styles/admin-dashboard.module.css";
 
 const kontenAwal = {
   heroTitle: "JELAJAHI CITA RASA LEGENDARIS SURABAYA",
@@ -25,43 +27,44 @@ export default function KontenForm() {
 
   return (
     <form noValidate>
-      <div className="content-grid">
-        <article className="panel">
-          <div className="panel__header">
+      <div className="row g-3">
+        <div className="col-12 col-xl-6">
+        <article className={`h-100 ${ui.panel}`}>
+          <div className={`d-flex flex-wrap align-items-start justify-content-between ${ui.panelHeader}`}>
             <div>
-              <h3 className="panel__title">
+              <h3 className={ui.panelTitle}>
                 <i className="fa-solid fa-house"></i> Hero Beranda
               </h3>
-              <p className="panel__subtitle">Judul &amp; deskripsi di bagian paling atas Beranda</p>
+              <p className={ui.panelSubtitle}>Judul &amp; deskripsi di bagian paling atas Beranda</p>
             </div>
           </div>
-          <div className="hero-preview">
-            <span className="hero-preview__label">Pratinjau</span>
-            <h4>{konten.heroTitle}</h4>
-            <p>{konten.heroDescription}</p>
+          <div className={`d-flex flex-column justify-content-center ${styles.heroPreview}`}>
+            <span className={styles.previewLabel}>Pratinjau</span>
+            <h4 className={styles.previewTitle}>{konten.heroTitle}</h4>
+            <p className={styles.previewText}>{konten.heroDescription}</p>
           </div>
-          <div className="form-field">
+          <div className={`d-flex flex-column ${ui.field}`}>
             <label htmlFor="content-heroTitle">
-              Judul hero <span className="required">*</span>
+              Judul hero <span className={ui.required}>*</span>
             </label>
             <input
               type="text"
               id="content-heroTitle"
               name="heroTitle"
-              className="form-control"
+              className={`form-control ${ui.input}`}
               maxLength={80}
               value={konten.heroTitle}
               onChange={handleChange}
             />
           </div>
-          <div className="form-field">
+          <div className={`d-flex flex-column ${ui.field}`}>
             <label htmlFor="content-heroDescription">
-              Deskripsi hero <span className="required">*</span>
+              Deskripsi hero <span className={ui.required}>*</span>
             </label>
             <textarea
               id="content-heroDescription"
               name="heroDescription"
-              className="form-control"
+              className={`form-control ${ui.input} ${ui.textarea}`}
               rows={4}
               maxLength={400}
               value={konten.heroDescription}
@@ -69,43 +72,45 @@ export default function KontenForm() {
             ></textarea>
           </div>
         </article>
+        </div>
 
-        <article className="panel">
-          <div className="panel__header">
+        <div className="col-12 col-xl-6">
+        <article className={`h-100 ${ui.panel}`}>
+          <div className={`d-flex flex-wrap align-items-start justify-content-between ${ui.panelHeader}`}>
             <div>
-              <h3 className="panel__title">
+              <h3 className={ui.panelTitle}>
                 <i className="fa-solid fa-star"></i> Hero Rekomendasi
               </h3>
-              <p className="panel__subtitle">Judul &amp; deskripsi di halaman Rekomendasi</p>
+              <p className={ui.panelSubtitle}>Judul &amp; deskripsi di halaman Rekomendasi</p>
             </div>
           </div>
-          <div className="hero-preview">
-            <span className="hero-preview__label">Pratinjau</span>
-            <h4>{konten.rekomendasiTitle}</h4>
-            <p>{konten.rekomendasiDescription}</p>
+          <div className={`d-flex flex-column justify-content-center ${styles.heroPreview}`}>
+            <span className={styles.previewLabel}>Pratinjau</span>
+            <h4 className={styles.previewTitle}>{konten.rekomendasiTitle}</h4>
+            <p className={styles.previewText}>{konten.rekomendasiDescription}</p>
           </div>
-          <div className="form-field">
+          <div className={`d-flex flex-column ${ui.field}`}>
             <label htmlFor="content-rekomendasiTitle">
-              Judul halaman <span className="required">*</span>
+              Judul halaman <span className={ui.required}>*</span>
             </label>
             <input
               type="text"
               id="content-rekomendasiTitle"
               name="rekomendasiTitle"
-              className="form-control"
+              className={`form-control ${ui.input}`}
               maxLength={80}
               value={konten.rekomendasiTitle}
               onChange={handleChange}
             />
           </div>
-          <div className="form-field">
+          <div className={`d-flex flex-column ${ui.field}`}>
             <label htmlFor="content-rekomendasiDescription">
-              Deskripsi halaman <span className="required">*</span>
+              Deskripsi halaman <span className={ui.required}>*</span>
             </label>
             <textarea
               id="content-rekomendasiDescription"
               name="rekomendasiDescription"
-              className="form-control"
+              className={`form-control ${ui.input} ${ui.textarea}`}
               rows={4}
               maxLength={400}
               value={konten.rekomendasiDescription}
@@ -113,62 +118,64 @@ export default function KontenForm() {
             ></textarea>
           </div>
         </article>
+        </div>
 
-        <article className="panel panel--wide">
-          <div className="panel__header">
+        <div className="col-12">
+        <article className={ui.panel}>
+          <div className={`d-flex flex-wrap align-items-start justify-content-between ${ui.panelHeader}`}>
             <div>
-              <h3 className="panel__title">
+              <h3 className={ui.panelTitle}>
                 <i className="fa-solid fa-phone"></i> Kontak &amp; Sosial Media
               </h3>
-              <p className="panel__subtitle">Tampil di footer semua halaman publik</p>
+              <p className={ui.panelSubtitle}>Tampil di footer semua halaman publik</p>
             </div>
           </div>
-          <div className="form-grid">
-            <div className="form-field">
+          <div className="row gx-3">
+            <div className={`col-12 col-md-6 d-flex flex-column ${ui.field}`}>
               <label htmlFor="content-contactEmail">
-                Email <span className="required">*</span>
+                Email <span className={ui.required}>*</span>
               </label>
               <input
                 type="email"
                 id="content-contactEmail"
                 name="contactEmail"
-                className="form-control"
+                className={`form-control ${ui.input}`}
                 value={konten.contactEmail}
                 onChange={handleChange}
               />
             </div>
-            <div className="form-field">
+            <div className={`col-12 col-md-6 d-flex flex-column ${ui.field}`}>
               <label htmlFor="content-contactPhone">
-                Nomor telepon <span className="required">*</span>
+                Nomor telepon <span className={ui.required}>*</span>
               </label>
               <input
                 type="tel"
                 id="content-contactPhone"
                 name="contactPhone"
-                className="form-control"
+                className={`form-control ${ui.input}`}
                 value={konten.contactPhone}
                 onChange={handleChange}
               />
             </div>
-            <div className="form-field">
+            <div className={`col-12 col-md-6 d-flex flex-column ${ui.field}`}>
               <label htmlFor="content-instagram">Link Instagram</label>
               <input
                 type="url"
                 id="content-instagram"
                 name="instagram"
-                className="form-control"
+                className={`form-control ${ui.input}`}
                 placeholder="https://instagram.com/..."
                 value={konten.instagram}
                 onChange={handleChange}
               />
             </div>
-            <div className="form-field">
+            <div className={`col-12 col-md-6 d-flex flex-column ${ui.field}`}>
               <label htmlFor="content-facebook">Link Facebook</label>
               <input
                 type="url"
                 id="content-facebook"
                 name="facebook"
-                className="form-control"
+                className={`form-control ${ui.input}`}
                 placeholder="https://facebook.com/..."
                 value={konten.facebook}
                 onChange={handleChange}
@@ -176,13 +183,14 @@ export default function KontenForm() {
             </div>
           </div>
         </article>
+        </div>
       </div>
 
-      <div className="sticky-actions">
-        <button type="button" className="ui-btn ui-btn--ghost">
+      <div className={`d-flex flex-wrap justify-content-end ${styles.stickyActions}`}>
+        <button type="button" className={`btn ${ui.btn} ${ui.btnGhost}`}>
           Kembalikan Default
         </button>
-        <button type="button" className="ui-btn ui-btn--primary">
+        <button type="button" className={`btn btn-primary ${ui.btn} ${ui.btnPrimary}`}>
           Simpan Konten
         </button>
       </div>

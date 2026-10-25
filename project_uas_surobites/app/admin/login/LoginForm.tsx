@@ -6,10 +6,18 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { admin } from "@/data/admin";
 import { isLoggedIn, login } from "@/lib/auth";
+import ui from "@/app/styles/admin-ui.module.css";
+import styles from "@/app/styles/admin-login.module.css";
 
 type FormAlert = {
   type: "info" | "error" | "success";
   message: string;
+};
+
+const alertClass = {
+  info: ui.alertInfo,
+  error: "",
+  success: ui.alertSuccess,
 };
 
 const pesanInfo: Record<string, string> = {
@@ -93,36 +101,36 @@ export default function LoginForm() {
   }
 
   return (
-    <div className={`login-card ${shaking ? "is-shaking" : ""}`}>
-      <div className="login-card__header">
+    <div className={`w-100 ${styles.card} ${shaking ? styles.shaking : ""}`}>
+      <div className={`text-center ${styles.cardHeader}`}>
         <Image
-          className="login-card__logo"
+          className={styles.cardLogo}
           src="/img/Surobites Logo.png"
           alt="Logo SuroBites"
           width={64}
           height={64}
         />
-        <p className="login-card__brand">SuroBites Admin</p>
-        <h1>Masuk ke Dashboard</h1>
-        <p>Silakan login untuk mengelola konten website.</p>
+        <p className={styles.cardBrand}>SuroBites Admin</p>
+        <h1 className={styles.cardTitle}>Masuk ke Dashboard</h1>
+        <p className={styles.cardText}>Silakan login untuk mengelola konten website.</p>
       </div>
 
       <form noValidate onSubmit={handleSubmit}>
         {shownAlert && (
-          <div className={`form-alert form-alert--${shownAlert.type}`} role="alert">
+          <div className={`d-flex align-items-center ${ui.alert} ${alertClass[shownAlert.type]}`} role="alert">
             {shownAlert.message}
           </div>
         )}
 
-        <div className="form-field">
+        <div className={`d-flex flex-column ${ui.field}`}>
           <label htmlFor="login-username">Username</label>
-          <div className="input-icon">
-            <i className="fa-solid fa-user"></i>
+          <div className={ui.inputIcon}>
+            <i className={`fa-solid fa-user position-absolute top-0 bottom-0 d-flex align-items-center ${ui.inputSymbol}`}></i>
             <input
               id="login-username"
               name="username"
               type="text"
-              className={`form-control ${usernameError ? "is-invalid" : ""}`}
+              className={`form-control ${ui.input} ${ui.withIcon} ${usernameError ? ui.invalid : ""}`}
               placeholder="Masukkan username"
               autoComplete="username"
               aria-describedby="login-username-error"
@@ -133,21 +141,21 @@ export default function LoginForm() {
               }}
             />
           </div>
-          <p className="field-error" id="login-username-error" aria-live="polite">
+          <p className={ui.fieldError} id="login-username-error" aria-live="polite">
             {usernameError}
           </p>
         </div>
 
-        <div className="form-field">
+        <div className={`d-flex flex-column ${ui.field}`}>
           <label htmlFor="login-password">Password</label>
-          <div className="input-icon input-icon--toggle">
-            <i className="fa-solid fa-lock"></i>
+          <div className={ui.inputIcon}>
+            <i className={`fa-solid fa-lock position-absolute top-0 bottom-0 d-flex align-items-center ${ui.inputSymbol}`}></i>
             <input
               ref={passwordRef}
               id="login-password"
               name="password"
               type={showPassword ? "text" : "password"}
-              className={`form-control ${passwordError ? "is-invalid" : ""}`}
+              className={`form-control ${ui.input} ${ui.withIcon} ${ui.withToggle} ${passwordError ? ui.invalid : ""}`}
               placeholder="Masukkan password"
               autoComplete="current-password"
               aria-describedby="login-password-error"
@@ -159,36 +167,36 @@ export default function LoginForm() {
             />
             <button
               type="button"
-              className="toggle-password"
+              className={`d-flex align-items-center justify-content-center ${ui.toggle}`}
               aria-label={showPassword ? "Sembunyikan password" : "Tampilkan password"}
               onClick={() => setShowPassword(!showPassword)}
             >
               <i className={showPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye"}></i>
             </button>
           </div>
-          <p className="field-error" id="login-password-error" aria-live="polite">
+          <p className={ui.fieldError} id="login-password-error" aria-live="polite">
             {passwordError}
           </p>
         </div>
 
         <button
           type="submit"
-          className="ui-btn ui-btn--primary ui-btn--block login-submit"
+          className={`btn btn-primary w-100 ${ui.btn} ${ui.btnPrimary} ${styles.submit}`}
           disabled={loading}
         >
-          {loading && <span className="btn-spinner"></span>}
+          {loading && <span className={ui.spinner}></span>}
           <span>{buttonText}</span>
         </button>
       </form>
 
-      <div className="demo-account">
+      <div className={`d-flex flex-column ${styles.demo}`}>
         <strong>Akun demo</strong>
         <span>
           Username: <code>{admin.username}</code> &middot; Password: <code>{admin.password}</code>
         </span>
       </div>
 
-      <Link href="/" className="back-link">← Kembali ke website</Link>
+      <Link href="/" className={styles.backLink}>← Kembali ke website</Link>
     </div>
   );
 }

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { admin } from "@/data/admin";
+import ui from "@/app/styles/admin-ui.module.css";
+import styles from "@/app/styles/admin-dashboard.module.css";
 
 const sectionTitles: Record<string, string> = {
   "/admin/dashboard": "Dashboard",
@@ -24,10 +26,10 @@ export default function AdminTopbar({ sidebarOpen, onOpenSidebar }: Props) {
   const title = sectionTitles[pathname] ?? "Dashboard";
 
   return (
-    <header className="admin-topbar">
+    <header className={`d-flex align-items-center ${styles.topbar}`}>
       <button
         type="button"
-        className="admin-menu-btn"
+        className={`d-flex d-lg-none align-items-center justify-content-center ${styles.menuBtn}`}
         aria-controls="admin-sidebar"
         aria-expanded={sidebarOpen}
         aria-label="Buka menu admin"
@@ -36,23 +38,23 @@ export default function AdminTopbar({ sidebarOpen, onOpenSidebar }: Props) {
         <i className="fa-solid fa-bars"></i>
       </button>
 
-      <div className="admin-topbar__title">
-        <p className="admin-breadcrumb">
+      <div className={styles.topTitle}>
+        <p className={styles.breadcrumb}>
           Admin <span aria-hidden="true">/</span> <span>{title}</span>
         </p>
-        <h1>{title}</h1>
+        <h1 className={styles.topHeading}>{title}</h1>
       </div>
 
-      <div className="admin-topbar__actions">
+      <div className={`d-flex align-items-center ${styles.topActions}`}>
         <Link
           href="/"
           target="_blank"
           rel="noopener"
-          className="ui-btn ui-btn--ghost ui-btn--sm hide-mobile"
+          className={`btn d-none d-md-inline-flex ${ui.btn} ${ui.btnSm} ${ui.btnGhost}`}
         >
           Lihat Website ↗
         </Link>
-        <span className="admin-avatar" title="Admin">
+        <span className={`d-inline-flex align-items-center justify-content-center ${styles.avatar}`} title="Admin">
           {admin.displayName.charAt(0)}
         </span>
       </div>

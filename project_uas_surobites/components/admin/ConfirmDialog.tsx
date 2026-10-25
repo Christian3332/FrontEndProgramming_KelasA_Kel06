@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import styles from "@/app/styles/confirm.module.css";
 
 type Props = {
   open: boolean;
@@ -53,27 +54,27 @@ export default function ConfirmDialog({
         onClick={onCancel}
       >
         <div
-          className="modal-dialog modal-dialog-centered"
+          className={`modal-dialog modal-dialog-centered ${styles.dialog}`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="modal-content confirm-box">
-            <div className="confirm-box__icon confirm-box__icon--danger">
+          <div className={`modal-content text-center ${styles.box}`}>
+            <div className={`d-flex align-items-center justify-content-center ${styles.icon} ${styles.iconDanger}`}>
               <i className={icon}></i>
             </div>
-            <h2 id="confirm-title">{title}</h2>
-            <p id="confirm-message">{message}</p>
-            <div className="confirm-box__actions">
-              <button type="button" className="ui-btn ui-btn--ghost" onClick={onCancel}>
+            <h2 className={styles.title} id="confirm-title">{title}</h2>
+            <p className={styles.text} id="confirm-message">{message}</p>
+            <div className={`d-flex ${styles.actions}`}>
+              <button type="button" className={`btn ${styles.btnGhost}`} onClick={onCancel}>
                 Batal
               </button>
-              <button type="button" className="ui-btn ui-btn--danger" onClick={onConfirm}>
+              <button type="button" className={`btn ${styles.btnDanger}`} onClick={onConfirm}>
                 {confirmText}
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div className="modal-backdrop show"></div>
+      <div className={`modal-backdrop show ${styles.backdrop}`}></div>
     </>
   );
 }

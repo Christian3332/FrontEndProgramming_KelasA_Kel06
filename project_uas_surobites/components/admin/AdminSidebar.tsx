@@ -9,6 +9,7 @@ import { foods, warungs } from "@/data/foods";
 import { faqs } from "@/data/faqs";
 import { logout } from "@/lib/auth";
 import ConfirmDialog from "@/components/admin/ConfirmDialog";
+import styles from "@/app/styles/admin-dashboard.module.css";
 
 type MenuItem = {
   href: string;
@@ -38,12 +39,15 @@ export default function AdminSidebar({ open, onClose }: Props) {
 
   // body dikunci biar halaman belakang tidak ikut scroll waktu sidebar terbuka di HP
   useEffect(() => {
-    document.body.classList.toggle("sidebar-open", open);
-    return () => document.body.classList.remove("sidebar-open");
+    if (!open) return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   function linkClass(href: string) {
-    return `admin-nav__link ${pathname === href ? "is-active" : ""}`;
+    return `d-flex align-items-center w-100 ${styles.navLink} ${pathname === href ? styles.navActive : ""}`;
   }
 
   function handleLogout() {
@@ -54,21 +58,21 @@ export default function AdminSidebar({ open, onClose }: Props) {
   return (
     <>
       <aside
-        className={`admin-sidebar ${open ? "is-open" : ""}`}
+        className={`d-flex flex-column ${styles.sidebar} ${open ? styles.sidebarOpen : ""}`}
         id="admin-sidebar"
         aria-label="Navigasi admin"
       >
-        <div className="admin-sidebar__brand">
-          <span className="brand-mark">
+        <div className={`d-flex align-items-center ${styles.sidebarBrand}`}>
+          <span className={`d-inline-flex align-items-center justify-content-center ${styles.brandMark}`}>
             <Image src="/img/Surobites Logo.png" alt="" width={32} height={32} />
           </span>
-          <div className="brand-text">
-            <strong>SuroBites</strong>
-            <small>Admin Panel</small>
+          <div>
+            <strong className={styles.brandName}>SuroBites</strong>
+            <small className={styles.brandSub}>Admin Panel</small>
           </div>
           <button
             type="button"
-            className="sidebar-close"
+            className={`d-flex d-lg-none align-items-center justify-content-center ${styles.sidebarClose}`}
             aria-label="Tutup menu admin"
             onClick={onClose}
           >
@@ -76,19 +80,19 @@ export default function AdminSidebar({ open, onClose }: Props) {
           </button>
         </div>
 
-        <nav className="admin-nav">
-          <p className="admin-nav__label">Menu utama</p>
+        <nav className={`d-flex flex-column ${styles.nav}`}>
+          <p className={styles.navLabel}>Menu utama</p>
           {menuUtama.map((menu) => (
             <Link key={menu.href} href={menu.href} className={linkClass(menu.href)} onClick={onClose}>
               <i className={menu.icon}></i>
               <span>{menu.label}</span>
               {menu.count !== undefined && (
-                <span className="admin-nav__badge">{menu.count}</span>
+                <span className={styles.navBadge}>{menu.count}</span>
               )}
             </Link>
           ))}
 
-          <p className="admin-nav__label">Lainnya</p>
+          <p className={styles.navLabel}>Lainnya</p>
           <Link
             href="/admin/dashboard/pengaturan"
             className={linkClass("/admin/dashboard/pengaturan")}
@@ -97,13 +101,13 @@ export default function AdminSidebar({ open, onClose }: Props) {
             <i className="fa-solid fa-sliders"></i>
             <span>Pengaturan</span>
           </Link>
-          <Link href="/" className="admin-nav__link" target="_blank" rel="noopener">
+          <Link href="/" className={`d-flex align-items-center w-100 ${styles.navLink}`} target="_blank" rel="noopener">
             <i className="fa-solid fa-arrow-up-right-from-square"></i>
             <span>Lihat Website</span>
           </Link>
           <button
             type="button"
-            className="admin-nav__link admin-nav__link--logout"
+            className={`d-flex align-items-center w-100 ${styles.navLink} ${styles.navLogout}`}
             onClick={() => setConfirmLogout(true)}
           >
             <i className="fa-solid fa-right-from-bracket"></i>
@@ -111,19 +115,19 @@ export default function AdminSidebar({ open, onClose }: Props) {
           </button>
         </nav>
 
-        <div className="admin-sidebar__footer">
-          <span className="admin-avatar" aria-hidden="true">
+        <div className={`d-flex align-items-center ${styles.sidebarFooter}`}>
+          <span className={`d-inline-flex align-items-center justify-content-center ${styles.avatar}`} aria-hidden="true">
             {admin.displayName.charAt(0)}
           </span>
-          <div className="admin-user">
-            <strong>{admin.displayName}</strong>
-            <small>Administrator</small>
+          <div className={styles.user}>
+            <strong className={styles.userName}>{admin.displayName}</strong>
+            <small className={styles.userRole}>Administrator</small>
           </div>
         </div>
       </aside>
 
       <div
-        className={`sidebar-backdrop ${open ? "is-visible" : ""}`}
+        className={`d-lg-none ${styles.backdrop} ${open ? styles.backdropVisible : ""}`}
         aria-hidden="true"
         onClick={onClose}
       ></div>
