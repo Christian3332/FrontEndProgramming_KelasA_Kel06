@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Button } from "react-bootstrap";
 import SectionHead from "@/components/admin/SectionHead";
 import CategorySummary from "@/components/admin/rekomendasi/CategorySummary";
 import RecoList from "@/components/admin/rekomendasi/RecoList";
@@ -17,9 +17,9 @@ export default function KelolaRekomendasiPage() {
         title="Kelola Rekomendasi"
         description="Centang kategori untuk setiap makanan. Satu makanan boleh memiliki beberapa kategori, dan hasilnya langsung dipakai halaman Rekomendasi."
       >
-        <Link href="/rekomendasi" target="_blank" rel="noopener" className={`btn ${ui.btn} ${ui.btnOutline}`}>
+        <Button href="/rekomendasi" target="_blank" rel="noopener" variant="" className={`${ui.btn} ${ui.btnOutline}`}>
           Lihat Halaman ↗
-        </Link>
+        </Button>
       </SectionHead>
 
       <CategorySummary />

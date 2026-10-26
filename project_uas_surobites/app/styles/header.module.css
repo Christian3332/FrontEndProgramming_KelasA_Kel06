@@ -1,6 +1,13 @@
 .header {
-    row-gap: 12px;
     z-index: 1000;
+}
+
+.navbar {
+    --bs-navbar-color: #000000;
+    --bs-navbar-hover-color: var(--sb-biru);
+    --bs-navbar-active-color: var(--sb-biru);
+    --bs-navbar-nav-link-padding-x: 0px;
+    --bs-navbar-toggler-focus-width: 0px;
 }
 
 .logoText {
@@ -51,6 +58,11 @@
     background: transparent;
 }
 
+.menuToggle:focus-visible {
+    outline: 3px solid var(--sb-biru);
+    outline-offset: 2px;
+}
+
 .bar {
     width: 25px;
     height: 3px;
@@ -71,23 +83,14 @@
     transform: translateY(-8px) rotate(-45deg);
 }
 
-.navbar {
-    padding-top: 10px;
-}
-
-.navOpen {
-    animation: navDrop 0.25s ease;
-}
-
 .navLinks {
     row-gap: 4px;
+    padding-top: 22px;
 }
 
 .navLink {
-    display: block;
     padding: 10px 0;
     border-bottom: 2px solid transparent;
-    color: #000000;
     font-size: 14px;
     font-weight: 600;
     text-align: center;
@@ -95,8 +98,7 @@
 }
 
 .navLink:hover,
-.active {
-    color: var(--sb-biru);
+.navLink[aria-current="page"] {
     border-bottom-color: var(--sb-biru);
 }
 
@@ -117,12 +119,9 @@
 }
 
 @media (min-width: 992px) {
-    .navbar {
-        padding-top: 0;
-    }
-
     .navLinks {
         column-gap: 24px;
+        padding-top: 0;
     }
 
     .navLink {
@@ -131,17 +130,6 @@
 
     .searchInput {
         max-width: 220px;
-    }
-}
-
-@keyframes navDrop {
-    from {
-        opacity: 0;
-        transform: translateY(-6px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
     }
 }
 
@@ -161,7 +149,6 @@
         transition: none;
     }
 
-    .navOpen,
     .count {
         animation: none;
     }

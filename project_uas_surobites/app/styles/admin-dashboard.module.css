@@ -3,43 +3,25 @@
 }
 
 .sidebar {
+    --bs-offcanvas-width: 270px;
+    --bs-offcanvas-border-width: 0px;
+    --bs-offcanvas-color: #FFFFFF;
+    --bs-offcanvas-transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: 1200;
     width: 270px;
     background: linear-gradient(180deg, #0D47A1, #0A3880);
     color: #FFFFFF;
-    visibility: hidden;
-    transform: translateX(-270px);
-    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.3s;
 }
 
 .sidebarOpen {
-    visibility: visible;
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2);
-    transform: none;
-    transition-delay: 0s;
 }
 
 .backdrop {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1150;
-    background-color: rgba(10, 25, 60, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
-}
-
-.backdropVisible {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0s;
+    background-color: rgb(10, 25, 60);
 }
 
 .sidebarBrand {
@@ -87,6 +69,8 @@
 }
 
 .nav {
+    --bs-nav-link-color: rgba(255, 255, 255, 0.86);
+    --bs-nav-link-hover-color: #FFFFFF;
     flex: 1 1 auto;
     gap: 4px;
     padding: 12px;
@@ -967,9 +951,7 @@
 
 @media (min-width: 992px) {
     .sidebar {
-        visibility: visible;
         box-shadow: none;
-        transform: none;
     }
 
     .mainWrap {
@@ -992,8 +974,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .sidebar,
-    .backdrop,
     .navLink,
     .statCard,
     .barRow,

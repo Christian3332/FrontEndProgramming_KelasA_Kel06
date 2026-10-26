@@ -4,19 +4,20 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Alert, Button, Form, Spinner } from "react-bootstrap";
 import { admin } from "@/data/admin";
 import { isLoggedIn, login } from "@/lib/auth";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-login.module.css";
 
 type FormAlert = {
-  type: "info" | "error" | "success";
+  type: "info" | "danger" | "success";
   message: string;
 };
 
 const alertClass = {
   info: ui.alertInfo,
-  error: "",
+  danger: "",
   success: ui.alertSuccess,
 };
 
@@ -93,7 +94,7 @@ export default function LoginForm() {
       setTimeout(() => router.push("/admin/dashboard"), 900);
     } else {
       setLoading(false);
-      setFormAlert({ type: "error", message: "Username atau password salah. Silakan coba lagi." });
+      setFormAlert({ type: "danger", message: "Username atau password salah. Silakan coba lagi." });
       setPassword("");
       passwordRef.current?.focus();
       shakeCard();
@@ -115,22 +116,24 @@ export default function LoginForm() {
         <p className={styles.cardText}>Silakan login untuk mengelola konten website.</p>
       </div>
 
-      <form noValidate onSubmit={handleSubmit}>
+      <Form noValidate onSubmit={handleSubmit}>
         {shownAlert && (
-          <div className={`d-flex align-items-center ${ui.alert} ${alertClass[shownAlert.type]}`} role="alert">
+          <Alert
+            variant={shownAlert.type}
+            className={`d-flex align-items-center ${ui.alert} ${alertClass[shownAlert.type]}`}
+          >
             {shownAlert.message}
-          </div>
+          </Alert>
         )}
 
-        <div className={`d-flex flex-column ${ui.field}`}>
-          <label htmlFor="login-username">Username</label>
+        <Form.Group controlId="login-username" className={`d-flex flex-column ${ui.field}`}>
+          <Form.Label>Username</Form.Label>
           <div className={ui.inputIcon}>
             <i className={`fa-solid fa-user position-absolute top-0 bottom-0 d-flex align-items-center ${ui.inputSymbol}`}></i>
-            <input
-              id="login-username"
+            <Form.Control
               name="username"
               type="text"
-              className={`form-control ${ui.input} ${ui.withIcon} ${usernameError ? ui.invalid : ""}`}
+              className={`${ui.input} ${ui.withIcon} ${usernameError ? ui.invalid : ""}`}
               placeholder="Masukkan username"
               autoComplete="username"
               aria-describedby="login-username-error"
@@ -144,18 +147,17 @@ export default function LoginForm() {
           <p className={ui.fieldError} id="login-username-error" aria-live="polite">
             {usernameError}
           </p>
-        </div>
+        </Form.Group>
 
-        <div className={`d-flex flex-column ${ui.field}`}>
-          <label htmlFor="login-password">Password</label>
+        <Form.Group controlId="login-password" className={`d-flex flex-column ${ui.field}`}>
+          <Form.Label>Password</Form.Label>
           <div className={ui.inputIcon}>
             <i className={`fa-solid fa-lock position-absolute top-0 bottom-0 d-flex align-items-center ${ui.inputSymbol}`}></i>
-            <input
+            <Form.Control
               ref={passwordRef}
-              id="login-password"
               name="password"
               type={showPassword ? "text" : "password"}
-              className={`form-control ${ui.input} ${ui.withIcon} ${ui.withToggle} ${passwordError ? ui.invalid : ""}`}
+              className={`${ui.input} ${ui.withIcon} ${ui.withToggle} ${passwordError ? ui.invalid : ""}`}
               placeholder="Masukkan password"
               autoComplete="current-password"
               aria-describedby="login-password-error"
@@ -177,17 +179,18 @@ export default function LoginForm() {
           <p className={ui.fieldError} id="login-password-error" aria-live="polite">
             {passwordError}
           </p>
-        </div>
+        </Form.Group>
 
-        <button
+        <Button
           type="submit"
-          className={`btn btn-primary w-100 ${ui.btn} ${ui.btnPrimary} ${styles.submit}`}
+          variant="primary"
+          className={`w-100 ${ui.btn} ${ui.btnPrimary} ${styles.submit}`}
           disabled={loading}
         >
-          {loading && <span className={ui.spinner}></span>}
+          {loading && <Spinner animation="border" size="sm" aria-hidden="true" />}
           <span>{buttonText}</span>
-        </button>
-      </form>
+        </Button>
+      </Form>
 
       <div className={`d-flex flex-column ${styles.demo}`}>
         <strong>Akun demo</strong>

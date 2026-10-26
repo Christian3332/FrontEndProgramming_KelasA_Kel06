@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Button, Col } from "react-bootstrap";
 import { faqs } from "@/data/faqs";
 import SectionHead from "@/components/admin/SectionHead";
 import ui from "@/app/styles/admin-ui.module.css";
@@ -16,9 +17,9 @@ export default function KelolaFaqPage() {
         title="Kelola FAQ"
         description="Pertanyaan dan jawaban ini tampil sebagai accordion di Beranda. Gunakan tombol panah untuk mengatur urutan."
       >
-        <button type="button" className={`btn btn-primary ${ui.btn} ${ui.btnPrimary}`}>
+        <Button variant="primary" className={`${ui.btn} ${ui.btnPrimary}`}>
           + Tambah FAQ
-        </button>
+        </Button>
       </SectionHead>
 
       <div className={ui.panel}>
@@ -32,7 +33,7 @@ export default function KelolaFaqPage() {
                 <h3 className={styles.faqQuestion}>{faq.question}</h3>
                 <p className={styles.faqAnswer}>{faq.answer}</p>
               </div>
-              <div className={`col-12 col-md-auto d-flex justify-content-end ${ui.rowActions}`}>
+              <Col xs={12} md="auto" className={`d-flex justify-content-end ${ui.rowActions}`}>
                 <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn}`} title="Naikkan" aria-label="Naikkan">
                   <i className="fa-solid fa-chevron-up"></i>
                 </button>
@@ -45,7 +46,7 @@ export default function KelolaFaqPage() {
                 <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn} ${ui.iconBtnDanger}`} title="Hapus" aria-label="Hapus">
                   <i className="fa-solid fa-trash"></i>
                 </button>
-              </div>
+              </Col>
             </div>
           ))}
         </div>

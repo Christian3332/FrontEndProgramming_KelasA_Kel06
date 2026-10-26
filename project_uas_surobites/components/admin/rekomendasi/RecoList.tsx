@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Button } from "react-bootstrap";
 import { categories, foods } from "@/data/foods";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
@@ -48,12 +49,12 @@ export default function RecoList() {
       </div>
 
       <div className={`d-flex flex-wrap align-items-center justify-content-end ${ui.panelFooter}`}>
-        <button type="button" className={`btn ${ui.btn} ${ui.btnGhost}`}>
+        <Button variant="" className={`${ui.btn} ${ui.btnGhost}`}>
           Batalkan
-        </button>
-        <button type="button" className={`btn btn-primary ${ui.btn} ${ui.btnPrimary}`}>
+        </Button>
+        <Button variant="primary" className={`${ui.btn} ${ui.btnPrimary}`}>
           Simpan Perubahan
-        </button>
+        </Button>
       </div>
     </div>
   );

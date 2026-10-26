@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Button } from "react-bootstrap";
 import SectionHead from "@/components/admin/SectionHead";
 import WarungTable from "@/components/admin/warung/WarungTable";
 import ui from "@/app/styles/admin-ui.module.css";
@@ -15,9 +16,9 @@ export default function KelolaWarungPage() {
         title="Kelola Warung"
         description="Data warung ini tampil di carousel Beranda dan halaman Lokasi Warung."
       >
-        <button type="button" className={`btn btn-primary ${ui.btn} ${ui.btnPrimary}`}>
+        <Button variant="primary" className={`${ui.btn} ${ui.btnPrimary}`}>
           + Tambah Warung
-        </button>
+        </Button>
       </SectionHead>
 
       <WarungTable />

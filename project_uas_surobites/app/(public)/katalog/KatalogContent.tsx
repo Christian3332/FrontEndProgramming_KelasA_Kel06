@@ -3,10 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { foods, type Food } from "@/data/foods";
 import { searchFoods } from "@/lib/helper";
 import FoodCard from "@/components/food/FoodCard";
 import FoodModal from "@/components/food/FoodModal";
+import LinkButton from "@/components/ui/LinkButton";
 import home from "@/app/styles/home.module.css";
 import styles from "@/app/styles/katalog.module.css";
 
@@ -22,7 +24,7 @@ export default function KatalogContent() {
   const shown = keyword ? list : list.slice(0, limit);
 
   return (
-    <div className="container">
+    <Container>
       <section className={home.katalog} aria-labelledby="katalog-title">
         <h2 id="katalog-title" className={home.sectionTitle}>Makanan Khas Surabaya</h2>
         <p className={home.subtitle}>
@@ -53,35 +55,35 @@ export default function KatalogContent() {
               Coba kata kunci lain, misalnya nama makanan, bahan, atau kategori
               seperti &quot;pedas&quot;.
             </p>
-            <Link href="/katalog" className={`btn btn-primary ${styles.emptyButton}`}>
+            <LinkButton href="/katalog" variant="primary" className={styles.emptyButton}>
               Lihat Semua Kuliner
-            </Link>
+            </LinkButton>
           </div>
         ) : (
-          <div className={`row g-4 justify-content-center mx-auto ${home.katalogGrid}`}>
+          <Row className={`g-4 justify-content-center mx-auto ${home.katalogGrid}`}>
             {shown.map((food) => (
-              <div className="col-12 col-sm-6 col-lg-4" key={food.id}>
+              <Col xs={12} sm={6} lg={4} key={food.id}>
                 <FoodCard food={food} onOpen={setSelected} />
-              </div>
+              </Col>
             ))}
-          </div>
+          </Row>
         )}
 
         {shown.length < list.length && (
           <div className="d-flex justify-content-center mt-4">
-            <button
-              type="button"
-              className={`btn d-inline-flex align-items-center gap-2 ${home.btnMore} ${styles.loadMore}`}
+            <Button
+              variant=""
+              className={`d-inline-flex align-items-center gap-2 ${home.btnMore} ${styles.loadMore}`}
               onClick={() => setLimit((l) => l + PAGE_SIZE)}
             >
               Tampilkan Lebih Banyak
               <span className={styles.downArrow} aria-hidden="true">↓</span>
-            </button>
+            </Button>
           </div>
         )}
       </section>
 
       <FoodModal food={selected} onClose={() => setSelected(null)} />
-    </div>
+    </Container>
   );
 }

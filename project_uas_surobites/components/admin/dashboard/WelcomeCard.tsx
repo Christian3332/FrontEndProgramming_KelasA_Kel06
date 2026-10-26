@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Button } from "react-bootstrap";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
@@ -24,12 +25,12 @@ export default function WelcomeCard() {
           mendapat informasi terbaru.
         </p>
         <div className={`d-flex flex-wrap ${styles.welcomeActions}`}>
-          <button type="button" className={`btn btn-primary ${ui.btn} ${ui.btnPrimary}`}>
+          <Button variant="primary" className={`${ui.btn} ${ui.btnPrimary}`}>
             + Tambah Makanan
-          </button>
-          <button type="button" className={`btn ${ui.btn} ${ui.btnLight}`}>
+          </Button>
+          <Button variant="" className={`${ui.btn} ${ui.btnLight}`}>
             + Tambah Warung
-          </button>
+          </Button>
         </div>
       </div>
       <span className={`d-none d-md-block ${styles.welcomeArt}`} aria-hidden="true">

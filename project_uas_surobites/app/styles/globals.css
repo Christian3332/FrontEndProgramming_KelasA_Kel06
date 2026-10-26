@@ -50,6 +50,12 @@ input:focus-visible {
     outline-offset: 2px;
 }
 
+.nav-link:focus-visible {
+    outline: 3px solid var(--sb-biru);
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
 .skip-link:focus {
     position: absolute;
     top: 10px;

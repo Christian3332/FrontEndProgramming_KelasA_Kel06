@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
@@ -26,9 +27,9 @@ export default function KontenForm() {
   }
 
   return (
-    <form noValidate>
-      <div className="row g-3">
-        <div className="col-12 col-xl-6">
+    <Form noValidate>
+      <Row className="g-3">
+        <Col xs={12} xl={6}>
         <article className={`h-100 ${ui.panel}`}>
           <div className={`d-flex flex-wrap align-items-start justify-content-between ${ui.panelHeader}`}>
             <div>
@@ -43,38 +44,37 @@ export default function KontenForm() {
             <h4 className={styles.previewTitle}>{konten.heroTitle}</h4>
             <p className={styles.previewText}>{konten.heroDescription}</p>
           </div>
-          <div className={`d-flex flex-column ${ui.field}`}>
-            <label htmlFor="content-heroTitle">
+          <Form.Group controlId="content-heroTitle" className={`d-flex flex-column ${ui.field}`}>
+            <Form.Label>
               Judul hero <span className={ui.required}>*</span>
-            </label>
-            <input
+            </Form.Label>
+            <Form.Control
               type="text"
-              id="content-heroTitle"
               name="heroTitle"
-              className={`form-control ${ui.input}`}
+              className={ui.input}
               maxLength={80}
               value={konten.heroTitle}
               onChange={handleChange}
             />
-          </div>
-          <div className={`d-flex flex-column ${ui.field}`}>
-            <label htmlFor="content-heroDescription">
+          </Form.Group>
+          <Form.Group controlId="content-heroDescription" className={`d-flex flex-column ${ui.field}`}>
+            <Form.Label>
               Deskripsi hero <span className={ui.required}>*</span>
-            </label>
-            <textarea
-              id="content-heroDescription"
+            </Form.Label>
+            <Form.Control
+              as="textarea"
               name="heroDescription"
-              className={`form-control ${ui.input} ${ui.textarea}`}
+              className={`${ui.input} ${ui.textarea}`}
               rows={4}
               maxLength={400}
               value={konten.heroDescription}
               onChange={handleChange}
-            ></textarea>
-          </div>
+            />
+          </Form.Group>
         </article>
-        </div>
+        </Col>
 
-        <div className="col-12 col-xl-6">
+        <Col xs={12} xl={6}>
         <article className={`h-100 ${ui.panel}`}>
           <div className={`d-flex flex-wrap align-items-start justify-content-between ${ui.panelHeader}`}>
             <div>
@@ -89,38 +89,37 @@ export default function KontenForm() {
             <h4 className={styles.previewTitle}>{konten.rekomendasiTitle}</h4>
             <p className={styles.previewText}>{konten.rekomendasiDescription}</p>
           </div>
-          <div className={`d-flex flex-column ${ui.field}`}>
-            <label htmlFor="content-rekomendasiTitle">
+          <Form.Group controlId="content-rekomendasiTitle" className={`d-flex flex-column ${ui.field}`}>
+            <Form.Label>
               Judul halaman <span className={ui.required}>*</span>
-            </label>
-            <input
+            </Form.Label>
+            <Form.Control
               type="text"
-              id="content-rekomendasiTitle"
               name="rekomendasiTitle"
-              className={`form-control ${ui.input}`}
+              className={ui.input}
               maxLength={80}
               value={konten.rekomendasiTitle}
               onChange={handleChange}
             />
-          </div>
-          <div className={`d-flex flex-column ${ui.field}`}>
-            <label htmlFor="content-rekomendasiDescription">
+          </Form.Group>
+          <Form.Group controlId="content-rekomendasiDescription" className={`d-flex flex-column ${ui.field}`}>
+            <Form.Label>
               Deskripsi halaman <span className={ui.required}>*</span>
-            </label>
-            <textarea
-              id="content-rekomendasiDescription"
+            </Form.Label>
+            <Form.Control
+              as="textarea"
               name="rekomendasiDescription"
-              className={`form-control ${ui.input} ${ui.textarea}`}
+              className={`${ui.input} ${ui.textarea}`}
               rows={4}
               maxLength={400}
               value={konten.rekomendasiDescription}
               onChange={handleChange}
-            ></textarea>
-          </div>
+            />
+          </Form.Group>
         </article>
-        </div>
+        </Col>
 
-        <div className="col-12">
+        <Col xs={12}>
         <article className={ui.panel}>
           <div className={`d-flex flex-wrap align-items-start justify-content-between ${ui.panelHeader}`}>
             <div>
@@ -130,70 +129,66 @@ export default function KontenForm() {
               <p className={ui.panelSubtitle}>Tampil di footer semua halaman publik</p>
             </div>
           </div>
-          <div className="row gx-3">
-            <div className={`col-12 col-md-6 d-flex flex-column ${ui.field}`}>
-              <label htmlFor="content-contactEmail">
+          <Row className="gx-3">
+            <Form.Group as={Col} xs={12} md={6} controlId="content-contactEmail" className={`d-flex flex-column ${ui.field}`}>
+              <Form.Label>
                 Email <span className={ui.required}>*</span>
-              </label>
-              <input
+              </Form.Label>
+              <Form.Control
                 type="email"
-                id="content-contactEmail"
                 name="contactEmail"
-                className={`form-control ${ui.input}`}
+                className={ui.input}
                 value={konten.contactEmail}
                 onChange={handleChange}
               />
-            </div>
-            <div className={`col-12 col-md-6 d-flex flex-column ${ui.field}`}>
-              <label htmlFor="content-contactPhone">
+            </Form.Group>
+            <Form.Group as={Col} xs={12} md={6} controlId="content-contactPhone" className={`d-flex flex-column ${ui.field}`}>
+              <Form.Label>
                 Nomor telepon <span className={ui.required}>*</span>
-              </label>
-              <input
+              </Form.Label>
+              <Form.Control
                 type="tel"
-                id="content-contactPhone"
                 name="contactPhone"
-                className={`form-control ${ui.input}`}
+                className={ui.input}
                 value={konten.contactPhone}
                 onChange={handleChange}
               />
-            </div>
-            <div className={`col-12 col-md-6 d-flex flex-column ${ui.field}`}>
-              <label htmlFor="content-instagram">Link Instagram</label>
-              <input
+            </Form.Group>
+            <Form.Group as={Col} xs={12} md={6} controlId="content-instagram" className={`d-flex flex-column ${ui.field}`}>
+              <Form.Label>Link Instagram</Form.Label>
+              <Form.Control
                 type="url"
-                id="content-instagram"
                 name="instagram"
-                className={`form-control ${ui.input}`}
+                className={ui.input}
                 placeholder="https://instagram.com/..."
                 value={konten.instagram}
                 onChange={handleChange}
               />
-            </div>
-            <div className={`col-12 col-md-6 d-flex flex-column ${ui.field}`}>
-              <label htmlFor="content-facebook">Link Facebook</label>
-              <input
+            </Form.Group>
+            <Form.Group as={Col} xs={12} md={6} controlId="content-facebook" className={`d-flex flex-column ${ui.field}`}>
+              <Form.Label>Link Facebook</Form.Label>
+              <Form.Control
                 type="url"
-                id="content-facebook"
                 name="facebook"
-                className={`form-control ${ui.input}`}
+                className={ui.input}
                 placeholder="https://facebook.com/..."
                 value={konten.facebook}
                 onChange={handleChange}
               />
-            </div>
-          </div>
+            </Form.Group>
+          </Row>
         </article>
-        </div>
-      </div>
+        </Col>
+      </Row>
 
       <div className={`d-flex flex-wrap justify-content-end ${styles.stickyActions}`}>
-        <button type="button" className={`btn ${ui.btn} ${ui.btnGhost}`}>
+        <Button variant="" className={`${ui.btn} ${ui.btnGhost}`}>
           Kembalikan Default
-        </button>
-        <button type="button" className={`btn btn-primary ${ui.btn} ${ui.btnPrimary}`}>
+        </Button>
+        <Button variant="primary" className={`${ui.btn} ${ui.btnPrimary}`}>
           Simpan Konten
-        </button>
+        </Button>
       </div>
-    </form>
+    </Form>
   );
 }

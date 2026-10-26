@@ -1,14 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Button, Carousel } from "react-bootstrap";
 import { warungs } from "@/data/foods";
+import LinkButton from "@/components/ui/LinkButton";
 import styles from "@/app/styles/home.module.css";
+
+const noop = () => () => {};
+
+function getReduceMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
 
 export default function WarungCarousel() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const reduceMotion = useSyncExternalStore(noop, getReduceMotion, () => true);
   const list = warungs.slice(0, 5);
   const total = list.length;
 
@@ -16,13 +24,7 @@ export default function WarungCarousel() {
   const next = () => setIndex((i) => (i + 1) % total);
 
   // geser sendiri tiap 4 detik, berhenti kalau mouse atau fokus ada di carousel
-  useEffect(() => {
-    if (paused || total < 2) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const timer = setTimeout(() => setIndex((i) => (i + 1) % total), 4000);
-    return () => clearTimeout(timer);
-  }, [index, paused, total]);
+  const autoPlay = !paused && !reduceMotion && total > 1;
 
   return (
     <section id="lokasi" className={styles.warung} aria-labelledby="lokasi-title">
@@ -48,24 +50,25 @@ export default function WarungCarousel() {
         >
           &#8592;
         </button>
-        <div
-          className={styles.track}
+        <Carousel
           id="warung-carousel-track"
+          className={styles.track}
+          activeIndex={index}
+          onSelect={(i) => setIndex(i)}
+          interval={autoPlay ? 4000 : null}
+          pause={false}
+          controls={false}
+          indicators={false}
+          fade
           tabIndex={0}
           aria-label="Daftar warung kuliner"
-          onKeyDown={(e) => {
-            if (e.key === "ArrowLeft") prev();
-            if (e.key === "ArrowRight") next();
-          }}
         >
           {list.map((w, i) => (
-            <div
-              className={`${styles.slide} ${i === index ? styles.slideActive : ""}`}
+            <Carousel.Item
               key={w.id}
               role="group"
               aria-roledescription="slide"
               aria-label={`${i + 1} dari ${total}`}
-              aria-hidden={i !== index}
             >
               <div className={`position-relative ${styles.slideMedia}`}>
                 <Image
@@ -79,18 +82,19 @@ export default function WarungCarousel() {
               <div className={styles.warungInfo}>
                 <h3 className={styles.warungName}>{w.name}</h3>
                 <p className={styles.warungAddress}>{w.address}</p>
-                <a
+                <Button
                   href={w.mapsUrl}
-                  className={`btn ${styles.btnBlue}`}
+                  variant=""
+                  className={styles.btnBlue}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Kunjungi
-                </a>
+                </Button>
               </div>
-            </div>
+            </Carousel.Item>
           ))}
-        </div>
+        </Carousel>
         <button
           type="button"
           className={`d-flex align-items-center justify-content-center rounded-circle ${styles.carouselBtn} ${styles.next}`}
@@ -102,12 +106,12 @@ export default function WarungCarousel() {
         </button>
       </div>
       <div className="d-flex justify-content-center mt-4">
-        <Link href="/lokasi" className={`btn d-inline-flex align-items-center gap-2 ${styles.btnMore}`}>
+        <LinkButton href="/lokasi" variant="" className={`d-inline-flex align-items-center gap-2 ${styles.btnMore}`}>
           Lihat Semua Lokasi Warung
           <span className={styles.btnMoreArrow} aria-hidden="true">
             →
           </span>
-        </Link>
+        </LinkButton>
       </div>
     </section>
   );

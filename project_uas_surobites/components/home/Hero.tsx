@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { Button } from "react-bootstrap";
+import LinkButton from "@/components/ui/LinkButton";
 import styles from "@/app/styles/home.module.css";
 
 export default function Hero() {
@@ -13,15 +14,16 @@ export default function Hero() {
           satu tempat.
         </p>
         <div className={`d-flex flex-column flex-sm-row mt-2 ${styles.heroButtons}`}>
-          <a href="#katalog" className={`btn btn-primary ${styles.heroButton}`}>
+          <Button href="#katalog" variant="primary" className={styles.heroButton}>
             Eksplorasi Menu
-          </a>
-          <Link
+          </Button>
+          <LinkButton
             href="/rekomendasi"
-            className={`btn d-none d-md-inline-block ${styles.heroButton} ${styles.heroSecondary}`}
+            variant=""
+            className={`d-none d-md-inline-block ${styles.heroButton} ${styles.heroSecondary}`}
           >
             Rekomendasi
-          </Link>
+          </LinkButton>
         </div>
       </div>
     </section>

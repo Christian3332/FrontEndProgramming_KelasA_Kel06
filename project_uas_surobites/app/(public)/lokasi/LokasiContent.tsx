@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import { warungs, type Food, type Warung } from "@/data/foods";
 import { findFood, searchItems } from "@/lib/helper";
 import WarungCard from "@/components/warung/WarungCard";
@@ -53,7 +54,7 @@ export default function LokasiContent() {
   }, []);
 
   return (
-    <div className="container">
+    <Container>
       <section className={styles.section} aria-labelledby="lokasi-title">
         <div className={`text-center ${styles.heading}`}>
           <h2 id="lokasi-title" className={styles.title}>Lokasi Warung Kuliner Surabaya</h2>
@@ -69,10 +70,10 @@ export default function LokasiContent() {
               className={`fa-solid fa-magnifying-glass position-absolute top-0 bottom-0 d-flex align-items-center ${styles.filterIcon}`}
               aria-hidden="true"
             ></i>
-            <input
+            <Form.Control
               id="warung-filter"
               type="search"
-              className={`form-control rounded-pill ${styles.filterInput}`}
+              className={`rounded-pill ${styles.filterInput}`}
               placeholder="Cari nama warung, alamat, atau menu..."
               aria-label="Cari warung"
               autoComplete="off"
@@ -99,22 +100,22 @@ export default function LokasiContent() {
             <p className={katalog.emptyText}>Coba cari dengan nama warung, alamat, atau menu lain.</p>
           </div>
         ) : (
-          <div className={`row g-4 mx-auto ${styles.grid}`}>
+          <Row className={`g-4 mx-auto ${styles.grid}`}>
             {list.map((w) => (
-              <div className="col-12 col-md-6 col-xl-4" key={w.id}>
+              <Col xs={12} md={6} xl={4} key={w.id}>
                 <WarungCard
                   warung={w}
                   onOpenMap={setMapWarung}
                   onOpenFood={setSelectedFood}
                 />
-              </div>
+              </Col>
             ))}
-          </div>
+          </Row>
         )}
       </section>
 
       <MapModal warung={mapWarung} onClose={() => setMapWarung(null)} />
       <FoodModal food={selectedFood} onClose={() => setSelectedFood(null)} />
-    </div>
+    </Container>
   );
 }

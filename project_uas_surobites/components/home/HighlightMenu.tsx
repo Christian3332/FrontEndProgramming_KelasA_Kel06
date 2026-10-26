@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { foods, type Food } from "@/data/foods";
 import { useFavorites } from "@/lib/favorites";
 import FoodModal from "@/components/food/FoodModal";
@@ -22,12 +23,12 @@ export default function HighlightMenu() {
       <h2 id="rekomendasi-pilihan-title" className={styles.sectionTitle}>
         Rekomendasi Pilihan
       </h2>
-      <div className={`row row-cols-1 row-cols-md-3 g-4 mx-auto ${styles.wide}`}>
+      <Row xs={1} md={3} className={`g-4 mx-auto ${styles.wide}`}>
         {unggulan.map((f) => {
           const fav = isFavorite(f.id);
           return (
-            <div className="col" key={f.id}>
-              <article className={`card h-100 ${cardStyles.foodCard}`}>
+            <Col key={f.id}>
+              <Card as="article" className={`h-100 ${cardStyles.foodCard}`}>
                 <div className={`position-relative ${cardStyles.cardMedia}`}>
                   <Image
                     src={f.image}
@@ -46,21 +47,21 @@ export default function HighlightMenu() {
                     <i className={fav ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
                   </button>
                 </div>
-                <div className="card-body d-flex flex-column align-items-center gap-2 text-center">
+                <Card.Body className="d-flex flex-column align-items-center gap-2 text-center">
                   <h3 className={cardStyles.highlightName}>{f.name}</h3>
-                  <button
-                    type="button"
-                    className={`btn ${cardStyles.btnLight}`}
+                  <Button
+                    variant=""
+                    className={cardStyles.btnLight}
                     onClick={() => setSelected(f)}
                   >
                     Deskripsi Singkat
-                  </button>
-                </div>
-              </article>
-            </div>
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
           );
         })}
-      </div>
+      </Row>
 
       <FoodModal food={selected} onClose={() => setSelected(null)} />
     </section>

@@ -244,7 +244,6 @@
 }
 
 .track {
-    display: grid;
     min-width: 0;
     margin: 0 10px;
     overflow: hidden;
@@ -255,26 +254,6 @@
 .track:focus-visible {
     outline: 3px solid var(--sb-biru-tua);
     outline-offset: 3px;
-}
-
-.slide {
-    position: relative;
-    grid-area: 1 / 1;
-    overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 500ms ease, visibility 0s linear 500ms;
-}
-
-.slideActive {
-    z-index: 1;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition-delay: 0s;
 }
 
 .slideMedia {
@@ -325,22 +304,29 @@
 }
 
 .faqList {
+    --bs-accordion-border-width: 0px;
+    --bs-accordion-border-radius: 15px;
+    --bs-accordion-inner-border-radius: 15px;
+    --bs-accordion-btn-padding-x: 18px;
+    --bs-accordion-btn-padding-y: 16px;
+    --bs-accordion-btn-color: #000000;
+    --bs-accordion-btn-bg: #FFFFFF;
+    --bs-accordion-btn-focus-box-shadow: none;
+    --bs-accordion-active-color: var(--sb-biru-tua);
+    --bs-accordion-active-bg: #FFFFFF;
     gap: 12px;
     max-width: 760px;
 }
 
 .faqItem {
     overflow: hidden;
-    border: 1px solid transparent;
     border-radius: 15px;
-    background-color: #FFFFFF;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    transition: box-shadow 0.25s ease;
 }
 
 .faqOpen {
-    border-color: var(--sb-biru-garis);
-    box-shadow: 0 8px 20px rgba(13, 71, 161, 0.1);
+    box-shadow: 0 0 0 1px var(--sb-biru-garis), 0 8px 20px rgba(13, 71, 161, 0.1);
 }
 
 .faqHeading {
@@ -348,21 +334,24 @@
     font-size: inherit;
 }
 
-.faqQuestion {
+.faqHeading button {
+    justify-content: space-between;
     gap: 14px;
-    padding: 16px 18px;
-    border: none;
-    background: none;
-    color: #000000;
     font-size: 14px;
     font-weight: 700;
-    text-align: left;
     transition: color 0.2s ease;
 }
 
-.faqQuestion:hover,
-.faqOpen .faqQuestion {
+.faqHeading button::after {
+    display: none;
+}
+
+.faqHeading button:hover {
     color: var(--sb-biru-tua);
+}
+
+.faqHeading button:focus-visible {
+    box-shadow: inset 0 0 0 3px var(--sb-biru);
 }
 
 .faqIcon {
@@ -406,24 +395,6 @@
 }
 
 .faqAnswer {
-    max-height: 0;
-    overflow: hidden;
-    visibility: hidden;
-    transition: max-height 0.3s ease, visibility 0s linear 0.3s;
-}
-
-.faqOpen .faqAnswer {
-    max-height: 400px;
-    visibility: visible;
-    transition-delay: 0s;
-}
-
-.faqAnswerInner {
-    overflow: hidden;
-}
-
-.faqAnswerText {
-    margin: 0;
     padding: 0 18px 18px;
     font-size: 13.5px;
     line-height: 1.65;
@@ -518,10 +489,9 @@
     .kategoriCard,
     .kategoriIcon,
     .btnMoreArrow,
-    .slide,
     .faqItem,
-    .faqIcon,
-    .faqAnswer {
+    .faqHeading button,
+    .faqIcon {
         transition: none;
     }
 }

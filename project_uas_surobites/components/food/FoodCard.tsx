@@ -1,5 +1,6 @@
 "use client";
 
+import { Button, Card } from "react-bootstrap";
 import type { Food } from "@/data/foods";
 import { getCategory } from "@/lib/helper";
 import { useFavorites } from "@/lib/favorites";
@@ -16,7 +17,7 @@ export default function FoodCard({ food, onOpen, showTags = false }: Props) {
   const fav = isFavorite(food.id);
 
   return (
-    <article className={`card h-100 ${styles.foodCard} ${styles.katalogCard}`} data-food-id={food.id}>
+    <Card as="article" className={`h-100 ${styles.foodCard} ${styles.katalogCard}`} data-food-id={food.id}>
       <div className={`position-relative ${styles.cardMedia}`}>
         <img
           src={food.image}
@@ -46,16 +47,16 @@ export default function FoodCard({ food, onOpen, showTags = false }: Props) {
           </div>
         )}
       </div>
-      <div className={`card-footer d-flex align-items-center justify-content-between gap-2 ${styles.katalogFooter}`}>
+      <Card.Footer className={`d-flex align-items-center justify-content-between gap-2 ${styles.katalogFooter}`}>
         <h3 className={styles.katalogName}>{food.name}</h3>
-        <button
-          type="button"
-          className={`btn flex-shrink-0 text-nowrap ${styles.btnLight} ${styles.btnSmall}`}
+        <Button
+          variant=""
+          className={`flex-shrink-0 text-nowrap ${styles.btnLight} ${styles.btnSmall}`}
           onClick={() => onOpen(food)}
         >
           Deskripsi Singkat
-        </button>
-      </div>
-    </article>
+        </Button>
+      </Card.Footer>
+    </Card>
   );
 }

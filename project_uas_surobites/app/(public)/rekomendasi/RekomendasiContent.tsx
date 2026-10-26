@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Button, Col, Row } from "react-bootstrap";
 import { foods, categories, warungs, type Food } from "@/data/foods";
 import { getCategory } from "@/lib/helper";
 import CategoryFilter from "@/components/food/CategoryFilter";
@@ -102,34 +103,34 @@ function RekomendasiList({ categoryId }: { categoryId: string | null }) {
             </p>
           </div>
           {active && (
-            <button
-              type="button"
-              className={`btn ${card.btnLight}`}
+            <Button
+              variant=""
+              className={card.btnLight}
               onClick={() => choose(null)}
             >
               Tampilkan Semua
-            </button>
+            </Button>
           )}
         </div>
 
-        <div className={`row g-4 justify-content-center mx-auto ${home.katalogGrid}`}>
+        <Row className={`g-4 justify-content-center mx-auto ${home.katalogGrid}`}>
           {shown.map((food) => (
-            <div className="col-12 col-sm-6 col-lg-4" key={food.id}>
+            <Col xs={12} sm={6} lg={4} key={food.id}>
               <FoodCard food={food} onOpen={setSelected} showTags />
-            </div>
+            </Col>
           ))}
-        </div>
+        </Row>
 
         {shown.length < list.length && (
           <div className="d-flex justify-content-center mt-4">
-            <button
-              type="button"
-              className={`btn d-inline-flex align-items-center gap-2 ${home.btnMore} ${katalog.loadMore}`}
+            <Button
+              variant=""
+              className={`d-inline-flex align-items-center gap-2 ${home.btnMore} ${katalog.loadMore}`}
               onClick={() => setLimit((l) => l + PAGE_SIZE)}
             >
               Tampilkan Lebih Banyak
               <span className={katalog.downArrow} aria-hidden="true">↓</span>
-            </button>
+            </Button>
           </div>
         )}
       </section>

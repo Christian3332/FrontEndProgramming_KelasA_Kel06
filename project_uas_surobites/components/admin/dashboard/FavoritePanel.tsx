@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Col, Row } from "react-bootstrap";
 import { foods } from "@/data/foods";
 import { useFavorites } from "@/lib/favorites";
 import ui from "@/app/styles/admin-ui.module.css";
@@ -26,9 +27,9 @@ export default function FavoritePanel() {
       {favoriteFoods.length === 0 ? (
         <p className={ui.panelEmpty}>Belum ada makanan yang difavoritkan di browser ini.</p>
       ) : (
-        <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-6 g-3">
+        <Row xs={2} sm={3} md={4} xl={6} className="g-3">
           {favoriteFoods.map((food) => (
-            <div className="col" key={food.id}>
+            <Col key={food.id}>
               <div className={`h-100 ${styles.miniFood}`}>
                 <Image
                   src={food.image}
@@ -39,9 +40,9 @@ export default function FavoritePanel() {
                 />
                 <span className={`d-flex align-items-center ${styles.miniName}`}>{food.name}</span>
               </div>
-            </div>
+            </Col>
           ))}
-        </div>
+        </Row>
       )}
     </article>
   );

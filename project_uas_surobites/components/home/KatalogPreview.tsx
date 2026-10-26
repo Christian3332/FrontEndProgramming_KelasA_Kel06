@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { foods, type Food } from "@/data/foods";
 import { useFavorites } from "@/lib/favorites";
 import FoodModal from "@/components/food/FoodModal";
+import LinkButton from "@/components/ui/LinkButton";
 import styles from "@/app/styles/home.module.css";
 import cardStyles from "@/app/styles/food-card.module.css";
 
@@ -25,12 +26,12 @@ export default function KatalogPreview() {
       <h2 id="katalog-title" className={styles.sectionTitle}>
         Makanan Khas Surabaya
       </h2>
-      <div className={`row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 justify-content-center mx-auto ${styles.katalogGrid}`}>
+      <Row xs={1} sm={2} lg={3} className={`g-4 justify-content-center mx-auto ${styles.katalogGrid}`}>
         {tampil.map((f) => {
           const fav = isFavorite(f.id);
           return (
-            <div className="col" key={f.id}>
-              <article className={`card h-100 ${cardStyles.foodCard} ${cardStyles.katalogCard}`}>
+            <Col key={f.id}>
+              <Card as="article" className={`h-100 ${cardStyles.foodCard} ${cardStyles.katalogCard}`}>
                 <div className={`position-relative ${cardStyles.cardMedia}`}>
                   <Image
                     src={f.image}
@@ -49,30 +50,30 @@ export default function KatalogPreview() {
                     <i className={fav ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
                   </button>
                 </div>
-                <div className={`card-footer d-flex align-items-center justify-content-between gap-2 ${cardStyles.katalogFooter}`}>
+                <Card.Footer className={`d-flex align-items-center justify-content-between gap-2 ${cardStyles.katalogFooter}`}>
                   <h3 className={cardStyles.katalogName}>{f.name}</h3>
-                  <button
-                    type="button"
-                    className={`btn flex-shrink-0 text-nowrap ${cardStyles.btnLight} ${cardStyles.btnSmall}`}
+                  <Button
+                    variant=""
+                    className={`flex-shrink-0 text-nowrap ${cardStyles.btnLight} ${cardStyles.btnSmall}`}
                     onClick={() => setSelected(f)}
                   >
                     Deskripsi Singkat
-                  </button>
-                </div>
-              </article>
-            </div>
+                  </Button>
+                </Card.Footer>
+              </Card>
+            </Col>
           );
         })}
-      </div>
+      </Row>
 
       {foods.length > JUMLAH_TAMPIL && (
         <div className="d-flex justify-content-center mt-4">
-          <Link href="/katalog" className={`btn d-inline-flex align-items-center gap-2 ${styles.btnMore}`}>
+          <LinkButton href="/katalog" variant="" className={`d-inline-flex align-items-center gap-2 ${styles.btnMore}`}>
             Lihat Semua Katalog
             <span className={styles.btnMoreArrow} aria-hidden="true">
               →
             </span>
-          </Link>
+          </LinkButton>
         </div>
       )}
 

@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { Nav, Offcanvas } from "react-bootstrap";
 import { admin } from "@/data/admin";
 import { foods, warungs } from "@/data/foods";
 import { faqs } from "@/data/faqs";
@@ -37,15 +38,6 @@ export default function AdminSidebar({ open, onClose }: Props) {
   const router = useRouter();
   const [confirmLogout, setConfirmLogout] = useState(false);
 
-  // body dikunci biar halaman belakang tidak ikut scroll waktu sidebar terbuka di HP
-  useEffect(() => {
-    if (!open) return;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-
   function linkClass(href: string) {
     return `d-flex align-items-center w-100 ${styles.navLink} ${pathname === href ? styles.navActive : ""}`;
   }
@@ -55,12 +47,17 @@ export default function AdminSidebar({ open, onClose }: Props) {
     router.replace("/admin/login?pesan=logout");
   }
 
+  // di layar besar sidebar selalu tampil, di HP jadi menu geser dari kiri
   return (
     <>
-      <aside
-        className={`d-flex flex-column ${styles.sidebar} ${open ? styles.sidebarOpen : ""}`}
+      <Offcanvas
+        show={open}
+        onHide={onClose}
+        responsive="lg"
         id="admin-sidebar"
         aria-label="Navigasi admin"
+        className={`d-flex flex-column ${styles.sidebar} ${open ? styles.sidebarOpen : ""}`}
+        backdropClassName={styles.backdrop}
       >
         <div className={`d-flex align-items-center ${styles.sidebarBrand}`}>
           <span className={`d-inline-flex align-items-center justify-content-center ${styles.brandMark}`}>
@@ -80,40 +77,42 @@ export default function AdminSidebar({ open, onClose }: Props) {
           </button>
         </div>
 
-        <nav className={`d-flex flex-column ${styles.nav}`}>
+        <Nav as="nav" className={`flex-column flex-nowrap ${styles.nav}`}>
           <p className={styles.navLabel}>Menu utama</p>
           {menuUtama.map((menu) => (
-            <Link key={menu.href} href={menu.href} className={linkClass(menu.href)} onClick={onClose}>
+            <Nav.Link as={Link} key={menu.href} href={menu.href} className={linkClass(menu.href)} onClick={onClose}>
               <i className={menu.icon}></i>
               <span>{menu.label}</span>
               {menu.count !== undefined && (
                 <span className={styles.navBadge}>{menu.count}</span>
               )}
-            </Link>
+            </Nav.Link>
           ))}
 
           <p className={styles.navLabel}>Lainnya</p>
-          <Link
+          <Nav.Link
+            as={Link}
             href="/admin/dashboard/pengaturan"
             className={linkClass("/admin/dashboard/pengaturan")}
             onClick={onClose}
           >
             <i className="fa-solid fa-sliders"></i>
             <span>Pengaturan</span>
-          </Link>
-          <Link href="/" className={`d-flex align-items-center w-100 ${styles.navLink}`} target="_blank" rel="noopener">
+          </Nav.Link>
+          <Nav.Link href="/" className={`d-flex align-items-center w-100 ${styles.navLink}`} target="_blank" rel="noopener">
             <i className="fa-solid fa-arrow-up-right-from-square"></i>
             <span>Lihat Website</span>
-          </Link>
-          <button
+          </Nav.Link>
+          <Nav.Link
+            as="button"
             type="button"
             className={`d-flex align-items-center w-100 ${styles.navLink} ${styles.navLogout}`}
             onClick={() => setConfirmLogout(true)}
           >
             <i className="fa-solid fa-right-from-bracket"></i>
             <span>Logout</span>
-          </button>
-        </nav>
+          </Nav.Link>
+        </Nav>
 
         <div className={`d-flex align-items-center ${styles.sidebarFooter}`}>
           <span className={`d-inline-flex align-items-center justify-content-center ${styles.avatar}`} aria-hidden="true">
@@ -124,13 +123,7 @@ export default function AdminSidebar({ open, onClose }: Props) {
             <small className={styles.userRole}>Administrator</small>
           </div>
         </div>
-      </aside>
-
-      <div
-        className={`d-lg-none ${styles.backdrop} ${open ? styles.backdropVisible : ""}`}
-        aria-hidden="true"
-        onClick={onClose}
-      ></div>
+      </Offcanvas>
 
       <ConfirmDialog
         open={confirmLogout}

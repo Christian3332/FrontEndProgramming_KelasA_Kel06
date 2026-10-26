@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useState } from "react";
+import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import { foods, type Food } from "@/data/foods";
 import { useFavorites } from "@/lib/favorites";
 import FoodCard from "@/components/food/FoodCard";
 import FoodModal from "@/components/food/FoodModal";
+import LinkButton from "@/components/ui/LinkButton";
 import home from "@/app/styles/home.module.css";
 import katalog from "@/app/styles/katalog.module.css";
 import confirm from "@/app/styles/confirm.module.css";
@@ -19,27 +20,13 @@ export default function FavoritContent() {
   // Urutan mengikuti katalog; id lama yang sudah tidak ada di data diabaikan
   const list = foods.filter((f) => favorites.includes(f.id));
 
-  // Modal konfirmasi: tutup dengan Escape dan kunci scroll halaman
-  useEffect(() => {
-    if (!confirmOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setConfirmOpen(false);
-    };
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [confirmOpen]);
-
   function handleClear() {
     clearFavorites();
     setConfirmOpen(false);
   }
 
   return (
-    <div className="container">
+    <Container>
       <section className={home.katalog} aria-labelledby="favorit-title">
         <div className={`text-center ${styles.heading}`}>
           <span
@@ -75,73 +62,63 @@ export default function FavoritContent() {
             </div>
             <h3 className={katalog.emptyTitle}>Belum ada makanan favorit.</h3>
             <p className={katalog.emptyText}>Klik ikon hati pada makanan yang ingin kamu simpan.</p>
-            <Link href="/katalog" className={`btn btn-primary ${katalog.emptyButton}`}>
+            <LinkButton href="/katalog" variant="primary" className={katalog.emptyButton}>
               Jelajahi Katalog
-            </Link>
+            </LinkButton>
           </div>
         ) : (
-          <div className={`row g-4 justify-content-center mx-auto ${home.katalogGrid}`}>
+          <Row className={`g-4 justify-content-center mx-auto ${home.katalogGrid}`}>
             {list.map((food) => (
-              <div className="col-12 col-sm-6 col-lg-4" key={food.id}>
+              <Col xs={12} sm={6} lg={4} key={food.id}>
                 <FoodCard food={food} onOpen={setSelected} />
-              </div>
+              </Col>
             ))}
-          </div>
+          </Row>
         )}
       </section>
 
       <FoodModal food={selected} onClose={() => setSelected(null)} />
 
-      {confirmOpen && (
-        <>
-          <div
-            className="modal d-block"
-            role="alertdialog"
-            aria-modal="true"
-            aria-labelledby="confirm-title"
-            tabIndex={-1}
+      <Modal
+        show={confirmOpen}
+        onHide={() => setConfirmOpen(false)}
+        centered
+        animation={false}
+        aria-labelledby="confirm-title"
+        dialogClassName={confirm.dialog}
+        contentClassName={`text-center ${confirm.box}`}
+        backdropClassName={confirm.backdrop}
+      >
+        <div
+          className={`d-flex align-items-center justify-content-center ${confirm.icon} ${confirm.iconDanger}`}
+          aria-hidden="true"
+        >
+          <i className="fa-solid fa-trash-can"></i>
+        </div>
+        <h2 className={confirm.title} id="confirm-title">
+          Hapus semua favorit?
+        </h2>
+        <p className={confirm.text}>
+          Semua kuliner yang kamu simpan akan dihapus dari daftar
+          favorit.
+        </p>
+        <div className={`d-flex ${confirm.actions}`}>
+          <Button
+            variant=""
+            className={confirm.btnGhost}
             onClick={() => setConfirmOpen(false)}
           >
-            <div
-              className={`modal-dialog modal-dialog-centered ${confirm.dialog}`}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className={`modal-content text-center ${confirm.box}`}>
-                <div
-                  className={`d-flex align-items-center justify-content-center ${confirm.icon} ${confirm.iconDanger}`}
-                  aria-hidden="true"
-                >
-                  <i className="fa-solid fa-trash-can"></i>
-                </div>
-                <h2 className={confirm.title} id="confirm-title">
-                  Hapus semua favorit?
-                </h2>
-                <p className={confirm.text}>
-                  Semua kuliner yang kamu simpan akan dihapus dari daftar
-                  favorit.
-                </p>
-                <div className={`d-flex ${confirm.actions}`}>
-                  <button
-                    type="button"
-                    className={`btn ${confirm.btnGhost}`}
-                    onClick={() => setConfirmOpen(false)}
-                  >
-                    Batal
-                  </button>
-                  <button
-                    type="button"
-                    className={`btn ${confirm.btnDanger}`}
-                    onClick={handleClear}
-                  >
-                    Ya, Hapus
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={`modal-backdrop show ${confirm.backdrop}`} />
-        </>
-      )}
-    </div>
+            Batal
+          </Button>
+          <Button
+            variant=""
+            className={confirm.btnDanger}
+            onClick={handleClear}
+          >
+            Ya, Hapus
+          </Button>
+        </div>
+      </Modal>
+    </Container>
   );
 }
