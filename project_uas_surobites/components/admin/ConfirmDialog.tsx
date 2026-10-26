@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { Button, Modal } from "react-bootstrap";
 import styles from "@/app/styles/confirm.module.css";
 
 type Props = {
@@ -22,59 +22,31 @@ export default function ConfirmDialog({
   onConfirm,
   onCancel,
 }: Props) {
-  // tombol Esc buat menutup, dan halaman belakang dikunci selama dialog terbuka
-  useEffect(() => {
-    if (!open) return;
-
-    function handleKey(e: KeyboardEvent) {
-      if (e.key === "Escape") onCancel();
-    }
-
-    document.addEventListener("keydown", handleKey);
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.removeEventListener("keydown", handleKey);
-      document.body.style.overflow = "";
-    };
-  }, [open, onCancel]);
-
-  if (!open) {
-    return null;
-  }
-
   return (
-    <>
-      <div
-        className="modal d-block"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="confirm-title"
-        aria-describedby="confirm-message"
-        onClick={onCancel}
-      >
-        <div
-          className={`modal-dialog modal-dialog-centered ${styles.dialog}`}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className={`modal-content text-center ${styles.box}`}>
-            <div className={`d-flex align-items-center justify-content-center ${styles.icon} ${styles.iconDanger}`}>
-              <i className={icon}></i>
-            </div>
-            <h2 className={styles.title} id="confirm-title">{title}</h2>
-            <p className={styles.text} id="confirm-message">{message}</p>
-            <div className={`d-flex ${styles.actions}`}>
-              <button type="button" className={`btn ${styles.btnGhost}`} onClick={onCancel}>
-                Batal
-              </button>
-              <button type="button" className={`btn ${styles.btnDanger}`} onClick={onConfirm}>
-                {confirmText}
-              </button>
-            </div>
-          </div>
-        </div>
+    <Modal
+      show={open}
+      onHide={onCancel}
+      centered
+      animation={false}
+      aria-labelledby="confirm-title"
+      aria-describedby="confirm-message"
+      dialogClassName={styles.dialog}
+      contentClassName={`text-center ${styles.box}`}
+      backdropClassName={styles.backdrop}
+    >
+      <div className={`d-flex align-items-center justify-content-center ${styles.icon} ${styles.iconDanger}`}>
+        <i className={icon}></i>
       </div>
-      <div className={`modal-backdrop show ${styles.backdrop}`}></div>
-    </>
+      <h2 className={styles.title} id="confirm-title">{title}</h2>
+      <p className={styles.text} id="confirm-message">{message}</p>
+      <div className={`d-flex ${styles.actions}`}>
+        <Button variant="" className={styles.btnGhost} onClick={onCancel}>
+          Batal
+        </Button>
+        <Button variant="" className={styles.btnDanger} onClick={onConfirm}>
+          {confirmText}
+        </Button>
+      </div>
+    </Modal>
   );
 }

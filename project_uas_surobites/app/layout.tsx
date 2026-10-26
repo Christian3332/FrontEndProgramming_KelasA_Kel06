@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Poetsen_One } from "next/font/google";
 
-// Bootstrap ditaruh paling atas biar bisa ditimpa globals.css
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./styles/globals.css";

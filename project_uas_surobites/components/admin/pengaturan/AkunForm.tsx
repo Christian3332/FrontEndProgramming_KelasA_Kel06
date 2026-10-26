@@ -1,26 +1,25 @@
 "use client";
 
 import { useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { admin } from "@/data/admin";
 import ui from "@/app/styles/admin-ui.module.css";
 
 type PasswordInputProps = {
-  id: string;
   name: string;
   autoComplete: string;
 };
 
 // tiap kolom password punya tombol mata sendiri, jadi state-nya dipisah per kolom
-function PasswordInput({ id, name, autoComplete }: PasswordInputProps) {
+function PasswordInput({ name, autoComplete }: PasswordInputProps) {
   const [show, setShow] = useState(false);
 
   return (
     <div className={ui.inputIcon}>
-      <input
+      <Form.Control
         type={show ? "text" : "password"}
-        id={id}
         name={name}
-        className={`form-control ${ui.input} ${ui.withToggle}`}
+        className={`${ui.input} ${ui.withToggle}`}
         autoComplete={autoComplete}
       />
       <button
@@ -47,56 +46,54 @@ export default function AkunForm() {
         </div>
       </div>
 
-      <form noValidate>
-        <div className="row gx-3">
-          <div className={`col-12 col-md-6 d-flex flex-column ${ui.field}`}>
-            <label htmlFor="acc-username">
+      <Form noValidate>
+        <Row className="gx-3">
+          <Form.Group as={Col} xs={12} md={6} controlId="acc-username" className={`d-flex flex-column ${ui.field}`}>
+            <Form.Label>
               Username <span className={ui.required}>*</span>
-            </label>
-            <input
+            </Form.Label>
+            <Form.Control
               type="text"
-              id="acc-username"
               name="username"
-              className={`form-control ${ui.input}`}
+              className={ui.input}
               autoComplete="username"
               defaultValue={admin.username}
             />
-          </div>
-          <div className={`col-12 col-md-6 d-flex flex-column ${ui.field}`}>
-            <label htmlFor="acc-displayName">Nama tampilan</label>
-            <input
+          </Form.Group>
+          <Form.Group as={Col} xs={12} md={6} controlId="acc-displayName" className={`d-flex flex-column ${ui.field}`}>
+            <Form.Label>Nama tampilan</Form.Label>
+            <Form.Control
               type="text"
-              id="acc-displayName"
               name="displayName"
-              className={`form-control ${ui.input}`}
+              className={ui.input}
               maxLength={40}
               defaultValue={admin.displayName}
             />
-          </div>
-          <div className={`col-12 d-flex flex-column ${ui.field}`}>
-            <label htmlFor="acc-currentPassword">
+          </Form.Group>
+          <Form.Group as={Col} xs={12} controlId="acc-currentPassword" className={`d-flex flex-column ${ui.field}`}>
+            <Form.Label>
               Password saat ini <span className={ui.required}>*</span>
-            </label>
-            <PasswordInput id="acc-currentPassword" name="currentPassword" autoComplete="current-password" />
-          </div>
-          <div className={`col-12 col-md-6 d-flex flex-column ${ui.field}`}>
-            <label htmlFor="acc-newPassword">
+            </Form.Label>
+            <PasswordInput name="currentPassword" autoComplete="current-password" />
+          </Form.Group>
+          <Form.Group as={Col} xs={12} md={6} controlId="acc-newPassword" className={`d-flex flex-column ${ui.field}`}>
+            <Form.Label>
               Password baru <span className={ui.optional}>(opsional)</span>
-            </label>
-            <PasswordInput id="acc-newPassword" name="newPassword" autoComplete="new-password" />
-          </div>
-          <div className={`col-12 col-md-6 d-flex flex-column ${ui.field}`}>
-            <label htmlFor="acc-confirmPassword">Konfirmasi password baru</label>
-            <PasswordInput id="acc-confirmPassword" name="confirmPassword" autoComplete="new-password" />
-          </div>
-        </div>
+            </Form.Label>
+            <PasswordInput name="newPassword" autoComplete="new-password" />
+          </Form.Group>
+          <Form.Group as={Col} xs={12} md={6} controlId="acc-confirmPassword" className={`d-flex flex-column ${ui.field}`}>
+            <Form.Label>Konfirmasi password baru</Form.Label>
+            <PasswordInput name="confirmPassword" autoComplete="new-password" />
+          </Form.Group>
+        </Row>
 
         <div className={`d-flex justify-content-end ${ui.formActions}`}>
-          <button type="button" className={`btn ${ui.btn} ${ui.btnBlue}`}>
+          <Button variant="" className={`${ui.btn} ${ui.btnBlue}`}>
             Simpan Akun
-          </button>
+          </Button>
         </div>
-      </form>
+      </Form>
     </article>
   );
 }

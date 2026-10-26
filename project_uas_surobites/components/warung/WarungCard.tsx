@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import Image from "next/image";
+import { Button, Card } from "react-bootstrap";
 import type { Food, Warung } from "@/data/foods";
 import { findFood, formatTime, isWarungOpen } from "@/lib/helper";
 import styles from "@/app/styles/lokasi.module.css";
@@ -26,7 +27,7 @@ export default function WarungCard({ warung, onOpenMap, onOpenFood }: Props) {
     .filter((f): f is Food => Boolean(f));
 
   return (
-    <article id={warung.id} data-warung className={`card h-100 ${styles.warungCard}`}>
+    <Card as="article" id={warung.id} data-warung className={`h-100 ${styles.warungCard}`}>
       <div className={`position-relative ${styles.media}`}>
         <Image
           src={warung.image}
@@ -46,7 +47,7 @@ export default function WarungCard({ warung, onOpenMap, onOpenFood }: Props) {
         )}
       </div>
 
-      <div className={`d-flex flex-column flex-grow-1 ${styles.body}`}>
+      <Card.Body className={`d-flex flex-column ${styles.body}`}>
         <h3 className={styles.cardTitle}>{warung.name}</h3>
 
         <ul className={`list-unstyled m-0 d-flex flex-column ${styles.info}`}>
@@ -85,23 +86,24 @@ export default function WarungCard({ warung, onOpenMap, onOpenFood }: Props) {
         </div>
 
         <div className={`d-flex flex-wrap ${styles.actions}`}>
-          <button
-            type="button"
-            className={`btn ${styles.btnMap}`}
+          <Button
+            variant=""
+            className={styles.btnMap}
             onClick={() => onOpenMap(warung)}
           >
             Lihat Peta
-          </button>
-          <a
+          </Button>
+          <Button
             href={warung.mapsUrl}
-            className={`btn ${styles.btnMaps}`}
+            variant=""
+            className={styles.btnMaps}
             target="_blank"
             rel="noopener noreferrer"
           >
             Buka Google Maps
-          </a>
+          </Button>
         </div>
-      </div>
-    </article>
+      </Card.Body>
+    </Card>
   );
 }

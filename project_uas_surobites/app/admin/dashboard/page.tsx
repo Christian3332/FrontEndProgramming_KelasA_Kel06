@@ -1,3 +1,4 @@
+import { Col, Row } from "react-bootstrap";
 import WelcomeCard from "@/components/admin/dashboard/WelcomeCard";
 import StatCards from "@/components/admin/dashboard/StatCards";
 import CategoryChart from "@/components/admin/dashboard/CategoryChart";
@@ -15,17 +16,17 @@ export default function AdminDashboardPage() {
       <WelcomeCard />
       <StatCards />
 
-      <div className="row g-3">
-        <div className="col-12 col-xl-7">
+      <Row className="g-3">
+        <Col xs={12} xl={7}>
           <CategoryChart />
-        </div>
-        <div className="col-12 col-xl-5">
+        </Col>
+        <Col xs={12} xl={5}>
           <ActivityPanel />
-        </div>
-        <div className="col-12">
+        </Col>
+        <Col xs={12}>
           <FavoritePanel />
-        </div>
-      </div>
+        </Col>
+      </Row>
     </section>
   );
 }

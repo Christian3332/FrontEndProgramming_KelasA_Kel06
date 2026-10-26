@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type React from "react";
+import { Button, Form } from "react-bootstrap";
 import styles from "@/app/styles/search-bar.module.css";
 
 type SearchBarProps = {
@@ -38,29 +39,29 @@ export default function SearchBar({
     }
 
     return (
-        <form className={`d-flex align-items-center gap-2 mx-auto my-4 px-3 ${styles.searchBar}`} role="search" onSubmit={handleSubmit}>
-            <input
+        <Form className={`d-flex align-items-center gap-2 mx-auto my-4 px-3 ${styles.searchBar}`} role="search" onSubmit={handleSubmit}>
+            <Form.Control
                 type="search"
                 name="q"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={placeholder}
                 aria-label="Cari kuliner"
-                className={`form-control rounded-pill ${styles.input}`}
+                className={`rounded-pill ${styles.input}`}
             />
 
             {query && (
-                <button
-                    type="button"
+                <Button
+                    variant="light"
                     onClick={handleReset}
                     aria-label="Hapus pencarian"
-                    className={`btn btn-light rounded-circle ${styles.iconButton}`}
+                    className={`rounded-circle ${styles.iconButton}`}
                 >
                     <span>&times;</span>
-                </button>
+                </Button>
             )}
 
-            <button type="submit" aria-label="Cari" className={`btn btn-primary rounded-circle ${styles.iconButton}`}>
+            <Button type="submit" variant="primary" aria-label="Cari" className={`rounded-circle ${styles.iconButton}`}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -76,7 +77,7 @@ export default function SearchBar({
                     <circle cx="11" cy="11" r="8" />
                     <path d="m21 21-4.35-4.35" />
                 </svg>
-            </button>
-        </form>
+            </Button>
+        </Form>
     );
 }

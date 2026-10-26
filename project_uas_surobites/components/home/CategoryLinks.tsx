@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Col, Row } from "react-bootstrap";
 import { categories, foods } from "@/data/foods";
 import styles from "@/app/styles/home.module.css";
 
@@ -16,11 +17,11 @@ export default function CategoryLinks() {
         Pilih sesuai selera, nanti SuroBites carikan kuliner Surabaya yang
         paling cocok untukmu.
       </p>
-      <div className={`row row-cols-2 row-cols-md-3 row-cols-xl-6 g-3 mx-auto ${styles.narrow}`}>
+      <Row xs={2} md={3} xl={6} className={`g-3 mx-auto ${styles.narrow}`}>
         {categories.map((c) => {
           const total = foods.filter((f) => f.categories.includes(c.id)).length;
           return (
-            <div className="col" key={c.id}>
+            <Col key={c.id}>
               <Link
                 href={`/rekomendasi?kategori=${c.id}`}
                 className={`d-flex flex-column align-items-center text-center h-100 ${styles.kategoriCard}`}
@@ -35,10 +36,10 @@ export default function CategoryLinks() {
                 <span className={styles.kategoriDesc}>{c.description}</span>
                 <span className={styles.kategoriCount}>{total} kuliner</span>
               </Link>
-            </div>
+            </Col>
           );
         })}
-      </div>
+      </Row>
     </section>
   );
 }

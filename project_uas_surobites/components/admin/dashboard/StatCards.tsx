@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Col, Row } from "react-bootstrap";
 import { foods, warungs } from "@/data/foods";
 import { faqs } from "@/data/faqs";
 import { useFavorites } from "@/lib/favorites";
@@ -46,9 +47,9 @@ export default function StatCards() {
   ];
 
   return (
-    <div className={`row row-cols-2 row-cols-xl-4 g-3 ${styles.statGrid}`}>
+    <Row xs={2} xl={4} className={`g-3 ${styles.statGrid}`}>
       {stats.map((stat) => (
-        <div className="col" key={stat.label}>
+        <Col key={stat.label}>
           <Link href={stat.href} className={`d-flex flex-column h-100 ${styles.statCard}`}>
             <span className={`d-flex align-items-center justify-content-between ${styles.statTop}`}>
               <span className={styles.statLabel}>{stat.label}</span>
@@ -59,8 +60,8 @@ export default function StatCards() {
             <strong className={styles.statValue}>{stat.value}</strong>
             <span className={styles.statHint}>{stat.hint}</span>
           </Link>
-        </div>
+        </Col>
       ))}
-    </div>
+    </Row>
   );
 }

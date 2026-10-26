@@ -1,14 +1,15 @@
+import { Col, Row } from "react-bootstrap";
 import { categories, foods } from "@/data/foods";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
 export default function CategorySummary() {
   return (
-    <div className={`row row-cols-2 row-cols-md-3 row-cols-xl-6 g-2 ${styles.summaryGrid}`}>
+    <Row xs={2} md={3} xl={6} className={`g-2 ${styles.summaryGrid}`}>
       {categories.map((category) => {
         const total = foods.filter((food) => food.categories.includes(category.id)).length;
 
         return (
-          <div className="col" key={category.id}>
+          <Col key={category.id}>
             <div className={`d-flex align-items-center h-100 ${styles.summaryChip}`}>
               <span className={`d-flex align-items-center justify-content-center ${styles.summaryIcon}`}>{category.icon}</span>
               <div>
@@ -16,9 +17,9 @@ export default function CategorySummary() {
                 <small className={styles.summaryLabel}>{category.label}</small>
               </div>
             </div>
-          </div>
+          </Col>
         );
       })}
-    </div>
+    </Row>
   );
 }

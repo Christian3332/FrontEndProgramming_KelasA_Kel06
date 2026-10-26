@@ -1,5 +1,6 @@
 "use client";
 
+import { Col, Row } from "react-bootstrap";
 import { categories, foods } from "@/data/foods";
 import styles from "@/app/styles/home.module.css";
 
@@ -7,8 +8,11 @@ type Props = { active: string | null; onChange: (id: string | null) => void };
 
 export default function CategoryFilter({ active, onChange }: Props) {
   return (
-    <div
-      className={`row row-cols-2 row-cols-md-3 row-cols-xl-6 g-3 mx-auto ${styles.narrow}`}
+    <Row
+      xs={2}
+      md={3}
+      xl={6}
+      className={`g-3 mx-auto ${styles.narrow}`}
       role="group"
       aria-label="Kategori rekomendasi"
     >
@@ -16,7 +20,7 @@ export default function CategoryFilter({ active, onChange }: Props) {
         const total = foods.filter((f) => f.categories.includes(c.id)).length;
         const isActive = c.id === active;
         return (
-          <div className="col" key={c.id}>
+          <Col key={c.id}>
             <button
               type="button"
               className={`d-flex flex-column align-items-center text-center w-100 h-100 ${styles.kategoriCard} ${isActive ? styles.kategoriActive : ""}`}
@@ -33,9 +37,9 @@ export default function CategoryFilter({ active, onChange }: Props) {
               <span className={styles.kategoriDesc}>{c.description}</span>
               <span className={styles.kategoriCount}>{total} kuliner</span>
             </button>
-          </div>
+          </Col>
         );
       })}
-    </div>
+    </Row>
   );
 }
