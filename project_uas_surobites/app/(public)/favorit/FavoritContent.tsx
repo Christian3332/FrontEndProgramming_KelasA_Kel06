@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Button, Col, Container, Modal, Row } from "react-bootstrap";
-import { foods, type Food } from "@/data/foods";
+import type { Food } from "@/data/foods";
+import { useFoods } from "@/lib/useFoods";
 import { useFavorites } from "@/lib/favorites";
 import FoodCard from "@/components/food/FoodCard";
 import FoodModal from "@/components/food/FoodModal";
@@ -13,6 +14,7 @@ import confirm from "@/app/styles/confirm.module.css";
 import styles from "@/app/styles/favorit.module.css";
 
 export default function FavoritContent() {
+  const foods = useFoods();
   const { favorites, clearFavorites } = useFavorites();
   const [selected, setSelected] = useState<Food | null>(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
