@@ -1,9 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { Col, Row } from "react-bootstrap";
-import { categories, foods } from "@/data/foods";
+import { categories } from "@/data/foods";
+import { useFoods } from "@/lib/useFoods";
 import styles from "@/app/styles/home.module.css";
 
 export default function CategoryLinks() {
+  const foods = useFoods();
   return (
     <section
       id="kategori"

@@ -1,11 +1,12 @@
 "use client";
 
 import { Badge } from "react-bootstrap";
-import { foods } from "@/data/foods";
+import { useFoods } from "@/lib/useFoods";
 import { useFavorites } from "@/lib/favorites";
 import styles from "@/app/styles/header.module.css";
 
 export default function FavCount() {
+  const foods = useFoods();
   const { favorites } = useFavorites();
   const total = foods.filter((f) => favorites.includes(f.id)).length;
   if (total === 0) return null;

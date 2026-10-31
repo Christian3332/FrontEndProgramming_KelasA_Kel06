@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Button } from "react-bootstrap";
 import SectionHead from "@/components/admin/SectionHead";
 import FoodTable from "@/components/admin/makanan/FoodTable";
 import ui from "@/app/styles/admin-ui.module.css";
@@ -15,11 +14,7 @@ export default function KelolaMakananPage() {
         id="sec-makanan"
         title="Kelola Makanan"
         description="Data makanan ini dipakai oleh halaman Katalog, Rekomendasi, Favorit, dan fitur pencarian."
-      >
-        <Button variant="primary" className={`${ui.btn} ${ui.btnPrimary}`}>
-          + Tambah Makanan
-        </Button>
-      </SectionHead>
+      />
 
       <FoodTable />
     </section>

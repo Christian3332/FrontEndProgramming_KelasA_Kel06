@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Button, Card, Col, Row } from "react-bootstrap";
-import { foods, type Food } from "@/data/foods";
+import type { Food } from "@/data/foods";
+import { useFoods } from "@/lib/useFoods";
 import { useFavorites } from "@/lib/favorites";
 import FoodModal from "@/components/food/FoodModal";
 import LinkButton from "@/components/ui/LinkButton";
@@ -13,6 +14,7 @@ import cardStyles from "@/app/styles/food-card.module.css";
 const JUMLAH_TAMPIL = 6;
 
 export default function KatalogPreview() {
+  const foods = useFoods();
   const [selected, setSelected] = useState<Food | null>(null);
   const { isFavorite, toggleFavorite } = useFavorites();
   const tampil = foods.slice(0, JUMLAH_TAMPIL);
