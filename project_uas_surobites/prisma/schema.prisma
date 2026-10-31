@@ -7,67 +7,86 @@ datasource db {
   provider = "sqlite"
 }
 
+model PriceCategory {
+  id    String @id
+  label String
+  hint  String
+  foods Food[] 
+}
+
 model Category {
   id          String @id
   label       String
   icon        String
   description String
-}
-
-model Price {
-  id    String @id
-  label String
-  hint  String
-  foods Food[]
+  foods       Food[]
 }
 
 model TimeSlot {
   id    String @id
   label String
   icon  String
+  foods Food[]
 }
 
 model Food {
-  id               String   @id
+  id               Int     @id @default(autoincrement())
+  slug             String  @unique
   name             String
   image            String
   shortDescription String
   story            String
-  ingredients      String   
   taste            String
-  categories       String   
-  priceCategory    String   
-  price            Price    @relation(fields: [priceCategory], references: [id])
   priceRange       String
-  timeCategory     String   
-  featured         Boolean  @default(false)
-  sortOrder        Int      @default(0)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  featured         Boolean @default(false)
+
+  priceCategoryId String
+  priceCategory   PriceCategory @relation(fields: [priceCategoryId], references: [id])
+
+  categories  Category[]
+  timeSlots   TimeSlot[]
+  warungs     Warung[]
+  ingredients Ingredient[]
+}
+
+model Ingredient {
+  id     Int    @id @default(autoincrement())
+  name   String
+  foodId Int
+  food   Food   @relation(fields: [foodId], references: [id], onDelete: Cascade)
 }
 
 model Warung {
-  id          String   @id
+  id          Int    @id @default(autoincrement())
+  slug        String @unique
   name        String
   address     String
   openDays    String
   openTime    String
   closeTime   String
   description String
-  foodIds     String   
-  otherMenu   String  
   image       String
   mapsUrl     String
-  sortOrder   Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+
+  foods Food[]
+  menus WarungMenu[]
+}
+
+model WarungMenu {
+  id       Int    @id @default(autoincrement())
+  name     String
+  warungId Int
+  warung   Warung @relation(fields: [warungId], references: [id], onDelete: Cascade)
+}
+
+model Admin {
+  id           Int    @id @default(autoincrement())
+  username     String @unique
+  passwordHash String
 }
 
 model Faq {
-  id        String   @id
-  question  String
-  answer    String
-  sortOrder Int      @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id       Int    @id @default(autoincrement())
+  question String
+  answer   String
 }
