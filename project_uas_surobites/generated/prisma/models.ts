@@ -8,10 +8,13 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/PriceCategory'
 export type * from './models/Category'
-export type * from './models/Price'
 export type * from './models/TimeSlot'
 export type * from './models/Food'
+export type * from './models/Ingredient'
 export type * from './models/Warung'
+export type * from './models/WarungMenu'
+export type * from './models/Admin'
 export type * from './models/Faq'
 export type * from './commonInputTypes'

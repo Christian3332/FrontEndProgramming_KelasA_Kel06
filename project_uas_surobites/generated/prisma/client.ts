@@ -31,8 +31,8 @@ export * from "./enums"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Categories
- * const categories = await prisma.category.findMany()
+ * // Fetch zero or more PriceCategories
+ * const priceCategories = await prisma.priceCategory.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -42,15 +42,15 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
+ * Model PriceCategory
+ * 
+ */
+export type PriceCategory = Prisma.PriceCategoryModel
+/**
  * Model Category
  * 
  */
 export type Category = Prisma.CategoryModel
-/**
- * Model Price
- * 
- */
-export type Price = Prisma.PriceModel
 /**
  * Model TimeSlot
  * 
@@ -62,10 +62,25 @@ export type TimeSlot = Prisma.TimeSlotModel
  */
 export type Food = Prisma.FoodModel
 /**
+ * Model Ingredient
+ * 
+ */
+export type Ingredient = Prisma.IngredientModel
+/**
  * Model Warung
  * 
  */
 export type Warung = Prisma.WarungModel
+/**
+ * Model WarungMenu
+ * 
+ */
+export type WarungMenu = Prisma.WarungMenuModel
+/**
+ * Model Admin
+ * 
+ */
+export type Admin = Prisma.AdminModel
 /**
  * Model Faq
  * 

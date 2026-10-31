@@ -27,75 +27,57 @@ export type AggregateFaq = {
 }
 
 export type FaqAvgAggregateOutputType = {
-  sortOrder: number | null
+  id: number | null
 }
 
 export type FaqSumAggregateOutputType = {
-  sortOrder: number | null
+  id: number | null
 }
 
 export type FaqMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   question: string | null
   answer: string | null
-  sortOrder: number | null
-  createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type FaqMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   question: string | null
   answer: string | null
-  sortOrder: number | null
-  createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type FaqCountAggregateOutputType = {
   id: number
   question: number
   answer: number
-  sortOrder: number
-  createdAt: number
-  updatedAt: number
   _all: number
 }
 
 
 export type FaqAvgAggregateInputType = {
-  sortOrder?: true
+  id?: true
 }
 
 export type FaqSumAggregateInputType = {
-  sortOrder?: true
+  id?: true
 }
 
 export type FaqMinAggregateInputType = {
   id?: true
   question?: true
   answer?: true
-  sortOrder?: true
-  createdAt?: true
-  updatedAt?: true
 }
 
 export type FaqMaxAggregateInputType = {
   id?: true
   question?: true
   answer?: true
-  sortOrder?: true
-  createdAt?: true
-  updatedAt?: true
 }
 
 export type FaqCountAggregateInputType = {
   id?: true
   question?: true
   answer?: true
-  sortOrder?: true
-  createdAt?: true
-  updatedAt?: true
   _all?: true
 }
 
@@ -186,12 +168,9 @@ export type FaqGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }
 
 export type FaqGroupByOutputType = {
-  id: string
+  id: number
   question: string
   answer: string
-  sortOrder: number
-  createdAt: Date
-  updatedAt: Date
   _count: FaqCountAggregateOutputType | null
   _avg: FaqAvgAggregateOutputType | null
   _sum: FaqSumAggregateOutputType | null
@@ -218,42 +197,30 @@ export type FaqWhereInput = {
   AND?: Prisma.FaqWhereInput | Prisma.FaqWhereInput[]
   OR?: Prisma.FaqWhereInput[]
   NOT?: Prisma.FaqWhereInput | Prisma.FaqWhereInput[]
-  id?: Prisma.StringFilter<"Faq"> | string
+  id?: Prisma.IntFilter<"Faq"> | number
   question?: Prisma.StringFilter<"Faq"> | string
   answer?: Prisma.StringFilter<"Faq"> | string
-  sortOrder?: Prisma.IntFilter<"Faq"> | number
-  createdAt?: Prisma.DateTimeFilter<"Faq"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Faq"> | Date | string
 }
 
 export type FaqOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
-  sortOrder?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type FaqWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.FaqWhereInput | Prisma.FaqWhereInput[]
   OR?: Prisma.FaqWhereInput[]
   NOT?: Prisma.FaqWhereInput | Prisma.FaqWhereInput[]
   question?: Prisma.StringFilter<"Faq"> | string
   answer?: Prisma.StringFilter<"Faq"> | string
-  sortOrder?: Prisma.IntFilter<"Faq"> | number
-  createdAt?: Prisma.DateTimeFilter<"Faq"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Faq"> | Date | string
 }, "id">
 
 export type FaqOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
-  sortOrder?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   _count?: Prisma.FaqCountOrderByAggregateInput
   _avg?: Prisma.FaqAvgOrderByAggregateInput
   _max?: Prisma.FaqMaxOrderByAggregateInput
@@ -265,110 +232,74 @@ export type FaqScalarWhereWithAggregatesInput = {
   AND?: Prisma.FaqScalarWhereWithAggregatesInput | Prisma.FaqScalarWhereWithAggregatesInput[]
   OR?: Prisma.FaqScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FaqScalarWhereWithAggregatesInput | Prisma.FaqScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Faq"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Faq"> | number
   question?: Prisma.StringWithAggregatesFilter<"Faq"> | string
   answer?: Prisma.StringWithAggregatesFilter<"Faq"> | string
-  sortOrder?: Prisma.IntWithAggregatesFilter<"Faq"> | number
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Faq"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Faq"> | Date | string
 }
 
 export type FaqCreateInput = {
-  id: string
   question: string
   answer: string
-  sortOrder?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type FaqUncheckedCreateInput = {
-  id: string
+  id?: number
   question: string
   answer: string
-  sortOrder?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type FaqUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FaqUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FaqCreateManyInput = {
-  id: string
+  id?: number
   question: string
   answer: string
-  sortOrder?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type FaqUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FaqUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FaqCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
-  sortOrder?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type FaqAvgOrderByAggregateInput = {
-  sortOrder?: Prisma.SortOrder
+  id?: Prisma.SortOrder
 }
 
 export type FaqMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
-  sortOrder?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type FaqMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
-  sortOrder?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type FaqSumOrderByAggregateInput = {
-  sortOrder?: Prisma.SortOrder
+  id?: Prisma.SortOrder
 }
 
 
@@ -377,50 +308,35 @@ export type FaqSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   id?: boolean
   question?: boolean
   answer?: boolean
-  sortOrder?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["faq"]>
 
 export type FaqSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   question?: boolean
   answer?: boolean
-  sortOrder?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["faq"]>
 
 export type FaqSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   question?: boolean
   answer?: boolean
-  sortOrder?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["faq"]>
 
 export type FaqSelectScalar = {
   id?: boolean
   question?: boolean
   answer?: boolean
-  sortOrder?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }
 
-export type FaqOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "question" | "answer" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["faq"]>
+export type FaqOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "question" | "answer", ExtArgs["result"]["faq"]>
 
 export type $FaqPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Faq"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     question: string
     answer: string
-    sortOrder: number
-    createdAt: Date
-    updatedAt: Date
   }, ExtArgs["result"]["faq"]>
   composites: {}
 }
@@ -844,12 +760,9 @@ export interface Prisma__FaqClient<T, Null = never, ExtArgs extends runtime.Type
  * Fields of the Faq model
  */
 export interface FaqFieldRefs {
-  readonly id: Prisma.FieldRef<"Faq", 'String'>
+  readonly id: Prisma.FieldRef<"Faq", 'Int'>
   readonly question: Prisma.FieldRef<"Faq", 'String'>
   readonly answer: Prisma.FieldRef<"Faq", 'String'>
-  readonly sortOrder: Prisma.FieldRef<"Faq", 'Int'>
-  readonly createdAt: Prisma.FieldRef<"Faq", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"Faq", 'DateTime'>
 }
     
 
