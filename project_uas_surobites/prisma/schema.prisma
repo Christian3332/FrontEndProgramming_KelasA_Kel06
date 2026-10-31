@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Category {
+  id          String @id
+  label       String
+  icon        String
+  description String
+}
+
+model Price {
+  id    String @id
+  label String
+  hint  String
+  foods Food[]
+}
+
+model TimeSlot {
+  id    String @id
+  label String
+  icon  String
+}
+
+model Food {
+  id               String   @id
+  name             String
+  image            String
+  shortDescription String
+  story            String
+  ingredients      String   
+  taste            String
+  categories       String   
+  priceCategory    String   
+  price            Price    @relation(fields: [priceCategory], references: [id])
+  priceRange       String
+  timeCategory     String   
+  featured         Boolean  @default(false)
+  sortOrder        Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Warung {
+  id          String   @id
+  name        String
+  address     String
+  openDays    String
+  openTime    String
+  closeTime   String
+  description String
+  foodIds     String   
+  otherMenu   String  
+  image       String
+  mapsUrl     String
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Faq {
+  id        String   @id
+  question  String
+  answer    String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
