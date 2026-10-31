@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Button, Col } from "react-bootstrap";
-import { faqs } from "@/data/faqs";
+import { connection } from "next/server";
+import { getFaqs } from "@/lib/queries";
 import SectionHead from "@/components/admin/SectionHead";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
@@ -9,7 +10,10 @@ export const metadata: Metadata = {
   title: "Kelola FAQ",
 };
 
-export default function KelolaFaqPage() {
+export default async function KelolaFaqPage() {
+  await connection();
+  const faqs = await getFaqs();
+
   return (
     <section className={ui.section} aria-labelledby="sec-faq">
       <SectionHead
