@@ -166,12 +166,14 @@ export type TimeSlotWhereInput = {
   id?: Prisma.StringFilter<"TimeSlot"> | string
   label?: Prisma.StringFilter<"TimeSlot"> | string
   icon?: Prisma.StringFilter<"TimeSlot"> | string
+  foods?: Prisma.FoodListRelationFilter
 }
 
 export type TimeSlotOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   label?: Prisma.SortOrder
   icon?: Prisma.SortOrder
+  foods?: Prisma.FoodOrderByRelationAggregateInput
 }
 
 export type TimeSlotWhereUniqueInput = Prisma.AtLeast<{
@@ -181,6 +183,7 @@ export type TimeSlotWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.TimeSlotWhereInput | Prisma.TimeSlotWhereInput[]
   label?: Prisma.StringFilter<"TimeSlot"> | string
   icon?: Prisma.StringFilter<"TimeSlot"> | string
+  foods?: Prisma.FoodListRelationFilter
 }, "id">
 
 export type TimeSlotOrderByWithAggregationInput = {
@@ -205,24 +208,28 @@ export type TimeSlotCreateInput = {
   id: string
   label: string
   icon: string
+  foods?: Prisma.FoodCreateNestedManyWithoutTimeSlotsInput
 }
 
 export type TimeSlotUncheckedCreateInput = {
   id: string
   label: string
   icon: string
+  foods?: Prisma.FoodUncheckedCreateNestedManyWithoutTimeSlotsInput
 }
 
 export type TimeSlotUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
+  foods?: Prisma.FoodUpdateManyWithoutTimeSlotsNestedInput
 }
 
 export type TimeSlotUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
+  foods?: Prisma.FoodUncheckedUpdateManyWithoutTimeSlotsNestedInput
 }
 
 export type TimeSlotCreateManyInput = {
@@ -261,12 +268,151 @@ export type TimeSlotMinOrderByAggregateInput = {
   icon?: Prisma.SortOrder
 }
 
+export type TimeSlotListRelationFilter = {
+  every?: Prisma.TimeSlotWhereInput
+  some?: Prisma.TimeSlotWhereInput
+  none?: Prisma.TimeSlotWhereInput
+}
+
+export type TimeSlotOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type TimeSlotCreateNestedManyWithoutFoodsInput = {
+  create?: Prisma.XOR<Prisma.TimeSlotCreateWithoutFoodsInput, Prisma.TimeSlotUncheckedCreateWithoutFoodsInput> | Prisma.TimeSlotCreateWithoutFoodsInput[] | Prisma.TimeSlotUncheckedCreateWithoutFoodsInput[]
+  connectOrCreate?: Prisma.TimeSlotCreateOrConnectWithoutFoodsInput | Prisma.TimeSlotCreateOrConnectWithoutFoodsInput[]
+  connect?: Prisma.TimeSlotWhereUniqueInput | Prisma.TimeSlotWhereUniqueInput[]
+}
+
+export type TimeSlotUncheckedCreateNestedManyWithoutFoodsInput = {
+  create?: Prisma.XOR<Prisma.TimeSlotCreateWithoutFoodsInput, Prisma.TimeSlotUncheckedCreateWithoutFoodsInput> | Prisma.TimeSlotCreateWithoutFoodsInput[] | Prisma.TimeSlotUncheckedCreateWithoutFoodsInput[]
+  connectOrCreate?: Prisma.TimeSlotCreateOrConnectWithoutFoodsInput | Prisma.TimeSlotCreateOrConnectWithoutFoodsInput[]
+  connect?: Prisma.TimeSlotWhereUniqueInput | Prisma.TimeSlotWhereUniqueInput[]
+}
+
+export type TimeSlotUpdateManyWithoutFoodsNestedInput = {
+  create?: Prisma.XOR<Prisma.TimeSlotCreateWithoutFoodsInput, Prisma.TimeSlotUncheckedCreateWithoutFoodsInput> | Prisma.TimeSlotCreateWithoutFoodsInput[] | Prisma.TimeSlotUncheckedCreateWithoutFoodsInput[]
+  connectOrCreate?: Prisma.TimeSlotCreateOrConnectWithoutFoodsInput | Prisma.TimeSlotCreateOrConnectWithoutFoodsInput[]
+  upsert?: Prisma.TimeSlotUpsertWithWhereUniqueWithoutFoodsInput | Prisma.TimeSlotUpsertWithWhereUniqueWithoutFoodsInput[]
+  set?: Prisma.TimeSlotWhereUniqueInput | Prisma.TimeSlotWhereUniqueInput[]
+  disconnect?: Prisma.TimeSlotWhereUniqueInput | Prisma.TimeSlotWhereUniqueInput[]
+  delete?: Prisma.TimeSlotWhereUniqueInput | Prisma.TimeSlotWhereUniqueInput[]
+  connect?: Prisma.TimeSlotWhereUniqueInput | Prisma.TimeSlotWhereUniqueInput[]
+  update?: Prisma.TimeSlotUpdateWithWhereUniqueWithoutFoodsInput | Prisma.TimeSlotUpdateWithWhereUniqueWithoutFoodsInput[]
+  updateMany?: Prisma.TimeSlotUpdateManyWithWhereWithoutFoodsInput | Prisma.TimeSlotUpdateManyWithWhereWithoutFoodsInput[]
+  deleteMany?: Prisma.TimeSlotScalarWhereInput | Prisma.TimeSlotScalarWhereInput[]
+}
+
+export type TimeSlotUncheckedUpdateManyWithoutFoodsNestedInput = {
+  create?: Prisma.XOR<Prisma.TimeSlotCreateWithoutFoodsInput, Prisma.TimeSlotUncheckedCreateWithoutFoodsInput> | Prisma.TimeSlotCreateWithoutFoodsInput[] | Prisma.TimeSlotUncheckedCreateWithoutFoodsInput[]
+  connectOrCreate?: Prisma.TimeSlotCreateOrConnectWithoutFoodsInput | Prisma.TimeSlotCreateOrConnectWithoutFoodsInput[]
+  upsert?: Prisma.TimeSlotUpsertWithWhereUniqueWithoutFoodsInput | Prisma.TimeSlotUpsertWithWhereUniqueWithoutFoodsInput[]
+  set?: Prisma.TimeSlotWhereUniqueInput | Prisma.TimeSlotWhereUniqueInput[]
+  disconnect?: Prisma.TimeSlotWhereUniqueInput | Prisma.TimeSlotWhereUniqueInput[]
+  delete?: Prisma.TimeSlotWhereUniqueInput | Prisma.TimeSlotWhereUniqueInput[]
+  connect?: Prisma.TimeSlotWhereUniqueInput | Prisma.TimeSlotWhereUniqueInput[]
+  update?: Prisma.TimeSlotUpdateWithWhereUniqueWithoutFoodsInput | Prisma.TimeSlotUpdateWithWhereUniqueWithoutFoodsInput[]
+  updateMany?: Prisma.TimeSlotUpdateManyWithWhereWithoutFoodsInput | Prisma.TimeSlotUpdateManyWithWhereWithoutFoodsInput[]
+  deleteMany?: Prisma.TimeSlotScalarWhereInput | Prisma.TimeSlotScalarWhereInput[]
+}
+
+export type TimeSlotCreateWithoutFoodsInput = {
+  id: string
+  label: string
+  icon: string
+}
+
+export type TimeSlotUncheckedCreateWithoutFoodsInput = {
+  id: string
+  label: string
+  icon: string
+}
+
+export type TimeSlotCreateOrConnectWithoutFoodsInput = {
+  where: Prisma.TimeSlotWhereUniqueInput
+  create: Prisma.XOR<Prisma.TimeSlotCreateWithoutFoodsInput, Prisma.TimeSlotUncheckedCreateWithoutFoodsInput>
+}
+
+export type TimeSlotUpsertWithWhereUniqueWithoutFoodsInput = {
+  where: Prisma.TimeSlotWhereUniqueInput
+  update: Prisma.XOR<Prisma.TimeSlotUpdateWithoutFoodsInput, Prisma.TimeSlotUncheckedUpdateWithoutFoodsInput>
+  create: Prisma.XOR<Prisma.TimeSlotCreateWithoutFoodsInput, Prisma.TimeSlotUncheckedCreateWithoutFoodsInput>
+}
+
+export type TimeSlotUpdateWithWhereUniqueWithoutFoodsInput = {
+  where: Prisma.TimeSlotWhereUniqueInput
+  data: Prisma.XOR<Prisma.TimeSlotUpdateWithoutFoodsInput, Prisma.TimeSlotUncheckedUpdateWithoutFoodsInput>
+}
+
+export type TimeSlotUpdateManyWithWhereWithoutFoodsInput = {
+  where: Prisma.TimeSlotScalarWhereInput
+  data: Prisma.XOR<Prisma.TimeSlotUpdateManyMutationInput, Prisma.TimeSlotUncheckedUpdateManyWithoutFoodsInput>
+}
+
+export type TimeSlotScalarWhereInput = {
+  AND?: Prisma.TimeSlotScalarWhereInput | Prisma.TimeSlotScalarWhereInput[]
+  OR?: Prisma.TimeSlotScalarWhereInput[]
+  NOT?: Prisma.TimeSlotScalarWhereInput | Prisma.TimeSlotScalarWhereInput[]
+  id?: Prisma.StringFilter<"TimeSlot"> | string
+  label?: Prisma.StringFilter<"TimeSlot"> | string
+  icon?: Prisma.StringFilter<"TimeSlot"> | string
+}
+
+export type TimeSlotUpdateWithoutFoodsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type TimeSlotUncheckedUpdateWithoutFoodsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type TimeSlotUncheckedUpdateManyWithoutFoodsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+
+/**
+ * Count Type TimeSlotCountOutputType
+ */
+
+export type TimeSlotCountOutputType = {
+  foods: number
+}
+
+export type TimeSlotCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  foods?: boolean | TimeSlotCountOutputTypeCountFoodsArgs
+}
+
+/**
+ * TimeSlotCountOutputType without action
+ */
+export type TimeSlotCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TimeSlotCountOutputType
+   */
+  select?: Prisma.TimeSlotCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TimeSlotCountOutputType without action
+ */
+export type TimeSlotCountOutputTypeCountFoodsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FoodWhereInput
+}
 
 
 export type TimeSlotSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   label?: boolean
   icon?: boolean
+  foods?: boolean | Prisma.TimeSlot$foodsArgs<ExtArgs>
+  _count?: boolean | Prisma.TimeSlotCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["timeSlot"]>
 
 export type TimeSlotSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -288,10 +434,18 @@ export type TimeSlotSelectScalar = {
 }
 
 export type TimeSlotOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "label" | "icon", ExtArgs["result"]["timeSlot"]>
+export type TimeSlotInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  foods?: boolean | Prisma.TimeSlot$foodsArgs<ExtArgs>
+  _count?: boolean | Prisma.TimeSlotCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type TimeSlotIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type TimeSlotIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $TimeSlotPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "TimeSlot"
-  objects: {}
+  objects: {
+    foods: Prisma.$FoodPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     label: string
@@ -690,6 +844,7 @@ readonly fields: TimeSlotFieldRefs;
  */
 export interface Prisma__TimeSlotClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  foods<T extends Prisma.TimeSlot$foodsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TimeSlot$foodsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -739,6 +894,10 @@ export type TimeSlotFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.TimeSlotOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimeSlotInclude<ExtArgs> | null
+  /**
    * Filter, which TimeSlot to fetch.
    */
   where: Prisma.TimeSlotWhereUniqueInput
@@ -757,6 +916,10 @@ export type TimeSlotFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.TimeSlotOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimeSlotInclude<ExtArgs> | null
+  /**
    * Filter, which TimeSlot to fetch.
    */
   where: Prisma.TimeSlotWhereUniqueInput
@@ -774,6 +937,10 @@ export type TimeSlotFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the TimeSlot
    */
   omit?: Prisma.TimeSlotOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimeSlotInclude<ExtArgs> | null
   /**
    * Filter, which TimeSlot to fetch.
    */
@@ -823,6 +990,10 @@ export type TimeSlotFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.TimeSlotOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimeSlotInclude<ExtArgs> | null
+  /**
    * Filter, which TimeSlot to fetch.
    */
   where?: Prisma.TimeSlotWhereInput
@@ -870,6 +1041,10 @@ export type TimeSlotFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the TimeSlot
    */
   omit?: Prisma.TimeSlotOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimeSlotInclude<ExtArgs> | null
   /**
    * Filter, which TimeSlots to fetch.
    */
@@ -919,6 +1094,10 @@ export type TimeSlotCreateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.TimeSlotOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimeSlotInclude<ExtArgs> | null
+  /**
    * The data needed to create a TimeSlot.
    */
   data: Prisma.XOR<Prisma.TimeSlotCreateInput, Prisma.TimeSlotUncheckedCreateInput>
@@ -964,6 +1143,10 @@ export type TimeSlotUpdateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the TimeSlot
    */
   omit?: Prisma.TimeSlotOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimeSlotInclude<ExtArgs> | null
   /**
    * The data needed to update a TimeSlot.
    */
@@ -1031,6 +1214,10 @@ export type TimeSlotUpsertArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.TimeSlotOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimeSlotInclude<ExtArgs> | null
+  /**
    * The filter to search for the TimeSlot to update in case it exists.
    */
   where: Prisma.TimeSlotWhereUniqueInput
@@ -1057,6 +1244,10 @@ export type TimeSlotDeleteArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.TimeSlotOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimeSlotInclude<ExtArgs> | null
+  /**
    * Filter which TimeSlot to delete.
    */
   where: Prisma.TimeSlotWhereUniqueInput
@@ -1077,6 +1268,30 @@ export type TimeSlotDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * TimeSlot.foods
+ */
+export type TimeSlot$foodsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Food
+   */
+  select?: Prisma.FoodSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Food
+   */
+  omit?: Prisma.FoodOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FoodInclude<ExtArgs> | null
+  where?: Prisma.FoodWhereInput
+  orderBy?: Prisma.FoodOrderByWithRelationInput | Prisma.FoodOrderByWithRelationInput[]
+  cursor?: Prisma.FoodWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FoodScalarFieldEnum | Prisma.FoodScalarFieldEnum[]
+}
+
+/**
  * TimeSlot without action
  */
 export type TimeSlotDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1088,4 +1303,8 @@ export type TimeSlotDefaultArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the TimeSlot
    */
   omit?: Prisma.TimeSlotOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimeSlotInclude<ExtArgs> | null
 }

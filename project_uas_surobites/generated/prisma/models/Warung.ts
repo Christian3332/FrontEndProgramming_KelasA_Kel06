@@ -27,123 +27,99 @@ export type AggregateWarung = {
 }
 
 export type WarungAvgAggregateOutputType = {
-  sortOrder: number | null
+  id: number | null
 }
 
 export type WarungSumAggregateOutputType = {
-  sortOrder: number | null
+  id: number | null
 }
 
 export type WarungMinAggregateOutputType = {
-  id: string | null
+  id: number | null
+  slug: string | null
   name: string | null
   address: string | null
   openDays: string | null
   openTime: string | null
   closeTime: string | null
   description: string | null
-  foodIds: string | null
-  otherMenu: string | null
   image: string | null
   mapsUrl: string | null
-  sortOrder: number | null
-  createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type WarungMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
+  slug: string | null
   name: string | null
   address: string | null
   openDays: string | null
   openTime: string | null
   closeTime: string | null
   description: string | null
-  foodIds: string | null
-  otherMenu: string | null
   image: string | null
   mapsUrl: string | null
-  sortOrder: number | null
-  createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type WarungCountAggregateOutputType = {
   id: number
+  slug: number
   name: number
   address: number
   openDays: number
   openTime: number
   closeTime: number
   description: number
-  foodIds: number
-  otherMenu: number
   image: number
   mapsUrl: number
-  sortOrder: number
-  createdAt: number
-  updatedAt: number
   _all: number
 }
 
 
 export type WarungAvgAggregateInputType = {
-  sortOrder?: true
+  id?: true
 }
 
 export type WarungSumAggregateInputType = {
-  sortOrder?: true
+  id?: true
 }
 
 export type WarungMinAggregateInputType = {
   id?: true
+  slug?: true
   name?: true
   address?: true
   openDays?: true
   openTime?: true
   closeTime?: true
   description?: true
-  foodIds?: true
-  otherMenu?: true
   image?: true
   mapsUrl?: true
-  sortOrder?: true
-  createdAt?: true
-  updatedAt?: true
 }
 
 export type WarungMaxAggregateInputType = {
   id?: true
+  slug?: true
   name?: true
   address?: true
   openDays?: true
   openTime?: true
   closeTime?: true
   description?: true
-  foodIds?: true
-  otherMenu?: true
   image?: true
   mapsUrl?: true
-  sortOrder?: true
-  createdAt?: true
-  updatedAt?: true
 }
 
 export type WarungCountAggregateInputType = {
   id?: true
+  slug?: true
   name?: true
   address?: true
   openDays?: true
   openTime?: true
   closeTime?: true
   description?: true
-  foodIds?: true
-  otherMenu?: true
   image?: true
   mapsUrl?: true
-  sortOrder?: true
-  createdAt?: true
-  updatedAt?: true
   _all?: true
 }
 
@@ -234,20 +210,16 @@ export type WarungGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 export type WarungGroupByOutputType = {
-  id: string
+  id: number
+  slug: string
   name: string
   address: string
   openDays: string
   openTime: string
   closeTime: string
   description: string
-  foodIds: string
-  otherMenu: string
   image: string
   mapsUrl: string
-  sortOrder: number
-  createdAt: Date
-  updatedAt: Date
   _count: WarungCountAggregateOutputType | null
   _avg: WarungAvgAggregateOutputType | null
   _sum: WarungSumAggregateOutputType | null
@@ -274,41 +246,38 @@ export type WarungWhereInput = {
   AND?: Prisma.WarungWhereInput | Prisma.WarungWhereInput[]
   OR?: Prisma.WarungWhereInput[]
   NOT?: Prisma.WarungWhereInput | Prisma.WarungWhereInput[]
-  id?: Prisma.StringFilter<"Warung"> | string
+  id?: Prisma.IntFilter<"Warung"> | number
+  slug?: Prisma.StringFilter<"Warung"> | string
   name?: Prisma.StringFilter<"Warung"> | string
   address?: Prisma.StringFilter<"Warung"> | string
   openDays?: Prisma.StringFilter<"Warung"> | string
   openTime?: Prisma.StringFilter<"Warung"> | string
   closeTime?: Prisma.StringFilter<"Warung"> | string
   description?: Prisma.StringFilter<"Warung"> | string
-  foodIds?: Prisma.StringFilter<"Warung"> | string
-  otherMenu?: Prisma.StringFilter<"Warung"> | string
   image?: Prisma.StringFilter<"Warung"> | string
   mapsUrl?: Prisma.StringFilter<"Warung"> | string
-  sortOrder?: Prisma.IntFilter<"Warung"> | number
-  createdAt?: Prisma.DateTimeFilter<"Warung"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Warung"> | Date | string
+  foods?: Prisma.FoodListRelationFilter
+  menus?: Prisma.WarungMenuListRelationFilter
 }
 
 export type WarungOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
   openDays?: Prisma.SortOrder
   openTime?: Prisma.SortOrder
   closeTime?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  foodIds?: Prisma.SortOrder
-  otherMenu?: Prisma.SortOrder
   image?: Prisma.SortOrder
   mapsUrl?: Prisma.SortOrder
-  sortOrder?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  foods?: Prisma.FoodOrderByRelationAggregateInput
+  menus?: Prisma.WarungMenuOrderByRelationAggregateInput
 }
 
 export type WarungWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
+  slug?: string
   AND?: Prisma.WarungWhereInput | Prisma.WarungWhereInput[]
   OR?: Prisma.WarungWhereInput[]
   NOT?: Prisma.WarungWhereInput | Prisma.WarungWhereInput[]
@@ -318,30 +287,23 @@ export type WarungWhereUniqueInput = Prisma.AtLeast<{
   openTime?: Prisma.StringFilter<"Warung"> | string
   closeTime?: Prisma.StringFilter<"Warung"> | string
   description?: Prisma.StringFilter<"Warung"> | string
-  foodIds?: Prisma.StringFilter<"Warung"> | string
-  otherMenu?: Prisma.StringFilter<"Warung"> | string
   image?: Prisma.StringFilter<"Warung"> | string
   mapsUrl?: Prisma.StringFilter<"Warung"> | string
-  sortOrder?: Prisma.IntFilter<"Warung"> | number
-  createdAt?: Prisma.DateTimeFilter<"Warung"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Warung"> | Date | string
-}, "id">
+  foods?: Prisma.FoodListRelationFilter
+  menus?: Prisma.WarungMenuListRelationFilter
+}, "id" | "slug">
 
 export type WarungOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
   openDays?: Prisma.SortOrder
   openTime?: Prisma.SortOrder
   closeTime?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  foodIds?: Prisma.SortOrder
-  otherMenu?: Prisma.SortOrder
   image?: Prisma.SortOrder
   mapsUrl?: Prisma.SortOrder
-  sortOrder?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   _count?: Prisma.WarungCountOrderByAggregateInput
   _avg?: Prisma.WarungAvgOrderByAggregateInput
   _max?: Prisma.WarungMaxOrderByAggregateInput
@@ -353,290 +315,523 @@ export type WarungScalarWhereWithAggregatesInput = {
   AND?: Prisma.WarungScalarWhereWithAggregatesInput | Prisma.WarungScalarWhereWithAggregatesInput[]
   OR?: Prisma.WarungScalarWhereWithAggregatesInput[]
   NOT?: Prisma.WarungScalarWhereWithAggregatesInput | Prisma.WarungScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Warung"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Warung"> | number
+  slug?: Prisma.StringWithAggregatesFilter<"Warung"> | string
   name?: Prisma.StringWithAggregatesFilter<"Warung"> | string
   address?: Prisma.StringWithAggregatesFilter<"Warung"> | string
   openDays?: Prisma.StringWithAggregatesFilter<"Warung"> | string
   openTime?: Prisma.StringWithAggregatesFilter<"Warung"> | string
   closeTime?: Prisma.StringWithAggregatesFilter<"Warung"> | string
   description?: Prisma.StringWithAggregatesFilter<"Warung"> | string
-  foodIds?: Prisma.StringWithAggregatesFilter<"Warung"> | string
-  otherMenu?: Prisma.StringWithAggregatesFilter<"Warung"> | string
   image?: Prisma.StringWithAggregatesFilter<"Warung"> | string
   mapsUrl?: Prisma.StringWithAggregatesFilter<"Warung"> | string
-  sortOrder?: Prisma.IntWithAggregatesFilter<"Warung"> | number
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Warung"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Warung"> | Date | string
 }
 
 export type WarungCreateInput = {
-  id: string
+  slug: string
   name: string
   address: string
   openDays: string
   openTime: string
   closeTime: string
   description: string
-  foodIds: string
-  otherMenu: string
   image: string
   mapsUrl: string
-  sortOrder?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  foods?: Prisma.FoodCreateNestedManyWithoutWarungsInput
+  menus?: Prisma.WarungMenuCreateNestedManyWithoutWarungInput
 }
 
 export type WarungUncheckedCreateInput = {
-  id: string
+  id?: number
+  slug: string
   name: string
   address: string
   openDays: string
   openTime: string
   closeTime: string
   description: string
-  foodIds: string
-  otherMenu: string
   image: string
   mapsUrl: string
-  sortOrder?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  foods?: Prisma.FoodUncheckedCreateNestedManyWithoutWarungsInput
+  menus?: Prisma.WarungMenuUncheckedCreateNestedManyWithoutWarungInput
 }
 
 export type WarungUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
   openDays?: Prisma.StringFieldUpdateOperationsInput | string
   openTime?: Prisma.StringFieldUpdateOperationsInput | string
   closeTime?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  foodIds?: Prisma.StringFieldUpdateOperationsInput | string
-  otherMenu?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
   mapsUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  foods?: Prisma.FoodUpdateManyWithoutWarungsNestedInput
+  menus?: Prisma.WarungMenuUpdateManyWithoutWarungNestedInput
 }
 
 export type WarungUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
   openDays?: Prisma.StringFieldUpdateOperationsInput | string
   openTime?: Prisma.StringFieldUpdateOperationsInput | string
   closeTime?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  foodIds?: Prisma.StringFieldUpdateOperationsInput | string
-  otherMenu?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
   mapsUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  foods?: Prisma.FoodUncheckedUpdateManyWithoutWarungsNestedInput
+  menus?: Prisma.WarungMenuUncheckedUpdateManyWithoutWarungNestedInput
 }
 
 export type WarungCreateManyInput = {
-  id: string
+  id?: number
+  slug: string
   name: string
   address: string
   openDays: string
   openTime: string
   closeTime: string
   description: string
-  foodIds: string
-  otherMenu: string
   image: string
   mapsUrl: string
-  sortOrder?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type WarungUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
   openDays?: Prisma.StringFieldUpdateOperationsInput | string
   openTime?: Prisma.StringFieldUpdateOperationsInput | string
   closeTime?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  foodIds?: Prisma.StringFieldUpdateOperationsInput | string
-  otherMenu?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
   mapsUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type WarungUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
   openDays?: Prisma.StringFieldUpdateOperationsInput | string
   openTime?: Prisma.StringFieldUpdateOperationsInput | string
   closeTime?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  foodIds?: Prisma.StringFieldUpdateOperationsInput | string
-  otherMenu?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
   mapsUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type WarungListRelationFilter = {
+  every?: Prisma.WarungWhereInput
+  some?: Prisma.WarungWhereInput
+  none?: Prisma.WarungWhereInput
+}
+
+export type WarungOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type WarungCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
   openDays?: Prisma.SortOrder
   openTime?: Prisma.SortOrder
   closeTime?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  foodIds?: Prisma.SortOrder
-  otherMenu?: Prisma.SortOrder
   image?: Prisma.SortOrder
   mapsUrl?: Prisma.SortOrder
-  sortOrder?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type WarungAvgOrderByAggregateInput = {
-  sortOrder?: Prisma.SortOrder
+  id?: Prisma.SortOrder
 }
 
 export type WarungMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
   openDays?: Prisma.SortOrder
   openTime?: Prisma.SortOrder
   closeTime?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  foodIds?: Prisma.SortOrder
-  otherMenu?: Prisma.SortOrder
   image?: Prisma.SortOrder
   mapsUrl?: Prisma.SortOrder
-  sortOrder?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type WarungMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
   openDays?: Prisma.SortOrder
   openTime?: Prisma.SortOrder
   closeTime?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  foodIds?: Prisma.SortOrder
-  otherMenu?: Prisma.SortOrder
   image?: Prisma.SortOrder
   mapsUrl?: Prisma.SortOrder
-  sortOrder?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type WarungSumOrderByAggregateInput = {
-  sortOrder?: Prisma.SortOrder
+  id?: Prisma.SortOrder
 }
 
+export type WarungScalarRelationFilter = {
+  is?: Prisma.WarungWhereInput
+  isNot?: Prisma.WarungWhereInput
+}
+
+export type WarungCreateNestedManyWithoutFoodsInput = {
+  create?: Prisma.XOR<Prisma.WarungCreateWithoutFoodsInput, Prisma.WarungUncheckedCreateWithoutFoodsInput> | Prisma.WarungCreateWithoutFoodsInput[] | Prisma.WarungUncheckedCreateWithoutFoodsInput[]
+  connectOrCreate?: Prisma.WarungCreateOrConnectWithoutFoodsInput | Prisma.WarungCreateOrConnectWithoutFoodsInput[]
+  connect?: Prisma.WarungWhereUniqueInput | Prisma.WarungWhereUniqueInput[]
+}
+
+export type WarungUncheckedCreateNestedManyWithoutFoodsInput = {
+  create?: Prisma.XOR<Prisma.WarungCreateWithoutFoodsInput, Prisma.WarungUncheckedCreateWithoutFoodsInput> | Prisma.WarungCreateWithoutFoodsInput[] | Prisma.WarungUncheckedCreateWithoutFoodsInput[]
+  connectOrCreate?: Prisma.WarungCreateOrConnectWithoutFoodsInput | Prisma.WarungCreateOrConnectWithoutFoodsInput[]
+  connect?: Prisma.WarungWhereUniqueInput | Prisma.WarungWhereUniqueInput[]
+}
+
+export type WarungUpdateManyWithoutFoodsNestedInput = {
+  create?: Prisma.XOR<Prisma.WarungCreateWithoutFoodsInput, Prisma.WarungUncheckedCreateWithoutFoodsInput> | Prisma.WarungCreateWithoutFoodsInput[] | Prisma.WarungUncheckedCreateWithoutFoodsInput[]
+  connectOrCreate?: Prisma.WarungCreateOrConnectWithoutFoodsInput | Prisma.WarungCreateOrConnectWithoutFoodsInput[]
+  upsert?: Prisma.WarungUpsertWithWhereUniqueWithoutFoodsInput | Prisma.WarungUpsertWithWhereUniqueWithoutFoodsInput[]
+  set?: Prisma.WarungWhereUniqueInput | Prisma.WarungWhereUniqueInput[]
+  disconnect?: Prisma.WarungWhereUniqueInput | Prisma.WarungWhereUniqueInput[]
+  delete?: Prisma.WarungWhereUniqueInput | Prisma.WarungWhereUniqueInput[]
+  connect?: Prisma.WarungWhereUniqueInput | Prisma.WarungWhereUniqueInput[]
+  update?: Prisma.WarungUpdateWithWhereUniqueWithoutFoodsInput | Prisma.WarungUpdateWithWhereUniqueWithoutFoodsInput[]
+  updateMany?: Prisma.WarungUpdateManyWithWhereWithoutFoodsInput | Prisma.WarungUpdateManyWithWhereWithoutFoodsInput[]
+  deleteMany?: Prisma.WarungScalarWhereInput | Prisma.WarungScalarWhereInput[]
+}
+
+export type WarungUncheckedUpdateManyWithoutFoodsNestedInput = {
+  create?: Prisma.XOR<Prisma.WarungCreateWithoutFoodsInput, Prisma.WarungUncheckedCreateWithoutFoodsInput> | Prisma.WarungCreateWithoutFoodsInput[] | Prisma.WarungUncheckedCreateWithoutFoodsInput[]
+  connectOrCreate?: Prisma.WarungCreateOrConnectWithoutFoodsInput | Prisma.WarungCreateOrConnectWithoutFoodsInput[]
+  upsert?: Prisma.WarungUpsertWithWhereUniqueWithoutFoodsInput | Prisma.WarungUpsertWithWhereUniqueWithoutFoodsInput[]
+  set?: Prisma.WarungWhereUniqueInput | Prisma.WarungWhereUniqueInput[]
+  disconnect?: Prisma.WarungWhereUniqueInput | Prisma.WarungWhereUniqueInput[]
+  delete?: Prisma.WarungWhereUniqueInput | Prisma.WarungWhereUniqueInput[]
+  connect?: Prisma.WarungWhereUniqueInput | Prisma.WarungWhereUniqueInput[]
+  update?: Prisma.WarungUpdateWithWhereUniqueWithoutFoodsInput | Prisma.WarungUpdateWithWhereUniqueWithoutFoodsInput[]
+  updateMany?: Prisma.WarungUpdateManyWithWhereWithoutFoodsInput | Prisma.WarungUpdateManyWithWhereWithoutFoodsInput[]
+  deleteMany?: Prisma.WarungScalarWhereInput | Prisma.WarungScalarWhereInput[]
+}
+
+export type WarungCreateNestedOneWithoutMenusInput = {
+  create?: Prisma.XOR<Prisma.WarungCreateWithoutMenusInput, Prisma.WarungUncheckedCreateWithoutMenusInput>
+  connectOrCreate?: Prisma.WarungCreateOrConnectWithoutMenusInput
+  connect?: Prisma.WarungWhereUniqueInput
+}
+
+export type WarungUpdateOneRequiredWithoutMenusNestedInput = {
+  create?: Prisma.XOR<Prisma.WarungCreateWithoutMenusInput, Prisma.WarungUncheckedCreateWithoutMenusInput>
+  connectOrCreate?: Prisma.WarungCreateOrConnectWithoutMenusInput
+  upsert?: Prisma.WarungUpsertWithoutMenusInput
+  connect?: Prisma.WarungWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WarungUpdateToOneWithWhereWithoutMenusInput, Prisma.WarungUpdateWithoutMenusInput>, Prisma.WarungUncheckedUpdateWithoutMenusInput>
+}
+
+export type WarungCreateWithoutFoodsInput = {
+  slug: string
+  name: string
+  address: string
+  openDays: string
+  openTime: string
+  closeTime: string
+  description: string
+  image: string
+  mapsUrl: string
+  menus?: Prisma.WarungMenuCreateNestedManyWithoutWarungInput
+}
+
+export type WarungUncheckedCreateWithoutFoodsInput = {
+  id?: number
+  slug: string
+  name: string
+  address: string
+  openDays: string
+  openTime: string
+  closeTime: string
+  description: string
+  image: string
+  mapsUrl: string
+  menus?: Prisma.WarungMenuUncheckedCreateNestedManyWithoutWarungInput
+}
+
+export type WarungCreateOrConnectWithoutFoodsInput = {
+  where: Prisma.WarungWhereUniqueInput
+  create: Prisma.XOR<Prisma.WarungCreateWithoutFoodsInput, Prisma.WarungUncheckedCreateWithoutFoodsInput>
+}
+
+export type WarungUpsertWithWhereUniqueWithoutFoodsInput = {
+  where: Prisma.WarungWhereUniqueInput
+  update: Prisma.XOR<Prisma.WarungUpdateWithoutFoodsInput, Prisma.WarungUncheckedUpdateWithoutFoodsInput>
+  create: Prisma.XOR<Prisma.WarungCreateWithoutFoodsInput, Prisma.WarungUncheckedCreateWithoutFoodsInput>
+}
+
+export type WarungUpdateWithWhereUniqueWithoutFoodsInput = {
+  where: Prisma.WarungWhereUniqueInput
+  data: Prisma.XOR<Prisma.WarungUpdateWithoutFoodsInput, Prisma.WarungUncheckedUpdateWithoutFoodsInput>
+}
+
+export type WarungUpdateManyWithWhereWithoutFoodsInput = {
+  where: Prisma.WarungScalarWhereInput
+  data: Prisma.XOR<Prisma.WarungUpdateManyMutationInput, Prisma.WarungUncheckedUpdateManyWithoutFoodsInput>
+}
+
+export type WarungScalarWhereInput = {
+  AND?: Prisma.WarungScalarWhereInput | Prisma.WarungScalarWhereInput[]
+  OR?: Prisma.WarungScalarWhereInput[]
+  NOT?: Prisma.WarungScalarWhereInput | Prisma.WarungScalarWhereInput[]
+  id?: Prisma.IntFilter<"Warung"> | number
+  slug?: Prisma.StringFilter<"Warung"> | string
+  name?: Prisma.StringFilter<"Warung"> | string
+  address?: Prisma.StringFilter<"Warung"> | string
+  openDays?: Prisma.StringFilter<"Warung"> | string
+  openTime?: Prisma.StringFilter<"Warung"> | string
+  closeTime?: Prisma.StringFilter<"Warung"> | string
+  description?: Prisma.StringFilter<"Warung"> | string
+  image?: Prisma.StringFilter<"Warung"> | string
+  mapsUrl?: Prisma.StringFilter<"Warung"> | string
+}
+
+export type WarungCreateWithoutMenusInput = {
+  slug: string
+  name: string
+  address: string
+  openDays: string
+  openTime: string
+  closeTime: string
+  description: string
+  image: string
+  mapsUrl: string
+  foods?: Prisma.FoodCreateNestedManyWithoutWarungsInput
+}
+
+export type WarungUncheckedCreateWithoutMenusInput = {
+  id?: number
+  slug: string
+  name: string
+  address: string
+  openDays: string
+  openTime: string
+  closeTime: string
+  description: string
+  image: string
+  mapsUrl: string
+  foods?: Prisma.FoodUncheckedCreateNestedManyWithoutWarungsInput
+}
+
+export type WarungCreateOrConnectWithoutMenusInput = {
+  where: Prisma.WarungWhereUniqueInput
+  create: Prisma.XOR<Prisma.WarungCreateWithoutMenusInput, Prisma.WarungUncheckedCreateWithoutMenusInput>
+}
+
+export type WarungUpsertWithoutMenusInput = {
+  update: Prisma.XOR<Prisma.WarungUpdateWithoutMenusInput, Prisma.WarungUncheckedUpdateWithoutMenusInput>
+  create: Prisma.XOR<Prisma.WarungCreateWithoutMenusInput, Prisma.WarungUncheckedCreateWithoutMenusInput>
+  where?: Prisma.WarungWhereInput
+}
+
+export type WarungUpdateToOneWithWhereWithoutMenusInput = {
+  where?: Prisma.WarungWhereInput
+  data: Prisma.XOR<Prisma.WarungUpdateWithoutMenusInput, Prisma.WarungUncheckedUpdateWithoutMenusInput>
+}
+
+export type WarungUpdateWithoutMenusInput = {
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  openDays?: Prisma.StringFieldUpdateOperationsInput | string
+  openTime?: Prisma.StringFieldUpdateOperationsInput | string
+  closeTime?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  mapsUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  foods?: Prisma.FoodUpdateManyWithoutWarungsNestedInput
+}
+
+export type WarungUncheckedUpdateWithoutMenusInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  openDays?: Prisma.StringFieldUpdateOperationsInput | string
+  openTime?: Prisma.StringFieldUpdateOperationsInput | string
+  closeTime?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  mapsUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  foods?: Prisma.FoodUncheckedUpdateManyWithoutWarungsNestedInput
+}
+
+export type WarungUpdateWithoutFoodsInput = {
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  openDays?: Prisma.StringFieldUpdateOperationsInput | string
+  openTime?: Prisma.StringFieldUpdateOperationsInput | string
+  closeTime?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  mapsUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  menus?: Prisma.WarungMenuUpdateManyWithoutWarungNestedInput
+}
+
+export type WarungUncheckedUpdateWithoutFoodsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  openDays?: Prisma.StringFieldUpdateOperationsInput | string
+  openTime?: Prisma.StringFieldUpdateOperationsInput | string
+  closeTime?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  mapsUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  menus?: Prisma.WarungMenuUncheckedUpdateManyWithoutWarungNestedInput
+}
+
+export type WarungUncheckedUpdateManyWithoutFoodsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  openDays?: Prisma.StringFieldUpdateOperationsInput | string
+  openTime?: Prisma.StringFieldUpdateOperationsInput | string
+  closeTime?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  mapsUrl?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+
+/**
+ * Count Type WarungCountOutputType
+ */
+
+export type WarungCountOutputType = {
+  foods: number
+  menus: number
+}
+
+export type WarungCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  foods?: boolean | WarungCountOutputTypeCountFoodsArgs
+  menus?: boolean | WarungCountOutputTypeCountMenusArgs
+}
+
+/**
+ * WarungCountOutputType without action
+ */
+export type WarungCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WarungCountOutputType
+   */
+  select?: Prisma.WarungCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * WarungCountOutputType without action
+ */
+export type WarungCountOutputTypeCountFoodsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FoodWhereInput
+}
+
+/**
+ * WarungCountOutputType without action
+ */
+export type WarungCountOutputTypeCountMenusArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WarungMenuWhereInput
+}
 
 
 export type WarungSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  slug?: boolean
   name?: boolean
   address?: boolean
   openDays?: boolean
   openTime?: boolean
   closeTime?: boolean
   description?: boolean
-  foodIds?: boolean
-  otherMenu?: boolean
   image?: boolean
   mapsUrl?: boolean
-  sortOrder?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  foods?: boolean | Prisma.Warung$foodsArgs<ExtArgs>
+  menus?: boolean | Prisma.Warung$menusArgs<ExtArgs>
+  _count?: boolean | Prisma.WarungCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["warung"]>
 
 export type WarungSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  slug?: boolean
   name?: boolean
   address?: boolean
   openDays?: boolean
   openTime?: boolean
   closeTime?: boolean
   description?: boolean
-  foodIds?: boolean
-  otherMenu?: boolean
   image?: boolean
   mapsUrl?: boolean
-  sortOrder?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["warung"]>
 
 export type WarungSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  slug?: boolean
   name?: boolean
   address?: boolean
   openDays?: boolean
   openTime?: boolean
   closeTime?: boolean
   description?: boolean
-  foodIds?: boolean
-  otherMenu?: boolean
   image?: boolean
   mapsUrl?: boolean
-  sortOrder?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["warung"]>
 
 export type WarungSelectScalar = {
   id?: boolean
+  slug?: boolean
   name?: boolean
   address?: boolean
   openDays?: boolean
   openTime?: boolean
   closeTime?: boolean
   description?: boolean
-  foodIds?: boolean
-  otherMenu?: boolean
   image?: boolean
   mapsUrl?: boolean
-  sortOrder?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
 }
 
-export type WarungOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "address" | "openDays" | "openTime" | "closeTime" | "description" | "foodIds" | "otherMenu" | "image" | "mapsUrl" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["warung"]>
+export type WarungOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "name" | "address" | "openDays" | "openTime" | "closeTime" | "description" | "image" | "mapsUrl", ExtArgs["result"]["warung"]>
+export type WarungInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  foods?: boolean | Prisma.Warung$foodsArgs<ExtArgs>
+  menus?: boolean | Prisma.Warung$menusArgs<ExtArgs>
+  _count?: boolean | Prisma.WarungCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type WarungIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type WarungIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $WarungPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Warung"
-  objects: {}
+  objects: {
+    foods: Prisma.$FoodPayload<ExtArgs>[]
+    menus: Prisma.$WarungMenuPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
+    slug: string
     name: string
     address: string
     openDays: string
     openTime: string
     closeTime: string
     description: string
-    foodIds: string
-    otherMenu: string
     image: string
     mapsUrl: string
-    sortOrder: number
-    createdAt: Date
-    updatedAt: Date
   }, ExtArgs["result"]["warung"]>
   composites: {}
 }
@@ -1031,6 +1226,8 @@ readonly fields: WarungFieldRefs;
  */
 export interface Prisma__WarungClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  foods<T extends Prisma.Warung$foodsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Warung$foodsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  menus<T extends Prisma.Warung$menusArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Warung$menusArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WarungMenuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1060,20 +1257,16 @@ export interface Prisma__WarungClient<T, Null = never, ExtArgs extends runtime.T
  * Fields of the Warung model
  */
 export interface WarungFieldRefs {
-  readonly id: Prisma.FieldRef<"Warung", 'String'>
+  readonly id: Prisma.FieldRef<"Warung", 'Int'>
+  readonly slug: Prisma.FieldRef<"Warung", 'String'>
   readonly name: Prisma.FieldRef<"Warung", 'String'>
   readonly address: Prisma.FieldRef<"Warung", 'String'>
   readonly openDays: Prisma.FieldRef<"Warung", 'String'>
   readonly openTime: Prisma.FieldRef<"Warung", 'String'>
   readonly closeTime: Prisma.FieldRef<"Warung", 'String'>
   readonly description: Prisma.FieldRef<"Warung", 'String'>
-  readonly foodIds: Prisma.FieldRef<"Warung", 'String'>
-  readonly otherMenu: Prisma.FieldRef<"Warung", 'String'>
   readonly image: Prisma.FieldRef<"Warung", 'String'>
   readonly mapsUrl: Prisma.FieldRef<"Warung", 'String'>
-  readonly sortOrder: Prisma.FieldRef<"Warung", 'Int'>
-  readonly createdAt: Prisma.FieldRef<"Warung", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"Warung", 'DateTime'>
 }
     
 
@@ -1090,6 +1283,10 @@ export type WarungFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Warung
    */
   omit?: Prisma.WarungOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WarungInclude<ExtArgs> | null
   /**
    * Filter, which Warung to fetch.
    */
@@ -1109,6 +1306,10 @@ export type WarungFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.WarungOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WarungInclude<ExtArgs> | null
+  /**
    * Filter, which Warung to fetch.
    */
   where: Prisma.WarungWhereUniqueInput
@@ -1126,6 +1327,10 @@ export type WarungFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Warung
    */
   omit?: Prisma.WarungOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WarungInclude<ExtArgs> | null
   /**
    * Filter, which Warung to fetch.
    */
@@ -1175,6 +1380,10 @@ export type WarungFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.WarungOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WarungInclude<ExtArgs> | null
+  /**
    * Filter, which Warung to fetch.
    */
   where?: Prisma.WarungWhereInput
@@ -1222,6 +1431,10 @@ export type WarungFindManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Warung
    */
   omit?: Prisma.WarungOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WarungInclude<ExtArgs> | null
   /**
    * Filter, which Warungs to fetch.
    */
@@ -1271,6 +1484,10 @@ export type WarungCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.WarungOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WarungInclude<ExtArgs> | null
+  /**
    * The data needed to create a Warung.
    */
   data: Prisma.XOR<Prisma.WarungCreateInput, Prisma.WarungUncheckedCreateInput>
@@ -1316,6 +1533,10 @@ export type WarungUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Warung
    */
   omit?: Prisma.WarungOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WarungInclude<ExtArgs> | null
   /**
    * The data needed to update a Warung.
    */
@@ -1383,6 +1604,10 @@ export type WarungUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.WarungOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WarungInclude<ExtArgs> | null
+  /**
    * The filter to search for the Warung to update in case it exists.
    */
   where: Prisma.WarungWhereUniqueInput
@@ -1409,6 +1634,10 @@ export type WarungDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.WarungOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WarungInclude<ExtArgs> | null
+  /**
    * Filter which Warung to delete.
    */
   where: Prisma.WarungWhereUniqueInput
@@ -1429,6 +1658,54 @@ export type WarungDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * Warung.foods
+ */
+export type Warung$foodsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Food
+   */
+  select?: Prisma.FoodSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Food
+   */
+  omit?: Prisma.FoodOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FoodInclude<ExtArgs> | null
+  where?: Prisma.FoodWhereInput
+  orderBy?: Prisma.FoodOrderByWithRelationInput | Prisma.FoodOrderByWithRelationInput[]
+  cursor?: Prisma.FoodWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FoodScalarFieldEnum | Prisma.FoodScalarFieldEnum[]
+}
+
+/**
+ * Warung.menus
+ */
+export type Warung$menusArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WarungMenu
+   */
+  select?: Prisma.WarungMenuSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WarungMenu
+   */
+  omit?: Prisma.WarungMenuOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WarungMenuInclude<ExtArgs> | null
+  where?: Prisma.WarungMenuWhereInput
+  orderBy?: Prisma.WarungMenuOrderByWithRelationInput | Prisma.WarungMenuOrderByWithRelationInput[]
+  cursor?: Prisma.WarungMenuWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WarungMenuScalarFieldEnum | Prisma.WarungMenuScalarFieldEnum[]
+}
+
+/**
  * Warung without action
  */
 export type WarungDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1440,4 +1717,8 @@ export type WarungDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Warung
    */
   omit?: Prisma.WarungOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WarungInclude<ExtArgs> | null
 }

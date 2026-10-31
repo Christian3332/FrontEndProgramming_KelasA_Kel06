@@ -51,11 +51,14 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  PriceCategory: 'PriceCategory',
   Category: 'Category',
-  Price: 'Price',
   TimeSlot: 'TimeSlot',
   Food: 'Food',
+  Ingredient: 'Ingredient',
   Warung: 'Warung',
+  WarungMenu: 'WarungMenu',
+  Admin: 'Admin',
   Faq: 'Faq'
 } as const
 
@@ -72,6 +75,15 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const PriceCategoryScalarFieldEnum = {
+  id: 'id',
+  label: 'label',
+  hint: 'hint'
+} as const
+
+export type PriceCategoryScalarFieldEnum = (typeof PriceCategoryScalarFieldEnum)[keyof typeof PriceCategoryScalarFieldEnum]
+
+
 export const CategoryScalarFieldEnum = {
   id: 'id',
   label: 'label',
@@ -80,15 +92,6 @@ export const CategoryScalarFieldEnum = {
 } as const
 
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
-
-
-export const PriceScalarFieldEnum = {
-  id: 'id',
-  label: 'label',
-  hint: 'hint'
-} as const
-
-export type PriceScalarFieldEnum = (typeof PriceScalarFieldEnum)[keyof typeof PriceScalarFieldEnum]
 
 
 export const TimeSlotScalarFieldEnum = {
@@ -102,52 +105,67 @@ export type TimeSlotScalarFieldEnum = (typeof TimeSlotScalarFieldEnum)[keyof typ
 
 export const FoodScalarFieldEnum = {
   id: 'id',
+  slug: 'slug',
   name: 'name',
   image: 'image',
   shortDescription: 'shortDescription',
   story: 'story',
-  ingredients: 'ingredients',
   taste: 'taste',
-  categories: 'categories',
-  priceCategory: 'priceCategory',
   priceRange: 'priceRange',
-  timeCategory: 'timeCategory',
   featured: 'featured',
-  sortOrder: 'sortOrder',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  priceCategoryId: 'priceCategoryId'
 } as const
 
 export type FoodScalarFieldEnum = (typeof FoodScalarFieldEnum)[keyof typeof FoodScalarFieldEnum]
 
 
+export const IngredientScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  foodId: 'foodId'
+} as const
+
+export type IngredientScalarFieldEnum = (typeof IngredientScalarFieldEnum)[keyof typeof IngredientScalarFieldEnum]
+
+
 export const WarungScalarFieldEnum = {
   id: 'id',
+  slug: 'slug',
   name: 'name',
   address: 'address',
   openDays: 'openDays',
   openTime: 'openTime',
   closeTime: 'closeTime',
   description: 'description',
-  foodIds: 'foodIds',
-  otherMenu: 'otherMenu',
   image: 'image',
-  mapsUrl: 'mapsUrl',
-  sortOrder: 'sortOrder',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  mapsUrl: 'mapsUrl'
 } as const
 
 export type WarungScalarFieldEnum = (typeof WarungScalarFieldEnum)[keyof typeof WarungScalarFieldEnum]
 
 
+export const WarungMenuScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  warungId: 'warungId'
+} as const
+
+export type WarungMenuScalarFieldEnum = (typeof WarungMenuScalarFieldEnum)[keyof typeof WarungMenuScalarFieldEnum]
+
+
+export const AdminScalarFieldEnum = {
+  id: 'id',
+  username: 'username',
+  passwordHash: 'passwordHash'
+} as const
+
+export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
+
+
 export const FaqScalarFieldEnum = {
   id: 'id',
   question: 'question',
-  answer: 'answer',
-  sortOrder: 'sortOrder',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  answer: 'answer'
 } as const
 
 export type FaqScalarFieldEnum = (typeof FaqScalarFieldEnum)[keyof typeof FaqScalarFieldEnum]
