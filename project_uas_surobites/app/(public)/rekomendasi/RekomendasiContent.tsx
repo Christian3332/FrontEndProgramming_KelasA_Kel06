@@ -17,13 +17,26 @@ import styles from "@/app/styles/rekomendasi.module.css";
 
 const PAGE_SIZE = 9;
 
-export default function RekomendasiContent() {
+type Props = {
+  content: {
+    rekomendasiTitle: string;
+    rekomendasiDescription: string;
+  };
+};
+
+export default function RekomendasiContent({ content }: Props) {
   const raw = useSearchParams().get("kategori");
   const categoryId = raw ? (getCategory(raw)?.id ?? null) : null;
-  return <RekomendasiList key={categoryId ?? "all"} categoryId={categoryId} />;
+  return <RekomendasiList key={categoryId ?? "all"} categoryId={categoryId} content={content} />;
 }
 
-function RekomendasiList({ categoryId }: { categoryId: string | null }) {
+function RekomendasiList({
+  categoryId,
+  content,
+}: {
+  categoryId: string | null;
+  content: Props["content"];
+}) {
   const foods = useFoods();
   const warungs = useWarungs();
   const router = useRouter();
@@ -58,11 +71,8 @@ function RekomendasiList({ categoryId }: { categoryId: string | null }) {
           <span className={`align-self-start ${styles.eyebrow}`}>
             <i className="fa-solid fa-wand-magic-sparkles"></i> Rekomendasi Kuliner
           </span>
-          <h2 id="rekomendasi-hero-title" className={home.heroTitle}>Temukan Kuliner yang Cocok Untukmu</h2>
-          <p className={home.heroText}>
-            Bingung mau makan apa? Pilih kategori sesuai selera dan kebutuhanmu,
-            lalu temukan rekomendasi makanan khas Surabaya yang paling pas.
-          </p>
+          <h2 id="rekomendasi-hero-title" className={home.heroTitle}>{content.rekomendasiTitle}</h2>
+          <p className={home.heroText}>{content.rekomendasiDescription}</p>
           <ul className={`list-unstyled d-flex flex-wrap m-0 ${styles.stats}`}>
             <li className={`d-flex align-items-baseline ${styles.stat}`}>
               <strong>{foods.length}</strong> Kuliner

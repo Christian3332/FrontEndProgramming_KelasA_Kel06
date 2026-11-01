@@ -59,7 +59,8 @@ export const ModelName = {
   Warung: 'Warung',
   WarungMenu: 'WarungMenu',
   Admin: 'Admin',
-  Faq: 'Faq'
+  Faq: 'Faq',
+  SiteContent: 'SiteContent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -170,6 +171,21 @@ export const FaqScalarFieldEnum = {
 } as const
 
 export type FaqScalarFieldEnum = (typeof FaqScalarFieldEnum)[keyof typeof FaqScalarFieldEnum]
+
+
+export const SiteContentScalarFieldEnum = {
+  id: 'id',
+  heroTitle: 'heroTitle',
+  heroDescription: 'heroDescription',
+  rekomendasiTitle: 'rekomendasiTitle',
+  rekomendasiDescription: 'rekomendasiDescription',
+  contactEmail: 'contactEmail',
+  contactPhone: 'contactPhone',
+  instagram: 'instagram',
+  facebook: 'facebook'
+} as const
+
+export type SiteContentScalarFieldEnum = (typeof SiteContentScalarFieldEnum)[keyof typeof SiteContentScalarFieldEnum]
 
 
 export const SortOrder = {
