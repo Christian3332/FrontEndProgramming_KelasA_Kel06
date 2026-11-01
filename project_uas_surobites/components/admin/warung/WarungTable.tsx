@@ -45,30 +45,54 @@ export default function WarungTable({ addRequest }: Props) {
     setTableError("");
   }
 
-  async function loadFoods() {
-    const response = await fetch("/api/foods");
-    if (response.ok) setFoodOptions(await response.json());
+  function startAdd() {
+    setForm(warungKosong);
+    setError("");
+    setOpen(true);
   }
 
   useEffect(() => {
-    loadWarungs();
-    loadFoods();
+    let aktif = true;
+
+    fetch("/api/warungs")
+      .then((response) => {
+        if (!response.ok) throw new Error("Data warung gagal dimuat.");
+        return response.json();
+      })
+      .then((data: Warung[]) => {
+        if (aktif) setList(data);
+      })
+      .catch(() => {
+        if (aktif) setTableError("Data warung gagal dimuat.");
+      });
+
+    fetch("/api/foods")
+      .then((response) => {
+        if (!response.ok) throw new Error("Data makanan gagal dimuat.");
+        return response.json();
+      })
+      .then((data: Food[]) => {
+        if (aktif) setFoodOptions(data);
+      })
+      .catch(() => {
+        if (aktif) setTableError("Pilihan makanan gagal dimuat.");
+      });
+
+    return () => {
+      aktif = false;
+    };
   }, []);
 
   useEffect(() => {
-    if (addRequest > 0) startAdd();
+    if (addRequest === 0) return;
+    const timer = window.setTimeout(startAdd, 0);
+    return () => window.clearTimeout(timer);
   }, [addRequest]);
 
   const filteredWarungs = list.filter((warung) =>
     warung.name.toLowerCase().includes(keyword.toLowerCase().trim()),
   );
   const emptyText = list.length === 0 ? "Belum ada data warung." : "Warung tidak ditemukan.";
-
-  function startAdd() {
-    setForm(warungKosong);
-    setError("");
-    setOpen(true);
-  }
 
   function startEdit(warung: Warung) {
     setForm({ ...warung });
