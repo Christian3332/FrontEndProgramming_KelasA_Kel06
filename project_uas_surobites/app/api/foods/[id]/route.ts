@@ -1,5 +1,6 @@
 import { getFood } from "@/lib/queries";
 import { prisma } from "@/lib/prisma";
+import { createSlug } from "@/lib/helper";
 
 type Context = { params: Promise<{ id: string }> };
 
@@ -16,16 +17,22 @@ export async function PUT(request: Request, { params }: Context) {
   const { id } = await params;
   const data = await request.json();
   const name = String(data.name ?? "").trim();
+  const slug = createSlug(name);
   const priceRange = String(data.priceRange ?? "").trim();
   const categories = Array.isArray(data.categories) ? data.categories : [];
   const timeCategory = Array.isArray(data.timeCategory) ? data.timeCategory : [];
   const ingredients = Array.isArray(data.ingredients) ? data.ingredients : [];
 
-  if (!name || !data.priceCategory || !priceRange) {
+  if (!name || !slug || !data.priceCategory || !priceRange) {
     return Response.json({ message: "Lengkapi nama, kategori harga, dan rentang harga makanan." }, { status: 400 });
   }
 
   try {
+    const existingFood = await prisma.food.findUnique({ where: { slug } });
+    if (existingFood && existingFood.slug !== id) {
+      return Response.json({ message: "Nama makanan tersebut sudah digunakan." }, { status: 400 });
+    }
+
     if (data.featured) {
       const featuredCount = await prisma.food.count({
         where: { featured: true, slug: { not: id } },
@@ -38,6 +45,7 @@ export async function PUT(request: Request, { params }: Context) {
     await prisma.food.update({
       where: { slug: id },
       data: {
+        slug,
         name,
         image: String(data.image || "/img/Rawon.jpg"),
         shortDescription: String(data.shortDescription ?? ""),
