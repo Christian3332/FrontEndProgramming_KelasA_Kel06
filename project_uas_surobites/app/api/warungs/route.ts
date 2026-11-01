@@ -14,8 +14,8 @@ export async function POST(request: Request) {
   const foodIds = Array.isArray(data.foodIds) ? data.foodIds : [];
   const otherMenu = Array.isArray(data.otherMenu) ? data.otherMenu : [];
 
-  if (!name || !slug || !String(data.address ?? "").trim()) {
-    return Response.json({ message: "Isi nama dan alamat warung." }, { status: 400 });
+  if (!name || !slug || !String(data.address ?? "").trim() || !String(data.openDays ?? "").trim() || !data.openTime || !data.closeTime) {
+    return Response.json({ message: "Isi nama, alamat, hari buka, dan jam operasional warung." }, { status: 400 });
   }
 
   try {
