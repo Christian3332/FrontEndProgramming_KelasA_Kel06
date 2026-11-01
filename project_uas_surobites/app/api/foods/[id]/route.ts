@@ -15,6 +15,11 @@ export async function GET(_request: Request, { params }: Context) {
 export async function PUT(request: Request, { params }: Context) {
   const { id } = await params;
   const data = await request.json();
+  const name = String(data.name ?? "").trim();
+
+  if (!name || !data.priceCategory || !data.priceRange) {
+    return Response.json({ message: "Lengkapi nama dan kategori harga makanan." }, { status: 400 });
+  }
 
   try {
     if (data.featured) {
@@ -29,7 +34,7 @@ export async function PUT(request: Request, { params }: Context) {
     await prisma.food.update({
       where: { slug: id },
       data: {
-        name: String(data.name ?? "").trim(),
+        name,
         image: String(data.image || "/img/Rawon.jpg"),
         shortDescription: String(data.shortDescription ?? ""),
         story: String(data.story ?? ""),
