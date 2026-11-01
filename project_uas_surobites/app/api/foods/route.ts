@@ -11,9 +11,12 @@ export async function POST(request: Request) {
   const data = await request.json();
   const name = String(data.name ?? "").trim();
   const slug = createSlug(name);
+  const categories = Array.isArray(data.categories) ? data.categories : [];
+  const timeCategory = Array.isArray(data.timeCategory) ? data.timeCategory : [];
+  const ingredients = Array.isArray(data.ingredients) ? data.ingredients : [];
 
-  if (!name || !slug || !data.priceCategory || !data.priceRange) {
-    return Response.json({ message: "Lengkapi nama dan kategori harga makanan." }, { status: 400 });
+  if (!name || !slug || !data.priceCategory || !String(data.priceRange ?? "").trim()) {
+    return Response.json({ message: "Lengkapi nama, kategori harga, dan rentang harga makanan." }, { status: 400 });
   }
 
   try {
@@ -35,9 +38,9 @@ export async function POST(request: Request) {
         priceRange: String(data.priceRange),
         featured: Boolean(data.featured),
         priceCategoryId: String(data.priceCategory),
-        categories: { connect: (data.categories ?? []).map((id: string) => ({ id })) },
-        timeSlots: { connect: (data.timeCategory ?? []).map((id: string) => ({ id })) },
-        ingredients: { create: (data.ingredients ?? []).map((name: string) => ({ name })) },
+        categories: { connect: categories.map((id: string) => ({ id: String(id) })) },
+        timeSlots: { connect: timeCategory.map((id: string) => ({ id: String(id) })) },
+        ingredients: { create: ingredients.map((name: string) => ({ name: String(name).trim() })).filter((ingredient: { name: string }) => ingredient.name) },
       },
     });
 

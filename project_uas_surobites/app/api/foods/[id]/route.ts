@@ -15,6 +15,15 @@ export async function GET(_request: Request, { params }: Context) {
 export async function PUT(request: Request, { params }: Context) {
   const { id } = await params;
   const data = await request.json();
+  const name = String(data.name ?? "").trim();
+  const priceRange = String(data.priceRange ?? "").trim();
+  const categories = Array.isArray(data.categories) ? data.categories : [];
+  const timeCategory = Array.isArray(data.timeCategory) ? data.timeCategory : [];
+  const ingredients = Array.isArray(data.ingredients) ? data.ingredients : [];
+
+  if (!name || !data.priceCategory || !priceRange) {
+    return Response.json({ message: "Lengkapi nama, kategori harga, dan rentang harga makanan." }, { status: 400 });
+  }
 
   try {
     if (data.featured) {
@@ -29,19 +38,19 @@ export async function PUT(request: Request, { params }: Context) {
     await prisma.food.update({
       where: { slug: id },
       data: {
-        name: String(data.name ?? "").trim(),
+        name,
         image: String(data.image || "/img/Rawon.jpg"),
         shortDescription: String(data.shortDescription ?? ""),
         story: String(data.story ?? ""),
         taste: String(data.taste ?? ""),
-        priceRange: String(data.priceRange ?? ""),
+        priceRange,
         featured: Boolean(data.featured),
         priceCategoryId: String(data.priceCategory ?? ""),
-        categories: { set: (data.categories ?? []).map((categoryId: string) => ({ id: categoryId })) },
-        timeSlots: { set: (data.timeCategory ?? []).map((timeId: string) => ({ id: timeId })) },
+        categories: { set: categories.map((categoryId: string) => ({ id: String(categoryId) })) },
+        timeSlots: { set: timeCategory.map((timeId: string) => ({ id: String(timeId) })) },
         ingredients: {
           deleteMany: {},
-          create: (data.ingredients ?? []).map((name: string) => ({ name })),
+          create: ingredients.map((ingredient: string) => ({ name: String(ingredient).trim() })).filter((ingredient: { name: string }) => ingredient.name),
         },
       },
     });
