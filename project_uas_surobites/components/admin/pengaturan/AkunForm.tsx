@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { admin } from "@/data/admin";
 import ui from "@/app/styles/admin-ui.module.css";
 
@@ -10,7 +10,6 @@ type PasswordInputProps = {
   autoComplete: string;
 };
 
-// tiap kolom password punya tombol mata sendiri, jadi state-nya dipisah per kolom
 function PasswordInput({ name, autoComplete }: PasswordInputProps) {
   const [show, setShow] = useState(false);
 
@@ -21,6 +20,8 @@ function PasswordInput({ name, autoComplete }: PasswordInputProps) {
         name={name}
         className={`${ui.input} ${ui.withToggle}`}
         autoComplete={autoComplete}
+        required
+        minLength={name === "newPassword" ? 8 : undefined}
       />
       <button
         type="button"
@@ -35,6 +36,50 @@ function PasswordInput({ name, autoComplete }: PasswordInputProps) {
 }
 
 export default function AkunForm() {
+  const [saving, setSaving] = useState(false);
+  const [notice, setNotice] = useState<{ type: "success" | "danger"; message: string } | null>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const newPassword = String(formData.get("newPassword") ?? "");
+    const confirmPassword = String(formData.get("confirmPassword") ?? "");
+
+    if (newPassword !== confirmPassword) {
+      setNotice({ type: "danger", message: "Konfirmasi password baru tidak sama." });
+      return;
+    }
+
+    setSaving(true);
+    setNotice(null);
+
+    try {
+      const response = await fetch("/api/admin/password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          currentPassword: formData.get("currentPassword"),
+          newPassword,
+          confirmPassword,
+        }),
+      });
+      const result = await response.json();
+
+      if (!response.ok) throw new Error(result.message ?? "Password gagal diubah.");
+
+      form.reset();
+      setNotice({ type: "success", message: result.message });
+    } catch (error) {
+      setNotice({
+        type: "danger",
+        message: error instanceof Error ? error.message : "Password gagal diubah.",
+      });
+    } finally {
+      setSaving(false);
+    }
+  }
+
   return (
     <article className={ui.panel}>
       <div className={`d-flex flex-wrap align-items-start justify-content-between ${ui.panelHeader}`}>
@@ -42,11 +87,13 @@ export default function AkunForm() {
           <h3 className={ui.panelTitle}>
             <i className="fa-solid fa-lock"></i> Akun Admin
           </h3>
-          <p className={ui.panelSubtitle}>Ubah username, nama tampilan, atau password login</p>
+          <p className={ui.panelSubtitle}>Ubah password login admin</p>
         </div>
       </div>
 
-      <Form noValidate>
+      {notice && <Alert variant={notice.type}>{notice.message}</Alert>}
+
+      <Form noValidate onSubmit={handleSubmit}>
         <Row className="gx-3">
           <Form.Group as={Col} xs={12} md={6} controlId="acc-username" className={`d-flex flex-column ${ui.field}`}>
             <Form.Label>
@@ -58,6 +105,7 @@ export default function AkunForm() {
               className={ui.input}
               autoComplete="username"
               defaultValue={admin.username}
+              readOnly
             />
           </Form.Group>
           <Form.Group as={Col} xs={12} md={6} controlId="acc-displayName" className={`d-flex flex-column ${ui.field}`}>
@@ -68,6 +116,7 @@ export default function AkunForm() {
               className={ui.input}
               maxLength={40}
               defaultValue={admin.displayName}
+              readOnly
             />
           </Form.Group>
           <Form.Group as={Col} xs={12} controlId="acc-currentPassword" className={`d-flex flex-column ${ui.field}`}>
@@ -78,19 +127,22 @@ export default function AkunForm() {
           </Form.Group>
           <Form.Group as={Col} xs={12} md={6} controlId="acc-newPassword" className={`d-flex flex-column ${ui.field}`}>
             <Form.Label>
-              Password baru <span className={ui.optional}>(opsional)</span>
+              Password baru <span className={ui.required}>*</span>
             </Form.Label>
             <PasswordInput name="newPassword" autoComplete="new-password" />
           </Form.Group>
           <Form.Group as={Col} xs={12} md={6} controlId="acc-confirmPassword" className={`d-flex flex-column ${ui.field}`}>
-            <Form.Label>Konfirmasi password baru</Form.Label>
+            <Form.Label>
+              Konfirmasi password baru <span className={ui.required}>*</span>
+            </Form.Label>
             <PasswordInput name="confirmPassword" autoComplete="new-password" />
           </Form.Group>
         </Row>
 
         <div className={`d-flex justify-content-end ${ui.formActions}`}>
-          <Button variant="" className={`${ui.btn} ${ui.btnBlue}`}>
-            Simpan Akun
+          <Button type="submit" variant="" className={`${ui.btn} ${ui.btnBlue}`} disabled={saving}>
+            {saving && <Spinner animation="border" size="sm" aria-hidden="true" />}
+            {saving ? "Menyimpan..." : "Simpan Password"}
           </Button>
         </div>
       </Form>

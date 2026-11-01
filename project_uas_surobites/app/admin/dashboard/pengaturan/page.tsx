@@ -14,7 +14,7 @@ export default function PengaturanPage() {
       <SectionHead
         id="sec-pengaturan"
         title="Pengaturan"
-        description="Atur username, nama tampilan, dan password akun admin demo."
+        description="Ubah password akun admin."
       />
 
       <div className={styles.settings}>
