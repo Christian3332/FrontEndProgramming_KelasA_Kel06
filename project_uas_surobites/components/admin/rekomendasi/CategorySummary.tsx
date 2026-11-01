@@ -1,8 +1,11 @@
 import { Col, Row } from "react-bootstrap";
-import { categories, foods } from "@/data/foods";
+import { categories } from "@/data/foods";
+import { getFoods } from "@/lib/queries";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
-export default function CategorySummary() {
+export default async function CategorySummary() {
+  const foods = await getFoods();
+
   return (
     <Row xs={2} md={3} xl={6} className={`g-2 ${styles.summaryGrid}`}>
       {categories.map((category) => {
