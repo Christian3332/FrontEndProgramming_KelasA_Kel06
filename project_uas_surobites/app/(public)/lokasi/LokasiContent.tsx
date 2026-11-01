@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import { warungs, type Food, type Warung } from "@/data/foods";
-import { findFood, searchItems } from "@/lib/helper";
+import type { Food, Warung } from "@/data/foods";
+import { useFoods } from "@/lib/useFoods";
+import { useWarungs } from "@/lib/useWarungs";
+import { searchItems } from "@/lib/helper";
 import WarungCard from "@/components/warung/WarungCard";
 import MapModal from "@/components/warung/MapModal";
 import FoodModal from "@/components/food/FoodModal";
@@ -12,19 +14,21 @@ import styles from "@/app/styles/lokasi.module.css";
 
 const HIGHLIGHT = [styles.highlighted];
 
-function warungSearchText(w: Warung): string {
-  const foodNames = w.foodIds.map((id) => findFood(id)?.name ?? "");
+function warungSearchText(w: Warung, foods: Food[]): string {
+  const foodNames = w.foodIds.map((id) => foods.find((food) => food.id === id)?.name ?? "");
   return [w.name, w.address, w.description, ...foodNames, ...w.otherMenu].join(
     " ",
   );
 }
 
 export default function LokasiContent() {
+  const warungs = useWarungs();
+  const foods = useFoods();
   const [keyword, setKeyword] = useState("");
   const [mapWarung, setMapWarung] = useState<Warung | null>(null);
   const [selectedFood, setSelectedFood] = useState<Food | null>(null);
 
-  const list = searchItems(warungs, keyword, warungSearchText);
+  const list = searchItems(warungs, keyword, (warung) => warungSearchText(warung, foods));
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | undefined;
@@ -105,6 +109,7 @@ export default function LokasiContent() {
               <Col xs={12} md={6} xl={4} key={w.id}>
                 <WarungCard
                   warung={w}
+                  foods={foods}
                   onOpenMap={setMapWarung}
                   onOpenFood={setSelectedFood}
                 />

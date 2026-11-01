@@ -4,18 +4,19 @@ import { useSyncExternalStore } from "react";
 import Image from "next/image";
 import { Button, Card } from "react-bootstrap";
 import type { Food, Warung } from "@/data/foods";
-import { findFood, formatTime, isWarungOpen } from "@/lib/helper";
+import { formatTime, isWarungOpen } from "@/lib/helper";
 import styles from "@/app/styles/lokasi.module.css";
 
 const noop = () => () => {};
 
 type Props = {
   warung: Warung;
+  foods: Food[];
   onOpenMap: (warung: Warung) => void;
   onOpenFood: (food: Food) => void;
 };
 
-export default function WarungCard({ warung, onOpenMap, onOpenFood }: Props) {
+export default function WarungCard({ warung, foods, onOpenMap, onOpenFood }: Props) {
   const open = useSyncExternalStore(
     noop,
     () => isWarungOpen(warung),
@@ -23,7 +24,7 @@ export default function WarungCard({ warung, onOpenMap, onOpenFood }: Props) {
   );
 
   const foodList = warung.foodIds
-    .map((id) => findFood(id))
+    .map((id) => foods.find((food) => food.id === id))
     .filter((f): f is Food => Boolean(f));
 
   return (

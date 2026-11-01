@@ -28,56 +28,66 @@ export type AggregateFaq = {
 
 export type FaqAvgAggregateOutputType = {
   id: number | null
+  position: number | null
 }
 
 export type FaqSumAggregateOutputType = {
   id: number | null
+  position: number | null
 }
 
 export type FaqMinAggregateOutputType = {
   id: number | null
   question: string | null
   answer: string | null
+  position: number | null
 }
 
 export type FaqMaxAggregateOutputType = {
   id: number | null
   question: string | null
   answer: string | null
+  position: number | null
 }
 
 export type FaqCountAggregateOutputType = {
   id: number
   question: number
   answer: number
+  position: number
   _all: number
 }
 
 
 export type FaqAvgAggregateInputType = {
   id?: true
+  position?: true
 }
 
 export type FaqSumAggregateInputType = {
   id?: true
+  position?: true
 }
 
 export type FaqMinAggregateInputType = {
   id?: true
   question?: true
   answer?: true
+  position?: true
 }
 
 export type FaqMaxAggregateInputType = {
   id?: true
   question?: true
   answer?: true
+  position?: true
 }
 
 export type FaqCountAggregateInputType = {
   id?: true
   question?: true
   answer?: true
+  position?: true
   _all?: true
 }
 
@@ -171,6 +181,7 @@ export type FaqGroupByOutputType = {
   id: number
   question: string
   answer: string
+  position: number
   _count: FaqCountAggregateOutputType | null
   _avg: FaqAvgAggregateOutputType | null
   _sum: FaqSumAggregateOutputType | null
@@ -200,12 +211,14 @@ export type FaqWhereInput = {
   id?: Prisma.IntFilter<"Faq"> | number
   question?: Prisma.StringFilter<"Faq"> | string
   answer?: Prisma.StringFilter<"Faq"> | string
+  position?: Prisma.IntFilter<"Faq"> | number
 }
 
 export type FaqOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
+  position?: Prisma.SortOrder
 }
 
 export type FaqWhereUniqueInput = Prisma.AtLeast<{
@@ -215,12 +228,14 @@ export type FaqWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.FaqWhereInput | Prisma.FaqWhereInput[]
   question?: Prisma.StringFilter<"Faq"> | string
   answer?: Prisma.StringFilter<"Faq"> | string
+  position?: Prisma.IntFilter<"Faq"> | number
 }, "id">
 
 export type FaqOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
+  position?: Prisma.SortOrder
   _count?: Prisma.FaqCountOrderByAggregateInput
   _avg?: Prisma.FaqAvgOrderByAggregateInput
   _max?: Prisma.FaqMaxOrderByAggregateInput
@@ -235,71 +250,84 @@ export type FaqScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Faq"> | number
   question?: Prisma.StringWithAggregatesFilter<"Faq"> | string
   answer?: Prisma.StringWithAggregatesFilter<"Faq"> | string
+  position?: Prisma.IntWithAggregatesFilter<"Faq"> | number
 }
 
 export type FaqCreateInput = {
   question: string
   answer: string
+  position?: number
 }
 
 export type FaqUncheckedCreateInput = {
   id?: number
   question: string
   answer: string
+  position?: number
 }
 
 export type FaqUpdateInput = {
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FaqUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FaqCreateManyInput = {
   id?: number
   question: string
   answer: string
+  position?: number
 }
 
 export type FaqUpdateManyMutationInput = {
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FaqUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   question?: Prisma.StringFieldUpdateOperationsInput | string
   answer?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FaqCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
+  position?: Prisma.SortOrder
 }
 
 export type FaqAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  position?: Prisma.SortOrder
 }
 
 export type FaqMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
+  position?: Prisma.SortOrder
 }
 
 export type FaqMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   question?: Prisma.SortOrder
   answer?: Prisma.SortOrder
+  position?: Prisma.SortOrder
 }
 
 export type FaqSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  position?: Prisma.SortOrder
 }
 
 
@@ -308,27 +336,31 @@ export type FaqSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   id?: boolean
   question?: boolean
   answer?: boolean
+  position?: boolean
 }, ExtArgs["result"]["faq"]>
 
 export type FaqSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   question?: boolean
   answer?: boolean
+  position?: boolean
 }, ExtArgs["result"]["faq"]>
 
 export type FaqSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   question?: boolean
   answer?: boolean
+  position?: boolean
 }, ExtArgs["result"]["faq"]>
 
 export type FaqSelectScalar = {
   id?: boolean
   question?: boolean
   answer?: boolean
+  position?: boolean
 }
 
-export type FaqOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "question" | "answer", ExtArgs["result"]["faq"]>
+export type FaqOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "question" | "answer" | "position", ExtArgs["result"]["faq"]>
 
 export type $FaqPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Faq"
@@ -337,6 +369,7 @@ export type $FaqPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     id: number
     question: string
     answer: string
+    position: number
   }, ExtArgs["result"]["faq"]>
   composites: {}
 }
@@ -763,6 +796,7 @@ export interface FaqFieldRefs {
   readonly id: Prisma.FieldRef<"Faq", 'Int'>
   readonly question: Prisma.FieldRef<"Faq", 'String'>
   readonly answer: Prisma.FieldRef<"Faq", 'String'>
+  readonly position: Prisma.FieldRef<"Faq", 'Int'>
 }
     
 

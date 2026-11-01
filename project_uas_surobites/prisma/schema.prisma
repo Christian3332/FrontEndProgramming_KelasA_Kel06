@@ -89,4 +89,5 @@ model Faq {
   id       Int    @id @default(autoincrement())
   question String
   answer   String
+  position Int    @default(0)
 }

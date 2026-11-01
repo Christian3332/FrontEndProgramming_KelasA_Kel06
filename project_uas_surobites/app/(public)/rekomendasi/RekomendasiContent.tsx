@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button, Col, Row } from "react-bootstrap";
-import { categories, warungs, type Food } from "@/data/foods";
+import { categories, type Food } from "@/data/foods";
 import { useFoods } from "@/lib/useFoods";
+import { useWarungs } from "@/lib/useWarungs";
 import { getCategory } from "@/lib/helper";
 import CategoryFilter from "@/components/food/CategoryFilter";
 import FoodCard from "@/components/food/FoodCard";
@@ -24,6 +25,7 @@ export default function RekomendasiContent() {
 
 function RekomendasiList({ categoryId }: { categoryId: string | null }) {
   const foods = useFoods();
+  const warungs = useWarungs();
   const router = useRouter();
   const [limit, setLimit] = useState(PAGE_SIZE);
   const [selected, setSelected] = useState<Food | null>(null);
