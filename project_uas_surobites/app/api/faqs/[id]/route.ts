@@ -1,8 +1,13 @@
 import { prisma } from "@/lib/prisma";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 
 type Context = { params: Promise<{ id: string }> };
 
 export async function PATCH(request: Request, { params }: Context) {
+  if (!(await isAdminAuthenticated())) {
+    return Response.json({ message: "Silakan login sebagai admin." }, { status: 401 });
+  }
+
   const id = Number((await params).id);
   const body = await request.json();
 
@@ -56,6 +61,10 @@ export async function PATCH(request: Request, { params }: Context) {
 }
 
 export async function DELETE(_request: Request, { params }: Context) {
+  if (!(await isAdminAuthenticated())) {
+    return Response.json({ message: "Silakan login sebagai admin." }, { status: 401 });
+  }
+
   const id = Number((await params).id);
   try {
     await prisma.faq.delete({ where: { id } });

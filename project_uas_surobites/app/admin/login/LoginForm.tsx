@@ -5,8 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Alert, Button, Form, Spinner } from "react-bootstrap";
-import { admin } from "@/data/admin";
-import { isLoggedIn, login } from "@/lib/auth";
+import { login } from "@/lib/auth";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-login.module.css";
 
@@ -42,9 +41,12 @@ export default function LoginForm() {
   const [shaking, setShaking] = useState(false);
 
   useEffect(() => {
-    if (isLoggedIn()) {
-      router.replace("/admin/dashboard");
-    }
+    fetch("/api/admin/session")
+      .then((response) => response.json())
+      .then((data: { authenticated: boolean }) => {
+        if (data.authenticated) router.replace("/admin/dashboard");
+      })
+      .catch(() => {});
   }, [router]);
 
   const info = pesan ? pesanInfo[pesan] : undefined;
@@ -86,15 +88,17 @@ export default function LoginForm() {
     }
 
     setLoading(true);
-    const berhasil = await login(username.trim(), password);
-
-    if (berhasil) {
+    try {
+      await login(username.trim(), password);
       setSuccess(true);
       setFormAlert({ type: "success", message: "Login berhasil, mengalihkan ke dashboard..." });
       setTimeout(() => router.push("/admin/dashboard"), 900);
-    } else {
+    } catch (error) {
       setLoading(false);
-      setFormAlert({ type: "danger", message: "Username atau password salah. Silakan coba lagi." });
+      setFormAlert({
+        type: "danger",
+        message: error instanceof Error ? error.message : "Login gagal. Silakan coba lagi.",
+      });
       setPassword("");
       passwordRef.current?.focus();
       shakeCard();
@@ -191,13 +195,6 @@ export default function LoginForm() {
           <span>{buttonText}</span>
         </Button>
       </Form>
-
-      <div className={`d-flex flex-column ${styles.demo}`}>
-        <strong>Akun demo</strong>
-        <span>
-          Username: <code>{admin.username}</code> &middot; Password: <code>{admin.password}</code>
-        </span>
-      </div>
 
       <Link href="/" className={styles.backLink}>← Kembali ke website</Link>
     </div>

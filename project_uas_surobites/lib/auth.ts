@@ -1,38 +1,37 @@
+"use client";
+
 import { useSyncExternalStore } from "react";
-import { admin } from "@/data/admin";
 
-const LOGIN_KEY = "surobites_login";
 const LAST_LOGIN_KEY = "surobites_last_login";
+const LAST_LOGIN_EVENT = "surobites:last-login";
 
-// fungsi ini yang diganti jadi fetch kalau mau backend
 export async function login(username: string, password: string) {
-  await new Promise((resolve) => setTimeout(resolve, 600));
+  const response = await fetch("/api/admin/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password }),
+  });
 
-  const berhasil = username === admin.username && password === admin.password;
-
-  if (berhasil) {
-    sessionStorage.setItem(LOGIN_KEY, "true");
-    localStorage.setItem(LAST_LOGIN_KEY, String(Date.now()));
+  if (!response.ok) {
+    const data = await response.json().catch(() => null);
+    throw new Error(data?.message ?? "Login gagal. Silakan coba lagi.");
   }
 
-  return berhasil;
+  localStorage.setItem(LAST_LOGIN_KEY, String(Date.now()));
+  window.dispatchEvent(new Event(LAST_LOGIN_EVENT));
 }
 
-export function isLoggedIn() {
-  return sessionStorage.getItem(LOGIN_KEY) === "true";
+export async function logout() {
+  await fetch("/api/admin/logout", { method: "POST" });
 }
 
-export function logout() {
-  sessionStorage.removeItem(LOGIN_KEY);
-}
-
-function subscribe() {
-  return () => {};
-}
-
-// null artinya belum tahu, karena di server belum bisa baca sessionStorage
-export function useLoginStatus() {
-  return useSyncExternalStore<boolean | null>(subscribe, isLoggedIn, () => null);
+function subscribe(callback: () => void) {
+  window.addEventListener("storage", callback);
+  window.addEventListener(LAST_LOGIN_EVENT, callback);
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener(LAST_LOGIN_EVENT, callback);
+  };
 }
 
 function getLastLogin() {

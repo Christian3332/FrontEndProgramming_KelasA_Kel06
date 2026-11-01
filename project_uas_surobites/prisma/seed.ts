@@ -5,7 +5,6 @@ import { PrismaClient } from "../generated/prisma/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import { categories, prices, times, foods, warungs } from "../data/foods";
 import { faqs } from "../data/faqs";
-import { admin } from "../data/admin";
 
 const adapter = new PrismaBetterSqlite3({ url: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
@@ -17,6 +16,13 @@ function hashPassword(password: string) {
 }
 
 async function main() {
+  const adminUsername = process.env.ADMIN_USERNAME?.trim();
+  const adminPassword = process.env.ADMIN_PASSWORD;
+
+  if (!adminUsername || !adminPassword) {
+    throw new Error("ADMIN_USERNAME dan ADMIN_PASSWORD wajib diatur sebelum menjalankan seed.");
+  }
+
   await prisma.ingredient.deleteMany();
   await prisma.warungMenu.deleteMany();
   await prisma.food.deleteMany();
@@ -73,7 +79,7 @@ async function main() {
   }
 
   await prisma.admin.create({
-    data: { username: admin.username, passwordHash: hashPassword(admin.password) },
+    data: { username: adminUsername, passwordHash: hashPassword(adminPassword) },
   });
 
   console.log("Seeding selesai.");
