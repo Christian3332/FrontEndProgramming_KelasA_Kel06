@@ -91,3 +91,15 @@ model Faq {
   answer   String
   position Int    @default(0)
 }
+
+model SiteContent {
+  id                      Int    @id
+  heroTitle               String
+  heroDescription         String
+  rekomendasiTitle        String
+  rekomendasiDescription  String
+  contactEmail            String
+  contactPhone            String
+  instagram               String
+  facebook                String
+}

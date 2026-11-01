@@ -3,7 +3,16 @@ import Image from 'next/image';
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "@/app/styles/footer.module.css";
 
-export function Footer() {
+type Props = {
+    content: {
+        contactEmail: string;
+        contactPhone: string;
+        instagram: string;
+        facebook: string;
+    };
+};
+
+export function Footer({ content }: Props) {
     return (
         <footer className={`mt-auto px-3 pt-4 ${styles.footer}`}>
             <Container className="p-0 d-flex flex-column flex-md-row justify-content-md-between align-items-md-start gap-4">
@@ -25,19 +34,23 @@ export function Footer() {
                         <h4 className={styles.title}>Quick Links</h4>
                         <ul className="list-unstyled m-0">
                             <li className={styles.item}>
-                                <a href="mailto:SuroBites@gmail.com">
-                                    SuroBites@gmail.com
-                                </a>
+                                <a href={`mailto:${content.contactEmail}`}>{content.contactEmail}</a>
                             </li>
-                            <li className={styles.item}><a href="tel:0888777999">0888777999</a></li>
+                            <li className={styles.item}>
+                                <a href={`tel:${content.contactPhone.replace(/[^\d+]/g, "")}`}>{content.contactPhone}</a>
+                            </li>
                         </ul>
                     </Col>
 
                     <Col className="text-end text-md-start" >
                         <h4 className={styles.title}>Follow us</h4>
                         <ul className="list-unstyled m-0">
-                            <li className={styles.item}><a href="#">Instagram</a></li>
-                            <li className={styles.item}><a href="#">Facebook</a></li>
+                            <li className={styles.item}>
+                                {content.instagram ? <a href={content.instagram} target="_blank" rel="noopener noreferrer">Instagram</a> : <span>Instagram</span>}
+                            </li>
+                            <li className={styles.item}>
+                                {content.facebook ? <a href={content.facebook} target="_blank" rel="noopener noreferrer">Facebook</a> : <span>Facebook</span>}
+                            </li>
                         </ul>
                     </Col>
                 </Row>

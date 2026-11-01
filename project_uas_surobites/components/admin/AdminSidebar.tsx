@@ -45,9 +45,10 @@ export default function AdminSidebar({ open, onClose }: Props) {
     return `d-flex align-items-center w-100 ${styles.navLink} ${pathname === href ? styles.navActive : ""}`;
   }
 
-  function handleLogout() {
-    logout();
+  async function handleLogout() {
+    await logout();
     router.replace("/admin/login?pesan=logout");
+    router.refresh();
   }
 
   // di layar besar sidebar selalu tampil, di HP jadi menu geser dari kiri

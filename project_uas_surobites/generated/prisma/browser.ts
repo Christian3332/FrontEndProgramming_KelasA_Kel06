@@ -62,3 +62,8 @@ export type Admin = Prisma.AdminModel
  * 
  */
 export type Faq = Prisma.FaqModel
+/**
+ * Model SiteContent
+ * 
+ */
+export type SiteContent = Prisma.SiteContentModel

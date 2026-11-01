@@ -1,18 +1,18 @@
 import { Button } from "react-bootstrap";
+import { connection } from "next/server";
 import LinkButton from "@/components/ui/LinkButton";
+import { getSiteContent } from "@/lib/site-content";
 import styles from "@/app/styles/home.module.css";
 
-export default function Hero() {
+export default async function Hero() {
+  await connection();
+  const content = await getSiteContent();
+
   return (
     <section id="beranda" className={`d-flex flex-column justify-content-center ${styles.hero}`}>
       <div className={`d-flex flex-column ${styles.heroContent}`}>
-        <h2 className={styles.heroTitle}>JELAJAHI CITA RASA LEGENDARIS SURABAYA</h2>
-        <p className={styles.heroText}>
-          Nikmati Kelezatan Kuliner Warisan Kota Pahlawan. Dari pekatnya kuah
-          Rawon daging hingga segarnya bumbu petis Rujak Cingur dan Lontong
-          Balap. Temukan sejarah, bahan rahasia, dan rekomendasi warung asli di
-          satu tempat.
-        </p>
+        <h2 className={styles.heroTitle}>{content.heroTitle}</h2>
+        <p className={styles.heroText}>{content.heroDescription}</p>
         <div className={`d-flex flex-column flex-sm-row mt-2 ${styles.heroButtons}`}>
           <Button href="#katalog" variant="primary" className={styles.heroButton}>
             Eksplorasi Menu

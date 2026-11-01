@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { getFaqs } from "@/lib/queries";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
@@ -7,6 +8,10 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (!(await isAdminAuthenticated())) {
+    return Response.json({ message: "Silakan login sebagai admin." }, { status: 401 });
+  }
+
   const body = await request.json();
   const question = String(body.question ?? "").trim();
   const answer = String(body.answer ?? "").trim();

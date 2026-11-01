@@ -1,33 +1,69 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
-const kontenAwal = {
-  heroTitle: "JELAJAHI CITA RASA LEGENDARIS SURABAYA",
-  heroDescription:
-    "Nikmati Kelezatan Kuliner Warisan Kota Pahlawan. Dari pekatnya kuah Rawon daging hingga segarnya bumbu petis Rujak Cingur dan Lontong Balap. Temukan sejarah, bahan rahasia, dan rekomendasi warung asli di satu tempat.",
-  rekomendasiTitle: "Temukan Kuliner yang Cocok Untukmu",
-  rekomendasiDescription:
-    "Bingung mau makan apa? Pilih kategori sesuai selera dan kebutuhanmu, lalu temukan rekomendasi makanan khas Surabaya yang paling pas.",
-  contactEmail: "SuroBites@gmail.com",
-  contactPhone: "0888777999",
-  instagram: "",
-  facebook: "",
+type SiteContent = {
+  heroTitle: string;
+  heroDescription: string;
+  rekomendasiTitle: string;
+  rekomendasiDescription: string;
+  contactEmail: string;
+  contactPhone: string;
+  instagram: string;
+  facebook: string;
 };
 
-export default function KontenForm() {
-  const [konten, setKonten] = useState(kontenAwal);
+type Props = {
+  content: SiteContent;
+  defaults: SiteContent;
+};
 
-  // satu fungsi untuk semua input, yang diubah sesuai atribut name-nya
+export default function KontenForm({ content, defaults }: Props) {
+  const [konten, setKonten] = useState(content);
+  const [saving, setSaving] = useState(false);
+  const [notice, setNotice] = useState<{ type: "success" | "danger"; message: string } | null>(null);
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setKonten({ ...konten, [e.target.name]: e.target.value });
   }
 
+  async function saveContent(contentToSave: SiteContent) {
+    setSaving(true);
+    setNotice(null);
+
+    try {
+      const response = await fetch("/api/site-content", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contentToSave),
+      });
+      const result = await response.json();
+
+      if (!response.ok) throw new Error(result.message ?? "Konten gagal disimpan.");
+
+      setKonten(contentToSave);
+      setNotice({ type: "success", message: result.message });
+    } catch (error) {
+      setNotice({
+        type: "danger",
+        message: error instanceof Error ? error.message : "Konten gagal disimpan.",
+      });
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    void saveContent(konten);
+  }
+
   return (
-    <Form noValidate>
+    <Form noValidate onSubmit={handleSubmit}>
+      {notice && <Alert variant={notice.type}>{notice.message}</Alert>}
       <Row className="g-3">
         <Col xs={12} xl={6}>
         <article className={`h-100 ${ui.panel}`}>
@@ -138,6 +174,8 @@ export default function KontenForm() {
                 type="email"
                 name="contactEmail"
                 className={ui.input}
+                maxLength={120}
+                required
                 value={konten.contactEmail}
                 onChange={handleChange}
               />
@@ -150,6 +188,8 @@ export default function KontenForm() {
                 type="tel"
                 name="contactPhone"
                 className={ui.input}
+                maxLength={30}
+                required
                 value={konten.contactPhone}
                 onChange={handleChange}
               />
@@ -161,6 +201,7 @@ export default function KontenForm() {
                 name="instagram"
                 className={ui.input}
                 placeholder="https://instagram.com/..."
+                maxLength={200}
                 value={konten.instagram}
                 onChange={handleChange}
               />
@@ -172,6 +213,7 @@ export default function KontenForm() {
                 name="facebook"
                 className={ui.input}
                 placeholder="https://facebook.com/..."
+                maxLength={200}
                 value={konten.facebook}
                 onChange={handleChange}
               />
@@ -182,11 +224,18 @@ export default function KontenForm() {
       </Row>
 
       <div className={`d-flex flex-wrap justify-content-end ${styles.stickyActions}`}>
-        <Button variant="" className={`${ui.btn} ${ui.btnGhost}`}>
+        <Button
+          type="button"
+          variant=""
+          className={`${ui.btn} ${ui.btnGhost}`}
+          disabled={saving}
+          onClick={() => void saveContent(defaults)}
+        >
           Kembalikan Default
         </Button>
-        <Button variant="primary" className={`${ui.btn} ${ui.btnPrimary}`}>
-          Simpan Konten
+        <Button type="submit" variant="primary" className={`${ui.btn} ${ui.btnPrimary}`} disabled={saving}>
+          {saving && <Spinner animation="border" size="sm" aria-hidden="true" />}
+          {saving ? "Menyimpan..." : "Simpan Konten"}
         </Button>
       </div>
     </Form>

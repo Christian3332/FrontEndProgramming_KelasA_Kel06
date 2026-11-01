@@ -1,5 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { connection } from "next/server";
+import { getSiteContent } from "@/lib/site-content";
 import RekomendasiContent from "./RekomendasiContent";
 
 export const metadata: Metadata = {
@@ -8,10 +10,13 @@ export const metadata: Metadata = {
     "Rekomendasi kuliner khas Surabaya berdasarkan selera: pedas, berkuah, gurih, segar, hemat, dan kuliner malam.",
 };
 
-export default function RekomendasiPage() {
+export default async function RekomendasiPage() {
+  await connection();
+  const content = await getSiteContent();
+
   return (
     <Suspense>
-      <RekomendasiContent />
+      <RekomendasiContent content={content} />
     </Suspense>
   );
 }

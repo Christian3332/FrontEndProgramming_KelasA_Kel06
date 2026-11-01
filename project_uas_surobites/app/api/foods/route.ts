@@ -1,6 +1,7 @@
 import { getFoods } from "@/lib/queries";
 import { prisma } from "@/lib/prisma";
 import { createSlug } from "@/lib/helper";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
@@ -8,6 +9,10 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (!(await isAdminAuthenticated())) {
+    return Response.json({ message: "Silakan login sebagai admin." }, { status: 401 });
+  }
+
   const data = await request.json();
   const name = String(data.name ?? "").trim();
   const slug = createSlug(name);
