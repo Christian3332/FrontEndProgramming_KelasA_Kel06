@@ -19,6 +19,11 @@ export async function POST(request: Request) {
   }
 
   try {
+    const existingWarung = await prisma.warung.findUnique({ where: { slug } });
+    if (existingWarung) {
+      return Response.json({ message: "Nama warung tersebut sudah digunakan." }, { status: 409 });
+    }
+
     await prisma.warung.create({
       data: {
         slug,

@@ -23,7 +23,7 @@ export async function PUT(request: Request, { params }: Context) {
 
     const slugDipakai = await prisma.warung.findUnique({ where: { slug } });
     if (slugDipakai && slugDipakai.id !== warung.id) {
-      return Response.json({ message: "Nama warung tersebut sudah digunakan." }, { status: 400 });
+      return Response.json({ message: "Nama warung tersebut sudah digunakan." }, { status: 409 });
     }
 
     await prisma.warung.update({
