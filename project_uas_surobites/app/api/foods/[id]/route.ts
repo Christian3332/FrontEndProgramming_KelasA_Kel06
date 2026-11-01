@@ -28,6 +28,11 @@ export async function PUT(request: Request, { params }: Context) {
   }
 
   try {
+    const food = await prisma.food.findUnique({ where: { slug: id } });
+    if (!food) {
+      return Response.json({ message: "Makanan tidak ditemukan." }, { status: 404 });
+    }
+
     const existingFood = await prisma.food.findUnique({ where: { slug } });
     if (existingFood && existingFood.slug !== id) {
       return Response.json({ message: "Nama makanan tersebut sudah digunakan." }, { status: 400 });
@@ -73,6 +78,11 @@ export async function DELETE(_request: Request, { params }: Context) {
   const { id } = await params;
 
   try {
+    const food = await prisma.food.findUnique({ where: { slug: id } });
+    if (!food) {
+      return Response.json({ message: "Makanan tidak ditemukan." }, { status: 404 });
+    }
+
     await prisma.food.delete({ where: { slug: id } });
     return Response.json({ message: "Makanan berhasil dihapus." });
   } catch {
