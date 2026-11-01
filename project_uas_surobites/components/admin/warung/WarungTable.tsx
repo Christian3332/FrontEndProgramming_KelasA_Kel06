@@ -36,7 +36,13 @@ export default function WarungTable({ addRequest }: Props) {
 
   async function loadWarungs() {
     const response = await fetch("/api/warungs");
-    if (response.ok) setList(await response.json());
+    if (!response.ok) {
+      setTableError("Data warung gagal dimuat.");
+      return;
+    }
+
+    setList(await response.json());
+    setTableError("");
   }
 
   async function loadFoods() {
