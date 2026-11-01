@@ -1,51 +1,137 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { warungs } from "@/data/foods";
+import { Alert, Button, Form, Modal } from "react-bootstrap";
+import type { Food, Warung } from "@/data/foods";
 import { findFood, formatTime, isWarungOpen } from "@/lib/helper";
 import AdminSearch from "@/components/admin/AdminSearch";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
-export default function WarungTable() {
-  const [keyword, setKeyword] = useState("");
+type Props = { addRequest: number };
 
-  const list = warungs.filter((warung) =>
+const warungKosong: Warung = {
+  id: "",
+  name: "",
+  address: "",
+  openDays: "",
+  openTime: "",
+  closeTime: "",
+  description: "",
+  foodIds: [],
+  otherMenu: [],
+  image: "/img/Warung.png",
+  mapsUrl: "",
+};
+
+export default function WarungTable({ addRequest }: Props) {
+  const [list, setList] = useState<Warung[]>([]);
+  const [foodOptions, setFoodOptions] = useState<Food[]>([]);
+  const [keyword, setKeyword] = useState("");
+  const [form, setForm] = useState<Warung>(warungKosong);
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState("");
+
+  async function loadWarungs() {
+    const response = await fetch("/api/warungs");
+    if (response.ok) setList(await response.json());
+  }
+
+  async function loadFoods() {
+    const response = await fetch("/api/foods");
+    if (response.ok) setFoodOptions(await response.json());
+  }
+
+  useEffect(() => {
+    loadWarungs();
+    loadFoods();
+  }, []);
+
+  useEffect(() => {
+    if (addRequest > 0) startAdd();
+  }, [addRequest]);
+
+  const filteredWarungs = list.filter((warung) =>
     warung.name.toLowerCase().includes(keyword.toLowerCase().trim()),
   );
-  const emptyText = warungs.length === 0 ? "Belum ada data warung." : "Warung tidak ditemukan.";
+  const emptyText = list.length === 0 ? "Belum ada data warung." : "Warung tidak ditemukan.";
+
+  function startAdd() {
+    setForm(warungKosong);
+    setError("");
+    setOpen(true);
+  }
+
+  function startEdit(warung: Warung) {
+    setForm({ ...warung });
+    setError("");
+    setOpen(true);
+  }
+
+  async function saveWarung(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+
+    const response = await fetch(form.id ? `/api/warungs/${form.id}` : "/api/warungs", {
+      method: form.id ? "PUT" : "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+
+    if (!response.ok) {
+      const result = await response.json();
+      setError(result.message ?? "Data warung gagal disimpan.");
+      return;
+    }
+
+    setOpen(false);
+    await loadWarungs();
+  }
+
+  async function deleteWarung(id: string) {
+    if (!window.confirm("Hapus warung ini?")) return;
+
+    const response = await fetch(`/api/warungs/${id}`, { method: "DELETE" });
+    if (response.ok) await loadWarungs();
+  }
+
+  function updateList(field: "foodIds" | "otherMenu", id: string, checked: boolean) {
+    const values = form[field];
+    setForm({
+      ...form,
+      [field]: checked ? [...values, id] : values.filter((value) => value !== id),
+    });
+  }
 
   return (
-    <div className={ui.panel}>
-      <div className={`d-flex flex-wrap align-items-center justify-content-between ${styles.toolbar}`}>
-        <AdminSearch
-          value={keyword}
-          onChange={setKeyword}
-          placeholder="Cari nama warung..."
-          label="Cari warung"
-        />
-        <span className={styles.count}>{list.length} warung</span>
-      </div>
+    <>
+      <div className={ui.panel}>
+        <div className={`d-flex flex-wrap align-items-center justify-content-between ${styles.toolbar}`}>
+          <AdminSearch
+            value={keyword}
+            onChange={setKeyword}
+            placeholder="Cari nama warung..."
+            label="Cari warung"
+          />
+          <span className={styles.count}>{filteredWarungs.length} warung</span>
+        </div>
 
-      <div className={styles.tableWrap}>
-        <table className={`w-100 ${styles.table}`}>
-          <thead>
-            <tr>
-              <th scope="col">Warung</th>
-              <th scope="col">Jam Buka</th>
-              <th scope="col">Menu</th>
-              <th scope="col">Status</th>
-              <th scope="col" className="text-end">Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            {list.length === 0 ? (
+        <div className={styles.tableWrap}>
+          <table className={`w-100 ${styles.table}`}>
+            <thead>
               <tr>
-                <td colSpan={5} className={styles.tableEmpty}>{emptyText}</td>
+                <th scope="col">Warung</th>
+                <th scope="col">Jam Buka</th>
+                <th scope="col">Menu</th>
+                <th scope="col">Status</th>
+                <th scope="col" className="text-end">Aksi</th>
               </tr>
-            ) : (
-              list.map((warung) => (
+            </thead>
+            <tbody>
+              {filteredWarungs.length === 0 ? (
+                <tr><td colSpan={5} className={styles.tableEmpty}>{emptyText}</td></tr>
+              ) : filteredWarungs.map((warung) => (
                 <tr key={warung.id}>
                   <td className={styles.cellMain} data-label="Warung">
                     <div className={`d-flex align-items-center ${styles.cellFood}`}>
@@ -58,23 +144,17 @@ export default function WarungTable() {
                   </td>
                   <td data-label="Jam Buka">
                     <div className={styles.cellTime}>
-                      <strong>
-                        {formatTime(warung.openTime)} – {formatTime(warung.closeTime)}
-                      </strong>
+                      <strong>{formatTime(warung.openTime)} – {formatTime(warung.closeTime)}</strong>
                       <small className={styles.cellSub}>{warung.openDays}</small>
                     </div>
                   </td>
                   <td data-label="Menu">
                     <div className={`d-flex flex-wrap justify-content-end justify-content-md-start ${ui.tagList}`}>
                       {warung.foodIds.map((id) => (
-                        <span className={`${ui.tag} ${ui.tagGray}`} key={id}>
-                          {findFood(id)?.name ?? id}
-                        </span>
+                        <span className={`${ui.tag} ${ui.tagGray}`} key={id}>{findFood(id)?.name ?? id}</span>
                       ))}
                       {warung.otherMenu.map((item) => (
-                        <span className={`${ui.tag} ${ui.tagGray}`} key={item}>
-                          {item}
-                        </span>
+                        <span className={`${ui.tag} ${ui.tagGray}`} key={item}>{item}</span>
                       ))}
                     </div>
                   </td>
@@ -87,30 +167,79 @@ export default function WarungTable() {
                   </td>
                   <td data-label="Aksi" className="text-end">
                     <div className={`d-flex justify-content-end ${ui.rowActions}`}>
-                      <button
-                        type="button"
-                        className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn}`}
-                        title="Edit"
-                        aria-label={`Edit ${warung.name}`}
-                      >
+                      <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn}`} title="Edit" aria-label={`Edit ${warung.name}`} onClick={() => startEdit(warung)}>
                         <i className="fa-solid fa-pen"></i>
                       </button>
-                      <button
-                        type="button"
-                        className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn} ${ui.iconBtnDanger}`}
-                        title="Hapus"
-                        aria-label={`Hapus ${warung.name}`}
-                      >
+                      <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn} ${ui.iconBtnDanger}`} title="Hapus" aria-label={`Hapus ${warung.name}`} onClick={() => deleteWarung(warung.id)}>
                         <i className="fa-solid fa-trash"></i>
                       </button>
                     </div>
                   </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+
+      <Modal show={open} onHide={() => setOpen(false)} centered size="lg">
+        <Form onSubmit={saveWarung}>
+          <Modal.Header closeButton>
+            <Modal.Title>{form.id ? "Edit Warung" : "Tambah Warung"}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form.Group className={ui.field}>
+              <Form.Label>Nama warung</Form.Label>
+              <Form.Control required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} />
+            </Form.Group>
+            <Form.Group className={ui.field}>
+              <Form.Label>Alamat</Form.Label>
+              <Form.Control required value={form.address} onChange={(event) => setForm({ ...form, address: event.target.value })} />
+            </Form.Group>
+            <Form.Group className={ui.field}>
+              <Form.Label>Hari buka</Form.Label>
+              <Form.Control value={form.openDays} onChange={(event) => setForm({ ...form, openDays: event.target.value })} />
+            </Form.Group>
+            <div className="d-flex gap-3">
+              <Form.Group className={`${ui.field} flex-fill`}>
+                <Form.Label>Jam buka</Form.Label>
+                <Form.Control value={form.openTime} onChange={(event) => setForm({ ...form, openTime: event.target.value })} />
+              </Form.Group>
+              <Form.Group className={`${ui.field} flex-fill`}>
+                <Form.Label>Jam tutup</Form.Label>
+                <Form.Control value={form.closeTime} onChange={(event) => setForm({ ...form, closeTime: event.target.value })} />
+              </Form.Group>
+            </div>
+            <Form.Group className={ui.field}>
+              <Form.Label>Deskripsi</Form.Label>
+              <Form.Control as="textarea" rows={2} value={form.description} onChange={(event) => setForm({ ...form, description: event.target.value })} />
+            </Form.Group>
+            <Form.Group className={ui.field}>
+              <Form.Label>Alamat gambar</Form.Label>
+              <Form.Control value={form.image} onChange={(event) => setForm({ ...form, image: event.target.value })} />
+            </Form.Group>
+            <Form.Group className={ui.field}>
+              <Form.Label>Link Google Maps</Form.Label>
+              <Form.Control value={form.mapsUrl} onChange={(event) => setForm({ ...form, mapsUrl: event.target.value })} />
+            </Form.Group>
+            <Form.Group className={ui.field}>
+              <Form.Label>Makanan</Form.Label>
+              {foodOptions.map((food) => (
+                <Form.Check key={food.id} type="checkbox" label={food.name} checked={form.foodIds.includes(food.id)} onChange={(event) => updateList("foodIds", food.id, event.target.checked)} />
+              ))}
+            </Form.Group>
+            <Form.Group className={ui.field}>
+              <Form.Label>Menu lain (pisahkan dengan koma)</Form.Label>
+              <Form.Control value={form.otherMenu.join(", ")} onChange={(event) => setForm({ ...form, otherMenu: event.target.value.split(",").map((item) => item.trim()).filter(Boolean) })} />
+            </Form.Group>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setOpen(false)}>Batal</Button>
+            <Button type="submit" className={`${ui.btn} ${ui.btnPrimary}`}>Simpan</Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
+    </>
   );
 }
