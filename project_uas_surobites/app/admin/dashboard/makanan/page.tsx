@@ -7,7 +7,13 @@ export const metadata: Metadata = {
   title: "Kelola Makanan",
 };
 
-export default function KelolaMakananPage() {
+export default async function KelolaMakananPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ aksi?: string }>;
+}) {
+  const { aksi } = await searchParams;
+
   return (
     <section className={ui.section} aria-labelledby="sec-makanan">
       <SectionHead
@@ -16,7 +22,7 @@ export default function KelolaMakananPage() {
         description="Data makanan ini dipakai oleh halaman Katalog, Rekomendasi, Favorit, dan fitur pencarian."
       />
 
-      <FoodTable />
+      <FoodTable initialAdd={aksi === "tambah"} />
     </section>
   );
 }

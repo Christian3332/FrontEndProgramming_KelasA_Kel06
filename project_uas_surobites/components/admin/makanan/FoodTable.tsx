@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
 import { categories, prices, times } from "@/data/foods";
 import type { Food } from "@/data/foods";
@@ -25,7 +26,8 @@ const foodKosong: Food = {
   featured: false,
 };
 
-export default function FoodTable() {
+export default function FoodTable({ initialAdd = false }: { initialAdd?: boolean }) {
+  const router = useRouter();
   const [list, setList] = useState<Food[]>([]);
   const [keyword, setKeyword] = useState("");
   const [form, setForm] = useState<Food>(foodKosong);
@@ -40,6 +42,15 @@ export default function FoodTable() {
   useEffect(() => {
     loadFoods();
   }, []);
+
+  useEffect(() => {
+    if (!initialAdd) return;
+
+    setForm(foodKosong);
+    setError("");
+    setOpen(true);
+    router.replace("/admin/dashboard/makanan", { scroll: false });
+  }, [initialAdd, router]);
 
   const filteredFoods = list.filter((food) =>
     food.name.toLowerCase().includes(keyword.toLowerCase().trim()),

@@ -1,10 +1,10 @@
 import "server-only";
-import { createHmac, scryptSync, timingSafeEqual } from "node:crypto";
+import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 
 const COOKIE_NAME = "surobites_admin_session";
-const SESSION_DURATION = 60 * 60 * 8;
+const SESSION_DURATION = 60 * 30;
 
 function getSessionSecret() {
   const secret = process.env.ADMIN_SESSION_SECRET;
@@ -62,24 +62,61 @@ export async function clearAdminSession() {
   (await cookies()).delete(COOKIE_NAME);
 }
 
-export async function isAdminAuthenticated() {
+async function getAdminSessionId() {
   try {
     const token = (await cookies()).get(COOKIE_NAME)?.value;
-    if (!token) return false;
+    if (!token) return null;
 
     const [payload, signature] = token.split(".");
-    if (!payload || !signature) return false;
+    if (!payload || !signature) return null;
 
     const expected = Buffer.from(sign(payload));
     const actual = Buffer.from(signature);
-    if (expected.length !== actual.length || !timingSafeEqual(expected, actual)) return false;
+    if (expected.length !== actual.length || !timingSafeEqual(expected, actual)) return null;
 
-    const session = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
-    return Number.isInteger(session.adminId) &&
-      session.adminId > 0 &&
-      Number.isInteger(session.expiresAt) &&
-      session.expiresAt > Math.floor(Date.now() / 1000);
+    const session: unknown = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
+    if (!session || typeof session !== "object") return null;
+
+    const values = session as Record<string, unknown>;
+    if (
+      typeof values.adminId !== "number" ||
+      !Number.isInteger(values.adminId) ||
+      values.adminId < 1 ||
+      typeof values.expiresAt !== "number" ||
+      !Number.isInteger(values.expiresAt) ||
+      values.expiresAt <= Math.floor(Date.now() / 1000)
+    ) {
+      return null;
+    }
+
+    const admin = await prisma.admin.findUnique({
+      where: { id: values.adminId },
+      select: { id: true },
+    });
+
+    return admin?.id ?? null;
   } catch {
-    return false;
+    return null;
   }
+}
+
+export async function isAdminAuthenticated() {
+  return (await getAdminSessionId()) !== null;
+}
+
+export async function changeAdminPassword(currentPassword: string, newPassword: string) {
+  const adminId = await getAdminSessionId();
+  if (!adminId) return "unauthorized" as const;
+
+  const admin = await prisma.admin.findUnique({ where: { id: adminId } });
+  if (!admin) return "unauthorized" as const;
+  if (!verifyPassword(currentPassword, admin.passwordHash)) {
+    return "invalid-password" as const;
+  }
+
+  const salt = randomBytes(16).toString("hex");
+  const passwordHash = scryptSync(newPassword, salt, 64).toString("hex");
+  await prisma.admin.update({ where: { id: adminId }, data: { passwordHash: `${salt}:${passwordHash}` } });
+
+  return "success" as const;
 }

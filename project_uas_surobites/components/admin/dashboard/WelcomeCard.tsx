@@ -25,10 +25,10 @@ export default function WelcomeCard() {
           mendapat informasi terbaru.
         </p>
         <div className={`d-flex flex-wrap ${styles.welcomeActions}`}>
-          <Button variant="primary" className={`${ui.btn} ${ui.btnPrimary}`}>
+          <Button href="/admin/dashboard/makanan?aksi=tambah" variant="primary" className={`${ui.btn} ${ui.btnPrimary}`}>
             + Tambah Makanan
           </Button>
-          <Button variant="" className={`${ui.btn} ${ui.btnLight}`}>
+          <Button href="/admin/dashboard/warung?aksi=tambah" variant="" className={`${ui.btn} ${ui.btnLight}`}>
             + Tambah Warung
           </Button>
         </div>
