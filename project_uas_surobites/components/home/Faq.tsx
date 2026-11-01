@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { Accordion } from "react-bootstrap";
-import { faqs } from "@/data/faqs";
+import { useFaqs } from "@/lib/useFaqs";
 import styles from "@/app/styles/home.module.css";
 
 export default function Faq() {
   const [open, setOpen] = useState<string | null>(null);
+  const faqs = useFaqs();
 
   return (
     <section id="faq" className={styles.faq} aria-labelledby="faq-title">

@@ -165,7 +165,8 @@ export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof Ad
 export const FaqScalarFieldEnum = {
   id: 'id',
   question: 'question',
-  answer: 'answer'
+  answer: 'answer',
+  position: 'position'
 } as const
 
 export type FaqScalarFieldEnum = (typeof FaqScalarFieldEnum)[keyof typeof FaqScalarFieldEnum]
