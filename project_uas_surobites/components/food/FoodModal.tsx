@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { Button, Col, Modal, Row } from "react-bootstrap";
-import { warungs, type Food } from "@/data/foods";
+import type { Food } from "@/data/foods";
+import { useWarungs } from "@/lib/useWarungs";
 import { getCategory, getPrice, getTime } from "@/lib/helper";
 import { useFavorites } from "@/lib/favorites";
 import LinkButton from "@/components/ui/LinkButton";
@@ -11,6 +12,7 @@ import styles from "@/app/styles/food-modal.module.css";
 type Props = { food: Food | null; onClose: () => void };
 
 export default function FoodModal({ food, onClose }: Props) {
+  const warungs = useWarungs();
   const { isFavorite, toggleFavorite } = useFavorites();
 
   if (!food) return null;

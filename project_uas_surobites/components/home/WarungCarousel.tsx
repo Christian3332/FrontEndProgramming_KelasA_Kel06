@@ -3,7 +3,7 @@
 import { useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { Button, Carousel } from "react-bootstrap";
-import { warungs } from "@/data/foods";
+import { useWarungs } from "@/lib/useWarungs";
 import LinkButton from "@/components/ui/LinkButton";
 import styles from "@/app/styles/home.module.css";
 
@@ -17,6 +17,7 @@ export default function WarungCarousel() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const reduceMotion = useSyncExternalStore(noop, getReduceMotion, () => true);
+  const warungs = useWarungs();
   const list = warungs.slice(0, 5);
   const total = list.length;
 

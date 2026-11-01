@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
 import type { Food, Warung } from "@/data/foods";
-import { findFood, formatTime, isWarungOpen } from "@/lib/helper";
+import { formatTime, isWarungOpen } from "@/lib/helper";
 import AdminSearch from "@/components/admin/AdminSearch";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
@@ -165,7 +165,7 @@ export default function WarungTable({ addRequest }: Props) {
                   <td data-label="Menu">
                     <div className={`d-flex flex-wrap justify-content-end justify-content-md-start ${ui.tagList}`}>
                       {warung.foodIds.map((id) => (
-                        <span className={`${ui.tag} ${ui.tagGray}`} key={id}>{findFood(id)?.name ?? id}</span>
+                        <span className={`${ui.tag} ${ui.tagGray}`} key={id}>{foodOptions.find((food) => food.id === id)?.name ?? id}</span>
                       ))}
                       {warung.otherMenu.map((item) => (
                         <span className={`${ui.tag} ${ui.tagGray}`} key={item}>{item}</span>
