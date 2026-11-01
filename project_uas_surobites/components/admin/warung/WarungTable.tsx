@@ -32,10 +32,17 @@ export default function WarungTable({ addRequest }: Props) {
   const [form, setForm] = useState<Warung>(warungKosong);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
+  const [tableError, setTableError] = useState("");
 
   async function loadWarungs() {
     const response = await fetch("/api/warungs");
-    if (response.ok) setList(await response.json());
+    if (!response.ok) {
+      setTableError("Data warung gagal dimuat.");
+      return;
+    }
+
+    setList(await response.json());
+    setTableError("");
   }
 
   async function loadFoods() {
@@ -93,7 +100,13 @@ export default function WarungTable({ addRequest }: Props) {
     if (!window.confirm("Hapus warung ini?")) return;
 
     const response = await fetch(`/api/warungs/${id}`, { method: "DELETE" });
-    if (response.ok) await loadWarungs();
+    if (response.ok) {
+      setTableError("");
+      await loadWarungs();
+    } else {
+      const result = await response.json();
+      setTableError(result.message ?? "Warung gagal dihapus.");
+    }
   }
 
   function updateList(field: "foodIds" | "otherMenu", id: string, checked: boolean) {
@@ -106,6 +119,7 @@ export default function WarungTable({ addRequest }: Props) {
 
   return (
     <>
+      {tableError && <Alert variant="danger">{tableError}</Alert>}
       <div className={ui.panel}>
         <div className={`d-flex flex-wrap align-items-center justify-content-between ${styles.toolbar}`}>
           <AdminSearch
@@ -199,16 +213,16 @@ export default function WarungTable({ addRequest }: Props) {
             </Form.Group>
             <Form.Group className={ui.field}>
               <Form.Label>Hari buka</Form.Label>
-              <Form.Control value={form.openDays} onChange={(event) => setForm({ ...form, openDays: event.target.value })} />
+                <Form.Control required value={form.openDays} onChange={(event) => setForm({ ...form, openDays: event.target.value })} />
             </Form.Group>
             <div className="d-flex gap-3">
               <Form.Group className={`${ui.field} flex-fill`}>
                 <Form.Label>Jam buka</Form.Label>
-                <Form.Control value={form.openTime} onChange={(event) => setForm({ ...form, openTime: event.target.value })} />
+                <Form.Control required type="time" value={form.openTime} onChange={(event) => setForm({ ...form, openTime: event.target.value })} />
               </Form.Group>
               <Form.Group className={`${ui.field} flex-fill`}>
                 <Form.Label>Jam tutup</Form.Label>
-                <Form.Control value={form.closeTime} onChange={(event) => setForm({ ...form, closeTime: event.target.value })} />
+                <Form.Control required type="time" value={form.closeTime} onChange={(event) => setForm({ ...form, closeTime: event.target.value })} />
               </Form.Group>
             </div>
             <Form.Group className={ui.field}>
