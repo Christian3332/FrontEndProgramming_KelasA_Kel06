@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: "Kelola Warung",
 };
 
-export default function KelolaWarungPage() {
-  return <WarungAdmin />;
+export default async function KelolaWarungPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ aksi?: string }>;
+}) {
+  const { aksi } = await searchParams;
+  return <WarungAdmin initialAdd={aksi === "tambah"} />;
 }
