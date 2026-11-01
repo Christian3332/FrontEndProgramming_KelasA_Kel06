@@ -17,6 +17,15 @@ export async function PUT(request: Request, { params }: Context) {
   const data = await request.json();
 
   try {
+    if (data.featured) {
+      const featuredCount = await prisma.food.count({
+        where: { featured: true, slug: { not: id } },
+      });
+      if (featuredCount >= 3) {
+        return Response.json({ message: "Maksimal hanya 3 makanan yang bisa menjadi Pilihan." }, { status: 400 });
+      }
+    }
+
     await prisma.food.update({
       where: { slug: id },
       data: {

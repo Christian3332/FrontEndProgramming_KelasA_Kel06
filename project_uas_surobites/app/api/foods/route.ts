@@ -17,6 +17,13 @@ export async function POST(request: Request) {
   }
 
   try {
+    if (data.featured) {
+      const featuredCount = await prisma.food.count({ where: { featured: true } });
+      if (featuredCount >= 3) {
+        return Response.json({ message: "Maksimal hanya 3 makanan yang bisa menjadi Pilihan." }, { status: 400 });
+      }
+    }
+
     await prisma.food.create({
       data: {
         slug,
