@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Alert, Button, Col, Form, Modal } from "react-bootstrap";
 import type { Faq } from "@/data/faqs";
 import SectionHead from "@/components/admin/SectionHead";
+import { refreshAdminCounts } from "@/components/admin/useAdminCounts";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
@@ -53,6 +54,7 @@ export default function FaqAdmin({ initialFaqs }: Props) {
 
       setOpen(false);
       await loadFaqs();
+      refreshAdminCounts();
     } catch {
       setError("FAQ gagal disimpan. Periksa koneksi lalu coba lagi.");
     }
@@ -89,6 +91,7 @@ export default function FaqAdmin({ initialFaqs }: Props) {
         return;
       }
       await loadFaqs();
+      refreshAdminCounts();
     } catch {
       setError("FAQ gagal dihapus. Periksa koneksi lalu coba lagi.");
     }

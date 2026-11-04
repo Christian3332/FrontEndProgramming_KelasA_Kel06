@@ -10,6 +10,7 @@ import { getCategory, getTime } from "@/lib/helper";
 import AdminSearch from "@/components/admin/AdminSearch";
 import PriceTag from "@/components/admin/PriceTag";
 import ImageUpload from "@/components/admin/ImageUpload";
+import { refreshAdminCounts } from "@/components/admin/useAdminCounts";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
@@ -96,13 +97,17 @@ export default function FoodTable({ initialAdd = false }: { initialAdd?: boolean
 
     setOpen(false);
     await loadFoods();
+    refreshAdminCounts();
   }
 
   async function deleteFood(id: string) {
     if (!window.confirm("Hapus makanan ini?")) return;
 
     const response = await fetch(`/api/foods/${id}`, { method: "DELETE" });
-    if (response.ok) await loadFoods();
+    if (response.ok) {
+      await loadFoods();
+      refreshAdminCounts();
+    }
   }
 
   function updateList(field: "categories" | "timeCategory", id: string, checked: boolean) {

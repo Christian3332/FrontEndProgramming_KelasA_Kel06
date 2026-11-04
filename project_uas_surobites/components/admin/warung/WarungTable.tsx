@@ -8,6 +8,7 @@ import { formatTime, isWarungOpen } from "@/lib/helper";
 import AdminSearch from "@/components/admin/AdminSearch";
 import PriceTag from "@/components/admin/PriceTag";
 import ImageUpload from "@/components/admin/ImageUpload";
+import { refreshAdminCounts } from "@/components/admin/useAdminCounts";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
@@ -119,6 +120,7 @@ export default function WarungTable({ addRequest }: Props) {
 
     setOpen(false);
     await loadWarungs();
+    refreshAdminCounts();
   }
 
   async function deleteWarung(id: string) {
@@ -128,6 +130,7 @@ export default function WarungTable({ addRequest }: Props) {
     if (response.ok) {
       setTableError("");
       await loadWarungs();
+      refreshAdminCounts();
     } else {
       const result = await response.json();
       setTableError(result.message ?? "Warung gagal dihapus.");
