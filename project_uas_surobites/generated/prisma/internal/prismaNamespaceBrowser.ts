@@ -114,6 +114,7 @@ export const FoodScalarFieldEnum = {
   taste: 'taste',
   priceRange: 'priceRange',
   featured: 'featured',
+  favoriteCount: 'favoriteCount',
   priceCategoryId: 'priceCategoryId'
 } as const
 
