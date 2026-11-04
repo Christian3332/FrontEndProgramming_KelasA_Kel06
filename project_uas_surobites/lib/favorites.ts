@@ -36,17 +36,30 @@ function write(list: string[]) {
   listeners.forEach((l) => l());
 }
 
+// kirim ke server biar jumlah favorit tiap makanan ikut ke-update.
+// kalau gagal ya udah, yang di localStorage tetap jalan
+function syncCount(id: string, action: "add" | "remove") {
+  fetch(`/api/foods/${encodeURIComponent(id)}/favorite`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action }),
+  }).catch(() => {});
+}
+
 export function useFavorites() {
   const favorites = useSyncExternalStore(subscribe, read, () => EMPTY);
 
   const toggleFavorite = useCallback((id: string) => {
     const current = read();
-    write(
-      current.includes(id) ? current.filter((x) => x !== id) : [...current, id],
-    );
+    const sudahFavorit = current.includes(id);
+    write(sudahFavorit ? current.filter((x) => x !== id) : [...current, id]);
+    syncCount(id, sudahFavorit ? "remove" : "add");
   }, []);
 
-  const clearFavorites = useCallback(() => write([]), []);
+  const clearFavorites = useCallback(() => {
+    read().forEach((id) => syncCount(id, "remove"));
+    write([]);
+  }, []);
   const isFavorite = (id: string) => favorites.includes(id);
 
   return { favorites, isFavorite, toggleFavorite, clearFavorites };

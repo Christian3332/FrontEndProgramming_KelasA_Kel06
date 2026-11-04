@@ -42,6 +42,7 @@ function toFood(r: FoodRow, order: { cats: string[]; slots: string[] }): Food {
     priceRange: r.priceRange,
     timeCategory: sortBy(r.timeSlots.map((t) => t.id), order.slots),
     featured: r.featured,
+    favoriteCount: r.favoriteCount,
   };
 }
 

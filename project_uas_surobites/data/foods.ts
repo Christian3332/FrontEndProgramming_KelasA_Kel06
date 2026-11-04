@@ -20,6 +20,7 @@ export type Food = {
   priceRange: string;
   timeCategory: string[];
   featured: boolean;
+  favoriteCount?: number;
 };
 
 export type Warung = {

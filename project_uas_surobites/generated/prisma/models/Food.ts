@@ -28,10 +28,12 @@ export type AggregateFood = {
 
 export type FoodAvgAggregateOutputType = {
   id: number | null
+  favoriteCount: number | null
 }
 
 export type FoodSumAggregateOutputType = {
   id: number | null
+  favoriteCount: number | null
 }
 
 export type FoodMinAggregateOutputType = {
@@ -44,6 +46,7 @@ export type FoodMinAggregateOutputType = {
   taste: string | null
   priceRange: string | null
   featured: boolean | null
+  favoriteCount: number | null
   priceCategoryId: string | null
 }
 
@@ -57,6 +60,7 @@ export type FoodMaxAggregateOutputType = {
   taste: string | null
   priceRange: string | null
   featured: boolean | null
+  favoriteCount: number | null
   priceCategoryId: string | null
 }
 
@@ -70,6 +74,7 @@ export type FoodCountAggregateOutputType = {
   taste: number
   priceRange: number
   featured: number
+  favoriteCount: number
   priceCategoryId: number
   _all: number
 }
@@ -77,10 +82,12 @@ export type FoodCountAggregateOutputType = {
 
 export type FoodAvgAggregateInputType = {
   id?: true
+  favoriteCount?: true
 }
 
 export type FoodSumAggregateInputType = {
   id?: true
+  favoriteCount?: true
 }
 
 export type FoodMinAggregateInputType = {
@@ -93,6 +100,7 @@ export type FoodMinAggregateInputType = {
   taste?: true
   priceRange?: true
   featured?: true
+  favoriteCount?: true
   priceCategoryId?: true
 }
 
@@ -106,6 +114,7 @@ export type FoodMaxAggregateInputType = {
   taste?: true
   priceRange?: true
   featured?: true
+  favoriteCount?: true
   priceCategoryId?: true
 }
 
@@ -119,6 +128,7 @@ export type FoodCountAggregateInputType = {
   taste?: true
   priceRange?: true
   featured?: true
+  favoriteCount?: true
   priceCategoryId?: true
   _all?: true
 }
@@ -219,6 +229,7 @@ export type FoodGroupByOutputType = {
   taste: string
   priceRange: string
   featured: boolean
+  favoriteCount: number
   priceCategoryId: string
   _count: FoodCountAggregateOutputType | null
   _avg: FoodAvgAggregateOutputType | null
@@ -255,6 +266,7 @@ export type FoodWhereInput = {
   taste?: Prisma.StringFilter<"Food"> | string
   priceRange?: Prisma.StringFilter<"Food"> | string
   featured?: Prisma.BoolFilter<"Food"> | boolean
+  favoriteCount?: Prisma.IntFilter<"Food"> | number
   priceCategoryId?: Prisma.StringFilter<"Food"> | string
   priceCategory?: Prisma.XOR<Prisma.PriceCategoryScalarRelationFilter, Prisma.PriceCategoryWhereInput>
   categories?: Prisma.CategoryListRelationFilter
@@ -273,6 +285,7 @@ export type FoodOrderByWithRelationInput = {
   taste?: Prisma.SortOrder
   priceRange?: Prisma.SortOrder
   featured?: Prisma.SortOrder
+  favoriteCount?: Prisma.SortOrder
   priceCategoryId?: Prisma.SortOrder
   priceCategory?: Prisma.PriceCategoryOrderByWithRelationInput
   categories?: Prisma.CategoryOrderByRelationAggregateInput
@@ -294,6 +307,7 @@ export type FoodWhereUniqueInput = Prisma.AtLeast<{
   taste?: Prisma.StringFilter<"Food"> | string
   priceRange?: Prisma.StringFilter<"Food"> | string
   featured?: Prisma.BoolFilter<"Food"> | boolean
+  favoriteCount?: Prisma.IntFilter<"Food"> | number
   priceCategoryId?: Prisma.StringFilter<"Food"> | string
   priceCategory?: Prisma.XOR<Prisma.PriceCategoryScalarRelationFilter, Prisma.PriceCategoryWhereInput>
   categories?: Prisma.CategoryListRelationFilter
@@ -312,6 +326,7 @@ export type FoodOrderByWithAggregationInput = {
   taste?: Prisma.SortOrder
   priceRange?: Prisma.SortOrder
   featured?: Prisma.SortOrder
+  favoriteCount?: Prisma.SortOrder
   priceCategoryId?: Prisma.SortOrder
   _count?: Prisma.FoodCountOrderByAggregateInput
   _avg?: Prisma.FoodAvgOrderByAggregateInput
@@ -333,6 +348,7 @@ export type FoodScalarWhereWithAggregatesInput = {
   taste?: Prisma.StringWithAggregatesFilter<"Food"> | string
   priceRange?: Prisma.StringWithAggregatesFilter<"Food"> | string
   featured?: Prisma.BoolWithAggregatesFilter<"Food"> | boolean
+  favoriteCount?: Prisma.IntWithAggregatesFilter<"Food"> | number
   priceCategoryId?: Prisma.StringWithAggregatesFilter<"Food"> | string
 }
 
@@ -345,6 +361,7 @@ export type FoodCreateInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
   priceCategory: Prisma.PriceCategoryCreateNestedOneWithoutFoodsInput
   categories?: Prisma.CategoryCreateNestedManyWithoutFoodsInput
   timeSlots?: Prisma.TimeSlotCreateNestedManyWithoutFoodsInput
@@ -362,6 +379,7 @@ export type FoodUncheckedCreateInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
   priceCategoryId: string
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutFoodsInput
   timeSlots?: Prisma.TimeSlotUncheckedCreateNestedManyWithoutFoodsInput
@@ -378,6 +396,7 @@ export type FoodUpdateInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategory?: Prisma.PriceCategoryUpdateOneRequiredWithoutFoodsNestedInput
   categories?: Prisma.CategoryUpdateManyWithoutFoodsNestedInput
   timeSlots?: Prisma.TimeSlotUpdateManyWithoutFoodsNestedInput
@@ -395,6 +414,7 @@ export type FoodUncheckedUpdateInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategoryId?: Prisma.StringFieldUpdateOperationsInput | string
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutFoodsNestedInput
   timeSlots?: Prisma.TimeSlotUncheckedUpdateManyWithoutFoodsNestedInput
@@ -412,6 +432,7 @@ export type FoodCreateManyInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
   priceCategoryId: string
 }
 
@@ -424,6 +445,7 @@ export type FoodUpdateManyMutationInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FoodUncheckedUpdateManyInput = {
@@ -436,6 +458,7 @@ export type FoodUncheckedUpdateManyInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategoryId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -459,11 +482,13 @@ export type FoodCountOrderByAggregateInput = {
   taste?: Prisma.SortOrder
   priceRange?: Prisma.SortOrder
   featured?: Prisma.SortOrder
+  favoriteCount?: Prisma.SortOrder
   priceCategoryId?: Prisma.SortOrder
 }
 
 export type FoodAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  favoriteCount?: Prisma.SortOrder
 }
 
 export type FoodMaxOrderByAggregateInput = {
@@ -476,6 +501,7 @@ export type FoodMaxOrderByAggregateInput = {
   taste?: Prisma.SortOrder
   priceRange?: Prisma.SortOrder
   featured?: Prisma.SortOrder
+  favoriteCount?: Prisma.SortOrder
   priceCategoryId?: Prisma.SortOrder
 }
 
@@ -489,11 +515,13 @@ export type FoodMinOrderByAggregateInput = {
   taste?: Prisma.SortOrder
   priceRange?: Prisma.SortOrder
   featured?: Prisma.SortOrder
+  favoriteCount?: Prisma.SortOrder
   priceCategoryId?: Prisma.SortOrder
 }
 
 export type FoodSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  favoriteCount?: Prisma.SortOrder
 }
 
 export type FoodScalarRelationFilter = {
@@ -692,6 +720,7 @@ export type FoodCreateWithoutPriceCategoryInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
   categories?: Prisma.CategoryCreateNestedManyWithoutFoodsInput
   timeSlots?: Prisma.TimeSlotCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungCreateNestedManyWithoutFoodsInput
@@ -708,6 +737,7 @@ export type FoodUncheckedCreateWithoutPriceCategoryInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutFoodsInput
   timeSlots?: Prisma.TimeSlotUncheckedCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungUncheckedCreateNestedManyWithoutFoodsInput
@@ -752,6 +782,7 @@ export type FoodScalarWhereInput = {
   taste?: Prisma.StringFilter<"Food"> | string
   priceRange?: Prisma.StringFilter<"Food"> | string
   featured?: Prisma.BoolFilter<"Food"> | boolean
+  favoriteCount?: Prisma.IntFilter<"Food"> | number
   priceCategoryId?: Prisma.StringFilter<"Food"> | string
 }
 
@@ -764,6 +795,7 @@ export type FoodCreateWithoutCategoriesInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
   priceCategory: Prisma.PriceCategoryCreateNestedOneWithoutFoodsInput
   timeSlots?: Prisma.TimeSlotCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungCreateNestedManyWithoutFoodsInput
@@ -780,6 +812,7 @@ export type FoodUncheckedCreateWithoutCategoriesInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
   priceCategoryId: string
   timeSlots?: Prisma.TimeSlotUncheckedCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungUncheckedCreateNestedManyWithoutFoodsInput
@@ -816,6 +849,7 @@ export type FoodCreateWithoutTimeSlotsInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
   priceCategory: Prisma.PriceCategoryCreateNestedOneWithoutFoodsInput
   categories?: Prisma.CategoryCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungCreateNestedManyWithoutFoodsInput
@@ -832,6 +866,7 @@ export type FoodUncheckedCreateWithoutTimeSlotsInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
   priceCategoryId: string
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungUncheckedCreateNestedManyWithoutFoodsInput
@@ -868,6 +903,7 @@ export type FoodCreateWithoutIngredientsInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
   priceCategory: Prisma.PriceCategoryCreateNestedOneWithoutFoodsInput
   categories?: Prisma.CategoryCreateNestedManyWithoutFoodsInput
   timeSlots?: Prisma.TimeSlotCreateNestedManyWithoutFoodsInput
@@ -884,6 +920,7 @@ export type FoodUncheckedCreateWithoutIngredientsInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
   priceCategoryId: string
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutFoodsInput
   timeSlots?: Prisma.TimeSlotUncheckedCreateNestedManyWithoutFoodsInput
@@ -915,6 +952,7 @@ export type FoodUpdateWithoutIngredientsInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategory?: Prisma.PriceCategoryUpdateOneRequiredWithoutFoodsNestedInput
   categories?: Prisma.CategoryUpdateManyWithoutFoodsNestedInput
   timeSlots?: Prisma.TimeSlotUpdateManyWithoutFoodsNestedInput
@@ -931,6 +969,7 @@ export type FoodUncheckedUpdateWithoutIngredientsInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategoryId?: Prisma.StringFieldUpdateOperationsInput | string
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutFoodsNestedInput
   timeSlots?: Prisma.TimeSlotUncheckedUpdateManyWithoutFoodsNestedInput
@@ -946,6 +985,7 @@ export type FoodCreateWithoutWarungsInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
   priceCategory: Prisma.PriceCategoryCreateNestedOneWithoutFoodsInput
   categories?: Prisma.CategoryCreateNestedManyWithoutFoodsInput
   timeSlots?: Prisma.TimeSlotCreateNestedManyWithoutFoodsInput
@@ -962,6 +1002,7 @@ export type FoodUncheckedCreateWithoutWarungsInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
   priceCategoryId: string
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutFoodsInput
   timeSlots?: Prisma.TimeSlotUncheckedCreateNestedManyWithoutFoodsInput
@@ -999,6 +1040,7 @@ export type FoodCreateManyPriceCategoryInput = {
   taste: string
   priceRange: string
   featured?: boolean
+  favoriteCount?: number
 }
 
 export type FoodUpdateWithoutPriceCategoryInput = {
@@ -1010,6 +1052,7 @@ export type FoodUpdateWithoutPriceCategoryInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   categories?: Prisma.CategoryUpdateManyWithoutFoodsNestedInput
   timeSlots?: Prisma.TimeSlotUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUpdateManyWithoutFoodsNestedInput
@@ -1026,6 +1069,7 @@ export type FoodUncheckedUpdateWithoutPriceCategoryInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutFoodsNestedInput
   timeSlots?: Prisma.TimeSlotUncheckedUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUncheckedUpdateManyWithoutFoodsNestedInput
@@ -1042,6 +1086,7 @@ export type FoodUncheckedUpdateManyWithoutPriceCategoryInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FoodUpdateWithoutCategoriesInput = {
@@ -1053,6 +1098,7 @@ export type FoodUpdateWithoutCategoriesInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategory?: Prisma.PriceCategoryUpdateOneRequiredWithoutFoodsNestedInput
   timeSlots?: Prisma.TimeSlotUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUpdateManyWithoutFoodsNestedInput
@@ -1069,6 +1115,7 @@ export type FoodUncheckedUpdateWithoutCategoriesInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategoryId?: Prisma.StringFieldUpdateOperationsInput | string
   timeSlots?: Prisma.TimeSlotUncheckedUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUncheckedUpdateManyWithoutFoodsNestedInput
@@ -1085,6 +1132,7 @@ export type FoodUncheckedUpdateManyWithoutCategoriesInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategoryId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -1097,6 +1145,7 @@ export type FoodUpdateWithoutTimeSlotsInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategory?: Prisma.PriceCategoryUpdateOneRequiredWithoutFoodsNestedInput
   categories?: Prisma.CategoryUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUpdateManyWithoutFoodsNestedInput
@@ -1113,6 +1162,7 @@ export type FoodUncheckedUpdateWithoutTimeSlotsInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategoryId?: Prisma.StringFieldUpdateOperationsInput | string
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUncheckedUpdateManyWithoutFoodsNestedInput
@@ -1129,6 +1179,7 @@ export type FoodUncheckedUpdateManyWithoutTimeSlotsInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategoryId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -1141,6 +1192,7 @@ export type FoodUpdateWithoutWarungsInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategory?: Prisma.PriceCategoryUpdateOneRequiredWithoutFoodsNestedInput
   categories?: Prisma.CategoryUpdateManyWithoutFoodsNestedInput
   timeSlots?: Prisma.TimeSlotUpdateManyWithoutFoodsNestedInput
@@ -1157,6 +1209,7 @@ export type FoodUncheckedUpdateWithoutWarungsInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategoryId?: Prisma.StringFieldUpdateOperationsInput | string
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutFoodsNestedInput
   timeSlots?: Prisma.TimeSlotUncheckedUpdateManyWithoutFoodsNestedInput
@@ -1173,6 +1226,7 @@ export type FoodUncheckedUpdateManyWithoutWarungsInput = {
   taste?: Prisma.StringFieldUpdateOperationsInput | string
   priceRange?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
   priceCategoryId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -1244,6 +1298,7 @@ export type FoodSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   taste?: boolean
   priceRange?: boolean
   featured?: boolean
+  favoriteCount?: boolean
   priceCategoryId?: boolean
   priceCategory?: boolean | Prisma.PriceCategoryDefaultArgs<ExtArgs>
   categories?: boolean | Prisma.Food$categoriesArgs<ExtArgs>
@@ -1263,6 +1318,7 @@ export type FoodSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   taste?: boolean
   priceRange?: boolean
   featured?: boolean
+  favoriteCount?: boolean
   priceCategoryId?: boolean
   priceCategory?: boolean | Prisma.PriceCategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["food"]>
@@ -1277,6 +1333,7 @@ export type FoodSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   taste?: boolean
   priceRange?: boolean
   featured?: boolean
+  favoriteCount?: boolean
   priceCategoryId?: boolean
   priceCategory?: boolean | Prisma.PriceCategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["food"]>
@@ -1291,10 +1348,11 @@ export type FoodSelectScalar = {
   taste?: boolean
   priceRange?: boolean
   featured?: boolean
+  favoriteCount?: boolean
   priceCategoryId?: boolean
 }
 
-export type FoodOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "name" | "image" | "shortDescription" | "story" | "taste" | "priceRange" | "featured" | "priceCategoryId", ExtArgs["result"]["food"]>
+export type FoodOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "name" | "image" | "shortDescription" | "story" | "taste" | "priceRange" | "featured" | "favoriteCount" | "priceCategoryId", ExtArgs["result"]["food"]>
 export type FoodInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   priceCategory?: boolean | Prisma.PriceCategoryDefaultArgs<ExtArgs>
   categories?: boolean | Prisma.Food$categoriesArgs<ExtArgs>
@@ -1329,6 +1387,7 @@ export type $FoodPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     taste: string
     priceRange: string
     featured: boolean
+    favoriteCount: number
     priceCategoryId: string
   }, ExtArgs["result"]["food"]>
   composites: {}
@@ -1767,6 +1826,7 @@ export interface FoodFieldRefs {
   readonly taste: Prisma.FieldRef<"Food", 'String'>
   readonly priceRange: Prisma.FieldRef<"Food", 'String'>
   readonly featured: Prisma.FieldRef<"Food", 'Boolean'>
+  readonly favoriteCount: Prisma.FieldRef<"Food", 'Int'>
   readonly priceCategoryId: Prisma.FieldRef<"Food", 'String'>
 }
     
