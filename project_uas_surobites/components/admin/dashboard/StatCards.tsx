@@ -1,18 +1,17 @@
-"use client";
-
 import Link from "next/link";
 import { Col, Row } from "react-bootstrap";
-import { foods } from "@/data/foods";
-import { useFaqs } from "@/lib/useFaqs";
-import { useWarungs } from "@/lib/useWarungs";
-import { useFavorites } from "@/lib/favorites";
+import type { Food } from "@/data/foods";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
-export default function StatCards() {
-  const { favorites } = useFavorites();
-  const warungs = useWarungs();
-  const faqs = useFaqs();
-  const favoriteCount = foods.filter((food) => favorites.includes(food.id)).length;
+type Props = {
+  foods: Food[];
+  totalWarung: number;
+  totalFaq: number;
+};
+
+export default function StatCards({ foods, totalWarung, totalFaq }: Props) {
+  // total klik favorit dari semua pengunjung, bukan cuma browser admin
+  const totalFavorite = foods.reduce((sum, food) => sum + (food.favoriteCount ?? 0), 0);
 
   const stats = [
     {
@@ -25,7 +24,7 @@ export default function StatCards() {
     },
     {
       label: "Jumlah warung",
-      value: warungs.length,
+      value: totalWarung,
       icon: "fa-solid fa-location-dot",
       iconClass: styles.statIconOrange,
       hint: "Tampil di Lokasi Warung",
@@ -33,18 +32,18 @@ export default function StatCards() {
     },
     {
       label: "Jumlah FAQ",
-      value: faqs.length,
+      value: totalFaq,
       icon: "fa-regular fa-comments",
       iconClass: "",
       hint: "Tampil di Beranda",
       href: "/admin/dashboard/faq",
     },
     {
-      label: "Makanan difavoritkan",
-      value: favoriteCount,
+      label: "Total favorit",
+      value: totalFavorite,
       icon: "fa-solid fa-heart",
       iconClass: styles.statIconRed,
-      hint: "Disimpan pengunjung di browser ini",
+      hint: "Dari semua pengunjung",
       href: "/favorit",
     },
   ];

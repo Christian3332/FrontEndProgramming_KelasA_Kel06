@@ -6,8 +6,10 @@ import AdminTopbar from "@/components/admin/AdminTopbar";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
 export default function AdminShell({
+  username,
   children,
 }: Readonly<{
+  username: string;
   children: React.ReactNode;
 }>) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -19,10 +21,11 @@ export default function AdminShell({
       </a>
 
       <div className={`d-flex min-vh-100 ${styles.layout}`}>
-        <AdminSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <AdminSidebar username={username} open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
         <div className={`d-flex flex-column ${styles.mainWrap}`}>
           <AdminTopbar
+            username={username}
             sidebarOpen={sidebarOpen}
             onOpenSidebar={() => setSidebarOpen(true)}
           />

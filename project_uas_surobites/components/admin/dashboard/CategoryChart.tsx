@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { categories, foods } from "@/data/foods";
+import { categories } from "@/data/foods";
+import type { Food } from "@/data/foods";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
-export default function CategoryChart() {
+export default function CategoryChart({ foods }: { foods: Food[] }) {
   return (
     <article className={`h-100 ${ui.panel}`}>
       <div className={`d-flex flex-wrap align-items-start justify-content-between ${ui.panelHeader}`}>

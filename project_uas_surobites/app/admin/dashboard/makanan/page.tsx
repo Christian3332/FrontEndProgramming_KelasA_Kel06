@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import SectionHead from "@/components/admin/SectionHead";
 import FoodTable from "@/components/admin/makanan/FoodTable";
+import { getFoods } from "@/lib/queries";
 import ui from "@/app/styles/admin-ui.module.css";
 
 export const metadata: Metadata = {
@@ -12,7 +14,9 @@ export default async function KelolaMakananPage({
 }: {
   searchParams: Promise<{ aksi?: string }>;
 }) {
+  await connection();
   const { aksi } = await searchParams;
+  const foods = await getFoods();
 
   return (
     <section className={ui.section} aria-labelledby="sec-makanan">
@@ -22,7 +26,7 @@ export default async function KelolaMakananPage({
         description="Data makanan ini dipakai oleh halaman Katalog, Rekomendasi, Favorit, dan fitur pencarian."
       />
 
-      <FoodTable initialAdd={aksi === "tambah"} />
+      <FoodTable initialFoods={foods} initialAdd={aksi === "tambah"} />
     </section>
   );
 }

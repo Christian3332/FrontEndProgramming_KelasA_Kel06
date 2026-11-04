@@ -104,6 +104,15 @@ export async function isAdminAuthenticated() {
   return (await getAdminSessionId()) !== null;
 }
 
+// username admin yang lagi login, null kalau belum login
+export async function getAdminUsername() {
+  const adminId = await getAdminSessionId();
+  if (!adminId) return null;
+
+  const admin = await prisma.admin.findUnique({ where: { id: adminId }, select: { username: true } });
+  return admin?.username ?? null;
+}
+
 export async function changeAdminPassword(currentPassword: string, newPassword: string) {
   const adminId = await getAdminSessionId();
   if (!adminId) return "unauthorized" as const;

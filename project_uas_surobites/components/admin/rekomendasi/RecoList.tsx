@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Alert, Button } from "react-bootstrap";
@@ -9,12 +9,12 @@ import type { Food } from "@/data/foods";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
-export default function RecoList() {
+export default function RecoList({ initialFoods }: { initialFoods: Food[] }) {
   const router = useRouter();
-  const [foods, setFoods] = useState<Food[]>([]);
-  const [originalFoods, setOriginalFoods] = useState<Food[]>([]);
+  const [foods, setFoods] = useState<Food[]>(initialFoods);
+  // salinan data asli, dipakai buat ngecek mana yang berubah pas disimpan
+  const [originalFoods, setOriginalFoods] = useState<Food[]>(initialFoods);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
   async function loadFoods() {
@@ -23,12 +23,7 @@ export default function RecoList() {
     const data: Food[] = await response.json();
     setFoods(data);
     setOriginalFoods(data);
-    setLoading(false);
   }
-
-  useEffect(() => {
-    loadFoods();
-  }, []);
 
   function changeCategory(foodId: string, categoryId: string, checked: boolean) {
     setError("");
@@ -106,7 +101,7 @@ export default function RecoList() {
       {error && <Alert variant="danger">{error}</Alert>}
 
       <div className="d-flex flex-column">
-        {!loading && foods.length === 0 && <p className={ui.panelEmpty}>Belum ada data makanan.</p>}
+        {foods.length === 0 &&<p className={ui.panelEmpty}>Belum ada data makanan.</p>}
 
         {foods.map((food) => (
           <div className={`d-flex flex-column flex-lg-row align-items-lg-center justify-content-lg-between ${styles.recoRow}`} key={food.id}>
@@ -148,7 +143,7 @@ export default function RecoList() {
         <Button variant="" className={`${ui.btn} ${ui.btnGhost}`} onClick={cancelChanges} disabled={saving}>
           Batalkan
         </Button>
-        <Button variant="primary" className={`${ui.btn} ${ui.btnPrimary}`} onClick={saveChanges} disabled={saving || loading}>
+        <Button variant="primary" className={`${ui.btn} ${ui.btnPrimary}`} onClick={saveChanges} disabled={saving}>
           {saving ? "Menyimpan..." : "Simpan Perubahan"}
         </Button>
       </div>

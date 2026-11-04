@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import { Button } from "react-bootstrap";
 import SectionHead from "@/components/admin/SectionHead";
 import CategorySummary from "@/components/admin/rekomendasi/CategorySummary";
 import RecoList from "@/components/admin/rekomendasi/RecoList";
+import { getFoods } from "@/lib/queries";
 import ui from "@/app/styles/admin-ui.module.css";
 
 export const metadata: Metadata = {
   title: "Kelola Rekomendasi",
 };
 
-export default function KelolaRekomendasiPage() {
+export default async function KelolaRekomendasiPage() {
+  await connection();
+  const foods = await getFoods();
+
   return (
     <section className={ui.section} aria-labelledby="sec-rekomendasi">
       <SectionHead
@@ -23,7 +28,7 @@ export default function KelolaRekomendasiPage() {
       </SectionHead>
 
       <CategorySummary />
-      <RecoList />
+      <RecoList initialFoods={foods} />
     </section>
   );
 }
