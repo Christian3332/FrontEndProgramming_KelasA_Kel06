@@ -72,18 +72,18 @@ export const categories: Category[] = [
 export const prices: Price[] = [
   {
     id: "hemat",
-    label: "Hemat",
-    hint: "Di bawah Rp20.000"
+    label: "Murah",
+    hint: "Di bawah Rp15.000"
   },
   {
     id: "sedang",
     label: "Sedang",
-    hint: "Rp20.000 – Rp35.000"
+    hint: "Rp15.000 – Rp30.000"
   },
   {
     id: "premium",
-    label: "Spesial",
-    hint: "Di atas Rp35.000"
+    label: "Mahal",
+    hint: "Di atas Rp30.000"
   }
 ];
 

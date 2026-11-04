@@ -23,7 +23,7 @@ export const faqs: Faq[] = [
   {
     id: "faq-cara-rekomendasi",
     question: "Bagaimana cara mendapatkan rekomendasi kuliner?",
-    answer: "Masuk ke halaman Rekomendasi lalu pilih kategori sesuai selera atau kebutuhanmu, misalnya Pedas, Berkuah, Hemat, atau Kuliner Malam."
+    answer: "Masuk ke halaman Rekomendasi lalu pilih kategori sesuai selera atau kebutuhanmu, misalnya Pedas, Berkuah, Gurih, atau Kuliner Malam."
   },
   {
     id: "faq-simpan-favorit",
