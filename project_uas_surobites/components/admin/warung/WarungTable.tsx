@@ -6,6 +6,7 @@ import { Alert, Button, Form, Modal } from "react-bootstrap";
 import type { Food, Warung } from "@/data/foods";
 import { formatTime, isWarungOpen } from "@/lib/helper";
 import AdminSearch from "@/components/admin/AdminSearch";
+import ImageUpload from "@/components/admin/ImageUpload";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
@@ -253,10 +254,7 @@ export default function WarungTable({ addRequest }: Props) {
               <Form.Label>Deskripsi</Form.Label>
               <Form.Control as="textarea" rows={2} value={form.description} onChange={(event) => setForm({ ...form, description: event.target.value })} />
             </Form.Group>
-            <Form.Group className={ui.field}>
-              <Form.Label>Alamat gambar</Form.Label>
-              <Form.Control value={form.image} onChange={(event) => setForm({ ...form, image: event.target.value })} />
-            </Form.Group>
+            <ImageUpload label="Foto warung" value={form.image} onChange={(url) => setForm({ ...form, image: url })} />
             <Form.Group className={ui.field}>
               <Form.Label>Link Google Maps</Form.Label>
               <Form.Control value={form.mapsUrl} onChange={(event) => setForm({ ...form, mapsUrl: event.target.value })} />
