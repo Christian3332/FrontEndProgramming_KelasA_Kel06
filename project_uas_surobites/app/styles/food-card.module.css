@@ -35,7 +35,7 @@
     width: 40px;
     height: 40px;
     background-color: rgba(255, 255, 255, 0.94);
-    color: var(--sb-biru-tua);
+    color: #0D47A1;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
     transition: transform 0.2s ease, color 0.2s ease;
 }
@@ -45,12 +45,12 @@
 }
 
 .favBtn:hover {
-    color: var(--sb-merah);
+    color: #E53935;
     transform: scale(1.08);
 }
 
 .favActive {
-    color: var(--sb-merah);
+    color: #E53935;
 }
 
 .cardTags {
@@ -66,7 +66,7 @@
     padding: 4px 9px;
     border-radius: 50px;
     background-color: rgba(255, 255, 255, 0.94);
-    color: var(--sb-biru-tua);
+    color: #0D47A1;
     font-size: 10.5px;
     font-weight: 700;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
@@ -76,6 +76,42 @@
     margin: 0;
     font-size: 15px;
     color: #000000;
+}
+
+.favCount {
+    gap: 7px;
+    margin: 0;
+    color: #000000;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.favCount i {
+    color: red;
+    font-size: 18px;
+    filter: drop-shadow(0 2px 3px rgba(229, 57, 53, 0.35));
+}
+
+.favCount strong {
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+/* pas kartunya di-hover, hatinya berdetak */
+.foodCard:hover .favCount i {
+    animation: detak 0.9s ease-in-out infinite;
+}
+
+@keyframes detak {
+    0%, 50%, 100% { transform: scale(1); }
+    15% { transform: scale(1.25); }
+    30% { transform: scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .foodCard:hover .favCount i {
+        animation: none;
+    }
 }
 
 .katalogFooter {
@@ -97,15 +133,15 @@
     --bs-btn-padding-x: 18px;
     --bs-btn-font-size: 12px;
     --bs-btn-border-radius: 20px;
-    --bs-btn-color: var(--sb-biru-tua);
-    --bs-btn-bg: var(--sb-biru-garis);
-    --bs-btn-border-color: var(--sb-biru-garis);
+    --bs-btn-color: #0D47A1;
+    --bs-btn-bg: #90CAF9;
+    --bs-btn-border-color: #90CAF9;
     --bs-btn-hover-color: #FFFFFF;
-    --bs-btn-hover-bg: var(--sb-biru);
-    --bs-btn-hover-border-color: var(--sb-biru);
+    --bs-btn-hover-bg: #2196F3;
+    --bs-btn-hover-border-color: #2196F3;
     --bs-btn-active-color: #FFFFFF;
-    --bs-btn-active-bg: var(--sb-biru);
-    --bs-btn-active-border-color: var(--sb-biru);
+    --bs-btn-active-bg: #2196F3;
+    --bs-btn-active-border-color: #2196F3;
 }
 
 .btnSmall {

@@ -13,7 +13,18 @@ import cardStyles from "@/app/styles/food-card.module.css";
 export default function HighlightMenu() {
   const foods = useFoods();
   const [selected, setSelected] = useState<Food | null>(null);
-  const { isFavorite, toggleFavorite } = useFavorites();
+  const { favorites, isFavorite, toggleFavorite } = useFavorites();
+
+  // simpan status favorit browser ini waktu data dari server masuk,
+  // biar angkanya bisa langsung berubah pas hati diklik tanpa refresh
+  const [awal, setAwal] = useState({ foods, favorites });
+  if (awal.foods !== foods) setAwal({ foods, favorites });
+
+  const jumlahFavorit = (f: Food) => {
+    const tadinyaFavorit = awal.favorites.includes(f.id) ? 1 : 0;
+    const sekarangFavorit = isFavorite(f.id) ? 1 : 0;
+    return Math.max(0, (f.favoriteCount ?? 0) - tadinyaFavorit + sekarangFavorit);
+  };
   // ambil 3 makanan dengan favorit terbanyak.
   // kalau jumlahnya sama (misal masih 0 semua), yang dicentang "pilihan" sama admin didahulukan
   const unggulan = [...foods]
@@ -59,6 +70,14 @@ export default function HighlightMenu() {
                 </div>
                 <Card.Body className="d-flex flex-column align-items-center gap-2 text-center">
                   <h3 className={cardStyles.highlightName}>{f.name}</h3>
+                  <p
+                    className={`d-inline-flex align-items-center ${cardStyles.favCount}`}
+                    aria-label={`Disukai oleh ${jumlahFavorit(f)} orang`}
+                    title={`Disukai oleh ${jumlahFavorit(f)} orang`}
+                  >
+                    <i className="fa-solid fa-heart" aria-hidden="true"></i>
+                    <strong aria-hidden="true">{jumlahFavorit(f)}</strong>
+                  </p>
                   <Button
                     variant=""
                     className={cardStyles.btnLight}
