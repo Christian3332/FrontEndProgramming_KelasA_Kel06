@@ -32,7 +32,6 @@ export type Warung = {
   closeTime: string;
   description: string;
   foodIds: string[];
-  otherMenu: string[];
   image: string;
   mapsUrl: string;
 };
@@ -63,12 +62,6 @@ export const categories: Category[] = [
     description: "Sayur, buah, dan bumbu segar"
   },
   {
-    id: "hemat",
-    label: "Hemat",
-    icon: "💰",
-    description: "Kenyang tanpa bikin kantong bolong"
-  },
-  {
     id: "malam",
     label: "Kuliner Malam",
     icon: "🌙",
@@ -79,18 +72,18 @@ export const categories: Category[] = [
 export const prices: Price[] = [
   {
     id: "hemat",
-    label: "Hemat",
-    hint: "Di bawah Rp20.000"
+    label: "Murah",
+    hint: "Di bawah Rp15.000"
   },
   {
     id: "sedang",
     label: "Sedang",
-    hint: "Rp20.000 – Rp35.000"
+    hint: "Rp15.000 – Rp30.000"
   },
   {
     id: "premium",
-    label: "Spesial",
-    hint: "Di atas Rp35.000"
+    label: "Mahal",
+    hint: "Di atas Rp30.000"
   }
 ];
 
@@ -136,7 +129,6 @@ export const foods: Food[] = [
     categories: [
       "berkuah",
       "gurih",
-      "hemat",
       "malam"
     ],
     priceCategory: "hemat",
@@ -163,8 +155,7 @@ export const foods: Food[] = [
     taste: "Pedas manis, segar, dan renyah",
     categories: [
       "pedas",
-      "segar",
-      "hemat"
+      "segar"
     ],
     priceCategory: "hemat",
     priceRange: "Rp10.000 – Rp20.000",
@@ -192,7 +183,6 @@ export const foods: Food[] = [
     categories: [
       "pedas",
       "gurih",
-      "hemat",
       "malam"
     ],
     priceCategory: "hemat",
@@ -300,8 +290,7 @@ export const foods: Food[] = [
     ],
     taste: "Segar, manis gurih, dengan sedikit pedas",
     categories: [
-      "segar",
-      "hemat"
+      "segar"
     ],
     priceCategory: "hemat",
     priceRange: "Rp10.000 – Rp15.000",
@@ -359,7 +348,6 @@ export const foods: Food[] = [
     categories: [
       "gurih",
       "pedas",
-      "hemat",
       "malam"
     ],
     priceCategory: "hemat",
@@ -440,9 +428,6 @@ export const warungs: Warung[] = [
     foodIds: [
       "lontong-kikil"
     ],
-    otherMenu: [
-      "Tahu Campur"
-    ],
     image: "/img/Warung.png",
     mapsUrl: "https://maps.app.goo.gl/5s2ocqsDTwDYwsb16"
   },
@@ -458,9 +443,6 @@ export const warungs: Warung[] = [
       "rawon-setan",
       "nasi-pecel"
     ],
-    otherMenu: [
-      "Nasi Campur"
-    ],
     image: "/img/warung selamat sukses.png",
     mapsUrl: "https://maps.app.goo.gl/9Tvp2K7jWLGTJj128"
   },
@@ -473,10 +455,6 @@ export const warungs: Warung[] = [
     closeTime: "22:00",
     description: "Kedai kaki lima di Rungkut yang dikenal dengan menu spesial nasi telur, porsinya mengenyangkan dengan harga ramah kantong.",
     foodIds: [],
-    otherMenu: [
-      "Nasi Telur",
-      "Es Teh"
-    ],
     image: "/img/Kedai Bang Jady.jpg",
     mapsUrl: "https://maps.app.goo.gl/YyiWHLXbtAo8xYy77"
   },
@@ -489,11 +467,6 @@ export const warungs: Warung[] = [
     closeTime: "21:00",
     description: "Depot bergaya modern di pusat kota dengan konsep \"selera tuan dan nyonya\" yang menyajikan camilan, hidangan rumahan, dan pempek.",
     foodIds: [],
-    otherMenu: [
-      "Pempek",
-      "Camilan",
-      "Hidangan Rumahan"
-    ],
     image: "/img/depot tanjung api surabaya.jpg",
     mapsUrl: "https://maps.app.goo.gl/FXVpeHzkZ5vZ4yqw5"
   },
@@ -506,9 +479,6 @@ export const warungs: Warung[] = [
     closeTime: "23:00",
     description: "Tempat makan favorit anak muda Surabaya untuk menikmati ceker pedas berbumbu meresap dengan suasana santai.",
     foodIds: [],
-    otherMenu: [
-      "Ceker Pedas"
-    ],
     image: "/img/ceker pedas cocote tonggo.png",
     mapsUrl: "https://maps.app.goo.gl/pa7UxQsWbcd6ETBT6"
   }

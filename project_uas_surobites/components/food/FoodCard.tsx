@@ -36,7 +36,8 @@ export default function FoodCard({ food, onOpen, showTags = false }: Props) {
         </button>
         {showTags && (
           <div className={`d-flex flex-wrap ${styles.cardTags}`}>
-            {food.categories.slice(0, 2).map((id) => {
+            {/* buang id kategori yang udah gak ada (mis. hemat) biar slot tag gak kosong */}
+            {food.categories.filter((id) => getCategory(id)).slice(0, 2).map((id) => {
               const c = getCategory(id);
               return c ? (
                 <span key={id} className={styles.cardTag}>

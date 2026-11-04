@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button, Col, Modal, Row } from "react-bootstrap";
 import type { Food } from "@/data/foods";
 import { useWarungs } from "@/lib/useWarungs";
-import { getCategory, getPrice, getTime } from "@/lib/helper";
+import { getCategory, getLowestPrice, getPriceLevel, getTime } from "@/lib/helper";
 import { useFavorites } from "@/lib/favorites";
 import LinkButton from "@/components/ui/LinkButton";
 import styles from "@/app/styles/food-modal.module.css";
@@ -18,7 +18,7 @@ export default function FoodModal({ food, onClose }: Props) {
   if (!food) return null;
 
   const fav = isFavorite(food.id);
-  const price = getPrice(food.priceCategory);
+  const priceLevel = getPriceLevel(getLowestPrice(food.priceRange));
   const warungList = warungs.filter((w) => w.foodIds.includes(food.id));
   const timeText = food.timeCategory
     .map((id) => {
@@ -71,7 +71,7 @@ export default function FoodModal({ food, onClose }: Props) {
       <Col md={5} className={`position-relative ${styles.media}`}>
         <img src={food.image} alt={food.name} className={`w-100 h-100 ${styles.mediaImg}`} />
         <span className={styles.price}>
-          <i className="fa-solid fa-coins"></i> {price?.label} · {food.priceRange}
+          <i className="fa-solid fa-coins"></i> {priceLevel} · {food.priceRange}
         </span>
       </Col>
 

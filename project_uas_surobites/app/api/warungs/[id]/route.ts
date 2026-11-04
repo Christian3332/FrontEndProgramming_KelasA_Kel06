@@ -14,7 +14,6 @@ export async function PUT(request: Request, { params }: Context) {
   const name = String(data.name ?? "").trim();
   const slug = createSlug(name);
   const foodIds = Array.isArray(data.foodIds) ? data.foodIds : [];
-  const otherMenu = Array.isArray(data.otherMenu) ? data.otherMenu : [];
 
   if (!name || !slug || !String(data.address ?? "").trim() || !String(data.openDays ?? "").trim() || !data.openTime || !data.closeTime) {
     return Response.json({ message: "Isi nama, alamat, hari buka, dan jam operasional warung." }, { status: 400 });
@@ -44,10 +43,6 @@ export async function PUT(request: Request, { params }: Context) {
         image: String(data.image || "/img/Warung.png"),
         mapsUrl: String(data.mapsUrl ?? ""),
         foods: { set: foodIds.map((foodId: string) => ({ slug: String(foodId) })) },
-        menus: {
-          deleteMany: {},
-          create: otherMenu.map((menu: string) => ({ name: String(menu).trim() })).filter((menu: { name: string }) => menu.name),
-        },
       },
     });
 

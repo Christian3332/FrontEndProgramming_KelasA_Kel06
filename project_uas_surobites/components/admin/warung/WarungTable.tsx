@@ -6,6 +6,7 @@ import { Alert, Button, Form, Modal } from "react-bootstrap";
 import type { Food, Warung } from "@/data/foods";
 import { formatTime, isWarungOpen } from "@/lib/helper";
 import AdminSearch from "@/components/admin/AdminSearch";
+import PriceTag from "@/components/admin/PriceTag";
 import ImageUpload from "@/components/admin/ImageUpload";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
@@ -21,7 +22,6 @@ const warungKosong: Warung = {
   closeTime: "",
   description: "",
   foodIds: [],
-  otherMenu: [],
   image: "/img/Warung.png",
   mapsUrl: "",
 };
@@ -134,11 +134,10 @@ export default function WarungTable({ addRequest }: Props) {
     }
   }
 
-  function updateList(field: "foodIds" | "otherMenu", id: string, checked: boolean) {
-    const values = form[field];
+  function toggleFood(id: string, checked: boolean) {
     setForm({
       ...form,
-      [field]: checked ? [...values, id] : values.filter((value) => value !== id),
+      foodIds: checked ? [...form.foodIds, id] : form.foodIds.filter((value) => value !== id),
     });
   }
 
@@ -189,12 +188,14 @@ export default function WarungTable({ addRequest }: Props) {
                   </td>
                   <td data-label="Menu">
                     <div className={`d-flex flex-wrap justify-content-end justify-content-md-start ${ui.tagList}`}>
-                      {warung.foodIds.map((id) => (
-                        <span className={`${ui.tag} ${ui.tagGray}`} key={id}>{foodOptions.find((food) => food.id === id)?.name ?? id}</span>
-                      ))}
-                      {warung.otherMenu.map((item) => (
-                        <span className={`${ui.tag} ${ui.tagGray}`} key={item}>{item}</span>
-                      ))}
+                      {warung.foodIds.map((id) => {
+                        const food = foodOptions.find((item) => item.id === id);
+                        if (!food) {
+                          return <span className={`${ui.tag} ${ui.tagGray}`} key={id}>{id}</span>;
+                        }
+
+                        return <PriceTag key={id} priceRange={food.priceRange} label={food.name} />;
+                      })}
                     </div>
                   </td>
                   <td data-label="Status">
@@ -262,12 +263,8 @@ export default function WarungTable({ addRequest }: Props) {
             <Form.Group className={ui.field}>
               <Form.Label>Makanan</Form.Label>
               {foodOptions.map((food) => (
-                <Form.Check key={food.id} type="checkbox" label={food.name} checked={form.foodIds.includes(food.id)} onChange={(event) => updateList("foodIds", food.id, event.target.checked)} />
+                <Form.Check key={food.id} type="checkbox" label={food.name} checked={form.foodIds.includes(food.id)} onChange={(event) => toggleFood(food.id, event.target.checked)} />
               ))}
-            </Form.Group>
-            <Form.Group className={ui.field}>
-              <Form.Label>Menu lain (pisahkan dengan koma)</Form.Label>
-              <Form.Control value={form.otherMenu.join(", ")} onChange={(event) => setForm({ ...form, otherMenu: event.target.value.split(",").map((item) => item.trim()).filter(Boolean) })} />
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>

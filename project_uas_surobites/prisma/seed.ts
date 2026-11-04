@@ -69,7 +69,6 @@ async function main() {
         image: w.image,
         mapsUrl: w.mapsUrl,
         foods: { connect: w.foodIds.map((slug) => ({ slug })) },
-        menus: { create: w.otherMenu.map((name) => ({ name })) },
       },
     });
   }

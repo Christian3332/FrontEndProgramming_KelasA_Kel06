@@ -4,10 +4,21 @@ import { useSyncExternalStore } from "react";
 import Image from "next/image";
 import { Button, Card } from "react-bootstrap";
 import type { Food, Warung } from "@/data/foods";
-import { formatTime, isWarungOpen } from "@/lib/helper";
+import { formatTime, getLowestPrice, getPriceLevel, isWarungOpen } from "@/lib/helper";
 import styles from "@/app/styles/lokasi.module.css";
 
 const noop = () => () => {};
+
+// Warna label harga di chip menu
+function priceClass(level: string) {
+  if (level === "Murah") {
+    return styles.priceLow;
+  } else if (level === "Sedang") {
+    return styles.priceMid;
+  } else {
+    return styles.priceHigh;
+  }
+}
 
 type Props = {
   warung: Warung;
@@ -67,24 +78,27 @@ export default function WarungCard({ warung, foods, onOpenMap, onOpenFood }: Pro
 
         <p className={styles.desc}>{warung.description}</p>
 
-        <div className={`d-flex flex-wrap align-items-center ${styles.menu}`}>
-          <span className={styles.menuLabel}>Menu:</span>
-          {foodList.map((food) => (
-            <button
-              key={food.id}
-              type="button"
-              className={`${styles.chip} ${styles.chipButton}`}
-              onClick={() => onOpenFood(food)}
-            >
-              {food.name}
-            </button>
-          ))}
-          {warung.otherMenu.map((item) => (
-            <span key={item} className={styles.chip}>
-              {item}
-            </span>
-          ))}
-        </div>
+        {/* kalau warung belum punya makanan, baris menu gak usah ditampilin */}
+        {foodList.length > 0 && (
+          <div className={`d-flex flex-wrap align-items-center ${styles.menu}`}>
+            <span className={styles.menuLabel}>Menu:</span>
+            {foodList.map((food) => {
+              const level = getPriceLevel(getLowestPrice(food.priceRange));
+              return (
+                <button
+                  key={food.id}
+                  type="button"
+                  className={`${styles.chip} ${styles.chipButton}`}
+                  title={food.priceRange}
+                  onClick={() => onOpenFood(food)}
+                >
+                  {food.name}
+                  <span className={`${styles.priceTag} ${priceClass(level)}`}>{level}</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         <div className={`d-flex flex-wrap ${styles.actions}`}>
           <Button

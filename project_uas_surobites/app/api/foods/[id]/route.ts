@@ -1,6 +1,7 @@
 import { getFood } from "@/lib/queries";
 import { prisma } from "@/lib/prisma";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { getPriceCategoryId } from "@/lib/helper";
 
 type Context = { params: Promise<{ id: string }> };
 
@@ -22,8 +23,8 @@ export async function PUT(request: Request, { params }: Context) {
   const data = await request.json();
   const name = String(data.name ?? "").trim();
 
-  if (!name || !data.priceCategory || !data.priceRange) {
-    return Response.json({ message: "Lengkapi nama dan kategori harga makanan." }, { status: 400 });
+  if (!name || !data.priceRange) {
+    return Response.json({ message: "Lengkapi nama dan rentang harga makanan." }, { status: 400 });
   }
 
   try {
@@ -46,7 +47,7 @@ export async function PUT(request: Request, { params }: Context) {
         taste: String(data.taste ?? ""),
         priceRange: String(data.priceRange ?? ""),
         featured: Boolean(data.featured),
-        priceCategoryId: String(data.priceCategory ?? ""),
+        priceCategoryId: getPriceCategoryId(String(data.priceRange)),
         categories: { set: (data.categories ?? []).map((categoryId: string) => ({ id: categoryId })) },
         timeSlots: { set: (data.timeCategory ?? []).map((timeId: string) => ({ id: timeId })) },
         ingredients: {

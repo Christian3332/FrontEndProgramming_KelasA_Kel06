@@ -176,6 +176,29 @@
     color: #FFFFFF;
 }
 
+.priceTag {
+    margin-left: 6px;
+    padding: 1px 6px;
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.priceLow {
+    background-color: honeydew;
+    color: green;
+}
+
+.priceMid {
+    background-color: oldlace;
+    color: darkorange;
+}
+
+.priceHigh {
+    background-color: mistyrose;
+    color: firebrick;
+}
+
 .actions {
     gap: 8px;
     margin-top: auto;

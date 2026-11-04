@@ -16,9 +16,7 @@ const HIGHLIGHT = [styles.highlighted];
 
 function warungSearchText(w: Warung, foods: Food[]): string {
   const foodNames = w.foodIds.map((id) => foods.find((food) => food.id === id)?.name ?? "");
-  return [w.name, w.address, w.description, ...foodNames, ...w.otherMenu].join(
-    " ",
-  );
+  return [w.name, w.address, w.description, ...foodNames].join(" ");
 }
 
 export default function LokasiContent() {

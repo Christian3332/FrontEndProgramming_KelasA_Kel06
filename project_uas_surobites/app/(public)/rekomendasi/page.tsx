@@ -7,7 +7,7 @@ import RekomendasiContent from "./RekomendasiContent";
 export const metadata: Metadata = {
   title: "Rekomendasi Kuliner | SuroBites",
   description:
-    "Rekomendasi kuliner khas Surabaya berdasarkan selera: pedas, berkuah, gurih, segar, hemat, dan kuliner malam.",
+    "Rekomendasi kuliner khas Surabaya berdasarkan selera: pedas, berkuah, gurih, segar, dan kuliner malam.",
 };
 
 export default async function RekomendasiPage() {

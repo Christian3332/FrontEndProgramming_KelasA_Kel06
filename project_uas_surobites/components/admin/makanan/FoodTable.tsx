@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
-import { categories, prices, times } from "@/data/foods";
+import { categories, times } from "@/data/foods";
 import type { Food } from "@/data/foods";
-import { getCategory, getPrice, getTime } from "@/lib/helper";
+import { getCategory, getTime } from "@/lib/helper";
 import AdminSearch from "@/components/admin/AdminSearch";
+import PriceTag from "@/components/admin/PriceTag";
 import ImageUpload from "@/components/admin/ImageUpload";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
@@ -164,7 +165,7 @@ export default function FoodTable({ initialAdd = false }: { initialAdd?: boolean
                   </td>
                   <td data-label="Harga">
                     <div>
-                      <span className={`${ui.tag} ${ui.tagOrange}`}>{getPrice(food.priceCategory)?.label}</span>
+                      <PriceTag priceRange={food.priceRange} />
                       <small className={styles.cellSub}>{food.priceRange}</small>
                     </div>
                   </td>
@@ -215,14 +216,12 @@ export default function FoodTable({ initialAdd = false }: { initialAdd?: boolean
               <Form.Control value={form.taste} onChange={(e) => setForm({ ...form, taste: e.target.value })} />
             </Form.Group>
             <Form.Group className={ui.field}>
-              <Form.Label>Kategori harga</Form.Label>
-              <Form.Select value={form.priceCategory} onChange={(e) => setForm({ ...form, priceCategory: e.target.value })}>
-                {prices.map((price) => <option key={price.id} value={price.id}>{price.label}</option>)}
-              </Form.Select>
-            </Form.Group>
-            <Form.Group className={ui.field}>
               <Form.Label>Rentang harga</Form.Label>
-              <Form.Control required value={form.priceRange} onChange={(e) => setForm({ ...form, priceRange: e.target.value })} />
+              <Form.Control required value={form.priceRange} onChange={(e) => setForm({ ...form, priceRange: e.target.value })} placeholder="contoh: Rp15.000 – Rp25.000" />
+              {/* kategori otomatis dari harga terendah, gak perlu dipilih manual */}
+              <Form.Text>
+                Kategori harga: {form.priceRange ? <PriceTag priceRange={form.priceRange} /> : "-"}
+              </Form.Text>
             </Form.Group>
             <Form.Group className={ui.field}>
               <Form.Label>Kategori</Form.Label>

@@ -27,6 +27,35 @@ export function formatRupiah(price: number): string {
   }).format(price);
 }
 
+// Ambil harga terendah dari teks, mis. "Rp15.000 – Rp25.000" jadi 15000
+export function getLowestPrice(priceRange: string): number {
+  const angka = priceRange.match(/\d[\d.]*/);
+  return angka ? Number(angka[0].replace(/\./g, "")) : 0;
+}
+
+// Kategori harga menu buat halaman kelola warung
+export function getPriceLevel(price: number): string {
+  if (price < 15000) {
+    return "Murah";
+  } else if (price <= 30000) {
+    return "Sedang";
+  } else {
+    return "Mahal";
+  }
+}
+
+// Id kategori di database masih hemat/sedang/premium, jadi disesuaikan dari kondisi di atas
+export function getPriceCategoryId(priceRange: string): string {
+  const level = getPriceLevel(getLowestPrice(priceRange));
+  if (level === "Murah") {
+    return "hemat";
+  } else if (level === "Sedang") {
+    return "sedang";
+  } else {
+    return "premium";
+  }
+}
+
 // Ubah teks jadi slug
 export function createSlug(text: string): string {
   return normalizeText(text)

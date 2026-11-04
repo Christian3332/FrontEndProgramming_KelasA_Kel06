@@ -11,7 +11,6 @@ const foodInclude = {
 
 const warungInclude = {
   foods: { select: { slug: true }, orderBy: { id: "asc" } },
-  menus: { orderBy: { id: "asc" } },
 } satisfies Prisma.WarungInclude;
 
 type FoodRow = Prisma.FoodGetPayload<{ include: typeof foodInclude }>;
@@ -56,7 +55,6 @@ function toWarung(r: WarungRow): Warung {
     closeTime: r.closeTime,
     description: r.description,
     foodIds: r.foods.map((f) => f.slug),
-    otherMenu: r.menus.map((m) => m.name),
     image: r.image,
     mapsUrl: r.mapsUrl,
   };
