@@ -14,7 +14,15 @@ export default function HighlightMenu() {
   const foods = useFoods();
   const [selected, setSelected] = useState<Food | null>(null);
   const { isFavorite, toggleFavorite } = useFavorites();
-  const unggulan = foods.filter((f) => f.featured);
+  // ambil 3 makanan dengan favorit terbanyak.
+  // kalau jumlahnya sama (misal masih 0 semua), yang dicentang "pilihan" sama admin didahulukan
+  const unggulan = [...foods]
+    .sort(
+      (a, b) =>
+        (b.favoriteCount ?? 0) - (a.favoriteCount ?? 0) ||
+        Number(b.featured) - Number(a.featured),
+    )
+    .slice(0, 3);
 
   return (
     <section
