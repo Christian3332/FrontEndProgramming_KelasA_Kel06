@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Col, Row } from "react-bootstrap";
-import { foods } from "@/data/foods";
+import { useFoods } from "@/lib/useFoods";
 import { useFaqs } from "@/lib/useFaqs";
 import { useWarungs } from "@/lib/useWarungs";
 import { useFavorites } from "@/lib/favorites";
@@ -10,6 +10,8 @@ import styles from "@/app/styles/admin-dashboard.module.css";
 
 export default function StatCards() {
   const { favorites } = useFavorites();
+  // ambil dari database, bukan data statis, biar makanan baru ikut kehitung
+  const foods = useFoods();
   const warungs = useWarungs();
   const faqs = useFaqs();
   const favoriteCount = foods.filter((food) => favorites.includes(food.id)).length;
