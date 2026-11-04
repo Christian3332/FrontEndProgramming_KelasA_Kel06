@@ -1,22 +1,20 @@
-import SearchBar from "@/components/SearchBar";
-import Hero from "@/components/Hero";
-import CategoryLinks from "@/components/CategoryLinks";
-import HighlightMenu from "@/components/HighlightMenu";
-import KatalogPreview from "@/components/KatalogPreview";
-import WarungCarousel from "@/components/WarungCarousel";
-import Faq from "@/components/Faq";
+import SearchBar from "@/components/layout/SearchBar";
+import Hero from "@/components/home/Hero";
+import CategoryLinks from "@/components/home/CategoryLinks";
+import HighlightMenu from "@/components/home/HighlightMenu";
+import WarungCarousel from "@/components/home/WarungCarousel";
+import Faq from "@/components/home/Faq";
 
 
 export default function HomePage() {
   return (
-    <main>
+    <>
       <Hero />
       <SearchBar />
       <CategoryLinks />
       <HighlightMenu />
-      <KatalogPreview />
       <WarungCarousel />
       <Faq />
-    </main>
+    </>
   );
 }

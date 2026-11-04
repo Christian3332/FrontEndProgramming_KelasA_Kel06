@@ -1,9 +1,9 @@
-// Function membersihkan text
+// Membersihkan teks
 export function normalizeText(text: string): string {
   return text.toLowerCase().trim().replace(/\s+/g, " ");
 }
 
-// Function mencari data menggunakan kata kunci
+// Mencari data pakai kata kunci
 export function searchItems<T>(
   items: T[],
   query: string,
@@ -18,7 +18,7 @@ export function searchItems<T>(
   );
 }
 
-// Function angka menjadi format rupiah
+// Ubah angka ke format rupiah
 export function formatRupiah(price: number): string {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -27,19 +27,48 @@ export function formatRupiah(price: number): string {
   }).format(price);
 }
 
-// Function Mengubah format nama
+// Ambil harga terendah dari teks, mis. "Rp15.000 – Rp25.000" jadi 15000
+export function getLowestPrice(priceRange: string): number {
+  const angka = priceRange.match(/\d[\d.]*/);
+  return angka ? Number(angka[0].replace(/\./g, "")) : 0;
+}
+
+// Kategori harga menu buat halaman kelola warung
+export function getPriceLevel(price: number): string {
+  if (price < 15000) {
+    return "Murah";
+  } else if (price <= 30000) {
+    return "Sedang";
+  } else {
+    return "Mahal";
+  }
+}
+
+// Id kategori di database masih hemat/sedang/premium, jadi disesuaikan dari kondisi di atas
+export function getPriceCategoryId(priceRange: string): string {
+  const level = getPriceLevel(getLowestPrice(priceRange));
+  if (level === "Murah") {
+    return "hemat";
+  } else if (level === "Sedang") {
+    return "sedang";
+  } else {
+    return "premium";
+  }
+}
+
+// Ubah teks jadi slug
 export function createSlug(text: string): string {
   return normalizeText(text)
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[̀-ͯ]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 }
 
-// Function mengambil kategori makanan
 import { categories, foods, prices, times, warungs } from "@/data/foods";
 import type { Food, Warung } from "@/data/foods";
 
+// Ambil data berdasarkan id
 export const getCategory = (id: string) => categories.find((c) => c.id === id);
 export const getPrice = (id: string) => prices.find((p) => p.id === id);
 export const getTime = (id: string) => times.find((t) => t.id === id);

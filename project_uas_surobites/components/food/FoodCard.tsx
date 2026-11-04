@@ -1,0 +1,63 @@
+"use client";
+
+import { Button, Card } from "react-bootstrap";
+import type { Food } from "@/data/foods";
+import { getCategory } from "@/lib/helper";
+import { useFavorites } from "@/lib/favorites";
+import styles from "@/app/styles/food-card.module.css";
+
+type Props = {
+  food: Food;
+  onOpen: (food: Food) => void;
+  showTags?: boolean;
+};
+
+export default function FoodCard({ food, onOpen, showTags = false }: Props) {
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const fav = isFavorite(food.id);
+
+  return (
+    <Card as="article" className={`h-100 ${styles.foodCard} ${styles.katalogCard}`} data-food-id={food.id}>
+      <div className={`position-relative ${styles.cardMedia}`}>
+        <img
+          src={food.image}
+          alt={food.name}
+          className={`w-100 h-100 ${styles.cardImg}`}
+          loading="lazy"
+        />
+        <button
+          type="button"
+          className={`position-absolute top-0 end-0 m-2 d-flex align-items-center justify-content-center rounded-circle border-0 ${styles.favBtn} ${fav ? styles.favActive : ""}`}
+          aria-label={`Favorit ${food.name}`}
+          aria-pressed={fav}
+          onClick={() => toggleFavorite(food.id)}
+        >
+          <i className={fav ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
+        </button>
+        {showTags && (
+          <div className={`d-flex flex-wrap ${styles.cardTags}`}>
+            {/* buang id kategori yang udah gak ada (mis. hemat) biar slot tag gak kosong */}
+            {food.categories.filter((id) => getCategory(id)).slice(0, 2).map((id) => {
+              const c = getCategory(id);
+              return c ? (
+                <span key={id} className={styles.cardTag}>
+                  {c.icon} {c.label}
+                </span>
+              ) : null;
+            })}
+          </div>
+        )}
+      </div>
+      <Card.Footer className={`d-flex align-items-center justify-content-between gap-2 ${styles.katalogFooter}`}>
+        <h3 className={styles.katalogName}>{food.name}</h3>
+        <Button
+          variant=""
+          className={`flex-shrink-0 text-nowrap ${styles.btnLight} ${styles.btnSmall}`}
+          onClick={() => onOpen(food)}
+        >
+          Deskripsi Singkat
+        </Button>
+      </Card.Footer>
+    </Card>
+  );
+}

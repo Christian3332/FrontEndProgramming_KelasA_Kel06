@@ -39,4 +39,4 @@ $(document).ready(function () {
     $(window).on("focus", function () {
         document.title = judulAsli;
     });
-});s
+});
