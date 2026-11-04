@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import { Button } from "react-bootstrap";
-import { admin } from "@/data/admin";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
@@ -17,11 +16,12 @@ const sectionTitles: Record<string, string> = {
 };
 
 type Props = {
+  username: string;
   sidebarOpen: boolean;
   onOpenSidebar: () => void;
 };
 
-export default function AdminTopbar({ sidebarOpen, onOpenSidebar }: Props) {
+export default function AdminTopbar({ username, sidebarOpen, onOpenSidebar }: Props) {
   const pathname = usePathname();
   const title = sectionTitles[pathname] ?? "Dashboard";
 
@@ -55,8 +55,8 @@ export default function AdminTopbar({ sidebarOpen, onOpenSidebar }: Props) {
         >
           Lihat Website ↗
         </Button>
-        <span className={`d-inline-flex align-items-center justify-content-center ${styles.avatar}`} title="Admin">
-          {admin.displayName.charAt(0)}
+        <span className={`d-inline-flex align-items-center justify-content-center ${styles.avatar}`} title={`Login sebagai ${username}`}>
+          {username.charAt(0).toUpperCase()}
         </span>
       </div>
     </header>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { getAdminUsername } from "@/lib/admin-auth";
 import AdminShell from "@/components/admin/AdminShell";
 
 export const metadata: Metadata = {
@@ -16,9 +16,10 @@ export default async function DashboardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  if (!(await isAdminAuthenticated())) {
+  const username = await getAdminUsername();
+  if (!username) {
     redirect("/admin/login?pesan=login");
   }
 
-  return <AdminShell>{children}</AdminShell>;
+  return <AdminShell username={username}>{children}</AdminShell>;
 }

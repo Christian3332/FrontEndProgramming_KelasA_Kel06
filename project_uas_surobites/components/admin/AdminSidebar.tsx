@@ -28,11 +28,12 @@ const menuUtama: MenuItem[] = [
 ];
 
 type Props = {
+  username: string;
   open: boolean;
   onClose: () => void;
 };
 
-export default function AdminSidebar({ open, onClose }: Props) {
+export default function AdminSidebar({ username, open, onClose }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const [confirmLogout, setConfirmLogout] = useState(false);
@@ -115,11 +116,11 @@ export default function AdminSidebar({ open, onClose }: Props) {
 
         <div className={`d-flex align-items-center ${styles.sidebarFooter}`}>
           <span className={`d-inline-flex align-items-center justify-content-center ${styles.avatar}`} aria-hidden="true">
-            {admin.displayName.charAt(0)}
+            {username.charAt(0).toUpperCase()}
           </span>
           <div className={styles.user}>
             <strong className={styles.userName}>{admin.displayName}</strong>
-            <small className={styles.userRole}>Administrator</small>
+            <small className={styles.userRole}>@{username}</small>
           </div>
         </div>
       </Offcanvas>

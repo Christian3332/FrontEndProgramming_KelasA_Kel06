@@ -35,7 +35,7 @@ function PasswordInput({ name, autoComplete }: PasswordInputProps) {
   );
 }
 
-export default function AkunForm() {
+export default function AkunForm({ username }: { username: string }) {
   const [saving, setSaving] = useState(false);
   const [notice, setNotice] = useState<{ type: "success" | "danger"; message: string } | null>(null);
 
@@ -104,7 +104,7 @@ export default function AkunForm() {
               name="username"
               className={ui.input}
               autoComplete="username"
-              defaultValue={admin.username}
+              defaultValue={username}
               readOnly
             />
           </Form.Group>
