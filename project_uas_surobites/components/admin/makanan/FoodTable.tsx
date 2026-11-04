@@ -8,6 +8,7 @@ import { categories, prices, times } from "@/data/foods";
 import type { Food } from "@/data/foods";
 import { getCategory, getPrice, getTime } from "@/lib/helper";
 import AdminSearch from "@/components/admin/AdminSearch";
+import ImageUpload from "@/components/admin/ImageUpload";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
@@ -31,6 +32,8 @@ export default function FoodTable({ initialAdd = false }: { initialAdd?: boolean
   const [list, setList] = useState<Food[]>([]);
   const [keyword, setKeyword] = useState("");
   const [form, setForm] = useState<Food>(foodKosong);
+  // teks bahan disimpan apa adanya biar koma & spasi gak langsung kehapus pas ngetik
+  const [ingredientsText, setIngredientsText] = useState("");
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
 
@@ -47,6 +50,7 @@ export default function FoodTable({ initialAdd = false }: { initialAdd?: boolean
     if (!initialAdd) return;
 
     setForm(foodKosong);
+    setIngredientsText("");
     setError("");
     setOpen(true);
     router.replace("/admin/dashboard/makanan", { scroll: false });
@@ -59,12 +63,14 @@ export default function FoodTable({ initialAdd = false }: { initialAdd?: boolean
 
   function startAdd() {
     setForm(foodKosong);
+    setIngredientsText("");
     setError("");
     setOpen(true);
   }
 
   function startEdit(food: Food) {
     setForm(food);
+    setIngredientsText(food.ingredients.join(", "));
     setError("");
     setOpen(true);
   }
@@ -73,10 +79,12 @@ export default function FoodTable({ initialAdd = false }: { initialAdd?: boolean
     event.preventDefault();
     setError("");
 
+    const ingredients = ingredientsText.split(",").map((item) => item.trim()).filter(Boolean);
+
     const response = await fetch(form.id ? `/api/foods/${form.id}` : "/api/foods", {
       method: form.id ? "PUT" : "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, ingredients }),
     });
 
     if (!response.ok) {
@@ -189,10 +197,7 @@ export default function FoodTable({ initialAdd = false }: { initialAdd?: boolean
               <Form.Label>Nama makanan</Form.Label>
               <Form.Control required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
             </Form.Group>
-            <Form.Group className={ui.field}>
-              <Form.Label>Alamat gambar</Form.Label>
-              <Form.Control value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} />
-            </Form.Group>
+            <ImageUpload label="Foto makanan" value={form.image} onChange={(url) => setForm({ ...form, image: url })} />
             <Form.Group className={ui.field}>
               <Form.Label>Deskripsi singkat</Form.Label>
               <Form.Control as="textarea" rows={2} value={form.shortDescription} onChange={(e) => setForm({ ...form, shortDescription: e.target.value })} />
@@ -203,7 +208,7 @@ export default function FoodTable({ initialAdd = false }: { initialAdd?: boolean
             </Form.Group>
             <Form.Group className={ui.field}>
               <Form.Label>Bahan (pisahkan dengan koma)</Form.Label>
-              <Form.Control value={form.ingredients.join(", ")} onChange={(e) => setForm({ ...form, ingredients: e.target.value.split(",").map((item) => item.trim()).filter(Boolean) })} />
+              <Form.Control value={ingredientsText} onChange={(e) => setIngredientsText(e.target.value)} placeholder="contoh: daging sapi, kluwek, bawang merah" />
             </Form.Group>
             <Form.Group className={ui.field}>
               <Form.Label>Rasa</Form.Label>
