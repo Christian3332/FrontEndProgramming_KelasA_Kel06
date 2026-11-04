@@ -10,6 +10,7 @@ import { getCategory, getTime } from "@/lib/helper";
 import AdminSearch from "@/components/admin/AdminSearch";
 import PriceTag from "@/components/admin/PriceTag";
 import ImageUpload from "@/components/admin/ImageUpload";
+import ConfirmDialog from "@/components/admin/ConfirmDialog";
 import { refreshAdminCounts } from "@/components/admin/useAdminCounts";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
@@ -44,6 +45,8 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
   // kalau datang dari tombol "Tambah makanan" di dashboard, form langsung kebuka
   const [open, setOpen] = useState(initialAdd);
   const [error, setError] = useState("");
+  // makanan yang lagi ditanyain mau dihapus atau nggak
+  const [hapus, setHapus] = useState<Food | null>(null);
 
   async function loadFoods() {
     const response = await fetch("/api/foods");
@@ -98,8 +101,7 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
   }
 
   async function deleteFood(id: string) {
-    if (!window.confirm("Hapus makanan ini?")) return;
-
+    setHapus(null);
     const response = await fetch(`/api/foods/${id}`, { method: "DELETE" });
     if (response.ok) {
       await loadFoods();
@@ -177,7 +179,7 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
                       <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn}`} title="Edit" aria-label={`Edit ${food.name}`} onClick={() => startEdit(food)}>
                         <i className="fa-solid fa-pen"></i>
                       </button>
-                      <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn} ${ui.iconBtnDanger}`} title="Hapus" aria-label={`Hapus ${food.name}`} onClick={() => deleteFood(food.id)}>
+                      <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn} ${ui.iconBtnDanger}`} title="Hapus" aria-label={`Hapus ${food.name}`} onClick={() => setHapus(food)}>
                         <i className="fa-solid fa-trash"></i>
                       </button>
                     </div>
@@ -241,6 +243,16 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
           </Modal.Footer>
         </Form>
       </Modal>
+
+      <ConfirmDialog
+        open={hapus !== null}
+        title="Hapus makanan?"
+        message={`"${hapus?.name}" akan dihapus dari Katalog, Rekomendasi, dan Favorit.`}
+        confirmText="Ya, Hapus"
+        icon="fa-regular fa-trash-can"
+        onConfirm={() => hapus && deleteFood(hapus.id)}
+        onCancel={() => setHapus(null)}
+      />
     </>
   );
 }

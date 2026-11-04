@@ -8,6 +8,7 @@ import { formatTime, isWarungOpen } from "@/lib/helper";
 import AdminSearch from "@/components/admin/AdminSearch";
 import PriceTag from "@/components/admin/PriceTag";
 import ImageUpload from "@/components/admin/ImageUpload";
+import ConfirmDialog from "@/components/admin/ConfirmDialog";
 import { refreshAdminCounts } from "@/components/admin/useAdminCounts";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
@@ -35,6 +36,8 @@ export default function WarungTable({ addRequest }: Props) {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
   const [tableError, setTableError] = useState("");
+  // warung yang lagi ditanyain mau dihapus atau nggak
+  const [hapus, setHapus] = useState<Warung | null>(null);
 
   async function loadWarungs() {
     const response = await fetch("/api/warungs");
@@ -124,8 +127,7 @@ export default function WarungTable({ addRequest }: Props) {
   }
 
   async function deleteWarung(id: string) {
-    if (!window.confirm("Hapus warung ini?")) return;
-
+    setHapus(null);
     const response = await fetch(`/api/warungs/${id}`, { method: "DELETE" });
     if (response.ok) {
       setTableError("");
@@ -213,7 +215,7 @@ export default function WarungTable({ addRequest }: Props) {
                       <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn}`} title="Edit" aria-label={`Edit ${warung.name}`} onClick={() => startEdit(warung)}>
                         <i className="fa-solid fa-pen"></i>
                       </button>
-                      <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn} ${ui.iconBtnDanger}`} title="Hapus" aria-label={`Hapus ${warung.name}`} onClick={() => deleteWarung(warung.id)}>
+                      <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn} ${ui.iconBtnDanger}`} title="Hapus" aria-label={`Hapus ${warung.name}`} onClick={() => setHapus(warung)}>
                         <i className="fa-solid fa-trash"></i>
                       </button>
                     </div>
@@ -276,6 +278,16 @@ export default function WarungTable({ addRequest }: Props) {
           </Modal.Footer>
         </Form>
       </Modal>
+
+      <ConfirmDialog
+        open={hapus !== null}
+        title="Hapus warung?"
+        message={`"${hapus?.name}" akan dihapus dari halaman Lokasi Warung.`}
+        confirmText="Ya, Hapus"
+        icon="fa-regular fa-trash-can"
+        onConfirm={() => hapus && deleteWarung(hapus.id)}
+        onCancel={() => setHapus(null)}
+      />
     </>
   );
 }

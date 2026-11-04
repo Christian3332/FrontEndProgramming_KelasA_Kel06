@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Alert, Button, Col, Form, Modal } from "react-bootstrap";
 import type { Faq } from "@/data/faqs";
 import SectionHead from "@/components/admin/SectionHead";
+import ConfirmDialog from "@/components/admin/ConfirmDialog";
 import { refreshAdminCounts } from "@/components/admin/useAdminCounts";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
@@ -17,6 +18,8 @@ export default function FaqAdmin({ initialFaqs }: Props) {
   const [form, setForm] = useState<Faq>(faqKosong);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
+  // faq yang lagi ditanyain mau dihapus atau nggak
+  const [hapus, setHapus] = useState<Faq | null>(null);
 
   async function loadFaqs() {
     const response = await fetch("/api/faqs");
@@ -80,7 +83,7 @@ export default function FaqAdmin({ initialFaqs }: Props) {
   }
 
   async function deleteFaq(id: string) {
-    if (!window.confirm("Hapus FAQ ini?")) return;
+    setHapus(null);
     setError("");
 
     try {
@@ -131,7 +134,7 @@ export default function FaqAdmin({ initialFaqs }: Props) {
                 <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn}`} title="Edit" aria-label={`Edit ${faq.question}`} onClick={() => startEdit(faq)}>
                   <i className="fa-solid fa-pen"></i>
                 </button>
-                <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn} ${ui.iconBtnDanger}`} title="Hapus" aria-label={`Hapus ${faq.question}`} onClick={() => deleteFaq(faq.id)}>
+                <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn} ${ui.iconBtnDanger}`} title="Hapus" aria-label={`Hapus ${faq.question}`} onClick={() => setHapus(faq)}>
                   <i className="fa-solid fa-trash"></i>
                 </button>
               </Col>
@@ -162,6 +165,16 @@ export default function FaqAdmin({ initialFaqs }: Props) {
           </Modal.Footer>
         </Form>
       </Modal>
+
+      <ConfirmDialog
+        open={hapus !== null}
+        title="Hapus FAQ?"
+        message={`Pertanyaan "${hapus?.question}" tidak akan tampil lagi di Beranda.`}
+        confirmText="Ya, Hapus"
+        icon="fa-regular fa-trash-can"
+        onConfirm={() => hapus && deleteFaq(hapus.id)}
+        onCancel={() => setHapus(null)}
+      />
     </section>
   );
 }
