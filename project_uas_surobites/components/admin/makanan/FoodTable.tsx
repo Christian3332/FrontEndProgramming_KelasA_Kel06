@@ -29,14 +29,20 @@ const foodKosong: Food = {
   featured: false,
 };
 
-export default function FoodTable({ initialAdd = false }: { initialAdd?: boolean }) {
+type Props = {
+  initialFoods: Food[];
+  initialAdd?: boolean;
+};
+
+export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
   const router = useRouter();
-  const [list, setList] = useState<Food[]>([]);
+  const [list, setList] = useState<Food[]>(initialFoods);
   const [keyword, setKeyword] = useState("");
   const [form, setForm] = useState<Food>(foodKosong);
   // teks bahan disimpan apa adanya biar koma & spasi gak langsung kehapus pas ngetik
   const [ingredientsText, setIngredientsText] = useState("");
-  const [open, setOpen] = useState(false);
+  // kalau datang dari tombol "Tambah makanan" di dashboard, form langsung kebuka
+  const [open, setOpen] = useState(initialAdd);
   const [error, setError] = useState("");
 
   async function loadFoods() {
@@ -44,18 +50,9 @@ export default function FoodTable({ initialAdd = false }: { initialAdd?: boolean
     if (response.ok) setList(await response.json());
   }
 
+  // hapus ?aksi=tambah dari url biar form gak kebuka lagi pas di-refresh
   useEffect(() => {
-    loadFoods();
-  }, []);
-
-  useEffect(() => {
-    if (!initialAdd) return;
-
-    setForm(foodKosong);
-    setIngredientsText("");
-    setError("");
-    setOpen(true);
-    router.replace("/admin/dashboard/makanan", { scroll: false });
+    if (initialAdd) router.replace("/admin/dashboard/makanan", { scroll: false });
   }, [initialAdd, router]);
 
   const filteredFoods = list.filter((food) =>
