@@ -1,5 +1,23 @@
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/user-auth";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
+
+export const dynamic = "force-dynamic";
+
+// khusus admin: daftar pertanyaan user yang belum dijawab
+export async function GET() {
+  if (!(await isAdminAuthenticated())) {
+    return Response.json({ message: "Silakan login sebagai admin." }, { status: 401 });
+  }
+
+  const rows = await prisma.faq.findMany({
+    where: { status: "pending" },
+    orderBy: { id: "desc" }, // yang paling baru di atas
+    select: { id: true, question: true },
+  });
+
+  return Response.json(rows.map((r) => ({ id: String(r.id), question: r.question })));
+}
 
 // user kirim pertanyaan baru, disimpan sebagai pending sampai dijawab admin
 export async function POST(request: Request) {
