@@ -7,6 +7,8 @@ const foodInclude = {
   categories: { select: { id: true } },
   timeSlots: { select: { id: true } },
   ingredients: { orderBy: { id: "asc" } },
+  // jumlah love diambil dari tabel FoodLike
+  _count: { select: { likes: true } },
 } satisfies Prisma.FoodInclude;
 
 const warungInclude = {
@@ -41,7 +43,7 @@ function toFood(r: FoodRow, order: { cats: string[]; slots: string[] }): Food {
     priceRange: r.priceRange,
     timeCategory: sortBy(r.timeSlots.map((t) => t.id), order.slots),
     featured: r.featured,
-    favoriteCount: r.favoriteCount,
+    favoriteCount: r._count.likes,
   };
 }
 
@@ -85,12 +87,25 @@ export async function getWarungs(): Promise<Warung[]> {
 }
 
 export async function getFaqs(): Promise<Faq[]> {
-  const rows = await prisma.faq.findMany({ orderBy: [{ position: "asc" }, { id: "asc" }] });
+  // pertanyaan user yang masih pending gak ikut ditampilkan
+  const rows = await prisma.faq.findMany({
+    where: { status: "published" },
+    orderBy: [{ position: "asc" }, { id: "asc" }],
+  });
   return rows.map((r) => ({
     id: String(r.id),
     question: r.question,
     answer: r.answer,
   }));
+}
+
+// pertanyaan dari user yang belum dijawab admin, terbaru di atas
+export async function getPendingQuestions(): Promise<Faq[]> {
+  const rows = await prisma.faq.findMany({
+    where: { status: "pending" },
+    orderBy: { id: "desc" },
+  });
+  return rows.map((r) => ({ id: String(r.id), question: r.question, answer: r.answer }));
 }
 
 export async function getCategories(): Promise<Category[]> {

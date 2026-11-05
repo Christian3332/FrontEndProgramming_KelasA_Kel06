@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Alert, Button, Form, Spinner } from "react-bootstrap";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-login.module.css";
+import { reloadLikes } from "@/lib/favorites";
 
 type Props = { mode: "login" | "register" };
 
@@ -50,6 +51,7 @@ export default function AuthForm({ mode }: Props) {
     }
 
     // refresh biar komponen server (navbar dll) ikut baca cookie yang baru
+    reloadLikes();
     router.replace(target);
     router.refresh();
   }

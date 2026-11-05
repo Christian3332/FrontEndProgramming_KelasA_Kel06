@@ -273,6 +273,7 @@ export type FoodWhereInput = {
   timeSlots?: Prisma.TimeSlotListRelationFilter
   warungs?: Prisma.WarungListRelationFilter
   ingredients?: Prisma.IngredientListRelationFilter
+  likes?: Prisma.FoodLikeListRelationFilter
 }
 
 export type FoodOrderByWithRelationInput = {
@@ -292,6 +293,7 @@ export type FoodOrderByWithRelationInput = {
   timeSlots?: Prisma.TimeSlotOrderByRelationAggregateInput
   warungs?: Prisma.WarungOrderByRelationAggregateInput
   ingredients?: Prisma.IngredientOrderByRelationAggregateInput
+  likes?: Prisma.FoodLikeOrderByRelationAggregateInput
 }
 
 export type FoodWhereUniqueInput = Prisma.AtLeast<{
@@ -314,6 +316,7 @@ export type FoodWhereUniqueInput = Prisma.AtLeast<{
   timeSlots?: Prisma.TimeSlotListRelationFilter
   warungs?: Prisma.WarungListRelationFilter
   ingredients?: Prisma.IngredientListRelationFilter
+  likes?: Prisma.FoodLikeListRelationFilter
 }, "id" | "slug">
 
 export type FoodOrderByWithAggregationInput = {
@@ -367,6 +370,7 @@ export type FoodCreateInput = {
   timeSlots?: Prisma.TimeSlotCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungCreateNestedManyWithoutFoodsInput
   ingredients?: Prisma.IngredientCreateNestedManyWithoutFoodInput
+  likes?: Prisma.FoodLikeCreateNestedManyWithoutFoodInput
 }
 
 export type FoodUncheckedCreateInput = {
@@ -385,6 +389,7 @@ export type FoodUncheckedCreateInput = {
   timeSlots?: Prisma.TimeSlotUncheckedCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungUncheckedCreateNestedManyWithoutFoodsInput
   ingredients?: Prisma.IngredientUncheckedCreateNestedManyWithoutFoodInput
+  likes?: Prisma.FoodLikeUncheckedCreateNestedManyWithoutFoodInput
 }
 
 export type FoodUpdateInput = {
@@ -402,6 +407,7 @@ export type FoodUpdateInput = {
   timeSlots?: Prisma.TimeSlotUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUpdateManyWithoutFoodsNestedInput
   ingredients?: Prisma.IngredientUpdateManyWithoutFoodNestedInput
+  likes?: Prisma.FoodLikeUpdateManyWithoutFoodNestedInput
 }
 
 export type FoodUncheckedUpdateInput = {
@@ -420,6 +426,7 @@ export type FoodUncheckedUpdateInput = {
   timeSlots?: Prisma.TimeSlotUncheckedUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUncheckedUpdateManyWithoutFoodsNestedInput
   ingredients?: Prisma.IngredientUncheckedUpdateManyWithoutFoodNestedInput
+  likes?: Prisma.FoodLikeUncheckedUpdateManyWithoutFoodNestedInput
 }
 
 export type FoodCreateManyInput = {
@@ -711,6 +718,20 @@ export type FoodUncheckedUpdateManyWithoutWarungsNestedInput = {
   deleteMany?: Prisma.FoodScalarWhereInput | Prisma.FoodScalarWhereInput[]
 }
 
+export type FoodCreateNestedOneWithoutLikesInput = {
+  create?: Prisma.XOR<Prisma.FoodCreateWithoutLikesInput, Prisma.FoodUncheckedCreateWithoutLikesInput>
+  connectOrCreate?: Prisma.FoodCreateOrConnectWithoutLikesInput
+  connect?: Prisma.FoodWhereUniqueInput
+}
+
+export type FoodUpdateOneRequiredWithoutLikesNestedInput = {
+  create?: Prisma.XOR<Prisma.FoodCreateWithoutLikesInput, Prisma.FoodUncheckedCreateWithoutLikesInput>
+  connectOrCreate?: Prisma.FoodCreateOrConnectWithoutLikesInput
+  upsert?: Prisma.FoodUpsertWithoutLikesInput
+  connect?: Prisma.FoodWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FoodUpdateToOneWithWhereWithoutLikesInput, Prisma.FoodUpdateWithoutLikesInput>, Prisma.FoodUncheckedUpdateWithoutLikesInput>
+}
+
 export type FoodCreateWithoutPriceCategoryInput = {
   slug: string
   name: string
@@ -725,6 +746,7 @@ export type FoodCreateWithoutPriceCategoryInput = {
   timeSlots?: Prisma.TimeSlotCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungCreateNestedManyWithoutFoodsInput
   ingredients?: Prisma.IngredientCreateNestedManyWithoutFoodInput
+  likes?: Prisma.FoodLikeCreateNestedManyWithoutFoodInput
 }
 
 export type FoodUncheckedCreateWithoutPriceCategoryInput = {
@@ -742,6 +764,7 @@ export type FoodUncheckedCreateWithoutPriceCategoryInput = {
   timeSlots?: Prisma.TimeSlotUncheckedCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungUncheckedCreateNestedManyWithoutFoodsInput
   ingredients?: Prisma.IngredientUncheckedCreateNestedManyWithoutFoodInput
+  likes?: Prisma.FoodLikeUncheckedCreateNestedManyWithoutFoodInput
 }
 
 export type FoodCreateOrConnectWithoutPriceCategoryInput = {
@@ -800,6 +823,7 @@ export type FoodCreateWithoutCategoriesInput = {
   timeSlots?: Prisma.TimeSlotCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungCreateNestedManyWithoutFoodsInput
   ingredients?: Prisma.IngredientCreateNestedManyWithoutFoodInput
+  likes?: Prisma.FoodLikeCreateNestedManyWithoutFoodInput
 }
 
 export type FoodUncheckedCreateWithoutCategoriesInput = {
@@ -817,6 +841,7 @@ export type FoodUncheckedCreateWithoutCategoriesInput = {
   timeSlots?: Prisma.TimeSlotUncheckedCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungUncheckedCreateNestedManyWithoutFoodsInput
   ingredients?: Prisma.IngredientUncheckedCreateNestedManyWithoutFoodInput
+  likes?: Prisma.FoodLikeUncheckedCreateNestedManyWithoutFoodInput
 }
 
 export type FoodCreateOrConnectWithoutCategoriesInput = {
@@ -854,6 +879,7 @@ export type FoodCreateWithoutTimeSlotsInput = {
   categories?: Prisma.CategoryCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungCreateNestedManyWithoutFoodsInput
   ingredients?: Prisma.IngredientCreateNestedManyWithoutFoodInput
+  likes?: Prisma.FoodLikeCreateNestedManyWithoutFoodInput
 }
 
 export type FoodUncheckedCreateWithoutTimeSlotsInput = {
@@ -871,6 +897,7 @@ export type FoodUncheckedCreateWithoutTimeSlotsInput = {
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungUncheckedCreateNestedManyWithoutFoodsInput
   ingredients?: Prisma.IngredientUncheckedCreateNestedManyWithoutFoodInput
+  likes?: Prisma.FoodLikeUncheckedCreateNestedManyWithoutFoodInput
 }
 
 export type FoodCreateOrConnectWithoutTimeSlotsInput = {
@@ -908,6 +935,7 @@ export type FoodCreateWithoutIngredientsInput = {
   categories?: Prisma.CategoryCreateNestedManyWithoutFoodsInput
   timeSlots?: Prisma.TimeSlotCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungCreateNestedManyWithoutFoodsInput
+  likes?: Prisma.FoodLikeCreateNestedManyWithoutFoodInput
 }
 
 export type FoodUncheckedCreateWithoutIngredientsInput = {
@@ -925,6 +953,7 @@ export type FoodUncheckedCreateWithoutIngredientsInput = {
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutFoodsInput
   timeSlots?: Prisma.TimeSlotUncheckedCreateNestedManyWithoutFoodsInput
   warungs?: Prisma.WarungUncheckedCreateNestedManyWithoutFoodsInput
+  likes?: Prisma.FoodLikeUncheckedCreateNestedManyWithoutFoodInput
 }
 
 export type FoodCreateOrConnectWithoutIngredientsInput = {
@@ -957,6 +986,7 @@ export type FoodUpdateWithoutIngredientsInput = {
   categories?: Prisma.CategoryUpdateManyWithoutFoodsNestedInput
   timeSlots?: Prisma.TimeSlotUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUpdateManyWithoutFoodsNestedInput
+  likes?: Prisma.FoodLikeUpdateManyWithoutFoodNestedInput
 }
 
 export type FoodUncheckedUpdateWithoutIngredientsInput = {
@@ -974,6 +1004,7 @@ export type FoodUncheckedUpdateWithoutIngredientsInput = {
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutFoodsNestedInput
   timeSlots?: Prisma.TimeSlotUncheckedUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUncheckedUpdateManyWithoutFoodsNestedInput
+  likes?: Prisma.FoodLikeUncheckedUpdateManyWithoutFoodNestedInput
 }
 
 export type FoodCreateWithoutWarungsInput = {
@@ -990,6 +1021,7 @@ export type FoodCreateWithoutWarungsInput = {
   categories?: Prisma.CategoryCreateNestedManyWithoutFoodsInput
   timeSlots?: Prisma.TimeSlotCreateNestedManyWithoutFoodsInput
   ingredients?: Prisma.IngredientCreateNestedManyWithoutFoodInput
+  likes?: Prisma.FoodLikeCreateNestedManyWithoutFoodInput
 }
 
 export type FoodUncheckedCreateWithoutWarungsInput = {
@@ -1007,6 +1039,7 @@ export type FoodUncheckedCreateWithoutWarungsInput = {
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutFoodsInput
   timeSlots?: Prisma.TimeSlotUncheckedCreateNestedManyWithoutFoodsInput
   ingredients?: Prisma.IngredientUncheckedCreateNestedManyWithoutFoodInput
+  likes?: Prisma.FoodLikeUncheckedCreateNestedManyWithoutFoodInput
 }
 
 export type FoodCreateOrConnectWithoutWarungsInput = {
@@ -1028,6 +1061,92 @@ export type FoodUpdateWithWhereUniqueWithoutWarungsInput = {
 export type FoodUpdateManyWithWhereWithoutWarungsInput = {
   where: Prisma.FoodScalarWhereInput
   data: Prisma.XOR<Prisma.FoodUpdateManyMutationInput, Prisma.FoodUncheckedUpdateManyWithoutWarungsInput>
+}
+
+export type FoodCreateWithoutLikesInput = {
+  slug: string
+  name: string
+  image: string
+  shortDescription: string
+  story: string
+  taste: string
+  priceRange: string
+  featured?: boolean
+  favoriteCount?: number
+  priceCategory: Prisma.PriceCategoryCreateNestedOneWithoutFoodsInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutFoodsInput
+  timeSlots?: Prisma.TimeSlotCreateNestedManyWithoutFoodsInput
+  warungs?: Prisma.WarungCreateNestedManyWithoutFoodsInput
+  ingredients?: Prisma.IngredientCreateNestedManyWithoutFoodInput
+}
+
+export type FoodUncheckedCreateWithoutLikesInput = {
+  id?: number
+  slug: string
+  name: string
+  image: string
+  shortDescription: string
+  story: string
+  taste: string
+  priceRange: string
+  featured?: boolean
+  favoriteCount?: number
+  priceCategoryId: string
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutFoodsInput
+  timeSlots?: Prisma.TimeSlotUncheckedCreateNestedManyWithoutFoodsInput
+  warungs?: Prisma.WarungUncheckedCreateNestedManyWithoutFoodsInput
+  ingredients?: Prisma.IngredientUncheckedCreateNestedManyWithoutFoodInput
+}
+
+export type FoodCreateOrConnectWithoutLikesInput = {
+  where: Prisma.FoodWhereUniqueInput
+  create: Prisma.XOR<Prisma.FoodCreateWithoutLikesInput, Prisma.FoodUncheckedCreateWithoutLikesInput>
+}
+
+export type FoodUpsertWithoutLikesInput = {
+  update: Prisma.XOR<Prisma.FoodUpdateWithoutLikesInput, Prisma.FoodUncheckedUpdateWithoutLikesInput>
+  create: Prisma.XOR<Prisma.FoodCreateWithoutLikesInput, Prisma.FoodUncheckedCreateWithoutLikesInput>
+  where?: Prisma.FoodWhereInput
+}
+
+export type FoodUpdateToOneWithWhereWithoutLikesInput = {
+  where?: Prisma.FoodWhereInput
+  data: Prisma.XOR<Prisma.FoodUpdateWithoutLikesInput, Prisma.FoodUncheckedUpdateWithoutLikesInput>
+}
+
+export type FoodUpdateWithoutLikesInput = {
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.StringFieldUpdateOperationsInput | string
+  story?: Prisma.StringFieldUpdateOperationsInput | string
+  taste?: Prisma.StringFieldUpdateOperationsInput | string
+  priceRange?: Prisma.StringFieldUpdateOperationsInput | string
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
+  priceCategory?: Prisma.PriceCategoryUpdateOneRequiredWithoutFoodsNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutFoodsNestedInput
+  timeSlots?: Prisma.TimeSlotUpdateManyWithoutFoodsNestedInput
+  warungs?: Prisma.WarungUpdateManyWithoutFoodsNestedInput
+  ingredients?: Prisma.IngredientUpdateManyWithoutFoodNestedInput
+}
+
+export type FoodUncheckedUpdateWithoutLikesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.StringFieldUpdateOperationsInput | string
+  story?: Prisma.StringFieldUpdateOperationsInput | string
+  taste?: Prisma.StringFieldUpdateOperationsInput | string
+  priceRange?: Prisma.StringFieldUpdateOperationsInput | string
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  favoriteCount?: Prisma.IntFieldUpdateOperationsInput | number
+  priceCategoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutFoodsNestedInput
+  timeSlots?: Prisma.TimeSlotUncheckedUpdateManyWithoutFoodsNestedInput
+  warungs?: Prisma.WarungUncheckedUpdateManyWithoutFoodsNestedInput
+  ingredients?: Prisma.IngredientUncheckedUpdateManyWithoutFoodNestedInput
 }
 
 export type FoodCreateManyPriceCategoryInput = {
@@ -1057,6 +1176,7 @@ export type FoodUpdateWithoutPriceCategoryInput = {
   timeSlots?: Prisma.TimeSlotUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUpdateManyWithoutFoodsNestedInput
   ingredients?: Prisma.IngredientUpdateManyWithoutFoodNestedInput
+  likes?: Prisma.FoodLikeUpdateManyWithoutFoodNestedInput
 }
 
 export type FoodUncheckedUpdateWithoutPriceCategoryInput = {
@@ -1074,6 +1194,7 @@ export type FoodUncheckedUpdateWithoutPriceCategoryInput = {
   timeSlots?: Prisma.TimeSlotUncheckedUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUncheckedUpdateManyWithoutFoodsNestedInput
   ingredients?: Prisma.IngredientUncheckedUpdateManyWithoutFoodNestedInput
+  likes?: Prisma.FoodLikeUncheckedUpdateManyWithoutFoodNestedInput
 }
 
 export type FoodUncheckedUpdateManyWithoutPriceCategoryInput = {
@@ -1103,6 +1224,7 @@ export type FoodUpdateWithoutCategoriesInput = {
   timeSlots?: Prisma.TimeSlotUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUpdateManyWithoutFoodsNestedInput
   ingredients?: Prisma.IngredientUpdateManyWithoutFoodNestedInput
+  likes?: Prisma.FoodLikeUpdateManyWithoutFoodNestedInput
 }
 
 export type FoodUncheckedUpdateWithoutCategoriesInput = {
@@ -1120,6 +1242,7 @@ export type FoodUncheckedUpdateWithoutCategoriesInput = {
   timeSlots?: Prisma.TimeSlotUncheckedUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUncheckedUpdateManyWithoutFoodsNestedInput
   ingredients?: Prisma.IngredientUncheckedUpdateManyWithoutFoodNestedInput
+  likes?: Prisma.FoodLikeUncheckedUpdateManyWithoutFoodNestedInput
 }
 
 export type FoodUncheckedUpdateManyWithoutCategoriesInput = {
@@ -1150,6 +1273,7 @@ export type FoodUpdateWithoutTimeSlotsInput = {
   categories?: Prisma.CategoryUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUpdateManyWithoutFoodsNestedInput
   ingredients?: Prisma.IngredientUpdateManyWithoutFoodNestedInput
+  likes?: Prisma.FoodLikeUpdateManyWithoutFoodNestedInput
 }
 
 export type FoodUncheckedUpdateWithoutTimeSlotsInput = {
@@ -1167,6 +1291,7 @@ export type FoodUncheckedUpdateWithoutTimeSlotsInput = {
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutFoodsNestedInput
   warungs?: Prisma.WarungUncheckedUpdateManyWithoutFoodsNestedInput
   ingredients?: Prisma.IngredientUncheckedUpdateManyWithoutFoodNestedInput
+  likes?: Prisma.FoodLikeUncheckedUpdateManyWithoutFoodNestedInput
 }
 
 export type FoodUncheckedUpdateManyWithoutTimeSlotsInput = {
@@ -1197,6 +1322,7 @@ export type FoodUpdateWithoutWarungsInput = {
   categories?: Prisma.CategoryUpdateManyWithoutFoodsNestedInput
   timeSlots?: Prisma.TimeSlotUpdateManyWithoutFoodsNestedInput
   ingredients?: Prisma.IngredientUpdateManyWithoutFoodNestedInput
+  likes?: Prisma.FoodLikeUpdateManyWithoutFoodNestedInput
 }
 
 export type FoodUncheckedUpdateWithoutWarungsInput = {
@@ -1214,6 +1340,7 @@ export type FoodUncheckedUpdateWithoutWarungsInput = {
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutFoodsNestedInput
   timeSlots?: Prisma.TimeSlotUncheckedUpdateManyWithoutFoodsNestedInput
   ingredients?: Prisma.IngredientUncheckedUpdateManyWithoutFoodNestedInput
+  likes?: Prisma.FoodLikeUncheckedUpdateManyWithoutFoodNestedInput
 }
 
 export type FoodUncheckedUpdateManyWithoutWarungsInput = {
@@ -1240,6 +1367,7 @@ export type FoodCountOutputType = {
   timeSlots: number
   warungs: number
   ingredients: number
+  likes: number
 }
 
 export type FoodCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1247,6 +1375,7 @@ export type FoodCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   timeSlots?: boolean | FoodCountOutputTypeCountTimeSlotsArgs
   warungs?: boolean | FoodCountOutputTypeCountWarungsArgs
   ingredients?: boolean | FoodCountOutputTypeCountIngredientsArgs
+  likes?: boolean | FoodCountOutputTypeCountLikesArgs
 }
 
 /**
@@ -1287,6 +1416,13 @@ export type FoodCountOutputTypeCountIngredientsArgs<ExtArgs extends runtime.Type
   where?: Prisma.IngredientWhereInput
 }
 
+/**
+ * FoodCountOutputType without action
+ */
+export type FoodCountOutputTypeCountLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FoodLikeWhereInput
+}
+
 
 export type FoodSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1305,6 +1441,7 @@ export type FoodSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   timeSlots?: boolean | Prisma.Food$timeSlotsArgs<ExtArgs>
   warungs?: boolean | Prisma.Food$warungsArgs<ExtArgs>
   ingredients?: boolean | Prisma.Food$ingredientsArgs<ExtArgs>
+  likes?: boolean | Prisma.Food$likesArgs<ExtArgs>
   _count?: boolean | Prisma.FoodCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["food"]>
 
@@ -1359,6 +1496,7 @@ export type FoodInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   timeSlots?: boolean | Prisma.Food$timeSlotsArgs<ExtArgs>
   warungs?: boolean | Prisma.Food$warungsArgs<ExtArgs>
   ingredients?: boolean | Prisma.Food$ingredientsArgs<ExtArgs>
+  likes?: boolean | Prisma.Food$likesArgs<ExtArgs>
   _count?: boolean | Prisma.FoodCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FoodIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1376,6 +1514,7 @@ export type $FoodPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     timeSlots: Prisma.$TimeSlotPayload<ExtArgs>[]
     warungs: Prisma.$WarungPayload<ExtArgs>[]
     ingredients: Prisma.$IngredientPayload<ExtArgs>[]
+    likes: Prisma.$FoodLikePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1788,6 +1927,7 @@ export interface Prisma__FoodClient<T, Null = never, ExtArgs extends runtime.Typ
   timeSlots<T extends Prisma.Food$timeSlotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Food$timeSlotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   warungs<T extends Prisma.Food$warungsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Food$warungsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WarungPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ingredients<T extends Prisma.Food$ingredientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Food$ingredientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  likes<T extends Prisma.Food$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Food$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FoodLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2320,6 +2460,30 @@ export type Food$ingredientsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.IngredientScalarFieldEnum | Prisma.IngredientScalarFieldEnum[]
+}
+
+/**
+ * Food.likes
+ */
+export type Food$likesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FoodLike
+   */
+  select?: Prisma.FoodLikeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FoodLike
+   */
+  omit?: Prisma.FoodLikeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FoodLikeInclude<ExtArgs> | null
+  where?: Prisma.FoodLikeWhereInput
+  orderBy?: Prisma.FoodLikeOrderByWithRelationInput | Prisma.FoodLikeOrderByWithRelationInput[]
+  cursor?: Prisma.FoodLikeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FoodLikeScalarFieldEnum | Prisma.FoodLikeScalarFieldEnum[]
 }
 
 /**

@@ -16,7 +16,9 @@ export async function PATCH(request: Request, { params }: Context) {
   }
 
   if (body.direction === "up" || body.direction === "down") {
+    // yang pending gak ikut diurutkan biar gak ketuker sama FAQ yang tampil
     const faqs = await prisma.faq.findMany({
+      where: { status: "published" },
       orderBy: [{ position: "asc" }, { id: "asc" }],
     });
     const index = faqs.findIndex((faq) => faq.id === id);

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Dropdown } from "react-bootstrap";
 import EditProfileModal, { type ProfileUser } from "@/components/layout/EditProfileModal";
+import { reloadLikes } from "@/lib/favorites";
 import styles from "@/app/styles/header.module.css";
 
 export default function UserMenu({ className = "" }: { className?: string }) {
@@ -24,6 +25,7 @@ export default function UserMenu({ className = "" }: { className?: string }) {
   async function logout() {
     await fetch("/api/auth/logout", { method: "POST" });
     setUser(null);
+    reloadLikes(); // love milik user sebelumnya dikosongin
     router.replace("/");
     router.refresh();
   }

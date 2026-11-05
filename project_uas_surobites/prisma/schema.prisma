@@ -48,6 +48,7 @@ model Food {
   timeSlots   TimeSlot[]
   warungs     Warung[]
   ingredients Ingredient[]
+  likes       FoodLike[]
 }
 
 model Ingredient {
@@ -97,6 +98,20 @@ model User {
   createdAt    DateTime @default(now())
 
   ratings Rating[]
+  likes   FoodLike[]
+}
+
+// love dari user ke makanan, total love = jumlah baris per makanan
+model FoodLike {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  foodId    Int
+  food      Food     @relation(fields: [foodId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  // 1 user cuma bisa love 1x per makanan
+  @@unique([userId, foodId])
 }
 
 // rating bintang (1-5) dari user ke warung
@@ -117,8 +132,10 @@ model Rating {
 model Faq {
   id       Int    @id @default(autoincrement())
   question String
-  answer   String
+  answer   String @default("") // pertanyaan dari user belum ada jawabannya
   position Int    @default(0)
+  // "pending" = pertanyaan baru dari user, "published" = tampil di FAQ publik
+  status   String @default("published")
 }
 
 model SiteContent {

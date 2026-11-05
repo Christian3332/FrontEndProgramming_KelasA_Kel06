@@ -60,6 +60,7 @@ export const ModelName = {
   WarungMenu: 'WarungMenu',
   Admin: 'Admin',
   User: 'User',
+  FoodLike: 'FoodLike',
   Rating: 'Rating',
   Faq: 'Faq',
   SiteContent: 'SiteContent'
@@ -178,6 +179,16 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const FoodLikeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  foodId: 'foodId',
+  createdAt: 'createdAt'
+} as const
+
+export type FoodLikeScalarFieldEnum = (typeof FoodLikeScalarFieldEnum)[keyof typeof FoodLikeScalarFieldEnum]
+
+
 export const RatingScalarFieldEnum = {
   id: 'id',
   score: 'score',
@@ -194,7 +205,8 @@ export const FaqScalarFieldEnum = {
   id: 'id',
   question: 'question',
   answer: 'answer',
-  position: 'position'
+  position: 'position',
+  status: 'status'
 } as const
 
 export type FaqScalarFieldEnum = (typeof FaqScalarFieldEnum)[keyof typeof FaqScalarFieldEnum]

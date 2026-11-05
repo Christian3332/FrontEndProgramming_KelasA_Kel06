@@ -5,15 +5,16 @@ import { Alert, Button, Col, Form, Modal } from "react-bootstrap";
 import type { Faq } from "@/data/faqs";
 import SectionHead from "@/components/admin/SectionHead";
 import ConfirmDialog from "@/components/admin/ConfirmDialog";
+import FaqQuestions from "@/components/admin/faq/FaqQuestions";
 import { refreshAdminCounts } from "@/components/admin/useAdminCounts";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
-type Props = { initialFaqs: Faq[] };
+type Props = { initialFaqs: Faq[]; initialQuestions: Faq[] };
 
 const faqKosong: Faq = { id: "", question: "", answer: "" };
 
-export default function FaqAdmin({ initialFaqs }: Props) {
+export default function FaqAdmin({ initialFaqs, initialQuestions }: Props) {
   const [faqs, setFaqs] = useState(initialFaqs);
   const [form, setForm] = useState<Faq>(faqKosong);
   const [open, setOpen] = useState(false);
@@ -111,6 +112,14 @@ export default function FaqAdmin({ initialFaqs }: Props) {
           + Tambah FAQ
         </Button>
       </SectionHead>
+
+      <FaqQuestions
+        initialQuestions={initialQuestions}
+        onPublished={() => {
+          loadFaqs();
+          refreshAdminCounts();
+        }}
+      />
 
       <div className={ui.panel}>
         {error && <Alert variant="danger">{error}</Alert>}

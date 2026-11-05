@@ -406,6 +406,7 @@ export const ModelName = {
   WarungMenu: 'WarungMenu',
   Admin: 'Admin',
   User: 'User',
+  FoodLike: 'FoodLike',
   Rating: 'Rating',
   Faq: 'Faq',
   SiteContent: 'SiteContent'
@@ -424,7 +425,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "priceCategory" | "category" | "timeSlot" | "food" | "ingredient" | "warung" | "warungMenu" | "admin" | "user" | "rating" | "faq" | "siteContent"
+    modelProps: "priceCategory" | "category" | "timeSlot" | "food" | "ingredient" | "warung" | "warungMenu" | "admin" | "user" | "foodLike" | "rating" | "faq" | "siteContent"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1094,6 +1095,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FoodLike: {
+      payload: Prisma.$FoodLikePayload<ExtArgs>
+      fields: Prisma.FoodLikeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FoodLikeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodLikePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FoodLikeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodLikePayload>
+        }
+        findFirst: {
+          args: Prisma.FoodLikeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodLikePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FoodLikeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodLikePayload>
+        }
+        findMany: {
+          args: Prisma.FoodLikeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodLikePayload>[]
+        }
+        create: {
+          args: Prisma.FoodLikeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodLikePayload>
+        }
+        createMany: {
+          args: Prisma.FoodLikeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FoodLikeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodLikePayload>[]
+        }
+        delete: {
+          args: Prisma.FoodLikeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodLikePayload>
+        }
+        update: {
+          args: Prisma.FoodLikeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodLikePayload>
+        }
+        deleteMany: {
+          args: Prisma.FoodLikeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FoodLikeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FoodLikeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodLikePayload>[]
+        }
+        upsert: {
+          args: Prisma.FoodLikeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodLikePayload>
+        }
+        aggregate: {
+          args: Prisma.FoodLikeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFoodLike>
+        }
+        groupBy: {
+          args: Prisma.FoodLikeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FoodLikeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FoodLikeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FoodLikeCountAggregateOutputType> | number
+        }
+      }
+    }
     Rating: {
       payload: Prisma.$RatingPayload<ExtArgs>
       fields: Prisma.RatingFieldRefs
@@ -1452,6 +1527,16 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const FoodLikeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  foodId: 'foodId',
+  createdAt: 'createdAt'
+} as const
+
+export type FoodLikeScalarFieldEnum = (typeof FoodLikeScalarFieldEnum)[keyof typeof FoodLikeScalarFieldEnum]
+
+
 export const RatingScalarFieldEnum = {
   id: 'id',
   score: 'score',
@@ -1468,7 +1553,8 @@ export const FaqScalarFieldEnum = {
   id: 'id',
   question: 'question',
   answer: 'answer',
-  position: 'position'
+  position: 'position',
+  status: 'status'
 } as const
 
 export type FaqScalarFieldEnum = (typeof FaqScalarFieldEnum)[keyof typeof FaqScalarFieldEnum]
@@ -1707,6 +1793,7 @@ export type GlobalOmitConfig = {
   warungMenu?: Prisma.WarungMenuOmit
   admin?: Prisma.AdminOmit
   user?: Prisma.UserOmit
+  foodLike?: Prisma.FoodLikeOmit
   rating?: Prisma.RatingOmit
   faq?: Prisma.FaqOmit
   siteContent?: Prisma.SiteContentOmit

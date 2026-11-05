@@ -13,18 +13,8 @@ import cardStyles from "@/app/styles/food-card.module.css";
 export default function HighlightMenu() {
   const foods = useFoods();
   const [selected, setSelected] = useState<Food | null>(null);
-  const { favorites, isFavorite, toggleFavorite } = useFavorites();
+  const { isFavorite, toggleFavorite, likeCount: jumlahFavorit } = useFavorites();
 
-  // simpan status favorit browser ini waktu data dari server masuk,
-  // biar angkanya bisa langsung berubah pas hati diklik tanpa refresh
-  const [awal, setAwal] = useState({ foods, favorites });
-  if (awal.foods !== foods) setAwal({ foods, favorites });
-
-  const jumlahFavorit = (f: Food) => {
-    const tadinyaFavorit = awal.favorites.includes(f.id) ? 1 : 0;
-    const sekarangFavorit = isFavorite(f.id) ? 1 : 0;
-    return Math.max(0, (f.favoriteCount ?? 0) - tadinyaFavorit + sekarangFavorit);
-  };
   // ambil 3 makanan dengan favorit terbanyak.
   // kalau jumlahnya sama (misal masih 0 semua), yang dicentang "pilihan" sama admin didahulukan
   const unggulan = [...foods]
