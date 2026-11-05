@@ -87,7 +87,11 @@ export async function getWarungs(): Promise<Warung[]> {
 }
 
 export async function getFaqs(): Promise<Faq[]> {
-  const rows = await prisma.faq.findMany({ orderBy: [{ position: "asc" }, { id: "asc" }] });
+  // pertanyaan user yang masih pending gak ikut ditampilkan
+  const rows = await prisma.faq.findMany({
+    where: { status: "published" },
+    orderBy: [{ position: "asc" }, { id: "asc" }],
+  });
   return rows.map((r) => ({
     id: String(r.id),
     question: r.question,

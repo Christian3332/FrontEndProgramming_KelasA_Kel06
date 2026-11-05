@@ -1553,7 +1553,8 @@ export const FaqScalarFieldEnum = {
   id: 'id',
   question: 'question',
   answer: 'answer',
-  position: 'position'
+  position: 'position',
+  status: 'status'
 } as const
 
 export type FaqScalarFieldEnum = (typeof FaqScalarFieldEnum)[keyof typeof FaqScalarFieldEnum]

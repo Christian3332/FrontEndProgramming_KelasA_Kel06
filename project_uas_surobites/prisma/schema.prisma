@@ -132,8 +132,10 @@ model Rating {
 model Faq {
   id       Int    @id @default(autoincrement())
   question String
-  answer   String
+  answer   String @default("") // pertanyaan dari user belum ada jawabannya
   position Int    @default(0)
+  // "pending" = pertanyaan baru dari user, "published" = tampil di FAQ publik
+  status   String @default("published")
 }
 
 model SiteContent {
