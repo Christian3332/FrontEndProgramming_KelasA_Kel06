@@ -87,6 +87,11 @@ export type Admin = Prisma.AdminModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model FoodLike
+ * 
+ */
+export type FoodLike = Prisma.FoodLikeModel
+/**
  * Model Rating
  * 
  */
