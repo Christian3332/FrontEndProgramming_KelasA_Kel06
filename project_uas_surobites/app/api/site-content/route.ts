@@ -40,6 +40,11 @@ export async function PUT(request: Request) {
     return Response.json({ message: "Periksa judul, deskripsi, email, dan nomor telepon." }, { status: 400 });
   }
 
+  // gambar cuma boleh dari folder public sendiri (hasil upload atau bawaan)
+  if ([content.heroImage, content.rekomendasiImage].some((image) => !/^\/(img|uploads)\/[^?#]+$/.test(image))) {
+    return Response.json({ message: "Gambar hero tidak valid." }, { status: 400 });
+  }
+
   if ([content.instagram, content.facebook].some((link) => !validSocialLink(link))) {
     return Response.json({ message: "Tautan media sosial harus berupa URL HTTP atau HTTPS." }, { status: 400 });
   }
