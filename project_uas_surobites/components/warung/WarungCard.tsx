@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Button, Card } from "react-bootstrap";
 import type { Food, Warung } from "@/data/foods";
 import { formatTime, getLowestPrice, getPriceLevel, isWarungOpen } from "@/lib/helper";
+import type { RatingSummary } from "@/lib/ratings";
+import StarRating from "@/components/warung/StarRating";
 import styles from "@/app/styles/lokasi.module.css";
 
 const noop = () => () => {};
@@ -25,9 +27,11 @@ type Props = {
   foods: Food[];
   onOpenMap: (warung: Warung) => void;
   onOpenFood: (food: Food) => void;
+  rating?: RatingSummary;
+  onRated: (warungId: string, summary: RatingSummary) => void;
 };
 
-export default function WarungCard({ warung, foods, onOpenMap, onOpenFood }: Props) {
+export default function WarungCard({ warung, foods, onOpenMap, onOpenFood, rating, onRated }: Props) {
   const open = useSyncExternalStore(
     noop,
     () => isWarungOpen(warung),
@@ -61,6 +65,7 @@ export default function WarungCard({ warung, foods, onOpenMap, onOpenFood }: Pro
 
       <Card.Body className={`d-flex flex-column ${styles.body}`}>
         <h3 className={styles.cardTitle}>{warung.name}</h3>
+        <StarRating warungId={warung.id} summary={rating} onRated={onRated} />
 
         <ul className={`list-unstyled m-0 d-flex flex-column ${styles.info}`}>
           <li className="d-flex align-items-start gap-2">

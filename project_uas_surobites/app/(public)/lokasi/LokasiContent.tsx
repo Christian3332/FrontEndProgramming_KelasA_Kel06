@@ -6,6 +6,7 @@ import type { Food, Warung } from "@/data/foods";
 import { useFoods } from "@/lib/useFoods";
 import { useWarungs } from "@/lib/useWarungs";
 import { searchItems } from "@/lib/helper";
+import type { RatingSummary } from "@/lib/ratings";
 import WarungCard from "@/components/warung/WarungCard";
 import MapModal from "@/components/warung/MapModal";
 import FoodModal from "@/components/food/FoodModal";
@@ -25,8 +26,21 @@ export default function LokasiContent() {
   const [keyword, setKeyword] = useState("");
   const [mapWarung, setMapWarung] = useState<Warung | null>(null);
   const [selectedFood, setSelectedFood] = useState<Food | null>(null);
+  const [ratings, setRatings] = useState<Record<string, RatingSummary>>({});
 
   const list = searchItems(warungs, keyword, (warung) => warungSearchText(warung, foods));
+
+  // rating semua warung diambil sekali aja, bukan per kartu
+  useEffect(() => {
+    fetch("/api/ratings")
+      .then((response) => (response.ok ? response.json() : {}))
+      .then(setRatings)
+      .catch(() => {});
+  }, []);
+
+  function updateRating(warungId: string, summary: RatingSummary) {
+    setRatings((prev) => ({ ...prev, [warungId]: summary }));
+  }
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | undefined;
@@ -110,6 +124,8 @@ export default function LokasiContent() {
                   foods={foods}
                   onOpenMap={setMapWarung}
                   onOpenFood={setSelectedFood}
+                  rating={ratings[w.id]}
+                  onRated={updateRating}
                 />
               </Col>
             ))}
