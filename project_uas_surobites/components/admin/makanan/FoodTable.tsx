@@ -51,6 +51,7 @@ export default function FoodTable({ initialFoods, initialCategories, initialAdd 
   const [error, setError] = useState("");
   // makanan yang lagi ditanyain mau dihapus atau nggak
   const [hapus, setHapus] = useState<Food | null>(null);
+  const [hapusKategori, setHapusKategori] = useState<Category | null>(null);
 
   async function loadFoods() {
     const response = await fetch("/api/foods");
@@ -137,6 +138,23 @@ export default function FoodTable({ initialFoods, initialCategories, initialAdd 
     setNewCategory({ label: "", icon: "" });
   }
 
+  async function deleteCategory(id: string) {
+    setHapusKategori(null);
+    setCategoryError("");
+
+    const response = await fetch(`/api/categories/${id}`, { method: "DELETE" });
+    if (!response.ok) {
+      const result = await response.json();
+      setCategoryError(result.message ?? "Kategori gagal dihapus.");
+      return;
+    }
+
+    setCategories(categories.filter((c) => c.id !== id));
+    setForm({ ...form, categories: form.categories.filter((c) => c !== id) });
+    // tag kategori di tabel juga ikut diperbarui
+    await loadFoods();
+  }
+
   function updateList(field: "categories" | "timeCategory", id: string, checked: boolean) {
     const values = form[field];
     setForm({
@@ -219,7 +237,8 @@ export default function FoodTable({ initialFoods, initialCategories, initialAdd 
         </div>
       </div>
 
-      <Modal show={open} onHide={() => setOpen(false)} centered size="lg">
+      {/* form disembunyiin dulu selama konfirmasi hapus kategori, biar modal gak numpuk */}
+      <Modal show={open && hapusKategori === null} onHide={() => setOpen(false)} centered size="lg">
         <Form onSubmit={saveFood}>
           <Modal.Header closeButton>
             <Modal.Title>{form.id ? "Edit Makanan" : "Tambah Makanan"}</Modal.Title>
@@ -257,7 +276,14 @@ export default function FoodTable({ initialFoods, initialCategories, initialAdd 
             </Form.Group>
             <Form.Group className={ui.field}>
               <Form.Label>Kategori</Form.Label>
-              {categories.map((category) => <Form.Check key={category.id} type="checkbox" label={`${category.icon} ${category.label}`} checked={form.categories.includes(category.id)} onChange={(e) => updateList("categories", category.id, e.target.checked)} />)}
+              {categories.map((category) => (
+                <div key={category.id} className="d-flex align-items-center justify-content-between gap-2 mb-1">
+                  <Form.Check id={`cat-${category.id}`} type="checkbox" label={`${category.icon} ${category.label}`} checked={form.categories.includes(category.id)} onChange={(e) => updateList("categories", category.id, e.target.checked)} />
+                  <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn} ${ui.iconBtnDanger}`} title="Hapus kategori" aria-label={`Hapus kategori ${category.label}`} onClick={() => setHapusKategori(category)}>
+                    <i className="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              ))}
               {/* gak bisa pakai <form> di dalam form, jadi enter-nya ditangani manual */}
               <div className="d-flex gap-2 mt-2">
                 <Form.Control className="w-25" value={newCategory.icon} onChange={(e) => setNewCategory({ ...newCategory, icon: e.target.value })} placeholder="🍽️" aria-label="Ikon kategori baru" />
@@ -287,6 +313,16 @@ export default function FoodTable({ initialFoods, initialCategories, initialAdd 
         icon="fa-regular fa-trash-can"
         onConfirm={() => hapus && deleteFood(hapus.id)}
         onCancel={() => setHapus(null)}
+      />
+
+      <ConfirmDialog
+        open={hapusKategori !== null}
+        title="Hapus kategori?"
+        message={`"${hapusKategori?.label}" dipakai ${list.filter((f) => hapusKategori && f.categories.includes(hapusKategori.id)).length} makanan. Makanannya tetap ada, cuma kategori ini yang dilepas.`}
+        confirmText="Ya, Hapus"
+        icon="fa-regular fa-trash-can"
+        onConfirm={() => hapusKategori && deleteCategory(hapusKategori.id)}
+        onCancel={() => setHapusKategori(null)}
       />
     </>
   );
