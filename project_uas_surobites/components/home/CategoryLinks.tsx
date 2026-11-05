@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { Col, Row } from "react-bootstrap";
-import { categories } from "@/data/foods";
 import { useFoods } from "@/lib/useFoods";
+import { useCategories } from "@/lib/useCategories";
 import styles from "@/app/styles/home.module.css";
 
 export default function CategoryLinks() {
   const foods = useFoods();
+  const categories = useCategories();
   return (
     <section
       id="kategori"

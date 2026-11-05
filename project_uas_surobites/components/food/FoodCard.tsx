@@ -2,7 +2,7 @@
 
 import { Button, Card } from "react-bootstrap";
 import type { Food } from "@/data/foods";
-import { getCategory } from "@/lib/helper";
+import { useCategories } from "@/lib/useCategories";
 import { useFavorites } from "@/lib/favorites";
 import styles from "@/app/styles/food-card.module.css";
 
@@ -15,6 +15,8 @@ type Props = {
 export default function FoodCard({ food, onOpen, showTags = false }: Props) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const fav = isFavorite(food.id);
+  const categories = useCategories();
+  const getCategory = (id: string) => categories.find((c) => c.id === id);
 
   return (
     <Card as="article" className={`h-100 ${styles.foodCard} ${styles.katalogCard}`} data-food-id={food.id}>

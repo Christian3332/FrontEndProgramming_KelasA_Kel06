@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button, Col, Row } from "react-bootstrap";
-import { categories, type Food } from "@/data/foods";
+import type { Category, Food } from "@/data/foods";
 import { useFoods } from "@/lib/useFoods";
 import { useWarungs } from "@/lib/useWarungs";
-import { getCategory } from "@/lib/helper";
+import { useCategories } from "@/lib/useCategories";
 import CategoryFilter from "@/components/food/CategoryFilter";
 import FoodCard from "@/components/food/FoodCard";
 import FoodModal from "@/components/food/FoodModal";
@@ -26,15 +26,25 @@ type Props = {
 
 export default function RekomendasiContent({ content }: Props) {
   const raw = useSearchParams().get("kategori");
-  const categoryId = raw ? (getCategory(raw)?.id ?? null) : null;
-  return <RekomendasiList key={categoryId ?? "all"} categoryId={categoryId} content={content} />;
+  const categories = useCategories();
+  const categoryId = raw ? (categories.find((c) => c.id === raw)?.id ?? null) : null;
+  return (
+    <RekomendasiList
+      key={categoryId ?? "all"}
+      categoryId={categoryId}
+      categories={categories}
+      content={content}
+    />
+  );
 }
 
 function RekomendasiList({
   categoryId,
+  categories,
   content,
 }: {
   categoryId: string | null;
+  categories: Category[];
   content: Props["content"];
 }) {
   const foods = useFoods();
@@ -43,7 +53,7 @@ function RekomendasiList({
   const [limit, setLimit] = useState(PAGE_SIZE);
   const [selected, setSelected] = useState<Food | null>(null);
 
-    const active = categoryId ? getCategory(categoryId) : undefined;
+  const active = categoryId ? categories.find((c) => c.id === categoryId) : undefined;
   const list = active
     ? foods.filter((f) => f.categories.includes(active.id))
     : foods;
@@ -94,7 +104,7 @@ function RekomendasiList({
           Klik salah satu kategori untuk melihat rekomendasi. Klik sekali lagi
           untuk menampilkan semua kuliner.
         </p>
-        <CategoryFilter foods={foods} active={categoryId} onChange={choose} />
+        <CategoryFilter foods={foods} categories={categories} active={categoryId} onChange={choose} />
       </section>
 
       {/* HASIL */}

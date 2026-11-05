@@ -1,12 +1,17 @@
 "use client";
 
 import { Col, Row } from "react-bootstrap";
-import { categories, type Food } from "@/data/foods";
+import type { Category, Food } from "@/data/foods";
 import styles from "@/app/styles/home.module.css";
 
-type Props = { foods: Food[]; active: string | null; onChange: (id: string | null) => void };
+type Props = {
+  foods: Food[];
+  categories: Category[];
+  active: string | null;
+  onChange: (id: string | null) => void;
+};
 
-export default function CategoryFilter({ foods, active, onChange }: Props) {
+export default function CategoryFilter({ foods, categories, active, onChange }: Props) {
   return (
     <Row
       xs={2}
