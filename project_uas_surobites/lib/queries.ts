@@ -99,6 +99,15 @@ export async function getFaqs(): Promise<Faq[]> {
   }));
 }
 
+// pertanyaan dari user yang belum dijawab admin, terbaru di atas
+export async function getPendingQuestions(): Promise<Faq[]> {
+  const rows = await prisma.faq.findMany({
+    where: { status: "pending" },
+    orderBy: { id: "desc" },
+  });
+  return rows.map((r) => ({ id: String(r.id), question: r.question, answer: r.answer }));
+}
+
 export async function getCategories(): Promise<Category[]> {
   return prisma.category.findMany();
 }
