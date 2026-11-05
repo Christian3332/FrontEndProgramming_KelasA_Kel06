@@ -93,6 +93,7 @@ model User {
   name         String
   email        String   @unique
   passwordHash String
+  image        String? // foto profil, kosong = pakai inisial nama
   createdAt    DateTime @default(now())
 
   ratings Rating[]
