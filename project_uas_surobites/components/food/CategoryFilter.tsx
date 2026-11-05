@@ -28,19 +28,19 @@ export default function CategoryFilter({ foods, categories, active, onChange }: 
           <Col key={c.id}>
             <button
               type="button"
-              className={`d-flex flex-column align-items-center text-center w-100 h-100 ${styles.kategoriCard} ${isActive ? styles.kategoriActive : ""}`}
+              className={`d-flex flex-column align-items-center text-center w-100 h-100 ${styles.categoryCard} ${isActive ? styles.categoryActive : ""}`}
               aria-pressed={isActive}
               onClick={() => onChange(isActive ? null : c.id)}
             >
               <span
-                className={`d-flex align-items-center justify-content-center rounded-circle ${styles.kategoriIcon}`}
+                className={`d-flex align-items-center justify-content-center rounded-circle ${styles.categoryIcon}`}
                 aria-hidden="true"
               >
                 {c.icon}
               </span>
-              <span className={styles.kategoriLabel}>{c.label}</span>
-              <span className={styles.kategoriDesc}>{c.description}</span>
-              <span className={styles.kategoriCount}>{total} kuliner</span>
+              <span className={styles.categoryLabel}>{c.label}</span>
+              <span className={styles.categoryDesc}>{c.description}</span>
+              <span className={styles.categoryCount}>{total} kuliner</span>
             </button>
           </Col>
         );

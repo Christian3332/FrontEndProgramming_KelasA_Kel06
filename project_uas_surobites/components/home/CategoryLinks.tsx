@@ -12,7 +12,7 @@ export default function CategoryLinks() {
   return (
     <section
       id="kategori"
-      className={styles.kategori}
+      className={styles.category}
       aria-labelledby="kategori-title"
     >
       <h2 id="kategori-title" className={styles.sectionTitle}>
@@ -31,17 +31,17 @@ export default function CategoryLinks() {
             <Col key={c.id}>
               <Link
                 href={`/rekomendasi?kategori=${c.id}`}
-                className={`d-flex flex-column align-items-center text-center h-100 ${styles.kategoriCard}`}
+                className={`d-flex flex-column align-items-center text-center h-100 ${styles.categoryCard}`}
               >
                 <span
-                  className={`d-flex align-items-center justify-content-center rounded-circle ${styles.kategoriIcon}`}
+                  className={`d-flex align-items-center justify-content-center rounded-circle ${styles.categoryIcon}`}
                   aria-hidden="true"
                 >
                   {c.icon}
                 </span>
-                <span className={styles.kategoriLabel}>{c.label}</span>
-                <span className={styles.kategoriDesc}>{c.description}</span>
-                <span className={styles.kategoriCount}>{total} kuliner</span>
+                <span className={styles.categoryLabel}>{c.label}</span>
+                <span className={styles.categoryDesc}>{c.description}</span>
+                <span className={styles.categoryCount}>{total} kuliner</span>
               </Link>
             </Col>
           );

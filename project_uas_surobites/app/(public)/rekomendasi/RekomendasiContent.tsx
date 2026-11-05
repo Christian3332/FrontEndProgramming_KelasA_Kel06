@@ -100,7 +100,7 @@ function RekomendasiList({
       </section>
 
       {/* PILIH KATEGORI */}
-      <section className={home.kategori} aria-labelledby="kategori-title">
+      <section className={home.category} aria-labelledby="kategori-title">
         <h2 id="kategori-title" className={home.sectionTitle}>Pilih Sesuai Seleramu</h2>
         <p className={home.subtitle}>
           Klik salah satu kategori untuk melihat rekomendasi. Klik sekali lagi
