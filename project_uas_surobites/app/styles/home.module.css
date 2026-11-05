@@ -16,7 +16,7 @@
     margin: 15px;
     padding: 30px 20px;
     border-radius: 20px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url("/img/hero image.jpeg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), var(--hero-image, url("/img/hero image.jpeg"));
     background-size: cover;
     background-position: center;
     color: #FFFFFF;
@@ -445,7 +445,7 @@
     .hero {
         min-height: 500px;
         padding: 80px 50px;
-        background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0px, rgba(0, 0, 0, 0.35) 500px, rgba(0, 0, 0, 0) 800px), url("/img/hero image.jpeg");
+        background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0px, rgba(0, 0, 0, 0.35) 500px, rgba(0, 0, 0, 0) 800px), var(--hero-image, url("/img/hero image.jpeg"));
     }
 
     .heroCompact {

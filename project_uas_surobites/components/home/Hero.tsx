@@ -9,7 +9,12 @@ export default async function Hero() {
   const content = await getSiteContent();
 
   return (
-    <section id="beranda" className={`d-flex flex-column justify-content-center ${styles.hero}`}>
+    <section
+      id="beranda"
+      className={`d-flex flex-column justify-content-center ${styles.hero}`}
+      // cuma url gambarnya yang dikirim, gradient-nya tetap ngikut css (beda di hp & desktop)
+      style={{ "--hero-image": `url("${content.heroImage}")` } as React.CSSProperties}
+    >
       <div className={`d-flex flex-column ${styles.heroContent}`}>
         <h2 className={styles.heroTitle}>{content.heroTitle}</h2>
         <p className={styles.heroText}>{content.heroDescription}</p>

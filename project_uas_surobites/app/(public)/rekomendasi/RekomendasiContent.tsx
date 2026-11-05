@@ -21,6 +21,7 @@ type Props = {
   content: {
     rekomendasiTitle: string;
     rekomendasiDescription: string;
+    rekomendasiImage: string;
   };
 };
 
@@ -75,6 +76,7 @@ function RekomendasiList({
       {/* HERO */}
       <section
         className={`d-flex flex-column justify-content-center ${home.hero} ${home.heroCompact}`}
+        style={{ "--hero-image": `url("${content.rekomendasiImage}")` } as React.CSSProperties}
         aria-labelledby="rekomendasi-hero-title"
       >
         <div className={`d-flex flex-column ${home.heroContent}`}>
