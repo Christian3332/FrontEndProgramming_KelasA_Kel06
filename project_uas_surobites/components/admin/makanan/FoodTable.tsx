@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
-import { categories, times } from "@/data/foods";
-import type { Food } from "@/data/foods";
-import { getCategory, getTime } from "@/lib/helper";
+import { times } from "@/data/foods";
+import type { Category, Food } from "@/data/foods";
+import { getTime } from "@/lib/helper";
 import AdminSearch from "@/components/admin/AdminSearch";
 import PriceTag from "@/components/admin/PriceTag";
 import ImageUpload from "@/components/admin/ImageUpload";
@@ -32,12 +32,16 @@ const foodKosong: Food = {
 
 type Props = {
   initialFoods: Food[];
+  initialCategories: Category[];
   initialAdd?: boolean;
 };
 
-export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
+export default function FoodTable({ initialFoods, initialCategories, initialAdd = false }: Props) {
   const router = useRouter();
   const [list, setList] = useState<Food[]>(initialFoods);
+  const [categories, setCategories] = useState<Category[]>(initialCategories);
+  const [newCategory, setNewCategory] = useState({ label: "", icon: "" });
+  const [categoryError, setCategoryError] = useState("");
   const [keyword, setKeyword] = useState("");
   const [form, setForm] = useState<Food>(foodKosong);
   // teks bahan disimpan apa adanya biar koma & spasi gak langsung kehapus pas ngetik
@@ -67,6 +71,7 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
     setForm(foodKosong);
     setIngredientsText("");
     setError("");
+    setCategoryError("");
     setOpen(true);
   }
 
@@ -74,6 +79,7 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
     setForm(food);
     setIngredientsText(food.ingredients.join(", "));
     setError("");
+    setCategoryError("");
     setOpen(true);
   }
 
@@ -107,6 +113,28 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
       await loadFoods();
       refreshAdminCounts();
     }
+  }
+
+  async function addCategory() {
+    setCategoryError("");
+    if (!newCategory.label.trim()) return;
+
+    const response = await fetch("/api/categories", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newCategory),
+    });
+    const result = await response.json();
+
+    if (!response.ok) {
+      setCategoryError(result.message ?? "Kategori gagal ditambahkan.");
+      return;
+    }
+
+    setCategories([...categories, result]);
+    // kategori baru langsung dicentang buat makanan yang lagi diisi
+    setForm({ ...form, categories: [...form.categories, result.id] });
+    setNewCategory({ label: "", icon: "" });
   }
 
   function updateList(field: "categories" | "timeCategory", id: string, checked: boolean) {
@@ -162,7 +190,7 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
                   <td data-label="Kategori">
                     <div className={`d-flex flex-wrap justify-content-end justify-content-md-start ${ui.tagList}`}>
                       {food.categories.map((id) => {
-                        const category = getCategory(id);
+                        const category = categories.find((c) => c.id === id);
                         return <span className={ui.tag} key={id}>{category ? `${category.icon} ${category.label}` : id}</span>;
                       })}
                     </div>
@@ -230,6 +258,13 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
             <Form.Group className={ui.field}>
               <Form.Label>Kategori</Form.Label>
               {categories.map((category) => <Form.Check key={category.id} type="checkbox" label={`${category.icon} ${category.label}`} checked={form.categories.includes(category.id)} onChange={(e) => updateList("categories", category.id, e.target.checked)} />)}
+              {/* gak bisa pakai <form> di dalam form, jadi enter-nya ditangani manual */}
+              <div className="d-flex gap-2 mt-2">
+                <Form.Control className="w-25" value={newCategory.icon} onChange={(e) => setNewCategory({ ...newCategory, icon: e.target.value })} placeholder="🍽️" aria-label="Ikon kategori baru" />
+                <Form.Control value={newCategory.label} onChange={(e) => setNewCategory({ ...newCategory, label: e.target.value })} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addCategory(); } }} placeholder="Nama kategori baru" aria-label="Nama kategori baru" />
+                <Button type="button" className={`${ui.btn} ${ui.btnOutline}`} onClick={addCategory}>Tambah</Button>
+              </div>
+              {categoryError && <Form.Text className="text-danger">{categoryError}</Form.Text>}
             </Form.Group>
             <Form.Group className={ui.field}>
               <Form.Label>Waktu penyajian</Form.Label>
