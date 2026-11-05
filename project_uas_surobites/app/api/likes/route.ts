@@ -43,3 +43,14 @@ export async function POST(request: Request) {
   const count = await prisma.foodLike.count({ where: { foodId: food.id } });
   return Response.json({ liked: !existing, count });
 }
+
+// buat tombol "hapus semua favorit"
+export async function DELETE() {
+  const user = await getCurrentUser();
+  if (!user) {
+    return Response.json({ message: "Login dulu untuk menyukai makanan." }, { status: 401 });
+  }
+
+  await prisma.foodLike.deleteMany({ where: { userId: user.id } });
+  return Response.json({ liked: [] });
+}
