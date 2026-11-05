@@ -5,14 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Dropdown } from "react-bootstrap";
+import EditProfileModal, { type ProfileUser } from "@/components/layout/EditProfileModal";
 import styles from "@/app/styles/header.module.css";
-
-type User = { id: number; name: string; email: string; image: string | null };
 
 export default function UserMenu({ className = "" }: { className?: string }) {
   const router = useRouter();
   // undefined = masih dicek, null = belum login
-  const [user, setUser] = useState<User | null | undefined>(undefined);
+  const [user, setUser] = useState<ProfileUser | null | undefined>(undefined);
+  const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     fetch("/api/auth/me")
@@ -40,6 +40,7 @@ export default function UserMenu({ className = "" }: { className?: string }) {
   }
 
   return (
+    <>
     <Dropdown align="end" className={className}>
       <Dropdown.Toggle as="button" type="button" bsPrefix={styles.avatar} aria-label={`Menu akun ${user.name}`}>
         {user.image ? (
@@ -56,10 +57,26 @@ export default function UserMenu({ className = "" }: { className?: string }) {
           <small>{user.email}</small>
         </Dropdown.Header>
         <Dropdown.Divider />
+        <Dropdown.Item as="button" onClick={() => setEditing(true)} className={styles.menuItem}>
+          <i className="fa-solid fa-user-pen" aria-hidden="true"></i> Edit Profil
+        </Dropdown.Item>
         <Dropdown.Item as="button" onClick={logout} className={styles.logoutItem}>
           <i className="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i> Logout
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
+
+    {/* dirender pas dibuka aja, biar isi form selalu ambil data user terbaru */}
+    {editing && (
+      <EditProfileModal
+        user={user}
+        onClose={() => setEditing(false)}
+        onSaved={(updated) => {
+          setUser(updated);
+          setEditing(false);
+        }}
+      />
+    )}
+    </>
   );
 }

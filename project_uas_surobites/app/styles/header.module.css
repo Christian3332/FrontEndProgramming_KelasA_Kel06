@@ -100,6 +100,39 @@
     word-break: break-all;
 }
 
+.menuItem {
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.menuItem:hover {
+    background-color: aliceblue;
+}
+
+.removePhoto {
+    margin: -8px 0 12px;
+    padding: 0;
+    font-size: 13px;
+    color: firebrick;
+}
+
+.passwordBox {
+    padding: 12px;
+    border: 1px solid gainsboro;
+    border-radius: 12px;
+}
+
+.passwordTitle {
+    float: none;
+    width: auto;
+    margin-bottom: 8px;
+    padding: 0 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: dimgray;
+}
+
 .logoutItem {
     border-radius: 10px;
     font-size: 14px;
