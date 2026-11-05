@@ -86,6 +86,15 @@ model Admin {
   passwordHash String
 }
 
+// akun pengunjung (beda sama Admin)
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
 model Faq {
   id       Int    @id @default(autoincrement())
   question String
