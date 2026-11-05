@@ -60,6 +60,7 @@ export const ModelName = {
   WarungMenu: 'WarungMenu',
   Admin: 'Admin',
   User: 'User',
+  Rating: 'Rating',
   Faq: 'Faq',
   SiteContent: 'SiteContent'
 } as const
@@ -174,6 +175,18 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const RatingScalarFieldEnum = {
+  id: 'id',
+  score: 'score',
+  userId: 'userId',
+  warungId: 'warungId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RatingScalarFieldEnum = (typeof RatingScalarFieldEnum)[keyof typeof RatingScalarFieldEnum]
 
 
 export const FaqScalarFieldEnum = {

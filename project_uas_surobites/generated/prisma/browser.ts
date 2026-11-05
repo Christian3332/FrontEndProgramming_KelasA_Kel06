@@ -63,6 +63,11 @@ export type Admin = Prisma.AdminModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model Rating
+ * 
+ */
+export type Rating = Prisma.RatingModel
+/**
  * Model Faq
  * 
  */
