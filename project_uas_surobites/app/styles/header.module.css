@@ -34,6 +34,84 @@
     transform: translateY(-2px);
 }
 
+.avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    overflow: hidden;
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: royalblue;
+    box-shadow: 0 0 0 2px lightsteelblue;
+    font-size: 17px;
+    font-weight: 800;
+    color: white;
+    cursor: pointer;
+}
+
+.avatarLoading {
+    background-color: gainsboro;
+    box-shadow: none;
+    cursor: default;
+}
+
+.avatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.loginBtn {
+    padding: 9px 18px;
+    border-radius: 50px;
+    background-color: royalblue;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    transition: background-color 0.2s ease;
+}
+
+.loginBtn:hover {
+    background-color: navy;
+    color: white;
+}
+
+.userMenu {
+    min-width: 220px;
+    padding: 6px;
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    color: black;
+}
+
+.userInfo small {
+    font-size: 12px;
+    color: gray;
+    word-break: break-all;
+}
+
+.logoutItem {
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: firebrick;
+}
+
+.logoutItem:hover {
+    background-color: mistyrose;
+    color: firebrick;
+}
+
 .count {
     top: -4px;
     right: -4px;

@@ -34,7 +34,9 @@ export async function getCurrentUser() {
       where: { id: userId },
       select: { id: true, name: true, email: true, image: true },
     });
-  } catch {
+  } catch (error) {
+    // dicatat di terminal biar ketauan kalau ada masalah (mis. lupa restart server habis prisma generate)
+    console.error("getCurrentUser gagal:", error);
     return null;
   }
 }

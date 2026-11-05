@@ -6,6 +6,7 @@ import Image from "next/image"
 import { usePathname } from "next/navigation";
 import { Form, Nav, Navbar } from "react-bootstrap";
 import FavCount from "@/components/layout/FavCount";
+import UserMenu from "@/components/layout/UserMenu";
 import styles from "@/app/styles/header.module.css";
 
 const menu = [
@@ -42,6 +43,8 @@ export function Header () {
                     <i className="fa-regular fa-heart"/>
                     <FavCount />
                 </Link>
+
+                <UserMenu className="order-2 order-lg-5 me-2 me-lg-0 ms-lg-2" />
 
                 <Navbar.Toggle
                     className={`order-2 ${styles.menuToggle}`}
