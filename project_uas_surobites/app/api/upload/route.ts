@@ -2,6 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { randomBytes } from "node:crypto";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { getCurrentUser } from "@/lib/user-auth";
 
 // cuma terima gambar biasa, maks 2 MB
 const allowedTypes: Record<string, string> = {
@@ -12,8 +13,9 @@ const allowedTypes: Record<string, string> = {
 const MAX_SIZE = 2 * 1024 * 1024;
 
 export async function POST(request: Request) {
-  if (!(await isAdminAuthenticated())) {
-    return Response.json({ message: "Silakan login sebagai admin." }, { status: 401 });
+  // admin (gambar konten) atau user yang login (foto profil) boleh upload
+  if (!(await isAdminAuthenticated()) && !(await getCurrentUser())) {
+    return Response.json({ message: "Silakan login terlebih dahulu." }, { status: 401 });
   }
 
   const formData = await request.formData();

@@ -58,6 +58,16 @@ export type WarungMenu = Prisma.WarungMenuModel
  */
 export type Admin = Prisma.AdminModel
 /**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
+/**
+ * Model Rating
+ * 
+ */
+export type Rating = Prisma.RatingModel
+/**
  * Model Faq
  * 
  */

@@ -69,8 +69,9 @@ model Warung {
   image       String
   mapsUrl     String
 
-  foods Food[]
-  menus WarungMenu[]
+  foods   Food[]
+  menus   WarungMenu[]
+  ratings Rating[]
 }
 
 model WarungMenu {
@@ -84,6 +85,33 @@ model Admin {
   id           Int    @id @default(autoincrement())
   username     String @unique
   passwordHash String
+}
+
+// akun pengunjung (beda sama Admin)
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String   @unique
+  passwordHash String
+  image        String? // foto profil, kosong = pakai inisial nama
+  createdAt    DateTime @default(now())
+
+  ratings Rating[]
+}
+
+// rating bintang (1-5) dari user ke warung
+model Rating {
+  id        Int      @id @default(autoincrement())
+  score     Int
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  warungId  Int
+  warung    Warung   @relation(fields: [warungId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 1 user cuma boleh punya 1 rating per warung (kalau rating lagi = update)
+  @@unique([userId, warungId])
 }
 
 model Faq {
