@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Accordion } from "react-bootstrap";
 import { useFaqs } from "@/lib/useFaqs";
+import FaqQuestionForm from "@/components/home/FaqQuestionForm";
 import styles from "@/app/styles/home.module.css";
 
 export default function Faq() {
@@ -36,6 +37,8 @@ export default function Faq() {
           </Accordion.Item>
         ))}
       </Accordion>
+
+      <FaqQuestionForm />
     </section>
   );
 }
