@@ -5,8 +5,9 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import type { Food } from "@/data/foods";
-import { categoryNames, normalizeText } from "@/lib/helper";
+import { normalizeText } from "@/lib/helper";
 import { useFoods } from "@/lib/useFoods";
+import { useCategories } from "@/lib/useCategories";
 import FoodCard from "@/components/food/FoodCard";
 import FoodModal from "@/components/food/FoodModal";
 import LinkButton from "@/components/ui/LinkButton";
@@ -17,6 +18,7 @@ const PAGE_SIZE = 9;
 
 export default function KatalogContent() {
   const foods = useFoods();
+  const categories = useCategories();
   const keyword = useSearchParams().get("q")?.trim() ?? "";
   const [limit, setLimit] = useState(PAGE_SIZE);
   const [selected, setSelected] = useState<Food | null>(null);
@@ -27,7 +29,7 @@ export default function KatalogContent() {
         food.shortDescription,
         food.taste,
         food.ingredients.join(" "),
-        categoryNames(food).join(" "),
+        food.categories.map((id) => categories.find((c) => c.id === id)?.label ?? id).join(" "),
       ].join(" ")).includes(normalizeText(keyword)))
     : foods;
   // Kalau lagi mencari, semua hasil langsung ditampilkan

@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
-import { categories, times } from "@/data/foods";
-import type { Food } from "@/data/foods";
-import { getCategory, getTime } from "@/lib/helper";
+import { times } from "@/data/foods";
+import type { Category, Food } from "@/data/foods";
+import { getTime } from "@/lib/helper";
 import AdminSearch from "@/components/admin/AdminSearch";
 import PriceTag from "@/components/admin/PriceTag";
 import ImageUpload from "@/components/admin/ImageUpload";
@@ -32,12 +32,16 @@ const foodKosong: Food = {
 
 type Props = {
   initialFoods: Food[];
+  initialCategories: Category[];
   initialAdd?: boolean;
 };
 
-export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
+export default function FoodTable({ initialFoods, initialCategories, initialAdd = false }: Props) {
   const router = useRouter();
   const [list, setList] = useState<Food[]>(initialFoods);
+  const [categories, setCategories] = useState<Category[]>(initialCategories);
+  const [newCategory, setNewCategory] = useState({ label: "", icon: "" });
+  const [categoryError, setCategoryError] = useState("");
   const [keyword, setKeyword] = useState("");
   const [form, setForm] = useState<Food>(foodKosong);
   // teks bahan disimpan apa adanya biar koma & spasi gak langsung kehapus pas ngetik
@@ -47,6 +51,7 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
   const [error, setError] = useState("");
   // makanan yang lagi ditanyain mau dihapus atau nggak
   const [hapus, setHapus] = useState<Food | null>(null);
+  const [hapusKategori, setHapusKategori] = useState<Category | null>(null);
 
   async function loadFoods() {
     const response = await fetch("/api/foods");
@@ -67,6 +72,7 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
     setForm(foodKosong);
     setIngredientsText("");
     setError("");
+    setCategoryError("");
     setOpen(true);
   }
 
@@ -74,6 +80,7 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
     setForm(food);
     setIngredientsText(food.ingredients.join(", "));
     setError("");
+    setCategoryError("");
     setOpen(true);
   }
 
@@ -107,6 +114,45 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
       await loadFoods();
       refreshAdminCounts();
     }
+  }
+
+  async function addCategory() {
+    setCategoryError("");
+    if (!newCategory.label.trim()) return;
+
+    const response = await fetch("/api/categories", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newCategory),
+    });
+    const result = await response.json();
+
+    if (!response.ok) {
+      setCategoryError(result.message ?? "Kategori gagal ditambahkan.");
+      return;
+    }
+
+    setCategories([...categories, result]);
+    // kategori baru langsung dicentang buat makanan yang lagi diisi
+    setForm({ ...form, categories: [...form.categories, result.id] });
+    setNewCategory({ label: "", icon: "" });
+  }
+
+  async function deleteCategory(id: string) {
+    setHapusKategori(null);
+    setCategoryError("");
+
+    const response = await fetch(`/api/categories/${id}`, { method: "DELETE" });
+    if (!response.ok) {
+      const result = await response.json();
+      setCategoryError(result.message ?? "Kategori gagal dihapus.");
+      return;
+    }
+
+    setCategories(categories.filter((c) => c.id !== id));
+    setForm({ ...form, categories: form.categories.filter((c) => c !== id) });
+    // tag kategori di tabel juga ikut diperbarui
+    await loadFoods();
   }
 
   function updateList(field: "categories" | "timeCategory", id: string, checked: boolean) {
@@ -162,7 +208,7 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
                   <td data-label="Kategori">
                     <div className={`d-flex flex-wrap justify-content-end justify-content-md-start ${ui.tagList}`}>
                       {food.categories.map((id) => {
-                        const category = getCategory(id);
+                        const category = categories.find((c) => c.id === id);
                         return <span className={ui.tag} key={id}>{category ? `${category.icon} ${category.label}` : id}</span>;
                       })}
                     </div>
@@ -191,7 +237,8 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
         </div>
       </div>
 
-      <Modal show={open} onHide={() => setOpen(false)} centered size="lg">
+      {/* form disembunyiin dulu selama konfirmasi hapus kategori, biar modal gak numpuk */}
+      <Modal show={open && hapusKategori === null} onHide={() => setOpen(false)} centered size="lg">
         <Form onSubmit={saveFood}>
           <Modal.Header closeButton>
             <Modal.Title>{form.id ? "Edit Makanan" : "Tambah Makanan"}</Modal.Title>
@@ -229,7 +276,21 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
             </Form.Group>
             <Form.Group className={ui.field}>
               <Form.Label>Kategori</Form.Label>
-              {categories.map((category) => <Form.Check key={category.id} type="checkbox" label={`${category.icon} ${category.label}`} checked={form.categories.includes(category.id)} onChange={(e) => updateList("categories", category.id, e.target.checked)} />)}
+              {categories.map((category) => (
+                <div key={category.id} className="d-flex align-items-center justify-content-between gap-2 mb-1">
+                  <Form.Check id={`cat-${category.id}`} type="checkbox" label={`${category.icon} ${category.label}`} checked={form.categories.includes(category.id)} onChange={(e) => updateList("categories", category.id, e.target.checked)} />
+                  <button type="button" className={`d-inline-flex align-items-center justify-content-center ${ui.iconBtn} ${ui.iconBtnDanger}`} title="Hapus kategori" aria-label={`Hapus kategori ${category.label}`} onClick={() => setHapusKategori(category)}>
+                    <i className="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              ))}
+              {/* gak bisa pakai <form> di dalam form, jadi enter-nya ditangani manual */}
+              <div className="d-flex gap-2 mt-2">
+                <Form.Control className="w-25" value={newCategory.icon} onChange={(e) => setNewCategory({ ...newCategory, icon: e.target.value })} placeholder="🍽️" aria-label="Ikon kategori baru" />
+                <Form.Control value={newCategory.label} onChange={(e) => setNewCategory({ ...newCategory, label: e.target.value })} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addCategory(); } }} placeholder="Nama kategori baru" aria-label="Nama kategori baru" />
+                <Button type="button" className={`${ui.btn} ${ui.btnOutline}`} onClick={addCategory}>Tambah</Button>
+              </div>
+              {categoryError && <Form.Text className="text-danger">{categoryError}</Form.Text>}
             </Form.Group>
             <Form.Group className={ui.field}>
               <Form.Label>Waktu penyajian</Form.Label>
@@ -252,6 +313,16 @@ export default function FoodTable({ initialFoods, initialAdd = false }: Props) {
         icon="fa-regular fa-trash-can"
         onConfirm={() => hapus && deleteFood(hapus.id)}
         onCancel={() => setHapus(null)}
+      />
+
+      <ConfirmDialog
+        open={hapusKategori !== null}
+        title="Hapus kategori?"
+        message={`"${hapusKategori?.label}" dipakai ${list.filter((f) => hapusKategori && f.categories.includes(hapusKategori.id)).length} makanan. Makanannya tetap ada, cuma kategori ini yang dilepas.`}
+        confirmText="Ya, Hapus"
+        icon="fa-regular fa-trash-can"
+        onConfirm={() => hapusKategori && deleteCategory(hapusKategori.id)}
+        onCancel={() => setHapusKategori(null)}
       />
     </>
   );

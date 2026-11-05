@@ -1,18 +1,23 @@
 "use client";
 
 import { Col, Row } from "react-bootstrap";
-import { categories, type Food } from "@/data/foods";
+import type { Category, Food } from "@/data/foods";
 import styles from "@/app/styles/home.module.css";
 
-type Props = { foods: Food[]; active: string | null; onChange: (id: string | null) => void };
+type Props = {
+  foods: Food[];
+  categories: Category[];
+  active: string | null;
+  onChange: (id: string | null) => void;
+};
 
-export default function CategoryFilter({ foods, active, onChange }: Props) {
+export default function CategoryFilter({ foods, categories, active, onChange }: Props) {
   return (
     <Row
       xs={2}
       md={3}
       xl={6}
-      className={`g-3 mx-auto ${styles.narrow}`}
+      className={`g-3 mx-auto justify-content-center ${styles.narrow}`}
       role="group"
       aria-label="Kategori rekomendasi"
     >
@@ -23,19 +28,19 @@ export default function CategoryFilter({ foods, active, onChange }: Props) {
           <Col key={c.id}>
             <button
               type="button"
-              className={`d-flex flex-column align-items-center text-center w-100 h-100 ${styles.kategoriCard} ${isActive ? styles.kategoriActive : ""}`}
+              className={`d-flex flex-column align-items-center text-center w-100 h-100 ${styles.categoryCard} ${isActive ? styles.categoryActive : ""}`}
               aria-pressed={isActive}
               onClick={() => onChange(isActive ? null : c.id)}
             >
               <span
-                className={`d-flex align-items-center justify-content-center rounded-circle ${styles.kategoriIcon}`}
+                className={`d-flex align-items-center justify-content-center rounded-circle ${styles.categoryIcon}`}
                 aria-hidden="true"
               >
                 {c.icon}
               </span>
-              <span className={styles.kategoriLabel}>{c.label}</span>
-              <span className={styles.kategoriDesc}>{c.description}</span>
-              <span className={styles.kategoriCount}>{total} kuliner</span>
+              <span className={styles.categoryLabel}>{c.label}</span>
+              <span className={styles.categoryDesc}>{c.description}</span>
+              <span className={styles.categoryCount}>{total} kuliner</span>
             </button>
           </Col>
         );

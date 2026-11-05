@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import SectionHead from "@/components/admin/SectionHead";
 import CategorySummary from "@/components/admin/rekomendasi/CategorySummary";
 import RecoList from "@/components/admin/rekomendasi/RecoList";
-import { getFoods } from "@/lib/queries";
+import { getCategories, getFoods } from "@/lib/queries";
 import ui from "@/app/styles/admin-ui.module.css";
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default async function KelolaRekomendasiPage() {
   await connection();
-  const foods = await getFoods();
+  const [foods, categories] = await Promise.all([getFoods(), getCategories()]);
 
   return (
     <section className={ui.section} aria-labelledby="sec-rekomendasi">
@@ -28,7 +28,7 @@ export default async function KelolaRekomendasiPage() {
       </SectionHead>
 
       <CategorySummary />
-      <RecoList initialFoods={foods} />
+      <RecoList initialFoods={foods} categories={categories} />
     </section>
   );
 }

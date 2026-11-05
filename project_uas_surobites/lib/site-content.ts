@@ -5,9 +5,11 @@ export const defaultSiteContent = {
   heroTitle: "JELAJAHI CITA RASA LEGENDARIS SURABAYA",
   heroDescription:
     "Nikmati Kelezatan Kuliner Warisan Kota Pahlawan. Dari pekatnya kuah Rawon daging hingga segarnya bumbu petis Rujak Cingur dan Lontong Balap. Temukan sejarah, bahan rahasia, dan rekomendasi warung asli di satu tempat.",
+  heroImage: "/img/hero image.jpeg",
   rekomendasiTitle: "Temukan Kuliner yang Cocok Untukmu",
   rekomendasiDescription:
     "Bingung mau makan apa? Pilih kategori sesuai selera dan kebutuhanmu, lalu temukan rekomendasi makanan khas Surabaya yang paling pas.",
+  rekomendasiImage: "/img/hero image.jpeg",
   contactEmail: "SuroBites@gmail.com",
   contactPhone: "0888777999",
   instagram: "",
@@ -23,8 +25,10 @@ export async function getSiteContent(): Promise<SiteContent> {
   return {
     heroTitle: content.heroTitle,
     heroDescription: content.heroDescription,
+    heroImage: content.heroImage,
     rekomendasiTitle: content.rekomendasiTitle,
     rekomendasiDescription: content.rekomendasiDescription,
+    rekomendasiImage: content.rekomendasiImage,
     contactEmail: content.contactEmail,
     contactPhone: content.contactPhone,
     instagram: content.instagram,

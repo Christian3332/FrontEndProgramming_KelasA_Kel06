@@ -4,7 +4,8 @@ import Link from "next/link";
 import { Button, Col, Modal, Row } from "react-bootstrap";
 import type { Food } from "@/data/foods";
 import { useWarungs } from "@/lib/useWarungs";
-import { getCategory, getLowestPrice, getPriceLevel, getTime } from "@/lib/helper";
+import { getLowestPrice, getPriceLevel, getTime } from "@/lib/helper";
+import { useCategories } from "@/lib/useCategories";
 import { useFavorites } from "@/lib/favorites";
 import LinkButton from "@/components/ui/LinkButton";
 import styles from "@/app/styles/food-modal.module.css";
@@ -14,6 +15,7 @@ type Props = { food: Food | null; onClose: () => void };
 export default function FoodModal({ food, onClose }: Props) {
   const warungs = useWarungs();
   const { isFavorite, toggleFavorite } = useFavorites();
+  const categories = useCategories();
 
   if (!food) return null;
 
@@ -83,7 +85,7 @@ export default function FoodModal({ food, onClose }: Props) {
           </h2>
           <div className={`d-flex flex-wrap ${styles.chipList}`}>
             {food.categories.map((id) => {
-              const c = getCategory(id);
+              const c = categories.find((item) => item.id === id);
               return c ? (
                 <Link
                   key={id}

@@ -97,8 +97,10 @@ model SiteContent {
   id                      Int    @id
   heroTitle               String
   heroDescription         String
+  heroImage               String @default("/img/hero image.jpeg")
   rekomendasiTitle        String
   rekomendasiDescription  String
+  rekomendasiImage        String @default("/img/hero image.jpeg")
   contactEmail            String
   contactPhone            String
   instagram               String

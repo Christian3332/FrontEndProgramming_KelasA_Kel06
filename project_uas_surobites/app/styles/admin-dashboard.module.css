@@ -864,6 +864,30 @@
     -webkit-box-orient: vertical;
 }
 
+.previewZoom {
+    position: absolute;
+    right: 12px;
+    bottom: 10px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background-color: white;
+    color: black;
+    font-size: 13px;
+}
+
+.previewZoom:hover {
+    background-color: whitesmoke;
+}
+
+.previewFull {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
 .stickyActions {
     position: sticky;
     bottom: 12px;

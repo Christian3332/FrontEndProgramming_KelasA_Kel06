@@ -5,13 +5,18 @@ import StatCards from "@/components/admin/dashboard/StatCards";
 import CategoryChart from "@/components/admin/dashboard/CategoryChart";
 import ActivityPanel from "@/components/admin/dashboard/ActivityPanel";
 import FavoritePanel from "@/components/admin/dashboard/FavoritePanel";
-import { getFaqs, getFoods, getWarungs } from "@/lib/queries";
+import { getCategories, getFaqs, getFoods, getWarungs } from "@/lib/queries";
 import ui from "@/app/styles/admin-ui.module.css";
 
 export default async function AdminDashboardPage() {
   // ambil langsung dari database biar angka di dashboard selalu yang terbaru
   await connection();
-  const [foods, warungs, faqs] = await Promise.all([getFoods(), getWarungs(), getFaqs()]);
+  const [foods, warungs, faqs, categories] = await Promise.all([
+    getFoods(),
+    getWarungs(),
+    getFaqs(),
+    getCategories(),
+  ]);
 
   return (
     <section className={ui.section} aria-labelledby="sec-dashboard">
@@ -24,7 +29,7 @@ export default async function AdminDashboardPage() {
 
       <Row className="g-3">
         <Col xs={12} xl={7}>
-          <CategoryChart foods={foods} />
+          <CategoryChart foods={foods} categories={categories} />
         </Col>
         <Col xs={12} xl={5}>
           <ActivityPanel />

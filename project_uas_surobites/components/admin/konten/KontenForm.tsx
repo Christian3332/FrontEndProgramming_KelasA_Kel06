@@ -1,15 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { Alert, Button, Col, Form, Row, Spinner } from "react-bootstrap";
+import Image from "next/image";
+import { Alert, Button, Col, Form, Modal, Row, Spinner } from "react-bootstrap";
+import ImageUpload from "@/components/admin/ImageUpload";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
 type SiteContent = {
   heroTitle: string;
   heroDescription: string;
+  heroImage: string;
   rekomendasiTitle: string;
   rekomendasiDescription: string;
+  rekomendasiImage: string;
   contactEmail: string;
   contactPhone: string;
   instagram: string;
@@ -21,8 +25,17 @@ type Props = {
   defaults: SiteContent;
 };
 
+// gradient gelapnya tetap dipasang biar teks di atas gambar masih kebaca
+function previewStyle(image: string) {
+  return {
+    backgroundImage: `linear-gradient(90deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.3)), url("${image}")`,
+  };
+}
+
 export default function KontenForm({ content, defaults }: Props) {
   const [konten, setKonten] = useState(content);
+  // gambar yang lagi dibuka di pop up
+  const [zoomImage, setZoomImage] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [notice, setNotice] = useState<{ type: "success" | "danger"; message: string } | null>(null);
 
@@ -62,6 +75,7 @@ export default function KontenForm({ content, defaults }: Props) {
   }
 
   return (
+    <>
     <Form noValidate onSubmit={handleSubmit}>
       {notice && <Alert variant={notice.type}>{notice.message}</Alert>}
       <Row className="g-3">
@@ -75,11 +89,25 @@ export default function KontenForm({ content, defaults }: Props) {
               <p className={ui.panelSubtitle}>Judul &amp; deskripsi di bagian paling atas Beranda</p>
             </div>
           </div>
-          <div className={`d-flex flex-column justify-content-center ${styles.heroPreview}`}>
+          <div className={`d-flex flex-column justify-content-center ${styles.heroPreview}`} style={previewStyle(konten.heroImage)}>
             <span className={styles.previewLabel}>Pratinjau</span>
             <h4 className={styles.previewTitle}>{konten.heroTitle}</h4>
             <p className={styles.previewText}>{konten.heroDescription}</p>
+            <button
+              type="button"
+              className={`d-flex align-items-center justify-content-center rounded-circle ${styles.previewZoom}`}
+              aria-label="Lihat gambar hero beranda"
+              title="Lihat gambar"
+              onClick={() => setZoomImage(konten.heroImage)}
+            >
+              <i className="fa-solid fa-expand"></i>
+            </button>
           </div>
+          <ImageUpload
+            label="Gambar hero"
+            value={konten.heroImage}
+            onChange={(url) => setKonten({ ...konten, heroImage: url })}
+          />
           <Form.Group controlId="content-heroTitle" className={`d-flex flex-column ${ui.field}`}>
             <Form.Label>
               Judul hero <span className={ui.required}>*</span>
@@ -120,11 +148,25 @@ export default function KontenForm({ content, defaults }: Props) {
               <p className={ui.panelSubtitle}>Judul &amp; deskripsi di halaman Rekomendasi</p>
             </div>
           </div>
-          <div className={`d-flex flex-column justify-content-center ${styles.heroPreview}`}>
+          <div className={`d-flex flex-column justify-content-center ${styles.heroPreview}`} style={previewStyle(konten.rekomendasiImage)}>
             <span className={styles.previewLabel}>Pratinjau</span>
             <h4 className={styles.previewTitle}>{konten.rekomendasiTitle}</h4>
             <p className={styles.previewText}>{konten.rekomendasiDescription}</p>
+            <button
+              type="button"
+              className={`d-flex align-items-center justify-content-center rounded-circle ${styles.previewZoom}`}
+              aria-label="Lihat gambar hero rekomendasi"
+              title="Lihat gambar"
+              onClick={() => setZoomImage(konten.rekomendasiImage)}
+            >
+              <i className="fa-solid fa-expand"></i>
+            </button>
           </div>
+          <ImageUpload
+            label="Gambar hero"
+            value={konten.rekomendasiImage}
+            onChange={(url) => setKonten({ ...konten, rekomendasiImage: url })}
+          />
           <Form.Group controlId="content-rekomendasiTitle" className={`d-flex flex-column ${ui.field}`}>
             <Form.Label>
               Judul halaman <span className={ui.required}>*</span>
@@ -239,5 +281,18 @@ export default function KontenForm({ content, defaults }: Props) {
         </Button>
       </div>
     </Form>
+
+    <Modal show={zoomImage !== null} onHide={() => setZoomImage(null)} centered size="lg">
+      <Modal.Header closeButton>
+        <Modal.Title>Gambar Hero</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {zoomImage && (
+          // unoptimized biar gambar yang baru diupload langsung kebaca
+          <Image src={zoomImage} alt="Gambar hero" width={1200} height={800} unoptimized className={styles.previewFull} />
+        )}
+      </Modal.Body>
+    </Modal>
+    </>
   );
 }
