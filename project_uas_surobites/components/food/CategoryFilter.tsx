@@ -17,7 +17,7 @@ export default function CategoryFilter({ foods, categories, active, onChange }: 
       xs={2}
       md={3}
       xl={6}
-      className={`g-3 mx-auto ${styles.narrow}`}
+      className={`g-3 mx-auto justify-content-center ${styles.narrow}`}
       role="group"
       aria-label="Kategori rekomendasi"
     >

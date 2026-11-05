@@ -22,7 +22,9 @@ export default function CategoryLinks() {
         Pilih sesuai selera, nanti SuroBites carikan kuliner Surabaya yang
         paling cocok untukmu.
       </p>
-      <Row xs={2} md={3} xl={6} className={`g-3 mx-auto ${styles.narrow}`}>
+      {/* justify-content-center biar baris terakhir yang gak penuh tetap di tengah,
+          jadi aman berapapun jumlah kategori yang ditambah admin */}
+      <Row xs={2} md={3} xl={6} className={`g-3 mx-auto justify-content-center ${styles.narrow}`}>
         {categories.map((c) => {
           const total = foods.filter((f) => f.categories.includes(c.id)).length;
           return (
