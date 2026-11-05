@@ -7,6 +7,8 @@ const foodInclude = {
   categories: { select: { id: true } },
   timeSlots: { select: { id: true } },
   ingredients: { orderBy: { id: "asc" } },
+  // jumlah love diambil dari tabel FoodLike
+  _count: { select: { likes: true } },
 } satisfies Prisma.FoodInclude;
 
 const warungInclude = {
@@ -41,7 +43,7 @@ function toFood(r: FoodRow, order: { cats: string[]; slots: string[] }): Food {
     priceRange: r.priceRange,
     timeCategory: sortBy(r.timeSlots.map((t) => t.id), order.slots),
     featured: r.featured,
-    favoriteCount: r.favoriteCount,
+    favoriteCount: r._count.likes,
   };
 }
 
