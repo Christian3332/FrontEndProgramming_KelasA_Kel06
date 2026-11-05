@@ -4,12 +4,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Alert, Button } from "react-bootstrap";
-import { categories } from "@/data/foods";
-import type { Food } from "@/data/foods";
+import type { Category, Food } from "@/data/foods";
 import ui from "@/app/styles/admin-ui.module.css";
 import styles from "@/app/styles/admin-dashboard.module.css";
 
-export default function RecoList({ initialFoods }: { initialFoods: Food[] }) {
+type Props = {
+  initialFoods: Food[];
+  categories: Category[];
+};
+
+export default function RecoList({ initialFoods, categories }: Props) {
   const router = useRouter();
   const [foods, setFoods] = useState<Food[]>(initialFoods);
   // salinan data asli, dipakai buat ngecek mana yang berubah pas disimpan
