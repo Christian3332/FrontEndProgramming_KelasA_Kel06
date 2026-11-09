@@ -774,6 +774,7 @@ export type FoodCreateOrConnectWithoutPriceCategoryInput = {
 
 export type FoodCreateManyPriceCategoryInputEnvelope = {
   data: Prisma.FoodCreateManyPriceCategoryInput | Prisma.FoodCreateManyPriceCategoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type FoodUpsertWithWhereUniqueWithoutPriceCategoryInput = {
@@ -2202,6 +2203,7 @@ export type FoodCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * The data used to create many Foods.
    */
   data: Prisma.FoodCreateManyInput | Prisma.FoodCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2220,6 +2222,7 @@ export type FoodCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many Foods.
    */
   data: Prisma.FoodCreateManyInput | Prisma.FoodCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

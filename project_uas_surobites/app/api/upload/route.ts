@@ -1,6 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { randomBytes } from "node:crypto";
+import { put } from "@vercel/blob";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { getCurrentUser } from "@/lib/user-auth";
 
@@ -36,8 +37,19 @@ export async function POST(request: Request) {
 
   // nama file dibuat acak biar gak bentrok sama file lain
   const fileName = `${Date.now()}-${randomBytes(4).toString("hex")}.${ext}`;
-  const uploadDir = path.join(process.cwd(), "public", "uploads");
 
+  // di vercel folder public gak bisa ditulis, jadi gambar disimpan ke vercel blob
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
+    try {
+      const blob = await put(`uploads/${fileName}`, file, { access: "public", contentType: file.type });
+      return Response.json({ url: blob.url }, { status: 201 });
+    } catch {
+      return Response.json({ message: "Gambar gagal diunggah." }, { status: 500 });
+    }
+  }
+
+  // kalau token blob belum diisi (lokal), simpan ke public/uploads seperti biasa
+  const uploadDir = path.join(process.cwd(), "public", "uploads");
   await mkdir(uploadDir, { recursive: true });
   await writeFile(path.join(uploadDir, fileName), Buffer.from(await file.arrayBuffer()));
 

@@ -1066,6 +1066,7 @@ export type PriceCategoryCreateManyArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many PriceCategories.
    */
   data: Prisma.PriceCategoryCreateManyInput | Prisma.PriceCategoryCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1084,6 +1085,7 @@ export type PriceCategoryCreateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    * The data used to create many PriceCategories.
    */
   data: Prisma.PriceCategoryCreateManyInput | Prisma.PriceCategoryCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
