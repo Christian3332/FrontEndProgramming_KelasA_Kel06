@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import SectionHead from "@/components/admin/SectionHead";
 import KontenForm from "@/components/admin/konten/KontenForm";
 import { defaultSiteContent, getSiteContent } from "@/lib/site-content";
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function KelolaKontenPage() {
+  await connection();
   const content = await getSiteContent();
 
   return (
