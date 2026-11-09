@@ -40,8 +40,9 @@ export async function PUT(request: Request) {
     return Response.json({ message: "Periksa judul, deskripsi, email, dan nomor telepon." }, { status: 400 });
   }
 
-  // gambar cuma boleh dari folder public sendiri (hasil upload atau bawaan)
-  if ([content.heroImage, content.rekomendasiImage].some((image) => !/^\/(img|uploads)\/[^?#]+$/.test(image))) {
+  // gambar cuma boleh dari folder public sendiri atau hasil upload di vercel blob
+  const imagePattern = /^(\/(img|uploads)\/|https:\/\/[a-z0-9-]+\.public\.blob\.vercel-storage\.com\/uploads\/)[^?#]+$/;
+  if ([content.heroImage, content.rekomendasiImage].some((image) => !imagePattern.test(image))) {
     return Response.json({ message: "Gambar hero tidak valid." }, { status: 400 });
   }
 

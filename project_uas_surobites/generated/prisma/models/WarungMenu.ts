@@ -378,6 +378,7 @@ export type WarungMenuCreateOrConnectWithoutWarungInput = {
 
 export type WarungMenuCreateManyWarungInputEnvelope = {
   data: Prisma.WarungMenuCreateManyWarungInput | Prisma.WarungMenuCreateManyWarungInput[]
+  skipDuplicates?: boolean
 }
 
 export type WarungMenuUpsertWithWhereUniqueWithoutWarungInput = {
@@ -1134,6 +1135,7 @@ export type WarungMenuCreateManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * The data used to create many WarungMenus.
    */
   data: Prisma.WarungMenuCreateManyInput | Prisma.WarungMenuCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1152,6 +1154,7 @@ export type WarungMenuCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * The data used to create many WarungMenus.
    */
   data: Prisma.WarungMenuCreateManyInput | Prisma.WarungMenuCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

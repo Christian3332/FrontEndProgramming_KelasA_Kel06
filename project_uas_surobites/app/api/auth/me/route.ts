@@ -33,8 +33,8 @@ export async function PUT(request: Request) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 200) {
     return Response.json({ message: "Format email tidak valid." }, { status: 400 });
   }
-  // foto cuma boleh dari hasil upload kita sendiri (atau kosong = hapus foto)
-  if (image && !/^\/uploads\/[\w-]+\.(jpg|png|webp)$/.test(image)) {
+  // foto cuma boleh dari hasil upload kita sendiri, lokal atau vercel blob (atau kosong = hapus foto)
+  if (image && !/^(\/uploads\/|https:\/\/[a-z0-9-]+\.public\.blob\.vercel-storage\.com\/uploads\/)[\w-]+\.(jpg|png|webp)$/.test(image)) {
     return Response.json({ message: "Foto profil tidak valid." }, { status: 400 });
   }
 

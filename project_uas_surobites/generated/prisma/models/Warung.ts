@@ -1617,6 +1617,7 @@ export type WarungCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * The data used to create many Warungs.
    */
   data: Prisma.WarungCreateManyInput | Prisma.WarungCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1635,6 +1636,7 @@ export type WarungCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * The data used to create many Warungs.
    */
   data: Prisma.WarungCreateManyInput | Prisma.WarungCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
