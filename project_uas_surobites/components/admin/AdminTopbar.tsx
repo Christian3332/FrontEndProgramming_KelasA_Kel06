@@ -12,6 +12,7 @@ const sectionTitles: Record<string, string> = {
   "/admin/dashboard/warung": "Kelola Warung",
   "/admin/dashboard/faq": "Kelola FAQ",
   "/admin/dashboard/konten": "Kelola Konten",
+  "/admin/dashboard/aktivitas": "Log Aktivitas",
   "/admin/dashboard/pengaturan": "Pengaturan",
 };
 

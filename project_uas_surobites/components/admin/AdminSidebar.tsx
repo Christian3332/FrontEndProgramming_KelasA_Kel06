@@ -25,6 +25,7 @@ const menuUtama: MenuItem[] = [
   { href: "/admin/dashboard/warung", label: "Kelola Warung", icon: "fa-solid fa-location-dot", countKey: "warungs" },
   { href: "/admin/dashboard/faq", label: "Kelola FAQ", icon: "fa-regular fa-circle-question", countKey: "faqs" },
   { href: "/admin/dashboard/konten", label: "Kelola Konten", icon: "fa-regular fa-file-lines" },
+  { href: "/admin/dashboard/aktivitas", label: "Log Aktivitas", icon: "fa-solid fa-clock-rotate-left" },
 ];
 
 type Props = {
