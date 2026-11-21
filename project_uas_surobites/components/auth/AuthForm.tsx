@@ -69,6 +69,11 @@ export default function AuthForm({ mode }: Props) {
 
       <Form noValidate onSubmit={handleSubmit}>
         {error && <Alert variant="danger" className={ui.alert}>{error}</Alert>}
+        {!error && !isRegister && params.get("reset") === "1" && (
+          <Alert variant="success" className={`${ui.alert} ${ui.alertSuccess}`}>
+            Password berhasil diubah. Silakan login dengan password baru.
+          </Alert>
+        )}
 
         {isRegister && (
           <Form.Group controlId="auth-name" className={`d-flex flex-column ${ui.field}`}>
@@ -122,6 +127,11 @@ export default function AuthForm({ mode }: Props) {
               <i className={showPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye"}></i>
             </button>
           </div>
+          {!isRegister && (
+            <Link href="/forgot-password" className={`align-self-end ${styles.forgotLink}`}>
+              Lupa password?
+            </Link>
+          )}
         </Form.Group>
 
         <Button type="submit" className={`w-100 ${ui.btn} ${ui.btnPrimary} ${styles.submit}`} disabled={loading}>

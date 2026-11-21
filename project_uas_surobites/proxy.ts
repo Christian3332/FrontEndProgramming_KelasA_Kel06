@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { USER_COOKIE, readUserId } from "@/lib/user-token";
 
 // halaman yang boleh dibuka tamu (belum login)
-const PUBLIC_PAGES = ["/", "/login", "/register"];
+const PUBLIC_PAGES = ["/", "/login", "/register", "/forgot-password", "/reset-password"];
 
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
