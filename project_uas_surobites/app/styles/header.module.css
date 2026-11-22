@@ -253,6 +253,26 @@
     }
 }
 
+/* grup kanan (search + favorit + avatar).
+   di HP: display contents = bungkusnya "dianggap gak ada", jadi urutan elemen di HP gak berubah */
+.rightGroup {
+    display: contents;
+}
+
+@media (min-width: 992px) {
+    /* logo & grup kanan dibuat sama lebar, jadi menu di tengahnya pas di tengah layar */
+    .brand,
+    .rightGroup {
+        flex: 1 1 0;
+    }
+
+    .rightGroup {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .bar,
     .navLink,

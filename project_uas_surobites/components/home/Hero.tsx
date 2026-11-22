@@ -19,7 +19,7 @@ export default async function Hero() {
         <h2 className={styles.heroTitle}>{content.heroTitle}</h2>
         <p className={styles.heroText}>{content.heroDescription}</p>
         <div className={`d-flex flex-column flex-sm-row mt-2 ${styles.heroButtons}`}>
-          <Button href="#katalog" variant="primary" className={styles.heroButton}>
+          <Button href="katalog" variant="primary" className={styles.heroButton}>
             Eksplorasi Menu
           </Button>
           <LinkButton

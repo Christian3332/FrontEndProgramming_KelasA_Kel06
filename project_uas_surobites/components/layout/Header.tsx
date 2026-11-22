@@ -29,22 +29,38 @@ export function Header () {
                 collapseOnSelect
                 className={`px-3 py-2 px-lg-5 py-lg-3 ${styles.navbar}`}
             >
-                <Navbar.Brand as={Link} href="/" className="order-1 d-flex align-items-center gap-2 p-0 me-0" aria-label="Surobites - Beranda">
+                <Navbar.Brand as={Link} href="/" className={`order-1 d-flex align-items-center gap-2 p-0 me-0 ${styles.brand}`} aria-label="Surobites - Beranda">
                     <Image src="/img/Surobites Logo.png" alt="Logo SuroBites" width={32} height={32}
                     />
                     <span className={styles.logoText}>SuroBites</span>
                 </Navbar.Brand>
 
-                <Link
-                    href="/favorit"
-                    className={`order-2 order-lg-4 ms-auto ms-lg-3 me-2 me-lg-0 position-relative d-inline-flex align-items-center justify-content-center rounded-circle ${styles.fav}`}
-                    aria-label="Favorit Saya"
-                >
-                    <i className="fa-regular fa-heart"/>
-                    <FavCount />
-                </Link>
+                {/* grup kanan: di desktop lebarnya disamain sama logo biar menu pas di tengah, di HP bungkusnya "hilang" (display: contents) */}
+                <div className={`order-lg-3 ${styles.rightGroup}`}>
+                    <Link
+                        href="/favorit"
+                        className={`order-2 order-lg-4 ms-auto ms-lg-3 me-2 me-lg-0 position-relative d-inline-flex align-items-center justify-content-center rounded-circle ${styles.fav}`}
+                        aria-label="Favorit Saya"
+                    >
+                        <i className="fa-regular fa-heart"/>
+                        <FavCount />
+                    </Link>
 
-                <UserMenu className="order-2 order-lg-5 me-2 me-lg-0 ms-lg-2" />
+                    <UserMenu className="order-2 order-lg-5 me-2 me-lg-0 ms-lg-2" />
+
+                    <Form className="col-12 col-lg-auto order-4 order-lg-3 d-flex justify-content-center mt-3 mt-lg-0" action="/katalog">
+                        <Form.Label visuallyHidden htmlFor="search-input">
+                            Cari kuliner
+                        </Form.Label>
+                        <Form.Control
+                            id="search-input"
+                            type="text"
+                            name="q"
+                            placeholder="Cari kuliner..."
+                            className={`rounded-pill ${styles.searchInput}`}
+                        />
+                    </Form>
+                </div>
 
                 <Navbar.Toggle
                     className={`order-2 ${styles.menuToggle}`}
@@ -57,7 +73,7 @@ export function Header () {
                     <span className={styles.bar}></span>
                 </Navbar.Toggle>
 
-                <Navbar.Collapse id="primary-navigation" className="order-3 order-lg-2 justify-content-lg-center">
+                <Navbar.Collapse id="primary-navigation" className="order-3 order-lg-2 justify-content-lg-center flex-lg-grow-0">
                     <Nav as="ul" className={styles.navLinks}>
                         {menu.map((item) => {
                             const active = pathname === item.href;
@@ -77,19 +93,6 @@ export function Header () {
                         })}
                     </Nav>
                 </Navbar.Collapse>
-
-                <Form className="col-12 col-lg-auto order-4 order-lg-3 d-flex justify-content-center mt-3 mt-lg-0" action="/katalog">
-                    <Form.Label visuallyHidden htmlFor="search-input">
-                        Cari kuliner
-                    </Form.Label>
-                    <Form.Control
-                        id="search-input"
-                        type="text"
-                        name="q"
-                        placeholder="Cari kuliner..."
-                        className={`rounded-pill ${styles.searchInput}`}
-                    />
-                </Form>
             </Navbar>
         </header>
     );
