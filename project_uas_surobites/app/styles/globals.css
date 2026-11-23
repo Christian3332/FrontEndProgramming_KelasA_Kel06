@@ -36,6 +36,25 @@ main {
     background-color: var(--sb-biru-muda);
 }
 
+/* motif batik buat halaman publik (beranda, rekomendasi, katalog, lokasi) */
+.batik-background {
+    position: relative;
+    isolation: isolate;
+}
+
+/* batiknya ditaruh di lapisan sendiri + dibikin agak transparan biar teks tetap kebaca */
+.batik-background::before {
+    content: "";
+    position: absolute;
+    inset: 0px;
+    z-index: -1;
+    background-image: url("/img/batik-background.jpg");
+    background-size: 700px auto;
+    background-repeat: repeat;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 h1,
 h2 {
     font-family: var(--font-poetsen), cursive;

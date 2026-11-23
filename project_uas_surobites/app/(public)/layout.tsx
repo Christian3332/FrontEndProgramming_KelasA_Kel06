@@ -14,7 +14,7 @@ export default async function PublicLayout({
     return (
         <>
             <Header />
-            <main id="main-content" className="flex-grow-1">{children}</main>
+            <main id="main-content" className="flex-grow-1 batik-background">{children}</main>
             <Footer content={content} />
         </>
     );
