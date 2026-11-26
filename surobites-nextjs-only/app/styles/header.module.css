@@ -1,0 +1,155 @@
+.header {
+    z-index: 1000;
+}
+
+.navbar {
+    --bs-navbar-color: #000000;
+    --bs-navbar-hover-color: var(--sb-biru);
+    --bs-navbar-active-color: var(--sb-biru);
+    --bs-navbar-nav-link-padding-x: 0px;
+    --bs-navbar-toggler-focus-width: 0px;
+}
+
+.logoText {
+    font-family: var(--font-poetsen), cursive;
+    font-size: 22px;
+    color: var(--sb-biru-tua);
+}
+
+.fav {
+    width: 42px;
+    height: 42px;
+    background-color: var(--sb-biru-muda);
+    color: var(--sb-biru-tua);
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.fav i {
+    font-size: 18px;
+}
+
+.fav:hover {
+    background-color: var(--sb-biru-tua);
+    color: #FFFFFF;
+    transform: translateY(-2px);
+}
+
+.count {
+    top: -4px;
+    right: -4px;
+    min-width: 19px;
+    border: 2px solid #FFFFFF;
+    background-color: var(--sb-oranye);
+    font-size: 10px;
+    font-weight: 800;
+    animation: badgeBump 0.45s ease;
+}
+
+.menuToggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 5px;
+    border: none;
+    background: transparent;
+}
+
+.menuToggle:focus-visible {
+    outline: 3px solid var(--sb-biru);
+    outline-offset: 2px;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: var(--sb-biru-tua);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menuToggle[aria-expanded="true"] .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menuToggle[aria-expanded="true"] .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menuToggle[aria-expanded="true"] .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.navLinks {
+    row-gap: 4px;
+    padding-top: 22px;
+}
+
+.navLink {
+    padding: 10px 0;
+    border-bottom: 2px solid transparent;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.navLink:hover,
+.navLink[aria-current="page"] {
+    border-bottom-color: var(--sb-biru);
+}
+
+.searchInput {
+    max-width: 320px;
+    padding: 10px 18px;
+    border-color: #D9D9D9;
+    background-color: var(--sb-biru-muda);
+    font-size: 13px;
+}
+
+.searchInput::placeholder {
+    color: #3B3B3B;
+}
+
+.searchInput:focus {
+    background-color: #FFFFFF;
+}
+
+@media (min-width: 992px) {
+    .navLinks {
+        column-gap: 24px;
+        padding-top: 0;
+    }
+
+    .navLink {
+        padding: 4px 0;
+    }
+
+    .searchInput {
+        max-width: 220px;
+    }
+}
+
+@keyframes badgeBump {
+    from {
+        transform: scale(1.35);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bar,
+    .navLink,
+    .fav {
+        transition: none;
+    }
+
+    .count {
+        animation: none;
+    }
+}

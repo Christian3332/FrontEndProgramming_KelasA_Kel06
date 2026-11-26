@@ -1,0 +1,98 @@
+.backdrop {
+    --bs-backdrop-bg: rgb(10, 25, 60);
+    --bs-backdrop-opacity: 0.55;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+}
+
+.dialog {
+    --bs-modal-margin: 16px;
+    max-width: 400px;
+    margin: 16px auto;
+}
+
+.box {
+    padding: 28px 24px 22px;
+    border: none;
+    border-radius: 22px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    animation: popIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 14px;
+    border-radius: 32px;
+    background-color: #FFF3E0;
+    font-size: 28px;
+}
+
+.iconDanger {
+    background-color: #FFEBEE;
+    color: #D32F2F;
+}
+
+.title {
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+.text {
+    margin: 0;
+    font-size: 14px;
+    color: #555555;
+}
+
+.actions {
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.btnGhost,
+.btnDanger {
+    --bs-btn-padding-y: 11px;
+    --bs-btn-padding-x: 20px;
+    --bs-btn-font-size: 13.5px;
+    --bs-btn-font-weight: 700;
+    flex: 1 1 0;
+}
+
+.btnGhost {
+    --bs-btn-color: var(--sb-biru-tua);
+    --bs-btn-bg: var(--sb-biru-muda);
+    --bs-btn-border-color: var(--sb-biru-muda);
+    --bs-btn-hover-color: var(--sb-biru-tua);
+    --bs-btn-hover-bg: var(--sb-biru-garis);
+    --bs-btn-hover-border-color: var(--sb-biru-garis);
+    --bs-btn-active-color: var(--sb-biru-tua);
+    --bs-btn-active-bg: var(--sb-biru-garis);
+    --bs-btn-active-border-color: var(--sb-biru-garis);
+}
+
+.btnDanger {
+    --bs-btn-color: #FFFFFF;
+    --bs-btn-bg: #D32F2F;
+    --bs-btn-border-color: #D32F2F;
+    --bs-btn-hover-color: #FFFFFF;
+    --bs-btn-hover-bg: #B71C1C;
+    --bs-btn-hover-border-color: #B71C1C;
+    --bs-btn-active-color: #FFFFFF;
+    --bs-btn-active-bg: #B71C1C;
+    --bs-btn-active-border-color: #B71C1C;
+}
+
+@keyframes popIn {
+    from {
+        transform: translateY(16px) scale(0.96);
+    }
+    to {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .box {
+        animation: none;
+    }
+}
